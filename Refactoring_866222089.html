@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VARLab : Refactoring</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="How-To-Articles_581435426.html">How-To Articles</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Unity-Development_688324665.html">Unity Development</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Unity-Full-Stack-Testing-Tutorial_749699073.html">Unity Full-Stack Testing Tutorial</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="864355030.html">WIP: Refactoring Tutorial</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            VARLab : Refactoring
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Jonathan Bezeau</span> on Nov 27, 2023
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <style type='text/css'>/*<![CDATA[*/
+div.rbtoc1751640731281 {padding: 0px;}
+div.rbtoc1751640731281 ul {list-style: disc;margin-left: 0px;}
+div.rbtoc1751640731281 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1751640731281'>
+<ul class='toc-indentation'>
+<li><a href='#Refactoring-What'>What</a></li>
+<li><a href='#Refactoring-When'>When</a></li>
+<li><a href='#Refactoring-Why'>Why</a></li>
+<li><a href='#Refactoring-How'>How</a></li>
+</ul>
+</div><h1 id="Refactoring-What">What</h1><p>Refactoring is a programming practice where code is moved or reorganized without changing any of the behavior or functionality in the module being changed. Think of it like steps in solving a math equation; at every step we make the same change to each side of the equality so that the truth still holds but the numbers make more sense:</p><div class="table-wrap"><table data-table-width="760" data-layout="default" data-local-id="3c14327a-611e-43cf-a344-98b6a2fab3a8" class="confluenceTable"><tbody><tr><th class="confluenceTh"><p><strong>Action</strong></p></th><th class="confluenceTh"><p><strong>Resulting Equation</strong></p></th></tr><tr><td class="confluenceTd"><p>start with non-obvious relationship</p></td><td class="confluenceTd"><p>2x-1 = 4y+1</p></td></tr><tr><td class="confluenceTd"><p>add +1 to each side</p></td><td class="confluenceTd"><p>2x = 4y+2</p></td></tr><tr><td class="confluenceTd"><p>divide both sides by 2 to isolate the value of x</p></td><td class="confluenceTd"><p>x = 2y+1</p></td></tr></tbody></table></div><p>We have “refactored” x to make its value more obvious without changing its original relationship with y</p><h1 id="Refactoring-When">When</h1><p>Seeing opportunities for refactoring comes with instinct / experience, and expertise. Developing a sense of when solutions are more work or harder to implement than they should be is one key to seeing opportunities to refactor code. Learning and practicing these programming techniques also makes more chances to refactor code obvious to you as a developer, even before your programs get to the point of being unwieldly.</p><h1 id="Refactoring-Why">Why</h1><p>Refactoring can be used to: </p><ul><li><p>reduce code duplication</p></li><li><p>simplify re-use</p></li><li><p>allow for more flexible use cases</p></li><li><p>improve ease of understanding</p></li></ul><p>Specific to VARLab’s unit testing initiative in Unity there is a combination of techniques we can use to expose testable logic in the private methods of an object without breaking encapsulation of the object’s private variables.</p><h1 id="Refactoring-How">How</h1><ol start="1"><li><p>Identify testable logic: a calculation, determination, or so on where we need to test that the outcome is correct. Real examples:</p><ol start="1"><li><p> determining the position of a door during its opening animation. </p></li></ol></li><li><p>Extract this logic to a function. Usually we can just put come curly braces around the code we want to start isolating, then provide a method signature above that, and move the whole thing into the class declaration as a private function.</p></li><li><p>Parameterize the new function. In this refactoring step, we replace all of our use of class member variables and Unity system calls with input parameter values, and check a meaningful output value. The input parameter values are provided from the same sources in the calling code. </p></li><li><p>Extract the parameterized function to a separate utility class with static, public methods.</p><ol start="1"><li><p>Encapsulation is maintained because the utility class does not have any state variables.</p></li></ol></li><li><p>When constructing your original class, include the new utility object as a constructor parameter. This allows us to do two kinds of testing: </p><ol start="1"><li><p>directly test input/output assertions on the utility functions</p></li><li><p>define a testing dummy version of the utility class where methods can assert on unexpected input from test cases run on the caller.</p></li></ol></li></ol>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Jul 04, 2025 14:52</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

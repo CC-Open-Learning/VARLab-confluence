@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VARLab : Merge Conflicts</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="How-To-Articles_581435426.html">How-To Articles</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Advanced-Git-Techniques_497385729.html">Advanced Git Techniques</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            VARLab : Merge Conflicts
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Jordan Robinson</span>, last modified on Jul 05, 2022
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>The most common thing we’ll encounter as an issue in Git are merge conflicts. Merge conflicts occur when two commits both have changes to the same file and Git cannot automatically determine what the final state of the file should be.</p><p>In this case we need to look at the changes ourselves and determine how the conflict should be resolved.</p><p>For code conflicts, this is usually as simple as rewriting the conflicting sections of code to ensure the code happens in the correct order.</p><p>For Unity scene/prefab conflicts, things get a lot more challenging and we can get to a point where the only outcome is one person’s changes getting discarded. This requires that person to redo their work which we want to avoid.</p><h3 id="MergeConflicts-HandlingMergeConflicts">Handling Merge Conflicts</h3><p>When we try to merge one branch into another or rebase one branch onto another we can potentially end up with merge conflicts.</p><p>If we’re using Sourcetree, these conflicts will appear in the <strong>File Status </strong>tab in the <strong>Unstaged files </strong>section.</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/497811475/498008073.png" data-image-src="attachments/497811475/498008073.png" data-height="109" data-width="649" data-unresolved-comment-count="0" data-linked-resource-id="498008073" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20220705-143436.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="497811475" data-linked-resource-container-version="3" data-media-id="fcdcc3d4-6246-4b60-bc6c-9f7f98294b05" data-media-type="file"></span><p>In this hypothetical rebase scenario, we have three total conflicts. One is for the trucking menu button, the next is for the trucking scene file, and the last is for the mode controller script.</p><p>To handle these conflicts, we’ll first determine what has changed by selecting the files and checking out their diff on the right side of the screen in Sourcetree.</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/497811475/498008079.png" data-image-src="attachments/497811475/498008079.png" data-height="654" data-width="762" data-unresolved-comment-count="0" data-linked-resource-id="498008079" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20220705-143720.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="497811475" data-linked-resource-container-version="3" data-media-id="c4c5a9d2-69e6-49cc-b333-a0f3351b1c0f" data-media-type="file"></span><p>Here we can see the yaml representing the menu button prefab. In this case there’s been changes in this branch and development since the time when this branch was first created. From here we can get some clues as to what changes occurred that are causing the conflict. In here it appears that an onClick event was serialized on this branch while development had some changes to the size and sprite applied.</p><p>If you’re fixing conflicts for another developer’s branch, this is when it’s a good time to ask them what changes they made to this file to determine whether it’s worth it to try the Unity yaml merge tool or simply discard their changes and have them redo the work to this specific file.</p><h3 id="MergeConflicts-ResolvingConflictsbyChoosingWhichChangesToKeep">Resolving Conflicts by Choosing Which Changes To Keep</h3><p>Sometimes it’s more work to resolve a conflict than it is to simply redo the work in a specific file. In this case we can right-click on the file we want to throw out changes on and select <strong>Resolve Conflicts &gt;</strong> <strong>Resolve Using ‘Mine’. </strong>When doing a rebase, “mine” refers to the file as it is on the branch you’re rebasing onto. So in this case, “mine” is what is on <strong>development</strong>, not the branch I’m trying to rebase.</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/497811475/497811486.png" data-image-src="attachments/497811475/497811486.png" data-height="433" data-width="544" data-unresolved-comment-count="0" data-linked-resource-id="497811486" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20220705-184448.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="497811475" data-linked-resource-container-version="3" data-media-id="62d1324a-4e72-4556-914f-9e217e110a0e" data-media-type="file"></span><p /><p>After selecting <strong>Resolve Using ‘Mine’</strong> all changes made to that file on your branch will be discarded. If those changes are important, you will need to redo whatever work was done on that file <strong>after</strong> you completely finish your rebase.</p><h3 id="MergeConflicts-UsingUnity’sYAMLMergeTool">Using Unity’s YAML Merge Tool</h3><p>If it would be a hassle to redo the work, you can try using Unity’s yaml merge tool to automatically handle the merge conflict. </p><p>For information on how to install the Unity YAML Merge tool, check out <a href="Setting-Up-Unity-YAML-Merge_498040849.html" data-linked-resource-id="498040849" data-linked-resource-version="3" data-linked-resource-type="page">Setting Up Unity YAML Merge</a>.</p><p>After setting up the merge tool, you can right-click on the conflicting file and choose <strong>Resolve Conflicts &gt; Launch External Merge Tool</strong>. If the tool is able to automatically resolve all the conflicts it will move the file to <strong>Staged files</strong> without issue. If there are small conflicts inside the file, you will need to handle them individually. If there are massive conflicts, the tool may not do anything at all and you will be forced to lose the work done on this file from this branch.</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/497811475/498008085.png" data-image-src="attachments/497811475/498008085.png" data-height="438" data-width="548" data-unresolved-comment-count="0" data-linked-resource-id="498008085" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20220705-144515.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="497811475" data-linked-resource-container-version="3" data-media-id="861f83bb-5127-4f3d-9471-37b0c4471e43" data-media-type="file"></span><p>To demonstrate a file that has conflicts that we need to handle ourselves, here is the script file for the mode controller.</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/497811475/498008091.png" data-image-src="attachments/497811475/498008091.png" data-height="1398" data-width="2557" data-unresolved-comment-count="0" data-linked-resource-id="498008091" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20220705-144758.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="497811475" data-linked-resource-container-version="3" data-media-id="1027f206-7f0b-401c-ab26-98efca32d46c" data-media-type="file"></span><p>In blue we see the state of the file on this branch while on the right we see the state of the file on the branch we’re trying to rebase onto. The middle shows the state of the file as it was when this branch was originally created.</p><p>On the bottom is the file with all the changes shown simultaneously, here we can manually edit the code to handle the merge conflicts.</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/497811475/498008097.png" data-image-src="attachments/497811475/498008097.png" data-height="613" data-width="665" data-unresolved-comment-count="0" data-linked-resource-id="498008097" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20220705-145105.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="497811475" data-linked-resource-container-version="3" data-media-id="9f060b63-7223-4197-ab14-68b7c06e38d9" data-media-type="file"></span><p>Now that the merge conflict has been handled, we can click <strong>Save &amp; Exit</strong>.</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/497811475/498008103.png" data-image-src="attachments/497811475/498008103.png" data-height="77" data-width="131" data-unresolved-comment-count="0" data-linked-resource-id="498008103" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20220705-145138.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="497811475" data-linked-resource-container-version="3" data-media-id="1616d1eb-3e68-47a0-a7f7-62f2f17f8612" data-media-type="file"></span><p>When we return to Sourcetree we can see some .orig files, these are backups of the files that we can right-click and remove.</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/497811475/498008109.png" data-image-src="attachments/497811475/498008109.png" data-height="214" data-width="589" data-unresolved-comment-count="0" data-linked-resource-id="498008109" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20220705-145227.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="497811475" data-linked-resource-container-version="3" data-media-id="1a9176f3-2eef-4ad8-8b2c-9439e99cf8c3" data-media-type="file"></span><p>Once these are all handled, the merge conflicts are done and we can continue our rebase.</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/497811475/498008115.png" data-image-src="attachments/497811475/498008115.png" data-height="442" data-width="345" data-unresolved-comment-count="0" data-linked-resource-id="498008115" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20220705-145255.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="497811475" data-linked-resource-container-version="3" data-media-id="d9fe6504-5baa-4960-b06e-fc0510326db5" data-media-type="file"></span><p />
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/497811475/498008073.png">image-20220705-143436.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/497811475/498008079.png">image-20220705-143720.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/497811475/498008085.png">image-20220705-144515.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/497811475/498008091.png">image-20220705-144758.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/497811475/498008097.png">image-20220705-145105.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/497811475/498008103.png">image-20220705-145138.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/497811475/498008109.png">image-20220705-145227.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/497811475/498008115.png">image-20220705-145255.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/497811475/497811486.png">image-20220705-184448.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Jul 04, 2025 14:51</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VARLab : Code Style Guide</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="How-To-Articles_581435426.html">How-To Articles</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            VARLab : Code Style Guide
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> David Inglis</span>, last modified by <span class='editor'> David Inglis</span> on Jun 06, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h2 id="CodeStyleGuide-TableofContents">Table of Contents</h2><style type='text/css'>/*<![CDATA[*/
+div.rbtoc1751640701590 {padding: 0px;}
+div.rbtoc1751640701590 ul {list-style: disc;margin-left: 0px;}
+div.rbtoc1751640701590 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1751640701590'>
+<ul class='toc-indentation'>
+<li><a href='#CodeStyleGuide-NamingConventions'>Naming Conventions</a>
+<ul class='toc-indentation'>
+<li><a href='#CodeStyleGuide-Classes,Methods,andEvents'>Classes, Methods, and Events</a></li>
+<li><a href='#CodeStyleGuide-PublicMembers'>Public Members</a></li>
+<li><a href='#CodeStyleGuide-PrivateMembers'>Private Members</a></li>
+<li><a href='#CodeStyleGuide-FunctionParameters'>Function Parameters</a></li>
+<li><a href='#CodeStyleGuide-FunctionVariables'>Function Variables</a></li>
+<li><a href='#CodeStyleGuide-Interfaces'>Interfaces</a></li>
+<li><a href='#CodeStyleGuide-Attributes'>Attributes</a></li>
+<li><a href='#CodeStyleGuide-Enums'>Enums</a></li>
+<li><a href='#CodeStyleGuide-Constants'>Constants</a></li>
+<li><a href='#CodeStyleGuide-AccessModifiers'>Access Modifiers</a></li>
+</ul>
+</li>
+<li><a href='#CodeStyleGuide-Comments'>Comments</a>
+<ul class='toc-indentation'>
+<li><a href='#CodeStyleGuide-CommentTags'>Comment Tags</a></li>
+<li><a href='#CodeStyleGuide-HeaderComments'>Header Comments</a></li>
+<li><a href='#CodeStyleGuide-In-lineComments'>In-line Comments</a></li>
+<li><a href='#CodeStyleGuide-PropertyValueComments'>Property Value Comments</a></li>
+<li><a href='#CodeStyleGuide-UnitySerializedFieldComments'>Unity Serialized Field Comments</a></li>
+</ul>
+</li>
+<li><a href='#CodeStyleGuide-CodingConventions'>Coding Conventions</a>
+<ul class='toc-indentation'>
+<li><a href='#CodeStyleGuide-MemberTypeOrder'>Member Type Order</a></li>
+<li><a href='#CodeStyleGuide-ImplicitTypedLocalVariables'>Implicit Typed Local Variables</a></li>
+<li><a href='#CodeStyleGuide-CodeCleanup'>Code Cleanup</a></li>
+</ul>
+</li>
+<li><a href='#CodeStyleGuide-Resources'>Resources</a></li>
+</ul>
+</div><p>This document outlines the style required for source code and comments for C# and Unity development. These style requirements are based on Conestoga College’s<strong> </strong><a class="external-link" href="https://conestoga.desire2learn.com/content/enforced/62087-D2LGroup-0059_P00_X_X_D2LGroup-0059_1_X/Standards/Coding/SET-Coding-Standards.pdf" rel="nofollow"><strong>SET Coding Standards</strong></a><strong> </strong>and Microsoft <a class="external-link" href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/inside-a-program/coding-conventions" rel="nofollow"><strong>C# Coding Conventions</strong></a>. </p><p>Commenting structure is also informed by Microsoft <a class="external-link" href="https://docs.microsoft.com/en-us/dotnet/csharp/codedoc" rel="nofollow"><strong>.NET XML Documentation</strong></a> which will provide helpful information in Visual Studio via <a class="external-link" href="https://docs.microsoft.com/en-us/visualstudio/ide/using-intellisense?view=vs-2019" rel="nofollow">Intellisense</a>, and can be used to generate wiki-like documentation files.</p><h2 id="CodeStyleGuide-NamingConventions">Naming Conventions</h2><p>C# programs use <code>PascalCase</code> for type names, namespaces, and all public members.</p><ul><li><p>Identifiers shouldn't contain two consecutive underscore (<code>_</code>) characters. Those names are reserved for compiler-generated identifiers.</p></li></ul><h3 id="CodeStyleGuide-Classes,Methods,andEvents">Classes, Methods, and Events</h3><p>Classes, methods, and event names should be written in <code>PascalCase</code> and have clear names that match their purpose, as suggested by the <a class="external-link" href="https://learn.microsoft.com/en-us/dotnet/standard/design-guidelines/names-of-classes-structs-and-interfaces" rel="nofollow"><strong>Microsoft .NET Documentation</strong></a>.</p><h3 id="CodeStyleGuide-PublicMembers">Public Members</h3><p>Public fields and properties should be written in <code>PascalCase</code> and represent the data they store.</p><h3 id="CodeStyleGuide-PrivateMembers">Private Members</h3><p>Use <code>camelCase</code> when naming <code>private</code> or <code>internal</code> fields.</p><h3 id="CodeStyleGuide-FunctionParameters">Function Parameters</h3><p>Use <code>camelCase</code> when naming method parameters.</p><h3 id="CodeStyleGuide-FunctionVariables">Function Variables</h3><p>Use <code>camelCase</code> when naming variables within functions. </p><h3 id="CodeStyleGuide-Interfaces">Interfaces</h3><p>Should be written in <code>PascalCase</code> with the letter <code>I</code> affixed to the beginning of the phrase.</p><h3 id="CodeStyleGuide-Attributes">Attributes</h3><p>Should be written in <code>PascalCase</code> with the word <code>Attribute</code> affixed to the end. </p><h3 id="CodeStyleGuide-Enums">Enums</h3><p>Should be written in <code>PascalCase</code> using a singular noun for non-flags and a plural noun for flags. </p><h3 id="CodeStyleGuide-Constants">Constants</h3><p>Constant fields should be written in <code>PascalCase</code>.</p><h3 id="CodeStyleGuide-AccessModifiers">Access Modifiers</h3><p>Classes, methods, members, and properties must always explicitly define their access modifier (<code>public</code>, <code>private</code>, etc) even when assumed to be <code>private</code> by default.</p><p /><h2 id="CodeStyleGuide-Comments">Comments</h2><h3 id="CodeStyleGuide-CommentTags">Comment Tags</h3><h4 id="CodeStyleGuide-RequiredTags">Required Tags</h4><p>The <code>&lt;summary&gt;</code> tag is used to provide a general overview of a field, property, class, or function.</p><p /><p>The <code>&lt;param&gt;</code> tag is used to describe a parameter used by a function It is important to include the name of the parameter in the tag (<code>&lt;param name=&quot;firstParameter&quot;&gt;</code>) as this helps <strong>Intellisense </strong>tie the description of a parameter to the actual value.</p><p /><p>The <code>&lt;returns&gt;</code> tag is used to describe the return value of a function. </p><p /><h4 id="CodeStyleGuide-OptionalTags">Optional Tags</h4><p>The <code>&lt;remarks&gt;</code> tag is used in a similar manner to the <code>&lt;summary&gt;</code> tag, to provide more information for a class or function.</p><p /><p>The <code>&lt;value&gt;</code> tag can be used in place of, or in addition to, the <code>&lt;summary&gt;</code> tag for fields and properties. </p><p /><p>The <code>&lt;see&gt;</code> tag is used to link to other resources from within a comment block.</p><ul><li><p>class or member reference (<code>&lt;see cref=&quot;UnityEngine.Debug&quot; /&gt;</code>) </p></li><li><p>URL (<code>&lt;see href=&quot;https://example.com&quot;&gt;Example&lt;/see&gt;</code>)</p></li></ul><p /><h3 id="CodeStyleGuide-HeaderComments">Header Comments</h3><h4 id="CodeStyleGuide-Classes">Classes</h4><p>Each class should contain a header comment with a description of the functionality provided by the class. All class header comments must provide at least a <code>&lt;summary&gt;</code>. To provide more detail about a class, use <code>&lt;remarks&gt;</code>.</p><p><code>Example</code></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">/// &lt;summary&gt;
+///     Uses advanced AI to determine how to rewrite code.
+/// &lt;/summary&gt;
+/// &lt;remarks&gt;
+///     CodeWriter is dependent on the &lt;see cref=&quot;AICodeWriter&quot; /&gt; library.
+/// &lt;/remarks&gt;
+public class CodeWriter { }</pre>
+</div></div><p /><h4 id="CodeStyleGuide-Methods">Methods</h4><p>Each method must include a header comment describing the purpose of the method using the <code>&lt;summary&gt;</code> tag, and descriptions of its inputs and outputs using the <code>&lt;param&gt;</code> and <code>&lt;returns&gt;</code> tags, respectively. For methods which have no parameters or a void return type, the respective tags can be left out.</p><h4 id="CodeStyleGuide-Example"><code>Example</code></h4><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">/// &lt;summary&gt;
+///     Calculates the total for the provided transactions.
+/// &lt;/summary&gt;
+/// &lt;remarks&gt;
+///     First the subtotal is calculated and then multiplied by tax of 10%.
+///     The result of the calculation is then added to the subtotal to get 
+///     the final total.
+/// &lt;/remarks&gt;
+/// &lt;param name=&quot;transactions&quot;&gt;
+///     A list of transactions for the order of type double
+/// &lt;/param&gt;
+/// &lt;returns&gt; The calculated total for the provided transactions &lt;/returns&gt;
+public double CalculateTotal(List&lt;double&gt; transactions) { }</pre>
+</div></div><p /><h3 id="CodeStyleGuide-In-lineComments">In-line Comments</h3><p>In-line comments are comments placed within a function or method. These comments are used to document the flow of logic within your source code.</p><p>In-line comments often serve to inform other developers (or your future self) about important blocks of code, difficult-to-understand or obscure code, or workarounds that were implemented for unexpected problems.</p><p><code>Example</code></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">// To get the total, add 10% of the subtotal to the initial subtotal
+total = subtotal + subtotal * 0.10;</pre>
+</div></div><p /><p>It can be difficult to understand what makes a valuable comment. In-line comments are the most useful in situations where the outcome of your code is not immediately obvious.</p><p><code>Example</code></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">var str = &quot;helloThere&quot;;
+// Parses &quot;camelCase&quot; as &quot;Camel Case&quot;
+str = Regex.Replace(str, &quot;(\\B[A-Z])&quot;, &quot; $1&quot;).Capitalize();</pre>
+</div></div><p>Without the comment, this code is almost entirely nonsensical to someone without <a class="external-link" href="https://docs.microsoft.com/en-us/dotnet/api/system.text.regularexpressions.regex?view=net-5.0" rel="nofollow">Regex</a> experience. While there is nothing wrong with this comment, it could be removed entirely by moving line 3 to its own function and using a descriptive function name paired with a good <code>&lt;summary&gt;</code> comment.</p><p>While it may seem better to comment every line of code written, over-commenting can harm readability.  Comments have also been known to lie, especially over time as the codebase changes but the comments do not.</p><h3 id="CodeStyleGuide-PropertyValueComments">Property Value Comments</h3><p>If a property represents a value that is not immediately obvious, it can be helpful to add a <code>&lt;value&gt;</code> tag along with the <code>&lt;summary&gt;</code> tag to describe in more detail the value that the property represents. </p><p><code>Example</code></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">/// &lt;summary&gt;
+///     Number of players currently in the game.
+/// &lt;/summary&gt;
+/// &lt;value&gt; The current value of &lt;see cref=&quot;playerList.Count&quot;&gt; &lt;/value&gt;
+public int NumPlayers { get { return playerList.Count; } }</pre>
+</div></div><h3 id="CodeStyleGuide-UnitySerializedFieldComments">Unity Serialized Field Comments</h3><p>Instead of the <code>&lt;summary&gt;</code> tag, use the <code>[Tooltip]</code> attribute for fields that are serialized by Unity, such as public fields, or protected and private fields using the <code>[SerializeField]</code> attribute. The comment within the <code>[Tooltip]</code> attribute will be shown in the <strong>Unity Inspector</strong> when hovering over that field. </p><p><code>Example</code></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">[Tooltip(&quot;Value of one dollar.&quot;)]
+[SerializeField] protected float dollarValue;</pre>
+</div></div><p /><h2 id="CodeStyleGuide-CodingConventions">Coding Conventions</h2><h3 id="CodeStyleGuide-MemberTypeOrder">Member Type Order</h3><p>When defining fields, properties, and methods in a class, the following list defines the preferred order of each of these member types:</p><ul><li><p><code>Enums</code></p></li><li><p><code>Structs</code></p></li><li><p><code>Interfaces</code></p></li><li><p><code>Classes</code></p></li><li><p><code>Fields</code></p></li><li><p><code>Delegates</code></p></li><li><p><code>Events</code></p></li><li><p><code>Properties</code></p></li><li><p><code>Indexers</code></p></li><li><p><code>Constructors</code></p></li><li><p><code>Destructors</code></p></li><li><p><code>Methods</code></p></li></ul><p /><h3 id="CodeStyleGuide-ImplicitTypedLocalVariables">Implicit Typed Local Variables</h3><p>Use the <code>var</code> keyword where their type can be implicitly determined. <strong>Do not</strong> use implicitly typed variables in loops.</p><p /><h3 id="CodeStyleGuide-CodeCleanup">Code Cleanup</h3><span class="confluence-embedded-file-wrapper image-left-wrap-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-content-image-border image-wrap-left" alt="image-20240606-160448.png" width="64" loading="lazy" src="attachments/59507580/1158119430.png?width=64" data-image-src="attachments/59507580/1158119430.png" data-height="255" data-width="246" data-unresolved-comment-count="0" data-linked-resource-id="1158119430" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20240606-160448.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="59507580" data-linked-resource-container-version="15" data-media-id="6120e5a5-33b8-480d-8bb3-c15aed4f70d4" data-media-type="file"></span><p>Visual Studio provides code cleanup tools to help with automatic formatting. Before committing, run the code cleanup tool by using the keyboard shortcut combination <strong>Ctrl+K, Ctrl+E</strong>.</p><p /><p>This tool can also be configured to run automatically each time a file is saved. Optionally enable this setting by navigating to <strong>Tools → Options → Text Editor → Code Cleanup </strong>and check the box to “Run Code Cleanup profile on Save.”</p><p>Code Cleanup Profiles <em>can </em>be modified for custom style guides, however the default profile is configured using Microsoft’s MSDN style guide and need not be modified.</p><p /><p /><h2 id="CodeStyleGuide-Resources">Resources</h2><ul><li><p><a class="external-link" href="https://conestoga.desire2learn.com/content/enforced/62087-D2LGroup-0059_P00_X_X_D2LGroup-0059_1_X/Standards/Coding/SET-Coding-Standards.pdf" rel="nofollow">Conestoga SET Coding Standards</a></p></li><li><p><a class="external-link" href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/inside-a-program/coding-conventions" rel="nofollow">C# Coding Conventions - C# Programming Guide | Microsoft Docs</a></p></li><li><p><a class="external-link" href="https://docs.microsoft.com/en-us/dotnet/csharp/codedoc" rel="nofollow">Documenting your code with XML comments | Microsoft Docs</a></p></li></ul>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/59507580/1158119430.png">image-20240606-160448.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Jul 04, 2025 14:51</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

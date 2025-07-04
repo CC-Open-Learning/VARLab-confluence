@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VARLab : Discarding Changes From A Pushed Commit</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="How-To-Articles_581435426.html">How-To Articles</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Advanced-Git-Techniques_497385729.html">Advanced Git Techniques</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            VARLab : Discarding Changes From A Pushed Commit
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Jordan Robinson</span> on Jul 05, 2022
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>If you have a situation where you accidentally push changes to a file you didn’t mean to push, we can do a soft reset to undo the commit and return everything back to unstaged changes.</p><p>First you’ll need to check out the branch you want to remove the change from in Sourcetree and go to <strong>Actions &gt; Open In Terminal</strong>.</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/497877212/497877219.png" data-image-src="attachments/497877212/497877219.png" data-height="99" data-width="335" data-unresolved-comment-count="0" data-linked-resource-id="497877219" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20220705-193700.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="497877212" data-linked-resource-container-version="1" data-media-id="8bacfc5d-2788-45ff-92ac-2101f29ab289" data-media-type="file"></span><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/497877212/497778769.png" data-image-src="attachments/497877212/497778769.png" data-height="87" data-width="570" data-unresolved-comment-count="0" data-linked-resource-id="497778769" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20220705-193706.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="497877212" data-linked-resource-container-version="1" data-media-id="6606433f-5b3c-42ee-9bed-6a462407f5e7" data-media-type="file"></span><p>In the terminal, type in <code>git reset HEAD~1</code> to undo the last commit locally and return all the changes to unstaged changes.</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/497877212/497844263.png" data-image-src="attachments/497877212/497844263.png" data-height="167" data-width="567" data-unresolved-comment-count="0" data-linked-resource-id="497844263" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20220705-193752.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="497877212" data-linked-resource-container-version="1" data-media-id="d99e3f0f-3550-4f20-b9ba-67c857a1cf33" data-media-type="file"></span><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/497877212/498008188.png" data-image-src="attachments/497877212/498008188.png" data-height="100" data-width="1074" data-unresolved-comment-count="0" data-linked-resource-id="498008188" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20220705-193803.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="497877212" data-linked-resource-container-version="1" data-media-id="dc4556e2-c355-42c9-a1cc-1ed44475b060" data-media-type="file"></span><p>You can now discard the changes you didn’t mean to include in your commit and create a new commit.</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/497877212/497844271.png" data-image-src="attachments/497877212/497844271.png" data-height="235" data-width="522" data-unresolved-comment-count="0" data-linked-resource-id="497844271" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20220705-193845.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="497877212" data-linked-resource-container-version="1" data-media-id="ce067277-ecba-47c9-a849-0ca2b8fe796b" data-media-type="file"></span><p>Once you’ve created your new commit, you’ll notice you have commits to push and pull as your local branch is now out of sync with Bitbucket.</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/497877212/497975331.png" data-image-src="attachments/497877212/497975331.png" data-height="63" data-width="107" data-unresolved-comment-count="0" data-linked-resource-id="497975331" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20220705-193937.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="497877212" data-linked-resource-container-version="1" data-media-id="263c0958-c9f5-42ee-b60f-e2eeb602b1e4" data-media-type="file"></span><p>Since we know the local version of the branch is the true version, we can <strong>Push</strong> and select <strong>Force Push. </strong>If force push is not enabled, you will need to enable it in <strong>Tools &gt; Options &gt; Git &gt; Enable force push</strong> first.</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/497877212/497942610.png" data-image-src="attachments/497877212/497942610.png" data-height="330" data-width="793" data-unresolved-comment-count="0" data-linked-resource-id="497942610" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20220705-194007.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="497877212" data-linked-resource-container-version="1" data-media-id="901f04dc-4f6a-491b-a0ea-b1bb8c4a4db3" data-media-type="file"></span><p>After force pushing, your new commit without the file you accidentally committed will be up on Bitbucket.</p>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/497877212/497877219.png">image-20220705-193700.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/497877212/497778769.png">image-20220705-193706.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/497877212/497844263.png">image-20220705-193752.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/497877212/498008188.png">image-20220705-193803.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/497877212/497844271.png">image-20220705-193845.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/497877212/497975331.png">image-20220705-193937.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/497877212/497942610.png">image-20220705-194007.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Jul 04, 2025 14:51</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

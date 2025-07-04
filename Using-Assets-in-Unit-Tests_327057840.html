@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VARLab : Using Assets in Unit Tests</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="How-To-Articles_581435426.html">How-To Articles</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Unity-Development_688324665.html">Unity Development</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="160694273.html">(OBSOLETE) Unit Testing In Unity</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            VARLab : Using Assets in Unit Tests
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Jordan Robinson</span>, last modified on Jul 07, 2021
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p><style>[data-colorid=im5spkw8t4]{color:#6554c0} html[data-color-mode=dark] [data-colorid=im5spkw8t4]{color:#503fab}[data-colorid=qu722bswwj]{color:#6554c0} html[data-color-mode=dark] [data-colorid=qu722bswwj]{color:#503fab}[data-colorid=dv3fkwyw7y]{color:#6554c0} html[data-color-mode=dark] [data-colorid=dv3fkwyw7y]{color:#503fab}[data-colorid=x3ntvwzmjn]{color:#6554c0} html[data-color-mode=dark] [data-colorid=x3ntvwzmjn]{color:#503fab}[data-colorid=hwu7vtbfrm]{color:#6554c0} html[data-color-mode=dark] [data-colorid=hwu7vtbfrm]{color:#503fab}[data-colorid=cabaircgds]{color:#6554c0} html[data-color-mode=dark] [data-colorid=cabaircgds]{color:#503fab}</style>Since our unit tests run inside an empty scene, we need to populate that scene with whatever objects we would like to be tested.</p><p>For instance if we want to test out the components attached to a specific prefab, we will need to create an instance of that prefab within our test scene first.</p><p>This is where the <a href="https://varlab-dev.atlassian.net/wiki/spaces/CV2/pages/158629987/Addressable+Assets" data-linked-resource-id="158629987" data-linked-resource-version="5" data-linked-resource-type="page">Addressable Assets</a> system comes into play. We can mark specific prefabs we would like to test as Addressable which will allow us to create an instance of them for our tests.</p><h2 id="UsingAssetsinUnitTests-SettingUpOurPrefab">Setting Up Our Prefab</h2><p>In the Unity Editor, locate the prefab you would like to use for testing. Click on the prefab and in the <a class="external-link" href="https://docs.unity3d.com/Manual/UsingTheInspector.html" rel="nofollow">Inspector Window</a> check the &ldquo;Addressable&rdquo; box and type in a useful name.</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/327057840/327123411.png" data-image-src="attachments/327057840/327123411.png" data-height="101" data-width="434" data-unresolved-comment-count="0" data-linked-resource-id="327123411" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20210707-171849.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="327057840" data-linked-resource-container-version="6" data-media-id="f06ee544-dd3a-4cb0-9f7a-b55ceece5840" data-media-type="file" /></span><p>Now that our prefab is set up to be accessed by the Addressable Asset system, we can load an instance of it in our tests.</p><h2 id="UsingAssetsinUnitTests-LoadingOurPrefab">Loading Our Prefab</h2><p>In our test file we can now load up our prefab so that it can be used for our tests.</p><p>At the top of our test file we&rsquo;ll need to include the namespaces for the Addressables system.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;</pre>
+</div></div><p>If you receive errors that these namespaces are not found, you likely need to add <strong>Assembly Definition References </strong>to your current assembly for <a class="external-link" href="https://docs.unity3d.com/Manual/com.unity.addressables.html" rel="nofollow">Unity.Addressables</a> and <a class="external-link" href="https://docs.unity3d.com/Packages/com.unity.resourcemanager@1.6/manual/index.html" rel="nofollow">Unity.ResourceManager</a>. Here is an example of what that looks like for the RemoteEducation.Tests <a class="external-link" href="https://docs.unity3d.com/Manual/ScriptCompilationAssemblyDefinitionFiles.html" rel="nofollow">assembly definition</a> in the Unity Inspector.</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/327057840/327123468.png" data-image-src="attachments/327057840/327123468.png" data-height="191" data-width="549" data-unresolved-comment-count="0" data-linked-resource-id="327123468" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20210505-140305.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="327057840" data-linked-resource-container-version="6" data-media-id="8460909b-5092-4ebb-9a10-fa3348a28bb6" data-media-type="file" /></span><p>In this example, we are using the Hydraulic Hoist prefab from the MotivePower module, so in our fields we have added the hoist and the handle used to asynchronously load it from the Addressables system.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">/// &lt;summary&gt;An instance of the hoist to test.&lt;/summary&gt;
+private HoistController hoist;
+
+/// &lt;summary&gt;Handle for the hoist's asynchronous loading operation.&lt;/summary&gt;
+AsyncOperationHandle&lt;GameObject&gt; hoistHandle;</pre>
+</div></div><p>To load our prefab into the hoist variable, we will have to asynchronously load it. We need to use either [<span data-colorid="qu722bswwj">UnitySetUp</span>] or [<span data-colorid="dv3fkwyw7y">UnityTest</span>] here as we are required to yield while we wait for the asynchronous loading operation to finish.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">[UnitySetUp]
+public IEnumerator UnitySetUp()
+{
+    hoistHandle = Addressables.InstantiateAsync(&quot;Hydraulic Hoist&quot;);
+    yield return hoistHandle;
+}</pre>
+</div></div><p>Since [<span data-colorid="hwu7vtbfrm">UnitySetUp</span>] runs before [<span data-colorid="cabaircgds">SetUp</span>] and we waited for the hoist to load by yielding its <a class="external-link" href="https://docs.unity3d.com/Packages/com.unity.addressables@0.7/manual/AddressableAssetsAsyncOperationHandle.html" rel="nofollow">AsyncOperationHandle</a>, we can now access the actual hoist prefab.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">[SetUp]
+public void Setup()
+{
+    hoist = hoistHandle.Result.GetComponentInChildren&lt;HoistController&gt;();
+    hoist.Initialize();
+}</pre>
+</div></div><p>In this [<span data-colorid="im5spkw8t4">SetUp</span>] method, we have retrieved the prefab instance as type <a class="external-link" href="https://docs.unity3d.com/ScriptReference/GameObject.html" rel="nofollow">GameObject</a> with hoistHandle.Result. With this we now have an instance of our prefab to do whatever we&rsquo;d like with.</p><h2 id="UsingAssetsinUnitTests-ReleasingInstances">Releasing Instances</h2><p>Once we&rsquo;re done with our prefab, we need to destroy it and let the Addressables system know that there&rsquo;s one less instance of this prefab in our scene. Doing this allows the Addressables system&rsquo;s internal counter to check if there are any remaining instances of this prefab.</p><p>If there are no remaining instances of this prefab, or other prefabs using the same assets, the Addressables system will free up the memory that was holding the assets needed to display the prefab.</p><p>To release our instance of the hoist, we can do so either at the end of our test or in [<span data-colorid="x3ntvwzmjn">TearDown</span>] as shown.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">[TearDown]
+public void TearDown()
+{ 
+    Addressables.ReleaseInstance(hoistHandle);  
+}</pre>
+</div></div><h2 id="UsingAssetsinUnitTests-ExcludingTestAssetsFromBuilds">Excluding Test Assets From Builds</h2><p>Sometimes we may need to use mock data for our tests that we don&rsquo;t need in our final builds. In the previous hoist example, we&rsquo;re going to use the hoist prefab in MotivePower so we&rsquo;re not worried about excluding it from the build.</p><p>Consider a situation where you have test data that you would like to stay constant and not be included in the final build of the sim. This test data could be something like mocked savedata, a list of preset inputs, or something of that nature.</p><p>What we can do in this case is mark those assets as Addressable and include them in the Addressables Group labeled &ldquo;UnitTests.&rdquo; The menu for this is located in <strong>Window-&gt;Asset Management-&gt;Addressables-&gt;Groups</strong>.</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/327057840/327123433.png" data-image-src="attachments/327057840/327123433.png" data-height="301" data-width="583" data-unresolved-comment-count="0" data-linked-resource-id="327123433" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20210707-173732.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="327057840" data-linked-resource-container-version="6" data-media-id="d77c9781-0679-4468-8370-82deb517c038" data-media-type="file" /></span><p>In the Addressables Groups window, we can see that the assets we marked as Addressable are automatically placed in the Default Local Group by default.</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/327057840/327057875.png" data-image-src="attachments/327057840/327057875.png" data-height="156" data-width="599" data-unresolved-comment-count="0" data-linked-resource-id="327057875" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20210707-173915.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="327057840" data-linked-resource-container-version="6" data-media-id="00154d57-a7ea-4148-84a6-fcb9e217940f" data-media-type="file" /></span><p>In order to exclude these assets from the simulation builds, we need to drag them into the group labeled &ldquo;UnitTests.&rdquo;</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/327057840/327123441.png" data-image-src="attachments/327057840/327123441.png" data-height="260" data-width="619" data-unresolved-comment-count="0" data-linked-resource-id="327123441" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20210707-173948.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="327057840" data-linked-resource-container-version="6" data-media-id="d852e4bf-08fc-4d49-b3a5-6bbe837a4e71" data-media-type="file" /></span><p>The UnitTests group is marked to <strong>not be included in builds</strong>.</p><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon" /><div class="confluence-information-macro-body"><p>Even though these assets are not included in builds, they will still load properly when we run our unit tests in the editor <strong>as well as the automated unit tests within our cloud builds</strong>.</p></div></div><h2 id="UsingAssetsinUnitTests-Resources">Resources</h2><p><a href="160694273.html" data-linked-resource-id="160694273" data-linked-resource-version="14" data-linked-resource-type="page">Unit Testing In Unity</a>  </p><p><a href="https://varlab-dev.atlassian.net/wiki/spaces/CV2/pages/158629987/Addressable+Assets" data-linked-resource-id="158629987" data-linked-resource-version="5" data-linked-resource-type="page">Addressable Assets</a> </p>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/327057840/327123411.png">image-20210707-171849.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/327057840/327123433.png">image-20210707-173732.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/327057840/327057875.png">image-20210707-173915.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/327057840/327123441.png">image-20210707-173948.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/327057840/327123468.png">image-20210505-140305.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Jul 04, 2025 14:52</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

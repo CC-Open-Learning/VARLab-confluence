@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VARLab : Authority</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Exploratory-Research-Projects_800587780.html">Exploratory Research Projects</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Multiplayer_803176449.html">Multiplayer</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="803176461.html">Multiplayer Research/Potential Options</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Mirror-Research-Main-Page_805994513.html">Mirror Research Main Page</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Basics-of-Mirror_826146819.html">Basics of Mirror</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            VARLab : Authority
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Talon Ernst</span>, last modified on Nov 13, 2023
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <style type='text/css'>/*<![CDATA[*/
+div.rbtoc1751640093831 {padding: 0px;}
+div.rbtoc1751640093831 ul {list-style: disc;margin-left: 0px;}
+div.rbtoc1751640093831 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1751640093831'>
+<ul class='toc-indentation'>
+<li><a href='#Authority-Authority'>Authority</a>
+<ul class='toc-indentation'>
+<li><a href='#Authority-ServerAuthority'>Server Authority</a></li>
+<li><a href='#Authority-ClientAuthority'>Client Authority</a></li>
+</ul>
+</li>
+<li><a href='#Authority-ChangingAuthority'>Changing Authority</a></li>
+<li><a href='#Authority-CheckingAuthority'>Checking Authority</a></li>
+</ul>
+</div><p /><div class="panel" style="background-color: #EAE6FF;border-color: #998DD9;border-width: 1px;"><div class="panelContent" style="background-color: #EAE6FF;">
+<p><strong>NOTE: </strong>This document mentions “NetworkIdentity” a fair amount, if you are confused on what this is please refer to the documentation on it, found here: <a href="Network-Identity_834043973.html" data-linked-resource-id="834043973" data-linked-resource-version="3" data-linked-resource-type="page">Network Identity</a></p>
+</div></div><h1 id="Authority-Authority">Authority</h1><p><strong>Authority</strong> in Mirror relates to who has the authority or “owns” a GameObject. Every object in the network needs to be owned by somebody, and it will always be either the server or a client. Mirror, by default, gives authority to the Server, meaning by default there is Server Authority. If this is not desirable, it can be changed to Client Authority.</p><h2 id="Authority-ServerAuthority">Server Authority</h2><p>Server Authority means the server has authority over a GameObject. This means that it will be controlled by the server. This is typically wanted on things unrelated to the player, such as NPCs, collectable items living in the game world, and level platforms.</p><h2 id="Authority-ClientAuthority">Client Authority</h2><p>Client Authority means that the Client has authority over a GameObject. When a client has authority, a few things can be done. A client can call a Command on said GameObject, and the GameObject will automatically be destroyed when the client disconnects. Furthermore, even if the client owns the object, the server still controls syncing and some other serialization features. In order to update this to all clients, you will need to use Commands.</p><h1 id="Authority-ChangingAuthority">Changing Authority</h1><p>As was stated, the Server is automatically given authority by default. There are a few ways to change who has authority over an object. <br/><br/>The first way to change it is when you are spawning it. You use the code shown in the Code Snippet to spawn an object.<br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">GameObject gameObject = Instantiate(prefab); //Instantiate the gameObject locally.
+NetworkServer.Spawn(gameObject); //Spawn the object.</pre>
+</div></div><p>If you spawn an object like this, the Server will be given authority. If you want the Client to have authority, change the code to the following.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">GameObject gameObject = Instantiate(prefab); //Instantiate the gameObject locally.
+NetworkServer.Spawn(gameObject, connectionToClient); //Spawn the object.</pre>
+</div></div><p>This, for the most part, is the same code. The only difference is an extra parameter in the NetworkServer.Spawn() method. The “connectionClient” parameter is the client who will be given authority to this object when it is spawned.</p><p /><p>Another way to change authority is to use a function given to us from the “NetworkIdentity” class. The function in the following code snippet allows us to change the authority by passing in the connection of the Client we want to give authority to.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">identity.AssignClientAuthority(conn);</pre>
+</div></div><p>You can remove a client's authority by calling the following method on your GameObjects NetworkIdentity.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">identity.RemoveClientAuthority();</pre>
+</div></div><p>“conn” is the connection of the client we are giving/removing authority from. “identity” is the Gameobjects NetworkIdentity.</p><h1 id="Authority-CheckingAuthority">Checking Authority</h1><p>You can check who has control over a GameObject. This can be done in two ways, one on the client side and one on the server side.<br/><br/>First is the client side. You can check the “isOwned” property of the GameObjects NetworkIdentity. This can be done by using the following code. This will return true to the client who owns the GameObject.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">bool isOwner = identity.isOwned;</pre>
+</div></div><p>The second way is on the server side. You can check the “connectionToClient” property of the GameObjects NetworkIdentity. This will return a client connection or null if the server owns it.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">var objectOwner = identity.connectionToClient;</pre>
+</div></div><p /><p>If you want to read more about Authority, you can read Mirrors documentation here: <a class="external-link" data-card-appearance="inline" href="https://mirror-networking.gitbook.io/docs/manual/guides/authority" rel="nofollow">https://mirror-networking.gitbook.io/docs/manual/guides/authority</a> </p><p />
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Jul 04, 2025 14:41</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

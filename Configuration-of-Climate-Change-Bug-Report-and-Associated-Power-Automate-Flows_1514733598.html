@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VARLab : Configuration of Climate Change Bug Report and Associated Power Automate Flows</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="VARLab_44990773.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="DLX-Product-Playbook_953614343.html">DLX Product Playbook</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Quality-Assurance-Team_1493794818.html">Quality Assurance Team</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="External-Team-Support---Handling-Third-Party-Testing-Requests_1493827596.html">External Team Support - Handling Third Party Testing Requests</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            VARLab : Configuration of Climate Change Bug Report and Associated Power Automate Flows
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Neethu Baby</span>, last modified on Dec 11, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <style type="text/css">/*<![CDATA[*/
+div.rbtoc1751639950414 {padding: 0px;}
+div.rbtoc1751639950414 ul {list-style: square;margin-left: 0px;}
+div.rbtoc1751639950414 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class="toc-macro rbtoc1751639950414"><style>[data-colorid=e8jrjbjkll]{color:#0747a6} html[data-color-mode=dark] [data-colorid=e8jrjbjkll]{color:#5999f8}[data-colorid=dutm5z0oxl]{color:#0747a6} html[data-color-mode=dark] [data-colorid=dutm5z0oxl]{color:#5999f8}[data-colorid=v5dztq2bvc]{color:#0747a6} html[data-color-mode=dark] [data-colorid=v5dztq2bvc]{color:#5999f8}[data-colorid=fcfablkti2]{color:#0747a6} html[data-color-mode=dark] [data-colorid=fcfablkti2]{color:#5999f8}</style>
+<ul class="toc-indentation">
+<li><a href="#ConfigurationofClimateChangeBugReportandAssociatedPowerAutomateFlows-Overview">Overview</a></li>
+<li><a href="#ConfigurationofClimateChangeBugReportandAssociatedPowerAutomateFlows-ClimateChangeBugReport-RequiredFields">Climate Change Bug Report - Required Fields</a></li>
+<li><a href="#ConfigurationofClimateChangeBugReportandAssociatedPowerAutomateFlows-ClimateChange-WhenanewitemisaddedinSharePoint,createBugIDandItemLink-PowerAutomateFlowSteps">Climate Change - When a new item is added in SharePoint, create Bug ID and Item Link - Power Automate Flow Steps</a></li>
+<li><a href="#ConfigurationofClimateChangeBugReportandAssociatedPowerAutomateFlows-ClimateChange-ExportattachmentsfromSPBuglisttosharedlocationinSharePoint-PowerAutomateFlowSteps">Climate Change - Export attachments from SP Bug list to shared location in SharePoint - Power Automate Flow Steps</a></li>
+</ul>
+</div><h2 id="ConfigurationofClimateChangeBugReportandAssociatedPowerAutomateFlows-Overview"><span data-colorid="v5dztq2bvc">Overview</span></h2><p>The Climate Change Bug Report is a SharePoint list configured to automatically generate a unique Bug ID for each new issue created. This Bug ID is formatted as a combination of &ldquo;BUG-CurrentDateTime-SharePointItemID,&rdquo; where the SharePointItemID is an auto-incrementing value.</p><p>The <em>Bug ID</em> is a single-line text column where data is generated using the Power Automate workflow <em>&quot;</em><a class="external-link" href="https://make.powerautomate.com/environments/Default-4ddd393a-e98a-4404-841f-c4becdd925a5/flows/shared/a2852736-440b-4941-9b01-ae08de3a0b03/details" rel="nofollow"><em>Climate Change - When a new item is added in SharePoint, create Bug ID and Item Link</em></a><em>&quot;. </em></p><p>The <em>Item Link</em> is a hyperlink column in the SharePoint list, automatically populated with the item's display link once the workflow is executed.</p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-content-image-border image-center" alt="image-20241211-152154.png" width="760" loading="lazy" src="attachments/1514733598/1514799122.png?width=760" data-image-src="attachments/1514733598/1514799122.png" data-height="265" data-width="905" data-unresolved-comment-count="0" data-linked-resource-id="1514799122" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20241211-152154.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1514733598" data-linked-resource-container-version="11" data-media-id="fcc11f1b-6eac-4004-b1da-22cd7a61d652" data-media-type="file" /></span><p><em><u>Note:</u> After creating a new bug entry in the list, it may take up to one minute for the Bug ID and Item Link to be generated. If the Bug ID does not appear immediately after creating the entry, please wait for a minute and refresh the page. The Bug ID and Item Link should then be visible.</em></p><h2 id="ConfigurationofClimateChangeBugReportandAssociatedPowerAutomateFlows-ClimateChangeBugReport-RequiredFields"><span data-colorid="e8jrjbjkll">Climate Change Bug Report - Required Fields</span></h2><p>When adding a new item to the list, the following columns are designated as mandatory according to the requirements. We can modify these mandatory columns at any time based on changing requirements.</p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-content-image-border image-center" alt="image-20241211-152753.png" width="643" loading="lazy" src="attachments/1514733598/1515225094.png?width=643" data-image-src="attachments/1514733598/1515225094.png" data-height="440" data-width="643" data-unresolved-comment-count="0" data-linked-resource-id="1515225094" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20241211-152753.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1514733598" data-linked-resource-container-version="11" data-media-id="319e759b-2505-409b-8734-6bb6b6b31f64" data-media-type="file" /></span><h2 id="ConfigurationofClimateChangeBugReportandAssociatedPowerAutomateFlows-ClimateChange-WhenanewitemisaddedinSharePoint,createBugIDandItemLink-PowerAutomateFlowSteps"><span data-colorid="fcfablkti2">Climate Change - When a new item is added in SharePoint, create Bug ID and Item Link - Power Automate Flow Steps</span></h2><p>This workflow is triggered whenever a new item is added to the SharePoint list <em>&ldquo;Climate Change - Bug Report.&rdquo;</em></p><p>Once triggered, the workflow retrieves the newly created item and updates the <em>Bug ID</em> and <em>Item Link</em> columns accordingly.</p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-content-image-border image-center" alt="image-20241211-154008.png" width="760" loading="lazy" src="attachments/1514733598/1514864668.png?width=760" data-image-src="attachments/1514733598/1514864668.png" data-height="637" data-width="1200" data-unresolved-comment-count="0" data-linked-resource-id="1514864668" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20241211-154008.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1514733598" data-linked-resource-container-version="11" data-media-id="0efac596-2567-4ad8-829b-d5447f4c854c" data-media-type="file" /></span><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-content-image-border image-center" alt="image-20241211-153850.png" width="760" loading="lazy" src="attachments/1514733598/1515094050.png?width=760" data-image-src="attachments/1514733598/1515094050.png" data-height="663" data-width="997" data-unresolved-comment-count="0" data-linked-resource-id="1515094050" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20241211-153850.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1514733598" data-linked-resource-container-version="11" data-media-id="974a95df-bb29-45b0-ab65-1ac7d9be7df2" data-media-type="file" /></span><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-content-image-border image-center" alt="image-20241211-153942.png" width="760" loading="lazy" src="attachments/1514733598/1514536994.png?width=760" data-image-src="attachments/1514733598/1514536994.png" data-height="667" data-width="979" data-unresolved-comment-count="0" data-linked-resource-id="1514536994" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20241211-153942.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1514733598" data-linked-resource-container-version="11" data-media-id="6c1d94d2-cc2a-4c29-9e2f-ac79713bfd50" data-media-type="file" /></span><h2 id="ConfigurationofClimateChangeBugReportandAssociatedPowerAutomateFlows-ClimateChange-ExportattachmentsfromSPBuglisttosharedlocationinSharePoint-PowerAutomateFlowSteps"><span data-colorid="dutm5z0oxl">Climate Change - Export attachments from SP Bug list to shared location in SharePoint - Power Automate Flow Steps</span></h2><p>&ldquo;<a class="external-link" href="https://make.powerautomate.com/environments/Default-4ddd393a-e98a-4404-841f-c4becdd925a5/flows/shared/73165e4e-b879-4984-904e-520a3347d774/details" rel="nofollow"><em>Climate Change - Export attachments from SP Bug list to shared location in SharePoint</em></a>&rdquo; is a power automate flow that needs to be run on demand. It is triggered manually. Whenever necessary, go to the workflow and click &quot;Run.&quot;</p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-content-image-border image-center" alt="image-20241211-155537.png" width="760" loading="lazy" src="attachments/1514733598/1515290652.png?width=760" data-image-src="attachments/1514733598/1515290652.png" data-height="522" data-width="1234" data-unresolved-comment-count="0" data-linked-resource-id="1515290652" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20241211-155537.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1514733598" data-linked-resource-container-version="11" data-media-id="2a981a83-0e5a-48bb-8edf-c3a95c343abf" data-media-type="file" /></span><p>This flow is used to retrieve all attachments from the &ldquo;<em>Climate Change - Bug Report</em>&rdquo; SharePoint list and save them to a shared location. When triggered, the flow will retrieve all attachments created in the past 30 days and save them to a different location in SharePoint.</p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-content-image-border image-center" alt="image-20241211-160513.png" width="687" loading="lazy" src="attachments/1514733598/1515094077.png?width=687" data-image-src="attachments/1514733598/1515094077.png" data-height="660" data-width="687" data-unresolved-comment-count="0" data-linked-resource-id="1515094077" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20241211-160513.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1514733598" data-linked-resource-container-version="11" data-media-id="127fcd59-a6dc-4817-b4b9-973c13a39d6b" data-media-type="file" /></span><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-content-image-border image-center" alt="image-20241211-160701.png" width="760" loading="lazy" src="attachments/1514733598/1514668069.png?width=760" data-image-src="attachments/1514733598/1514668069.png" data-height="657" data-width="1007" data-unresolved-comment-count="0" data-linked-resource-id="1514668069" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20241211-160701.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1514733598" data-linked-resource-container-version="11" data-media-id="ba2e924b-5457-46e3-9ea4-c9f4c66ab743" data-media-type="file" /></span><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-content-image-border image-center" alt="image-20241211-160738.png" width="760" loading="lazy" src="attachments/1514733598/1515323416.png?width=760" data-image-src="attachments/1514733598/1515323416.png" data-height="617" data-width="1255" data-unresolved-comment-count="0" data-linked-resource-id="1515323416" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20241211-160738.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1514733598" data-linked-resource-container-version="11" data-media-id="86c3a361-a411-4e60-b3cb-3f19892a1893" data-media-type="file" /></span><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon" /><div class="confluence-information-macro-body"><p><em><u>Note:</u> As we currently do not have a service account, the workflow is owned by Neethu and shared only with Cristina and Dayne to minimize risks. Any incorrect changes to the workflow could potentially disrupt the entire process.</em></p></div></div><p />
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1514733598/1514799122.png">image-20241211-152154.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1514733598/1515225094.png">image-20241211-152753.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1514733598/1515290631.png">image-20241211-153009.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1514733598/1515290645.png">image-20241211-153804.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1514733598/1515094050.png">image-20241211-153850.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1514733598/1514536994.png">image-20241211-153942.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1514733598/1514864668.png">image-20241211-154008.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1514733598/1515290652.png">image-20241211-155537.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1514733598/1515094077.png">image-20241211-160513.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1514733598/1514668069.png">image-20241211-160701.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1514733598/1515323416.png">image-20241211-160738.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Jul 04, 2025 14:39</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

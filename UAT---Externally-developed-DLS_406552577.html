@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VARLab : UAT - Externally developed DLS</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="CVRI-Software-Development-Process_406519837.html">CVRI Software Development Process</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="247660671.html">User Acceptance Testing (UAT) Process</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            VARLab : UAT - Externally developed DLS
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Germán Gaussmann</span>, last modified by <span class='editor'> Stacey Dineen</span> on Aug 20, 2021
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>Some of our DLS are developed by external vendors. Examples of this are the CSI, Traffic Forensics and Welding DLS.</p><p>Even though they are not developed by the VARLab team, they still need to go through the same processes, such as UAT. We obviously cannot embed any of the feedback tools in the simulations themselves, to avoid having to ask the external vendor to have a UAT version which would imply more development time on their end.</p><p>What we have done is follow a similar UAT pipeline than what we do for our in-house DLS, which is designing an intro module that should fill the gaps not covered by the DLS itself and then have standalone survey forms that the UAT participants will complete after completing the simulation.</p><h1 id="UAT-ExternallydevelopedDLS-CreatinganintromoduleinVTS">Creating an intro module in VTS</h1><p>To create an intro module, we need a script, a background image and to choose an avatar and a voice for the avatar. We are currently using <a class="external-link" href="https://speechelo.com/" rel="nofollow">Speechelo</a> to create the audio clips for the avatars.  You may choose to start from the Intro-Outro Template, but it’s important to remember that you should customize the template for your specific needs - it is more like a checklist than a recipe.  Take only what you need and remove everything else!</p><p>Before creating the Intro, it is important to have a clear understanding of exactly what information the end users need to have that is not already included in the simulation.  We disrespect our volunteers and our learners when we misuse their time, so it’s really important to be as concise and clear as possible.  If the intro module lasts longer than about 2-4 minutes, chances are good you have overdone it and could trim out content that isn’t really necessary (just a guideline - work with your project team to determine the requirements).  The goal is to deliver the essential information in a clear and concise way: Tell the learner <strong>what they need to know to succeed</strong> and then get them into the simulation as quickly as possible!</p><p>The DLS may or may not require a separate Intro module, depending on how much guidance is offered to the learner within the simulation (e.g. tutorials, on-screen directions, etc.)</p><p>In addition to the Intro, the DLS may require an “Outro” that will play at the end of the DLS modules.  The Outro can be used to confirm completion of the learning content and may contain a self-evaluation quiz or direct links to extended learning opportunities or next steps. Many DLS will not have an Outro, but it’s good to know that it is an option, in case it is needed.</p><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Contact the VLT for the credentials of the VARLab account for Speechelo.</p></div></div><p>Since the intro module will be played as a video, you shouldn’t add any interactions and just have the segments play one after the other. When you are done, from the top right of your VTS Editor, click the camera button:</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/406552577/408125568.png" data-image-src="attachments/406552577/408125568.png" data-height="121" data-width="398" data-unresolved-comment-count="0" data-linked-resource-id="408125568" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20210819-194040.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="406552577" data-linked-resource-container-version="3" data-media-id="49f6f671-f1a8-43ae-be1d-8da74e9e1398" data-media-type="file"></span><p>You will get this screen:</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/406552577/408125587.png" data-image-src="attachments/406552577/408125587.png" data-height="871" data-width="1247" data-unresolved-comment-count="0" data-linked-resource-id="408125587" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20210819-195434.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="406552577" data-linked-resource-container-version="3" data-media-id="deb67d83-a3b9-465f-befb-27fd3a236d82" data-media-type="file"></span><p>Make sure you turn off “Capture Menu” and leave “Capture subtitles” on. Pick the quality settings from the right and click on Start recording. </p><p>Once you have the video file, you have two options for how to present it to end users in eConestoga:</p><ol><li><p>You can add the video directly to the course shell in eConestoga.</p><ul><li><p>Select Upload/Create &gt; Video or Audio &gt; Upload tab &gt; select video file for upload. This can take some time up upload. When complete, type in the title you want shown in the course and click Save.</p></li></ul></li><li><p>You can upload the video to VARLab’s YouTube account, and add the link to the course shell in eConestoga. This is the right option if you need to upload the same video into multiple different topics within the same course (you will be unable to add the video to each topic otherwise). Instructions follow for this option.</p></li></ol><p>These are the credentials needed to access the account:</p><div id="expander-351725469" class="expand-container"><div id="expander-control-351725469" class="expand-control"><span class="expand-control-icon"><img style="vertical-align:middle;" class="expand-control-image" src="images/icons/grey_arrow_down.png"></span><span class="expand-control-text">Click to reveal credentials</span></div><div id="expander-content-351725469" class="expand-content"><p>User: <a class="external-link" href="mailto:varlabplays@gmail.com" rel="nofollow">varlabplays@gmail.com</a></p><p>Pass: ConestogaVarLab2021</p></div></div><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>You will need to contact the VLT to be authorized to access the account.</p></div></div><p>When uploading the video, make sure to turn off comments and publish it as “Unlisted”. Once you have that link, you need to embedd it to your module on eConestoga.</p><p>Select Video or Audio from the Upload/Create interface:</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/406552577/408027293.png" data-image-src="attachments/406552577/408027293.png" data-height="497" data-width="324" data-unresolved-comment-count="0" data-linked-resource-id="408027293" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20210819-201351.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="406552577" data-linked-resource-container-version="3" data-media-id="fa440fca-47c2-414b-aa83-8eef8f5440a6" data-media-type="file"></span><p>And paste the link to the video you just uploaded:</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/406552577/408158355.png" data-image-src="attachments/406552577/408158355.png" data-height="701" data-width="856" data-unresolved-comment-count="0" data-linked-resource-id="408158355" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20210819-201329.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="406552577" data-linked-resource-container-version="3" data-media-id="10263cf6-7f57-4d62-b864-82edef9bde8a" data-media-type="file"></span><p /><h1 id="UAT-ExternallydevelopedDLS-AddingasurveytoeConestoga">Adding a survey to eConestoga</h1><p>To add your survey done in Microsoft Forms to eConestoga, simply choose “Create a Link” from the Upload/Create interface and add the link to the form:</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/406552577/406650883.png" data-image-src="attachments/406552577/406650883.png" data-height="539" data-width="651" data-unresolved-comment-count="0" data-linked-resource-id="406650883" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20210818-183709.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="406552577" data-linked-resource-container-version="3" data-media-id="9afaddd7-971e-4a4e-873e-f0402428c1da" data-media-type="file"></span><p>To make things more organized on the module, you could add a sub-module just for the survey and it would look like this:</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/406552577/408125634.png" data-image-src="attachments/406552577/408125634.png" data-height="870" data-width="986" data-unresolved-comment-count="0" data-linked-resource-id="408125634" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20210819-202515.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="406552577" data-linked-resource-container-version="3" data-media-id="0c846914-c0cb-4f70-b87d-b54d00f6c70c" data-media-type="file"></span><p />
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/406552577/406650883.png">image-20210818-183709.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/406552577/408125568.png">image-20210819-194040.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/406552577/408060138.png">image-20210819-195413.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/406552577/408125587.png">image-20210819-195434.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/406552577/408158355.png">image-20210819-201329.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/406552577/408027293.png">image-20210819-201351.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/406552577/408125634.png">image-20210819-202515.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Jul 04, 2025 14:40</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

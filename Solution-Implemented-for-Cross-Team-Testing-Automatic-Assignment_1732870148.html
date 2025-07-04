@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VARLab : Solution Implemented for Cross Team Testing Automatic Assignment</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="VARLab_44990773.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="DLX-Product-Playbook_953614343.html">DLX Product Playbook</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Quality-Assurance-Team_1493794818.html">Quality Assurance Team</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Automatic-Assignments-for-Cross-Team-Testing_1558118414.html">Automatic Assignments for Cross Team Testing</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            VARLab : Solution Implemented for Cross Team Testing Automatic Assignment
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Neethu Baby</span>, last modified on Apr 03, 2025
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>The automatic assignment has been successfully executed as per the plan using a Power Automate flow and  SharePoint lists. We chose Power Automate and SharePoint for several reasons. Firstly, Power Automate is a low-code solution that simplifies maintenance and reduces complexity, making it easy to manage without requiring extensive development efforts. Additionally, it doesn’t require deployment, which streamlines the process.</p><p>SharePoint was selected as the data source because it allows for easy transfer of ownership, is accessible to members, and ensures seamless collaboration across teams. Furthermore, SharePoint's integration with Power Automate provides a powerful, flexible, and secure environment for managing assignments and workflow automation efficiently.</p><p>Below are the three basic criteria and their current status:</p><div class="table-wrap"><table data-table-width="760" data-layout="default" data-local-id="e85abc60-4de2-496a-8930-272323caba6a" class="confluenceTable"><tbody><tr><th class="confluenceTh"><p><strong>Criteria</strong></p></th><th class="confluenceTh"><p><strong>Status</strong></p></th><th class="confluenceTh"><p><strong>Details</strong></p></th></tr><tr><td class="confluenceTd"><p>Can’t get assigned to test your own project.</p></td><td class="confluenceTd"><p>Achieved</p></td><td class="confluenceTd"><p>The system ensures that testers are not assigned to their own project.</p></td></tr><tr><td class="confluenceTd"><p>Ideally not assigned to test the same project two sprints in a row</p></td><td class="confluenceTd"><p>Provision is given</p></td><td class="confluenceTd"><p>Since there are only 2 or 3 projects under test, repetition of assignments is likely. This issue will arise due to limited available projects in this semester.</p></td></tr><tr><td class="confluenceTd"><p>Distribute specialized skills such as UI/UX, instructional design, game design, etc. across all projects for better coverage</p></td><td class="confluenceTd"><p>For Future Enhancement</p></td><td class="confluenceTd"><p>This will be considered for future enhancements, as none of the current projects under test require specialized skills.</p></td></tr></tbody></table></div><p><strong>Implementation Approach</strong></p><p>The process begins with creating a SharePoint list, &quot;CTT Testers,&quot; which is used to maintain all tester details. This list includes columns for tester name, primary project team, assigned project history, availability check, and assigned status.</p><p>Next is the &quot;CTT Projects&quot; list, which contains a comprehensive list of all projects. Project team leaders are responsible for updating this list before the Cross Team Testing to specify how many testers are required for their project. Additionally, if a project is not scheduled for testing during the current sprint, team leaders can indicate this in the list as well.</p><p>Lastly, the &quot;CTT Assignments&quot; list will contain the results of the automatic assignment process. The Power Automate workflow will automatically delete and add new entries to the assignment list each time it runs. This list includes the tester name and the project assigned for testing. The list is grouped based on the primary project team to ensure better visibility and organization.</p><p /><p><strong>Future Enhancement</strong></p><p>Modify the Power Automate flow by adding more conditions to handle Criteria 2 and Criteria 3 discussed above.</p><p /><p><strong>Potential Issues and Challenges</strong></p><p>Since the Power Automate connection is not configured with a service account, it may stop working if the current credentials become invalid. In that case, Jon or Dayne will need to reconnect the flow using their own credentials. </p><p>Here is the link to reconnect the Power Automate flow using new credentials:</p><p><a class="external-link" href="https://learn.microsoft.com/en-us/power-automate/add-manage-connections" rel="nofollow">Manage connections in Power Automate</a></p><p /><p /><p /><p /><p />
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Jul 04, 2025 14:39</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

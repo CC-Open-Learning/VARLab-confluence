@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VARLab : On Working With, Generating, and Configuring LODs</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="947650564.html">Art/Asset Department</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            VARLab : On Working With, Generating, and Configuring LODs
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Topher Rouleau</span>, last modified on Apr 30, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="confluence-information-macro confluence-information-macro-information"><style>[data-colorid=tokaqxrj3b]{color:#4c9aff} html[data-color-mode=dark] [data-colorid=tokaqxrj3b]{color:#004eb3}[data-colorid=w0x0o5gn8a]{color:#6554c0} html[data-color-mode=dark] [data-colorid=w0x0o5gn8a]{color:#503fab}[data-colorid=of716o0iyz]{color:#4c9aff} html[data-color-mode=dark] [data-colorid=of716o0iyz]{color:#004eb3}[data-colorid=ry5g5zvcfj]{color:#ffc400} html[data-color-mode=dark] [data-colorid=ry5g5zvcfj]{color:#ffc400}[data-colorid=lohju2p8gk]{color:#ff5630} html[data-color-mode=dark] [data-colorid=lohju2p8gk]{color:#cf2600}[data-colorid=qj8s7kmdf8]{color:#4c9aff} html[data-color-mode=dark] [data-colorid=qj8s7kmdf8]{color:#004eb3}[data-colorid=e71s9z3f0q]{color:#ffc400} html[data-color-mode=dark] [data-colorid=e71s9z3f0q]{color:#ffc400}[data-colorid=yfni74cuko]{color:#ffc400} html[data-color-mode=dark] [data-colorid=yfni74cuko]{color:#ffc400}[data-colorid=txkz1mxjjv]{color:#36b37e} html[data-color-mode=dark] [data-colorid=txkz1mxjjv]{color:#4cc994}[data-colorid=t2jhfbvtsa]{color:#36b37e} html[data-color-mode=dark] [data-colorid=t2jhfbvtsa]{color:#4cc994}[data-colorid=lu4zquhe10]{color:#6554c0} html[data-color-mode=dark] [data-colorid=lu4zquhe10]{color:#503fab}[data-colorid=wdk5pad8g1]{color:#36b37e} html[data-color-mode=dark] [data-colorid=wdk5pad8g1]{color:#4cc994}[data-colorid=pp6k2evc6r]{color:#ff5630} html[data-color-mode=dark] [data-colorid=pp6k2evc6r]{color:#cf2600}[data-colorid=r8xu0henry]{color:#ff5630} html[data-color-mode=dark] [data-colorid=r8xu0henry]{color:#cf2600}[data-colorid=uph2s9n740]{color:#6554c0} html[data-color-mode=dark] [data-colorid=uph2s9n740]{color:#503fab}</style><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon" /><div class="confluence-information-macro-body"><p>This document will describe the process(es) behind generating LODs for models, and the expectations on how these assets will be delivered. </p></div></div><div class="panel" style="background-color: #EAE6FF;border-color: #998DD9;border-width: 1px;"><div class="panelContent" style="background-color: #EAE6FF;">
+<p>This document is still a work in progress</p>
+</div></div><style type="text/css">/*<![CDATA[*/
+div.rbtoc1751640198471 {padding: 0px;}
+div.rbtoc1751640198471 ul {list-style: none;margin-left: 0px;}
+div.rbtoc1751640198471 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class="toc-macro rbtoc1751640198471">
+<ul class="toc-indentation">
+<li><a href="#OnWorkingWith,Generating,andConfiguringLODs-LODs">LODs</a>
+<ul class="toc-indentation">
+<li><a href="#OnWorkingWith,Generating,andConfiguringLODs-WhatisanLOD?">What is an LOD?</a></li>
+<li><a href="#OnWorkingWith,Generating,andConfiguringLODs-WhyUseLODs?">Why Use LODs?</a></li>
+</ul>
+</li>
+<li><a href="#OnWorkingWith,Generating,andConfiguringLODs-LODNamingConventions">LOD Naming Conventions</a>
+<ul class="toc-indentation">
+<li><a href="#OnWorkingWith,Generating,andConfiguringLODs-WorkingWithLODs">Working With LODs</a>
+<ul class="toc-indentation">
+<li><a href="#OnWorkingWith,Generating,andConfiguringLODs-LODsThatAreAlreadyThere">LODs That Are Already There</a></li>
+<li><a href="#OnWorkingWith,Generating,andConfiguringLODs-ConfiguringorRe-configuringLODs">Configuring or Re-configuring LODs</a></li>
+</ul>
+</li>
+<li><a href="#OnWorkingWith,Generating,andConfiguringLODs-LODHeirarchy">LOD Heirarchy</a></li>
+<li><a href="#OnWorkingWith,Generating,andConfiguringLODs-GeneratingLODs">Generating LODs</a>
+<ul class="toc-indentation">
+<li><a href="#OnWorkingWith,Generating,andConfiguringLODs-UsingSimplyGon">Using SimplyGon</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div><h1 id="OnWorkingWith,Generating,andConfiguringLODs-LODs">LODs</h1><h2 id="OnWorkingWith,Generating,andConfiguringLODs-WhatisanLOD?">What is an LOD?</h2><p>LOD stands for &ldquo;Level of Detail&rdquo;, and is a system used in games to try to optimize the performance of visuals. In general, an LOD system swaps out models or textures for lower fidelity versions of themselves, either based on the distance the object is from the camera, or based on what percentage of the screen the object takes up. </p><p>LODs are certainly not a new thing, being employed all the way back on the PS1 and N64</p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" width="760" loading="lazy" src="attachments/838893572/867172373.jpg?width=760" data-image-src="attachments/838893572/867172373.jpg" data-height="720" data-width="1280" data-unresolved-comment-count="0" data-linked-resource-id="867172373" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="maxresdefault-20231128-153933.jpg" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/jpeg" data-linked-resource-container-id="838893572" data-linked-resource-container-version="10" data-media-id="66517541-80d7-4a91-ae57-8a3586ae931e" data-media-type="file" /></span><p>While the relative size of the object is the biggest factor at play here, and we rely on a smaller object having fewer pixels to display it and therefore less detail, it is a common strategy to also employ use of post processing to further hide the changes in the LODs</p><p>For our purposes we will often just two LODs, but it is not uncommon for a big budget game to have more than two. Depending on the size and importance of an object, as well as the number of angles a player can view it from a character or proper might go from being nearly cinema quality all the way to being reduced to a card or a standee - basically flat - before being culled entirely. Trees are a great example of an asset that will often have a card version of it before being culled.</p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" width="760" loading="lazy" src="attachments/838893572/867106824.png?width=760" data-image-src="attachments/838893572/867106824.png" data-height="365" data-width="776" data-unresolved-comment-count="0" data-linked-resource-id="867106824" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="SpeedTreeView-20231128-154721.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="838893572" data-linked-resource-container-version="10" data-media-id="d3a4b571-9887-44a1-ac40-94857c3bd427" data-media-type="file" /></span><h2 id="OnWorkingWith,Generating,andConfiguringLODs-WhyUseLODs?">Why Use LODs?</h2><p>Great question! As mentioned above, an LOD system is an attempt to optimize the graphic processing available from a piece of hardware. While this is still a consideration today (and especially so for us as we deploy to web), these considerations were much more important with older hardware.</p><p>Lets look at the XBox 360 as an example. On paper, that console was supposed to be able to render 500 million polygons per second, but in reality that number is likely much lower, depending on the game. We can use 100 million triangles per second as an optimistic benchmark. With so few draw calls available, this would make a full forest like the Pine Forest in Skyrim impossible for the hardware to handle&hellip; without the use of LODs and other optimization techniques.</p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" width="760" loading="lazy" src="attachments/838893572/866713720.webp?width=760" data-image-src="attachments/838893572/866713720.webp" data-height="1080" data-width="1920" data-unresolved-comment-count="0" data-linked-resource-id="866713720" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="a0tmj02qhl921-20231128-155531.webp" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/webp" data-linked-resource-container-id="838893572" data-linked-resource-container-version="10" data-media-id="479dfe11-6785-487d-a2ca-895d0444878c" data-media-type="file" /></span><p>Be aware though, that all things come at a cost. While use of LODs certainly lessens the burden on a system's GPU the trade off is increased overhead on the CPU and RAM, depending on the setup. Games often don&rsquo;t use the entirety of the CPU available to them, so this usually a moot point, but it is something to keep in mind.</p><h1 id="OnWorkingWith,Generating,andConfiguringLODs-LODNamingConventions">LOD Naming Conventions</h1><p>Like all our art assets, we want to have a descriptive and descriptive name. Objects or parts objects that use LODs are no exception, except for the exception that we don&rsquo;t get to decide the convention for LODs. In our case, Unity did that for us.</p><blockquote><p>GameObject_<strong>LOD0</strong><br />GameObject_<strong>LOD1</strong><br />GameObject_<strong>LOD2</strong></p></blockquote><p>Seen above is the naming convention that Unity expects for auto-detecting LODs. They're pretty simple. All Unity expects is that the <strong>very end of the part name </strong>has &ldquo;_LOD[x]&rdquo; where &ldquo;X&rdquo; is the level of detail.</p><p>LODs use a base 0 counting system, and <strong>the zeroth entry is the highest fidelity</strong> version, with each increment having less detail than the one that came before it.</p><p>These naming conventions, when present in an imported FBX signal to Unity that this game object should have the LOD Group Component. This component can be configured manually, but having proper names speeds this up quite a bit!</p><h2 id="OnWorkingWith,Generating,andConfiguringLODs-WorkingWithLODs">Working With LODs</h2><h3 id="OnWorkingWith,Generating,andConfiguringLODs-LODsThatAreAlreadyThere">LODs That Are Already There</h3><p>When manipulating a model that uses LODs you should be careful to <strong>perform equal actions to all levels of detail in the model</strong>. If you don&rsquo;t do this, the LOD system will not only be swapping the models and textures, but also the position, rotation, or scale when the camera moves closer or further:</p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" width="612" loading="lazy" src="attachments/838893572/867336208.gif?width=612" data-image-src="attachments/838893572/867336208.gif" data-height="669" data-width="1280" data-unresolved-comment-count="0" data-linked-resource-id="867336208" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="UnityLODs.gif" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/gif" data-linked-resource-container-id="838893572" data-linked-resource-container-version="10" data-media-id="d9190439-a975-4b5b-b8bb-0b82be3ceec9" data-media-type="file" /></span><p>There are two main things you can check to see if the model has LODs. The first is to check the hierarchy of the game object and check the names of the parts of the model to see if it has a name that includes &ldquo;_LOD[x]&rdquo; as described above. You can also check the top level of the game object to see if it has the LOD Group component</p><h3 id="OnWorkingWith,Generating,andConfiguringLODs-ConfiguringorRe-configuringLODs">Configuring or Re-configuring LODs</h3><p>Sometimes you may need to adjust an LOD Group component for one reason or another. The main reason would be that the swap between models is too obvious or jarring. The simplest way to fix this is to change the distance at which the models are swapped. </p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" width="618" loading="lazy" src="attachments/838893572/867041334.png?width=618" data-image-src="attachments/838893572/867041334.png" data-height="474" data-width="618" data-unresolved-comment-count="0" data-linked-resource-id="867041334" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20231128-212337.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="838893572" data-linked-resource-container-version="10" data-media-id="f2e62425-9d44-4f70-823f-f76fd6727ae9" data-media-type="file" /></span><p>Using the control in the image above, you can drag the ends of the coloured sections of the bar in order set what distance (or screen percentage) the models are swapped at.<br /><br />In the above picture we can see that LOD0 is active from 100% to 23% screen real estate, then LOD1 is active from 23% to 2% screen real estate. Finally the object is culled at 1% or less screen real estate.<br /><br />Also note the bright blue camera icon. This represents the current position of the camera and shows what screen percentage the object takes up at that distance. You can use this in order to help gauge when the LODs should be swapped.  You can click the &ldquo;Set To Camera&rdquo; buttons to move the break-point to the current camera position for the corresponding Level.</p><p>The other main reason to make an adjustment here is if a part needs to be added or removed. We can see the plus and minus buttons on each LOD. These can be used to add or remove meshes as needed. Note also the &ldquo;Recalculate Bounds&rdquo; button. This button will find the outer bounds of the meshes involved in this LOD group, and will set the bounds accordingly. These bounds are used to gauge what screen percentage the LOD Group is taking up.</p><h2 id="OnWorkingWith,Generating,andConfiguringLODs-LODHeirarchy">LOD Heirarchy</h2><p>We can avoid some issues that can arise when working with LODs by setting a deliberate heirarchy to our models. It&rsquo;s possible that a model may be received or retrieved with the LODs arranged differently from what will help us out. These will usually come from historical assets, or assets that we have purchased or otherwise received from outside of VAR Staff generating them. Don&rsquo;t worry though, this hierarchy can be set up in engine!</p><p>We will aim to have a hierarchy that places a lower detail LOD as a direct child of the previous level of detail. </p><p /><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" alt="image-20240430-183053.png" width="618" loading="lazy" src="attachments/838893572/1092648970.png?width=618" data-image-src="attachments/838893572/1092648970.png" data-height="34" data-width="310" data-unresolved-comment-count="0" data-linked-resource-id="1092648970" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20240430-183053.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="838893572" data-linked-resource-container-version="10" data-media-id="a75ae511-9d97-48ef-8375-df080af14a41" data-media-type="file" /></span><p /><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" alt="image-20240430-183241.png" width="625" loading="lazy" src="attachments/838893572/1092321304.png?width=625" data-image-src="attachments/838893572/1092321304.png" data-height="40" data-width="317" data-unresolved-comment-count="0" data-linked-resource-id="1092321304" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20240430-183241.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="838893572" data-linked-resource-container-version="10" data-media-id="04868cef-9566-45de-8771-1b480a9ec71a" data-media-type="file" /></span><p>Sometime we will have more complex models that will have sub-meshes, and each could have its own LOD. It could also mean that some of the sub meshes do NOT have their own LODIn this case, we will want to maintain a proper model hierarchy as well as the LOD hierarchy, which would look something like this:</p><p /><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" alt="image-20240430-183904.png" width="369" loading="lazy" src="attachments/838893572/1092354056.png?width=369" data-image-src="attachments/838893572/1092354056.png" data-height="288" data-width="369" data-unresolved-comment-count="0" data-linked-resource-id="1092354056" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20240430-183904.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="838893572" data-linked-resource-container-version="10" data-media-id="f26d0bfc-5cb3-4247-bd5b-28fce05416ce" data-media-type="file" /></span><p>In the above picture we can see that the model&rsquo;s overall hierarchy is:</p><blockquote><ul><li><p><strong><span data-colorid="qj8s7kmdf8">Door Frame</span></strong></p><ul><li><p><strong><span data-colorid="t2jhfbvtsa">Latch</span></strong></p></li><li><p><strong><span data-colorid="e71s9z3f0q">Door</span></strong></p><ul><li><p><strong><span data-colorid="lohju2p8gk">Gasket</span></strong></p></li><li><p><strong><span data-colorid="w0x0o5gn8a">Handle</span></strong></p></li><li><p><strong>Spring</strong></p></li></ul></li></ul></li></ul></blockquote><p>Adding in the LODs we would instead see:<br /></p><blockquote><ul><li><p><strong><span data-colorid="of716o0iyz">Door Frame LOD0</span></strong></p><ul><li><p><strong><span data-colorid="tokaqxrj3b">Door Frame LOD1</span></strong></p></li><li><p><strong><span data-colorid="txkz1mxjjv">Latch LOD0</span></strong></p><ul><li><p><strong><span data-colorid="wdk5pad8g1">Latch LOD1</span></strong></p></li></ul></li><li><p><strong><span data-colorid="yfni74cuko">Door LOD0</span></strong></p><ul><li><p><strong><span data-colorid="ry5g5zvcfj">Door LOD1</span></strong></p></li><li><p><strong><span data-colorid="r8xu0henry">Gasket LOD0</span></strong></p><ul><li><p><strong><span data-colorid="pp6k2evc6r">Gasket LOD1</span></strong></p></li></ul></li><li><p><strong><span data-colorid="lu4zquhe10">Handle LOD0</span></strong></p><ul><li><p><strong><span data-colorid="uph2s9n740">Handle LOD1</span></strong></p></li></ul></li><li><p><strong>Spring LOD0</strong></p><ul><li><p><strong>Spring LOD1</strong></p></li></ul></li></ul></li></ul></li></ul></blockquote><p>Note that DoorFrame LOD1 and Latch LOD0 are on the exact same level. DoorFrame LOD1 is directly a child of its higher fidelity LOD, and Latch is still a child of the DoorFrame as it was in the previous example. </p><h2 id="OnWorkingWith,Generating,andConfiguringLODs-GeneratingLODs">Generating LODs</h2><div class="panel" style="background-color: #EAE6FF;border-color: #998DD9;border-width: 1px;"><div class="panelContent" style="background-color: #EAE6FF;">
+<p>This section will be completed at a later date</p>
+</div></div><p>There&rsquo;s a few ways that LODs can be generated. Some can be very manual, while other tools exist to do it nearly automatically. </p><h4 id="OnWorkingWith,Generating,andConfiguringLODs-UsingSimplyGon">Using SimplyGon</h4><p>If we want to make LODs as dead-simple as possible, look no further than SimplyGon. SimplyGon can be found <a class="external-link" href="https://www.simplygon.com/" rel="nofollow">here.</a> For the most part this becomes a fire and forget solution once you are configured, though the fere version does have a limit on how many LODs can be generated daily. </p>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/838893572/867172373.jpg">maxresdefault-20231128-153933.jpg</a> (image/jpeg)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/838893572/867106824.png">SpeedTreeView-20231128-154721.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/838893572/866713720.webp">a0tmj02qhl921-20231128-155531.webp</a> (image/webp)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/838893572/867336208.gif">UnityLODs.gif</a> (image/gif)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/838893572/866844726.png">image-20231128-211401.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/838893572/867041328.png">image-20231128-212321.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/838893572/867041334.png">image-20231128-212337.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/838893572/1092648970.png">image-20240430-183053.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/838893572/1092321304.png">image-20240430-183241.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/838893572/1091633173.png">image-20240430-183836.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/838893572/1092616203.png">image-20240430-183845.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/838893572/1091928070.png">image-20240430-183857.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/838893572/1092354056.png">image-20240430-183904.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Jul 04, 2025 14:43</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

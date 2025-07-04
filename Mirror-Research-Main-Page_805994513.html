@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VARLab : Mirror Research Main Page</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Exploratory-Research-Projects_800587780.html">Exploratory Research Projects</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Multiplayer_803176449.html">Multiplayer</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="803176461.html">Multiplayer Research/Potential Options</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            VARLab : Mirror Research Main Page
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Talon Ernst</span>, last modified by <span class='editor'> Talon Ernst</span> on Oct 25, 2023
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>This document is where all of the research done with Mirror, a multiplayer framework, will be kept.<br/>It can be notes, tutorials, thoughts, anything.</p><p /><style type='text/css'>/*<![CDATA[*/
+div.rbtoc1751640086933 {padding: 0px;}
+div.rbtoc1751640086933 ul {list-style: disc;margin-left: 0px;}
+div.rbtoc1751640086933 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1751640086933'>
+<ul class='toc-indentation'>
+<li><a href='#MirrorResearchMainPage-Research'>Research</a>
+<ul class='toc-indentation'>
+<li><a href='#MirrorResearchMainPage-BasicInformation'>Basic Information</a></li>
+<li><a href='#MirrorResearchMainPage-Topologies'>Topologies</a>
+<ul class='toc-indentation'>
+<li><a href='#MirrorResearchMainPage-Client-Servervs.P2P'>Client-Server vs. P2P</a></li>
+<li><a href='#MirrorResearchMainPage-ClientHostedvs.DedicatedServer'>Client Hosted vs. Dedicated Server</a></li>
+</ul>
+</li>
+<li><a href='#MirrorResearchMainPage-BasicsofMirror'>Basics of Mirror</a></li>
+</ul>
+</li>
+<li><a href='#MirrorResearchMainPage-ImportantResources/Links'>Important Resources/Links</a>
+<ul class='toc-indentation'>
+<li><a href='#MirrorResearchMainPage-MirrorRelatedResources'>Mirror Related Resources</a></li>
+<li><a href='#MirrorResearchMainPage-DefinitionRelatedResources'>Definition Related Resources</a></li>
+<li><a href='#MirrorResearchMainPage-Other'>Other</a></li>
+</ul>
+</li>
+</ul>
+</div><h1 id="MirrorResearchMainPage-Research">Research</h1><h2 id="MirrorResearchMainPage-BasicInformation">Basic Information </h2><ul><li><p>Mirror is based on Unity's abandoned UNET system. They took it and fixed it/added to it.</p></li><li><p>The version of Unity VARLab uses, which is 2021.3.24f1, is supported by Mirror.</p></li><li><p>To add Mirror to a project, you simply add it from the asset store.</p></li><li><p>Mirror is completely free and is also trusted by developers. It is even used in many games that have already been released. More can be read about those games <a class="external-link" href="https://github.com/MirrorNetworking/Mirror#made-with-mirror" rel="nofollow">here</a>.</p></li></ul><h2 id="MirrorResearchMainPage-Topologies">Topologies</h2><p>This section will cover the various topologies that Mirror supports and does not support, as well as give a bit of detail on each. More resources can be found throughout the document if they are not easily understood.</p><h3 id="MirrorResearchMainPage-Client-Servervs.P2P">Client-Server vs. P2P</h3><p>Mirror, by default, is <strong>Client-Server. </strong>This means that ALL communication that happens must go through the server. </p><p>The biggest reason to use a Client-Server architecture is that it has <strong>centralization, </strong>meaning that there is a server in the “center” of all the clients, which all communication must go through. This can be seen as a pro or a con, depending on wants and needs.  Furthermore, if the server is closed for some reason or crashes, the entire game will crash for all clients because it relies on the Server to function.</p><p>If you do not want this, you can use P2P (Peer to Peer) architecture, which is <strong>decentralized,</strong> meaning there is no center server. Rather, all clients have equal footing in the network. They can share resources, workloads, etc. If one of the clients helping act as a server crashes, the game will continue for everyone else. Only that player will be disconnected.<br/><br/>Each architecture has many other pros/cons, including security, scalability, cost, etc. More can be read about both architectures and the pros/cons of each <a class="external-link" href="https://www.zenarmor.com/docs/network-basics/what-is-client-server-network" rel="nofollow">here</a>. Not being able to use P2P is unfortunate. It means that we will be stuck with the Client-Server architecture, not that it is bad, just that we can never change if we see a reason to use P2P.</p><h3 id="MirrorResearchMainPage-ClientHostedvs.DedicatedServer">Client Hosted vs. Dedicated Server</h3><p>Mirror allows you to host a server in 2 ways. The first way is for one of the clients to host the game. This does not mean the client has any special privileges in the game. They are simply in charge of creating an instance of the game considered the “Server”. They then act as both a client of the game and the server.<br/><br/>The second way to host the game is with a <strong>Dedicated Server.</strong> This is where an instance of the game acts ONLY as the server. Mirror talks more in-depth about these and how they support them <a class="external-link" href="https://mirror-networking.gitbook.io/docs/manual/general" rel="nofollow">here</a>.</p><p>Having the ability to choose between a client hosting a game and having a dedicated server is awesome! both are great options depending on needs, and we are not stuck using one method!</p><h2 id="MirrorResearchMainPage-BasicsofMirror">Basics of Mirror</h2><p>Since this is a lengthy topic, it will be covered on its own page <a href="Basics-of-Mirror_826146819.html" data-linked-resource-id="826146819" data-linked-resource-version="8" data-linked-resource-type="page">here</a>.</p><p /><p /><h1 id="MirrorResearchMainPage-ImportantResources/Links">Important Resources/Links</h1><p>These are important resources/links. It can include Mirror related things, definition-related things, and even more.</p><h2 id="MirrorResearchMainPage-MirrorRelatedResources">Mirror Related Resources</h2><p>These are resources related to the Multiplayer framework: Mirror</p><p>Mirror Documentation: <a class="external-link" data-card-appearance="inline" href="https://mirror-networking.gitbook.io/docs/" rel="nofollow">https://mirror-networking.gitbook.io/docs/</a> </p><p>Mirror API: <a class="external-link" data-card-appearance="inline" href="https://storage.googleapis.com/mirror-api-docs/html/index.html" rel="nofollow">https://storage.googleapis.com/mirror-api-docs/html/index.html</a></p><p>Mirror Download: <a class="external-link" data-card-appearance="inline" href="https://assetstore.unity.com/packages/tools/network/mirror-129321" rel="nofollow">https://assetstore.unity.com/packages/tools/network/mirror-129321</a> </p><p>Mirror Discord: <a class="external-link" data-card-appearance="inline" href="https://discord.com/invite/N9QVxbM" rel="nofollow">https://discord.com/invite/N9QVxbM</a> </p><h2 id="MirrorResearchMainPage-DefinitionRelatedResources">Definition Related Resources</h2><p>There are links that can help explain topics mentioned in this document</p><p>Client-Server/P2P (Peer to Peer): <a class="external-link" data-card-appearance="inline" href="https://www.networkstraining.com/peer-to-peer-vs-client-server-network/" rel="nofollow">https://www.networkstraining.com/peer-to-peer-vs-client-server-network/</a>   <br/>TCP vs UDP: <a class="external-link" data-card-appearance="inline" href="https://www.geeksforgeeks.org/differences-between-tcp-and-udp/" rel="nofollow">https://www.geeksforgeeks.org/differences-between-tcp-and-udp/</a> </p><h2 id="MirrorResearchMainPage-Other">Other</h2><p>These are miscellaneous links that, while related to this Mirror research, do not fit under a specific category.</p><p>Mirror Research Repository Link: <a class="external-link" data-card-appearance="inline" href="https://bitbucket.org/VARLab/unity-networking-research/src/master/" rel="nofollow">https://bitbucket.org/VARLab/unity-networking-research/src/master/</a> <br/>ParrelSync: <a class="external-link" data-card-appearance="inline" href="https://github.com/VeriorPies/ParrelSync" rel="nofollow">https://github.com/VeriorPies/ParrelSync</a> </p>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Jul 04, 2025 14:41</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

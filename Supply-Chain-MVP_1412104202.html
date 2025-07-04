@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VARLab : Supply Chain MVP</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Exploratory-Research-Projects_800587780.html">Exploratory Research Projects</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Heuristic-NPCs_1338343427.html">Heuristic NPCs</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Supply-Chain-adjacent-focus_1422065665.html">Supply Chain adjacent focus</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            VARLab : Supply Chain MVP
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Alistair Campbell</span>, last modified on Nov 14, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h2 id="SupplyChainMVP-SystemRequirements">System Requirements</h2><ul><li><p>Inventory system</p><ul><li><p>Can be attached to any object to provide it an inventory</p></li><li><p>Items can be added or removed from that inventory</p></li><li><p>Inventory contents can be checked by external systems</p></li><li><p>Inventory can influence visual state of the object (might mean objects with inventories need custom set up to support &quot;physical&quot; representation)</p></li><li><p>Inventories can add or remove items from themselves</p></li><li><p>Inventories have a maximum capacity and cannot be overfilled</p></li></ul></li><li><p>Navigation System</p><ul><li><p>Should allow for directional navigation constraints (aisles should only be traversable in one direction)</p></li></ul></li><li><p>Pallets system</p><ul><li><p>Pallets have an inventory attached to them</p></li><li><p>Pallets can change visual state depending on the state of the inventory inside them <strong>(elaborate)</strong></p></li><li><p>Pallets can be moved via forklifts and pallet jacks</p></li><li><p><strong>What happens to an empty pallet?</strong></p></li></ul></li><li><p>stocking system</p><ul><li><p>All resources in the warehouse will be finite  (maybe with the exception of empty pallets the workers use)</p></li><li><p>There will be multiple extra pallets of each item stored above it and around the warehouse.</p></li><li><p>stockers will use a forklift to replace empty pallets with full ones from storage</p></li><li><p>While stockers are moving a pallet with the forklift, the entire aisle will be closed off preventing NPC’s from entering it.</p></li></ul></li></ul><p><del>hello</del></p><p /><h2 id="SupplyChainMVP-SystemConcepts">System Concepts</h2><ul><li><p>Navigation Directions</p><ul><li><p>Have navigation modifiers at the start and end of every aisle, entering an aisle would trigger the direction switch to only allow the NPC to pass through the areas designated as the end direction</p></li><li><p>Ex. NPC Enters from the “start”, NPC is now only allowed to pass through areas marked “end” and vice versa, preventing them from pathing backwards in the aisle. <strong>This would not stop them from backing up when in an aisle, only exiting/entering the aisle from the wrong direction.</strong></p></li></ul></li><li><p><span class="confluence-anchor-link" id="SupplyChainMVP-Order-Sorting"><span class="confluence-anchor-link" id="Order-Sorting"></span></span>Order Sorting</p><ul><li><p>All possible items in the warehouse will be assigned a number from 0 to X depending on their position in the physical environment (0 being closest to the start of the flow and X being the furthest away).</p></li><li><p>Item lists to pick will be sorted by these position indexes, which should by default prompt the NPC to follow the correct flow of the warehouse automatically when combined with navigation constraints</p></li></ul></li></ul><h2 id="SupplyChainMVP-NPCConcepts">NPC Concepts</h2><ul><li><p>Energy</p><ul><li><p>Depletes over time</p></li><li><p>Can be regained by taking a break</p></li></ul></li><li><p>Motivation</p><ul><li><p>???</p></li><li><p>Low motivation NPCs are more prone to resting/have a higher energy threshold</p></li><li><p><strong>What are the performance differences of a highly motivated employee vs low motivated employee?</strong></p></li></ul></li><li><p>Load (Speed represented as an actual value)</p><ul><li><p>represents weight of the NPC’s inventory/carried items</p></li><li><p>influences movement acceleration/deceleration? (heavy things will take longer to get moving and get stopped, which could create inefficiencies in movement/traffic jams with heavy slow pallets.</p></li><li><p>Energy drain could be influenced by load (high load = high drain)</p></li></ul></li><li><p>Efficiency (maybe skill would be a more human way to represent it)</p><ul><li><p>Impacts chance to miss an item. Lower skill = higher mistake chance</p></li><li><p>Could impact the speed at which an NPC does its task. High skill could pick boxes faster</p></li></ul></li><li><p>“Gives a shit&quot;</p><ul><li><p>This is basically motivation 2 electric boogaloo. Low motivation employees are less likely to give a shit. It might be worth making that just one thing.</p></li></ul></li></ul><p /><h1 id="SupplyChainMVP-NPCWarehouseJobs">NPC Warehouse Jobs</h1><h3 id="SupplyChainMVP-Picker">Picker</h3><ul><li><p>Fills orders for trucks</p></li><li><p>Grabs items off shelves and loads them on pallets</p></li><li><p>Job Flow</p><ul><li><p>Day start</p></li><li><p>Grab jack</p></li><li><p>get new order from desk</p></li><li><p>grab pallet</p></li><li><p>go to job locations and add items to pallet to fill order</p></li><li><p>Drop off filled order at wrapping station</p></li></ul></li></ul><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" alt="image-20241114-173600.png" width="646" loading="lazy" src="attachments/1412104202/1466728452.png?width=646" data-image-src="attachments/1412104202/1466728452.png" data-height="1669" data-width="1012" data-unresolved-comment-count="0" data-linked-resource-id="1466728452" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20241114-173600.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1412104202" data-linked-resource-container-version="7" data-media-id="c1444945-a310-48f5-af5f-5b472f7b9e9e" data-media-type="file"></span><h3 id="SupplyChainMVP-Stocker">Stocker</h3><ul><li><p>Ensures shelves stay stocked</p></li><li><p>Closes aisles and restocks empty pallets</p></li><li><p>Job flow</p><ul><li><p>Day start</p></li><li><p>Walk around and check on stock levels</p></li><li><p>Goes to an aisle when stock has been depleted</p></li><li><p>Closes aisle</p></li><li><p>Refills stock</p></li><li><p>opens aisle</p></li></ul></li></ul><p /><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" alt="image-20241114-173627.png" width="553" loading="lazy" src="attachments/1412104202/1467351045.png?width=553" data-image-src="attachments/1412104202/1467351045.png" data-height="1585" data-width="553" data-unresolved-comment-count="0" data-linked-resource-id="1467351045" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20241114-173627.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1412104202" data-linked-resource-container-version="7" data-media-id="1eb595bf-3bdb-47a5-84be-896c849f585e" data-media-type="file"></span><p /><h3 id="SupplyChainMVP-Manager">Manager</h3><ul><li><p>Patrols warehouse</p></li><li><p>Ensures workers are behaving correctly</p></li><li><p>Job Flow</p><ul><li><p>Walks around warehouse to check on workers</p></li><li><p>Goes to office occasionally</p></li></ul></li></ul><p /><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" alt="image-20241114-173643.png" width="416" loading="lazy" src="attachments/1412104202/1467383822.png?width=416" data-image-src="attachments/1412104202/1467383822.png" data-height="1020" data-width="676" data-unresolved-comment-count="0" data-linked-resource-id="1467383822" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20241114-173643.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1412104202" data-linked-resource-container-version="7" data-media-id="aed4ed3f-14c7-458c-99c7-392b8eee7aae" data-media-type="file"></span><p /><h3 id="SupplyChainMVP-Wrapper">Wrapper</h3><ul><li><p>Wraps filled pallets before they are loaded on trucks</p></li><li><p>Job Flow</p><ul><li><p>Day start</p></li><li><p>Go to wrapping station</p></li><li><p>Wrap pallets dropped off by pickers (stand there and do nothing)</p></li></ul></li></ul><h3 id="SupplyChainMVP-Breaks">Breaks</h3><ul><li><p>Breaks will be evaluated between the action cycle, such as once a picker is finished picking an order and before they start another order</p></li><li><p>NPC’s on a break will move to a break area and loiter there for an amount of time</p></li><li><p>NPC’s will take different type of breaks depending on their characteristics</p><ul><li><p>Smokers will go outside to smoke</p></li><li><p>Others will go to break areas inside the warehouse</p></li></ul></li><li><p>NPC’s may switch break areas part way through to wander to a new break area</p></li><li><p>Breaks will refill an NPC’s energy need</p></li></ul><p /><h3 id="SupplyChainMVP-Needs">Needs</h3><ul><li><p>Needs will trigger actions when they reach certain thresholds</p></li><li><p>Tiredness</p><ul><li><p>NPC gets tired over time</p></li><li><p>When NPC’s get tired enough they will take a break</p></li><li><p>breaks refill the NPC’s tiredness value</p></li></ul></li><li><p>Hunger?</p><ul><li><p>NPC’s get hungry over time</p></li><li><p>NPC’s will take a long break and eat their lunch</p></li><li><p>Lunch will refill their hunger value</p></li><li><p>Lunch breaks/refilling hunger takes longer than a regular break<br/></p></li></ul></li></ul><h3 id="SupplyChainMVP-Traits">Traits</h3><ul><li><p>Modifiers will influence the needs thresholds of an NPC, causing them to behave more or less extremely depending on their needs</p></li><li><p>Smoker</p><ul><li><p>Smokers will go outside to smoke during their break instead of going to a break location inside</p></li><li><p>Smokers have a lower energy threshold, leading to them taking breaks more often</p></li></ul></li><li><p>Hard Worker</p><ul><li><p>Hard workers will have a higher energy threshold, meaning they will take breaks less often</p></li></ul></li></ul><p />
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1412104202/1467711507.png">image-20241114-173533.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1412104202/1466728452.png">image-20241114-173600.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1412104202/1467351045.png">image-20241114-173627.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1412104202/1467383822.png">image-20241114-173643.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Jul 04, 2025 14:42</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

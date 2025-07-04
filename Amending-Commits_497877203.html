@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VARLab : Amending Commits</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="How-To-Articles_581435426.html">How-To Articles</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Advanced-Git-Techniques_497385729.html">Advanced Git Techniques</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            VARLab : Amending Commits
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Jordan Robinson</span>, last modified on Jul 05, 2022
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>Sometimes you need to make a small change to your branch but you don’t think it warrants a whole new commit. In this case we can amend your previous commit in order to rewrite history as if your change was there the whole time.</p><p>In Sourcetree under the <strong>File Status</strong> tab we can view our changes, stage our changes like usual, but before we go to commit we need to select <strong>Amend Latest Commit </strong>in the bottom-right.</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/497877203/498008172.png" data-image-src="attachments/497877203/498008172.png" data-height="137" data-width="189" data-unresolved-comment-count="0" data-linked-resource-id="498008172" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20220705-192549.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="497877203" data-linked-resource-container-version="2" data-media-id="7dfbbcb2-50c8-402c-8fef-0dfe94396486" data-media-type="file"></span><p>Once you’ve selected this option you’ll notice the previous commit message shows up in the message box.</p><p>After clicking <strong>Commit</strong> you’ll find that you have a commit to push and pull.</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/497877203/497975317.png" data-image-src="attachments/497877203/497975317.png" data-height="64" data-width="111" data-unresolved-comment-count="0" data-linked-resource-id="497975317" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20220705-192647.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="497877203" data-linked-resource-container-version="2" data-media-id="3cae1a9e-9f43-4db0-8874-8b796359455c" data-media-type="file"></span><p>This is because your local branch is now out of sync with Bitbucket and we need to tell it that our version is the true version with a <strong>Force Push</strong>. If force push is not enabled, you will need to enable it in <strong>Tools &gt; Options &gt; Git &gt; Enable force push</strong> first.</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/497877203/497975323.png" data-image-src="attachments/497877203/497975323.png" data-height="331" data-width="798" data-unresolved-comment-count="0" data-linked-resource-id="497975323" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20220705-192720.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="497877203" data-linked-resource-container-version="2" data-media-id="fddf6bf7-42db-4c19-adcc-b7a006a85b86" data-media-type="file"></span><p>After force pushing, your previous commit will be amended as if the changes you just added were always there to begin with.</p>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/497877203/498008172.png">image-20220705-192549.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/497877203/497975317.png">image-20220705-192647.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/497877203/497975323.png">image-20220705-192720.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Jul 04, 2025 14:51</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

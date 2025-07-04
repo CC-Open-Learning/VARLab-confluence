@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VARLab : Hard Reset (You Broke Everything)</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="How-To-Articles_581435426.html">How-To Articles</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Advanced-Git-Techniques_497385729.html">Advanced Git Techniques</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            VARLab : Hard Reset (You Broke Everything)
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Jordan Robinson</span>, last modified on Jul 06, 2022
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>If you’re reading this article I’m sorry, but we can restore the branch you destroyed.</p><p>Hard resets are a last line of defense for when we screw up a rebase and end up losing a ton of work as a result.</p><p>First thing we need to do is check out the branch we want to save.</p><h2 id="HardReset(YouBrokeEverything)-FiguringOutWhatStateToResetTo">Figuring Out What State To Reset To</h2><p>If we want to undo our mistakes, we need to know when things weren’t so messed up. To begin we need to do some detective work. In Sourcetree, you can go to <strong>Actions &gt; Open In Terminal</strong>.</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/497877183/497877190.png" data-image-src="attachments/497877183/497877190.png" data-height="92" data-width="566" data-unresolved-comment-count="0" data-linked-resource-id="497877190" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20220705-191022.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="497877183" data-linked-resource-container-version="3" data-media-id="f0ff4963-d19c-4708-8c70-0fbdf5d350e9" data-media-type="file"></span><p>In the terminal, we need to write <code>git reflog</code> to get our Git’s reference log and see everything we’ve been doing in Sourcetree.</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/497877183/497909810.png" data-image-src="attachments/497877183/497909810.png" data-height="1153" data-width="2538" data-unresolved-comment-count="0" data-linked-resource-id="497909810" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20220705-191146.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="497877183" data-linked-resource-container-version="3" data-media-id="ee05e85d-8c55-4721-9ef0-edcaec451f5f" data-media-type="file"></span><p>In these logs, you’ll notice each has a label next to them such as <code>HEAD@{9}</code> to identify each entry. These labels are in chronological order where 0 is the newest log entry and higher numbers are older entries.</p><p>We want to find the label of the entry for back when our branch wasn’t so messed up.</p><p>In this example, I’m on the <a class="external-link" href="https://varlab-dev.atlassian.net/browse/TI-1015" rel="nofollow">TI-1015</a> branch and I started a rebase that broke some things. So now I want to go back to before the rebase started which logically will be when we moved from the development branch over the <a class="external-link" href="https://varlab-dev.atlassian.net/browse/TI-1015" rel="nofollow">TI-1015</a> branch.</p><p>If we’re looking at the logs, I can see the last time I switched from development to <a class="external-link" href="https://varlab-dev.atlassian.net/browse/TI-1015" rel="nofollow">TI-1015</a> is <code>HEAD@{1}</code> so if I wanted to undo my mistake I can hard reset to that log entry.</p><h2 id="HardReset(YouBrokeEverything)-HardResetting">Hard Resetting</h2><p>Now that I’ve found the entry I want to reset to, I’ll hit <strong>q </strong>on my keyboard to exit the log and return back to the command line.</p><p>In the command line I’ll now type in <code>git reset --hard HEAD@{1}</code> to reset my Git to where it was at <code>HEAD@{1}</code>.</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/497877183/497778728.png" data-image-src="attachments/497877183/497778728.png" data-height="55" data-width="805" data-unresolved-comment-count="0" data-linked-resource-id="497778728" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20220705-191831.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="497877183" data-linked-resource-container-version="3" data-media-id="14e3c503-77bb-45c5-92d8-c430ac26c81d" data-media-type="file"></span><p>This has cancelled my messed up rebase and returned me to how the branch was right before I began it.</p><p>If you pushed the messed up branch to Bitbucket already, you will need to use <strong>Push</strong> with <strong>Force Push </strong>checked in order to update it there. If force push is not enabled, you will need to enable it in <strong>Tools &gt; Options &gt; Git &gt; Enable force push</strong> first.</p><p>Note that your reflog is unique to your device! If you’re unsure doing anything outlined in this article please involve someone who has experience with this process!</p>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/497877183/497877190.png">image-20220705-191022.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/497877183/497909810.png">image-20220705-191146.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/497877183/497778728.png">image-20220705-191831.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Jul 04, 2025 14:51</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

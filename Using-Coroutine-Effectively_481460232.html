@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VARLab : Using Coroutine Effectively</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="How-To-Articles_581435426.html">How-To Articles</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Unity-Development_688324665.html">Unity Development</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            VARLab : Using Coroutine Effectively
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Jordan Robinson</span>, last modified by <span class='editor'> David Inglis</span> on Apr 26, 2023
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>This article provides an overview of common issues you may run into while getting used to using Coroutines.</p><style type='text/css'>/*<![CDATA[*/
+div.rbtoc1751640766426 {padding: 0px;}
+div.rbtoc1751640766426 ul {list-style: disc;margin-left: 0px;}
+div.rbtoc1751640766426 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1751640766426'>
+<ul class='toc-indentation'>
+<li><a href='#UsingCoroutineEffectively-WhentouseCoroutines'>When to use Coroutines</a></li>
+<li><a href='#UsingCoroutineEffectively-Example'>Example</a></li>
+<li><a href='#UsingCoroutineEffectively-Problems'>Problems</a></li>
+<li><a href='#UsingCoroutineEffectively-SometimesUpdateisBest'>Sometimes Update is Best</a></li>
+<li><a href='#UsingCoroutineEffectively-ButSometimesUpdateisBad'>But Sometimes Update is Bad</a></li>
+</ul>
+</div><h2 id="UsingCoroutineEffectively-WhentouseCoroutines">When to use Coroutines</h2><p>Coroutines are convenient when we have a small one-off animation or delay that we know does not need to be interrupted. In this circumstance, a coroutine can save quite a bit of boilerplate code that would otherwise be required to do the same task in Update.</p><div class="panel" style="background-color: #EAE6FF;border-color: #998DD9;border-width: 1px;"><div class="panelContent" style="background-color: #EAE6FF;">
+<p>A quick note about async/await as an alternative. Async and await can be used in Unity in place of Coroutines however unlike Coroutines they are not cancelled when the MonoBehaviour executing them is disabled. Async/await should be used very carefully in production code for CORE as WebGL has spotty support for C# Tasks.</p>
+</div></div><p>When a Coroutine does need to be interrupted we have to consider how that interruption complicates our code. If we have a simple interruption such as exiting the Coroutine when a condition is met, we can likely work around that without creating spaghetti.</p><h2 id="UsingCoroutineEffectively-Example">Example</h2><p>Here we’ll show a Coroutine that moves an object from point A to point B over a certain duration.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">private IEnumerator MoveObject(Vector3 a, Vector3 b, float duration)
+{
+    for(float t = 0f; t &lt;= 1f; t += Time.deltaTime / duration)
+    {
+        transform.position = Vector3.Lerp(a, b, t);
+        yield return null;
+    }
+}</pre>
+</div></div><p>In this case, we’ve condensed the code for this animation into one tiny method. This is a great use-case for Coroutines as we can both simplify our code and prevent the use of an Update method.</p><p>Avoiding using Update is an optimization that can add up significantly when we’re talking about hundreds or thousands of MonoBehaviours. That doesn’t mean we want to avoid Update entirely, but that we only use it when we need to.</p><h2 id="UsingCoroutineEffectively-Problems">Problems</h2><p>This Coroutine does exactly what we need it to for now, but can very easily be broken if small changes are made to our requirements or if the method call occurs more than once.</p><p>Let’s say this Coroutine is triggered by hitting the spacebar and our user hits it multiple times in a row before the Coroutine is finished running. This would start multiple coroutines that are all fighting each other to move the object. In order to fix this we’d have to check to see if the coroutine is running and either prevent another from starting or stop the old one and run the new one.</p><p>In the former case we’d have something like this:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">private Coroutine routine;
+
+public void RunRoutine()
+{
+    if(routine == null)
+        routine = StartCoroutine(MoveObject(a,b,duration));
+}</pre>
+</div></div><p>In the latter case, it would look something like this:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">private Coroutine routine;
+
+public void RunRoutine()
+{
+    if(routine != null)
+        StopCoroutine(routine);
+        
+    routine = StartCoroutine(MoveObject(a,b,duration));
+}</pre>
+</div></div><p>We’re already having to add in some safeties to avoid concurrent coroutines but what if our requirements change and we need to be able to pause the coroutine?</p><p>Now we need additional code in our coroutine to pause it and wait until it gets unpaused. For this, we’ll need to listen for a boolean.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">private bool paused;
+
+private IEnumerator MoveObject(Vector3 a, Vector3 b, float duration)
+{
+    for(float t = 0f; t &lt;= 1f; t += Time.deltaTime / duration)
+    {
+        if(paused)
+            yield return new WaitUntil(!paused);
+            
+        transform.position = Vector3.Lerp(a, b, t);
+        yield return null;
+    }
+}</pre>
+</div></div><p>As you can see things are starting to get a bit complicated for a simple movement animation.</p><p>We’ve made it so our coroutine can’t have multiple routines running simultaneously and we can pause it, but what if we need to reverse it?</p><p>Now things get really ugly and we question our life choices.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">private bool reverse;
+private float t = 0f;
+
+private IEnumerator MoveObject(Vector3 a, Vector3 b, float duration)
+{
+    while(CheckCondition())
+    {
+        if(paused)
+            yield return new WaitUntil(!paused);
+            
+        transform.position = Vector3.Lerp(a, b, t);
+        SetTime(duration);
+        yield return null;
+    }
+}
+
+private bool CheckCondition()
+{
+    if(reverse)
+        return t &gt; 0f;
+        
+    return t &lt;= 1f;
+}
+
+private void SetTime(float duration)
+{
+    var delta = Time.deltaTime / duration;
+    
+    if(reverse)
+        t -= delta;
+        
+    t += delta;
+}</pre>
+</div></div><p>So now we’ve created a movement animation that can be interrupted and reversed at will but at what cost?</p><h2 id="UsingCoroutineEffectively-SometimesUpdateisBest">Sometimes Update is Best</h2><p>To create the same system using Update, we can use a simple state machine.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">public enum State
+{
+    Idle = 0,
+    Opening = 1,
+    Closing = 2
+}
+
+public State state { get; private set; } = State.Closed;
+private float t = 0f;
+
+void Update()
+{
+    if(state == State.Idle)
+        return;
+
+    var delta = Time.deltaTime / duration;
+    
+    if(state == State.Closing)
+        delta *= -1;
+    
+    t += delta;
+        
+    transform.position = Vector3.Lerp(a, b, t);
+    
+    CheckState();
+}
+
+private void CheckState()
+{
+    t = Mathf.Clamp(t, 0f, 1f);
+    
+    if(t &lt;= 0f || t &gt;= 1f)
+        state == State.Idle;
+}</pre>
+</div></div><p>Now we can move and reverse our object at any point just by changing the value of the variable state.</p><h2 id="UsingCoroutineEffectively-ButSometimesUpdateisBad">But Sometimes Update is Bad</h2><p>One thing about this example is that during the entire time period, this object is not moving it is still running the Update method only to check that the state is idle and return. This is wasteful as the object is still part of the Update loop despite doing absolutely nothing important.</p><p>For this reason, you may still consider using a Coroutine or explicitly disabling this script when not in use.</p>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Jul 04, 2025 14:52</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

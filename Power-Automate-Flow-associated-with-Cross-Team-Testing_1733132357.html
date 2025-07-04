@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VARLab : Power Automate Flow associated with Cross Team Testing</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="VARLab_44990773.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="DLX-Product-Playbook_953614343.html">DLX Product Playbook</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Quality-Assurance-Team_1493794818.html">Quality Assurance Team</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Automatic-Assignments-for-Cross-Team-Testing_1558118414.html">Automatic Assignments for Cross Team Testing</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Solution-Implemented-for-Cross-Team-Testing-Automatic-Assignment_1732870148.html">Solution Implemented for Cross Team Testing Automatic Assignment</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            VARLab : Power Automate Flow associated with Cross Team Testing
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Neethu Baby</span> on Apr 03, 2025
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p><a class="external-link" href="https://make.powerautomate.com/environments/Default-4ddd393a-e98a-4404-841f-c4becdd925a5/flows/shared/886f86f0-fbee-40a1-b155-ab09fe722d37/details" rel="nofollow">Pilot - Automatic Assignments for Cross Team Testing</a> is the power automate used for the automatic assignment. It is a manually triggered workflow, allowing us to initiate it based on the sprint.</p><p><strong>Implementation Step</strong></p><ol start="1"><li><p>Getting all items from the CTT Assignments list.</p></li><li><p>Delete the old assignments.</p></li><li><p>Get all items from the CTT Testers list.</p></li><li><p>Set the column value “Assigned” as No.</p></li><li><p>Get all items from the CTT Projects list.</p></li><li><p>Loop through each item in the CTT Projects list. Check if the column value “Requesters Testers” greater than 0.</p></li><li><p>If No, </p><ol start="1"><li><p>Send an email to Cam and Jon, saying no testers requested for this project </p></li></ol></li><li><p>If Yes, </p><ol start="1"><li><p>Get all items from CTT Testers list</p></li><li><p>Loop through each item. </p></li><li><p>Check is column value <strong>“Assigned” is not true AND</strong> column value <strong>“Requested Tester” greater than 0 AND</strong> column value <strong>“Availability for testing” is true</strong></p></li><li><p>If No,</p><ol start="1"><li><p>No action required</p></li></ol></li><li><p>Yes,</p><ol start="1"><li><p>Check if the column value “Primary Project Team” in CTT Testers list is not equal to the column value “Project” in the CTT Projects list. </p></li><li><p>If No,</p><ol start="1"><li><p>No action required</p></li></ol></li><li><p>If Yes,</p><ol start="1"><li><p>Update column value “Assigned” as Yes in CTT Testers</p></li><li><p>Create an entry in the CTT Assignments list</p></li></ol></li></ol></li></ol></li></ol><p style="margin-left: 60.0px;"></p><p style="margin-left: 30.0px;"></p><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><em><u>Note:</u> </em></p><p><em>As we currently do not have a service account, the workflow is owned by Neethu and shared only with Jonathan and Dayne to minimize risks. Any incorrect changes to the workflow could potentially disrupt the entire process.</em></p><p /><p><em>The &quot;Title&quot; column has been renamed to the &quot;Project Name&quot; column is in the CTT Projects list, and the &quot;Name&quot; column is in the CTT Testers list in SharePoint. In Power Automate, it will appear as &quot;Title,&quot; which is the display name of the column.</em></p></div></div>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Jul 04, 2025 14:39</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VARLab : Unity Unit Testing Tutorial</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="How-To-Articles_581435426.html">How-To Articles</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Unity-Development_688324665.html">Unity Development</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Unity-Full-Stack-Testing-Tutorial_749699073.html">Unity Full-Stack Testing Tutorial</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            VARLab : Unity Unit Testing Tutorial
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> User 1f114</span>, last modified on Sept 20, 2023
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <style type='text/css'>/*<![CDATA[*/
+div.rbtoc1751640731789 {padding: 0px;}
+div.rbtoc1751640731789 ul {list-style: disc;margin-left: 0px;}
+div.rbtoc1751640731789 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1751640731789'>
+<ul class='toc-indentation'>
+<li><a href='#UnityUnitTestingTutorial-Part3:SettingUptheTestEnvironment'>Part 3: Setting Up the Test Environment</a>
+<ul class='toc-indentation'>
+<li><a href='#UnityUnitTestingTutorial-CreateandConfiguretheTestingAssemblyDefinitionFile'>Create and Configure the Testing Assembly Definition File</a></li>
+<li><a href='#UnityUnitTestingTutorial-2.CreateandconfigureAssemblyDefinitionfile'>2. Create and configure Assembly Definition file</a></li>
+</ul>
+</li>
+<li><a href='#UnityUnitTestingTutorial-Part4:WriteUnitTests'>Part 4: Write Unit Tests</a></li>
+<li><a href='#UnityUnitTestingTutorial-ContinuetoIntegrationTestingTutorial'>Continue to Integration Testing Tutorial</a></li>
+</ul>
+</div><h1 id="UnityUnitTestingTutorial-Part3:SettingUptheTestEnvironment">Part 3: Setting Up the Test Environment</h1><div id="expander-1918018704" class="expand-container"><div id="expander-control-1918018704" class="expand-control"><span class="expand-control-icon"><img style="vertical-align:middle;" class="expand-control-image" src="images/icons/grey_arrow_down.png"></span><span class="expand-control-text">Option 1 - Using CORE-Interfaces</span></div><div id="expander-content-1918018704" class="expand-content"><h4 id="UnityUnitTestingTutorial-CreateandConfiguretheTestingAssemblyDefinitionFile"><span class="inline-comment-marker" data-ref="a0669c13-d37d-40e5-ab5d-480099d1f130">Create and Configure the Testing Assembly Definition File</span></h4><ul><li><p>Create a “<strong>Tests</strong>” folder inside of “<strong>Assets</strong>“. Open this folder. </p></li><li><p>Now open the <strong>Test Runner (Window&gt; General &gt; Test Runner)</strong>, go to the “<strong>EditMode</strong>” test tab, and press “<strong>Create EditMode Test Assembly Folder</strong>“.</p></li></ul><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" width="612" loading="lazy" src="attachments/754188289/754941966.png?width=612" data-image-src="attachments/754188289/754941966.png" data-height="482" data-width="826" data-unresolved-comment-count="0" data-linked-resource-id="754941966" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230707-033925.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="754188289" data-linked-resource-container-version="18" data-media-id="57e8da11-40ab-4bb9-bd8a-7c783cccb038" data-media-type="file"></span><ul><li><p>Inside of the new <strong>EditMode </strong>folder, select “<strong>EditModeTests</strong>“ assembly, and in the <strong>Inspector </strong>add <code>FullStackTutorial</code> , <code>TextMeshPro</code> and  <code>core.interfaces</code> to “<strong>Assembly Definition References</strong>“, and <code>Moq.dll</code> to “<strong>Assembly References</strong>“ as shown in the image below.</p></li></ul><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/754188289/768868363.png" data-image-src="attachments/754188289/768868363.png" data-height="698" data-width="523" data-unresolved-comment-count="0" data-linked-resource-id="768868363" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230724-191154.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="754188289" data-linked-resource-container-version="18" data-media-id="f508ec2c-bc97-40ec-ae55-8bd9f6ccfe5d" data-media-type="file"></span><p /></div></div><div id="expander-781192246" class="expand-container"><div id="expander-control-781192246" class="expand-control"><span class="expand-control-icon"><img style="vertical-align:middle;" class="expand-control-image" src="images/icons/grey_arrow_down.png"></span><span class="expand-control-text">Option 2 - Creating your own Interfaces an Wrappers</span></div><div id="expander-content-781192246" class="expand-content"><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>This should only be done if you are not using CORE-Interfaces. CORE-Interfaces package already includes Moq.</p></div></div><p /><ul><li><p>On <a class="external-link" data-card-appearance="inline" href="http://Nuget.org" rel="nofollow">http://Nuget.org</a> , search for <strong>Moq</strong>, then go to the <a class="external-link" href="https://www.nuget.org/packages/Moq" rel="nofollow">1st result</a> and click <a class="external-link" href="https://www.nuget.org/api/v2/package/Moq/4.18.4" rel="nofollow">Download Package</a>.</p></li></ul><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/754188289/775159839.png" data-image-src="attachments/754188289/775159839.png" data-height="687" data-width="1174" data-unresolved-comment-count="0" data-linked-resource-id="775159839" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230801-142343.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="754188289" data-linked-resource-container-version="18" data-media-id="148cd406-8983-46e8-be26-e2e3233d4e23" data-media-type="file"></span><ul><li><p>In the Unity editor, go to “<strong>Edit/ Project Settings</strong>”, then go to <strong>Player</strong>. In the <strong>Other Settings</strong> section, check the <strong>Configuration</strong>.</p></li></ul><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/754188289/754188330.png" data-image-src="attachments/754188289/754188330.png" data-height="511" data-width="1106" data-unresolved-comment-count="0" data-linked-resource-id="754188330" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230530-151339.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="754188289" data-linked-resource-container-version="18" data-media-id="d5e7b298-7f74-47a0-9b8e-fa04a9521474" data-media-type="file"></span><ul><li><p>On <strong>Moq</strong>’s NuGet Gallery page, go to the <strong>Dependencies </strong>tab and download all of the dependency packages for your .NET version.</p></li></ul><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" width="680" loading="lazy" src="attachments/754188289/754188327.png?width=680" data-image-src="attachments/754188289/754188327.png" data-height="809" data-width="1059" data-unresolved-comment-count="0" data-linked-resource-id="754188327" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230530-151950.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="754188289" data-linked-resource-container-version="18" data-media-id="872f8414-a068-4b70-a81c-47ffed1f676c" data-media-type="file"></span><ul><li><p>For each package, download it as well as all of its dependency packages. ie: for <strong>Castle.Core</strong> package:</p></li></ul><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/754188289/754188324.png" data-image-src="attachments/754188289/754188324.png" data-height="862" data-width="1740" data-unresolved-comment-count="0" data-linked-resource-id="754188324" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230530-152135.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="754188289" data-linked-resource-container-version="18" data-media-id="f3afa2de-5033-43b0-99d1-6941911151a3" data-media-type="file"></span><ul><li><p>As you can see, for .NETStandard 2.0 in our current Unity configuration, we have 8 dependency packages downloaded:</p></li></ul><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/754188289/754188306.png" data-image-src="attachments/754188289/754188306.png" data-height="247" data-width="572" data-unresolved-comment-count="0" data-linked-resource-id="754188306" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230705-145613.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="754188289" data-linked-resource-container-version="18" data-media-id="2f48c04b-4089-4b82-a7f5-b632c0b541c8" data-media-type="file"></span><ul><li><p>Create a new folder named “Moq” in Unity editor, with the path “<strong>Assets/ Plugins/ Moq.</strong>“ Then, extract each downloaded package. Go to the “<strong>lib</strong>“ folder and the corresponding framework version (“<strong>netstandard2.0</strong>“), then drag and drop the .dll file in to the Moq folder. Do this for each package.</p></li></ul><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/754188289/754188318.png" data-image-src="attachments/754188289/754188318.png" data-height="366" data-width="1005" data-unresolved-comment-count="0" data-linked-resource-id="754188318" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230530-153947.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="754188289" data-linked-resource-container-version="18" data-media-id="0780a771-eee0-45d0-9f49-a3c7b918b954" data-media-type="file"></span><h4 id="UnityUnitTestingTutorial-2.CreateandconfigureAssemblyDefinitionfile">2. <span class="inline-comment-marker" data-ref="a0669c13-d37d-40e5-ab5d-480099d1f130">Create and configure Assembly Definition file</span></h4><ul><li><p>Create a “<strong>Tests</strong>” folder inside of “<strong>Assets</strong>“. Open this folder. Now, open the <strong>Test Runner (Window&gt; General &gt; Test Runner)</strong>, go to the “<strong>EditMode</strong>” test tab, and click “<strong>Create EditMode Test Assembly Folder</strong>“.</p></li></ul><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/754188289/754941966.png" data-image-src="attachments/754188289/754941966.png" data-height="482" data-width="826" data-unresolved-comment-count="0" data-linked-resource-id="754941966" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230707-033925.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="754188289" data-linked-resource-container-version="18" data-media-id="57e8da11-40ab-4bb9-bd8a-7c783cccb038" data-media-type="file"></span><ul><li><p>Inside of the new <strong>EditMode </strong>folder, select the “<strong>EditMode</strong>“ assembly.</p></li><li><p>In the <strong>Inspector, </strong>add <code>FullStackTutorial</code> and <code>TextMeshPro</code> to “<strong>Assembly Definition References</strong>“, and <code>Moq.dll</code> to “<strong>Assembly References</strong>“ as shown in the image below.</p></li></ul><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/754188289/755073028.png" data-image-src="attachments/754188289/755073028.png" data-height="190" data-width="556" data-unresolved-comment-count="0" data-linked-resource-id="755073028" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230707-035050.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="754188289" data-linked-resource-container-version="18" data-media-id="9f3f8dbb-74d0-4bf5-ac45-6aa1c1059fb3" data-media-type="file"></span></div></div><h1 id="UnityUnitTestingTutorial-Part4:WriteUnitTests">Part 4: Write Unit Tests</h1><ul><li><p>We’ll now write some unit tests. In one test, we’ll verify that the label is correctly set for two random cards, (for example, the Ten of Hearts and the Ace of Spaces). In another, we’ll also verify that our exception is thrown when passed a null value.</p></li><li><p>Create a file called <code>ShowCurrentCardUnitTests.cs</code> inside of the EditMode directory. Paste the following file inside of it. Please, take time to read and understand how this test works.</p></li></ul><p /><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Add the following using statement if you are using CORE-Interfaces:</p><p>using VARLab.Interfaces;</p></div></div><p /><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">using NUnit.Framework;
+using Moq;
+using System;
+using UnityEngine;
+
+public class ShowCurrentCardUnitTests
+{
+    // This is the class we will test
+    ShowRandomCardImpl showRandomCardImpl;
+
+    // These are the mocked dependencies that we inject for the test
+    Mock&lt;IText&gt; currentCardLabel;
+    Mock&lt;IGameObject&gt; parent;
+    Mock&lt;IRandom&gt; rng;
+    Mock&lt;ILambda&gt; drawCardAction; // For testing actions.
+
+    public interface ILambda
+    {
+        void callOnAction();
+    }
+
+    // Good tests should look as close to test casses written in 
+    // English as possible. Try to use helpers to achieve this!
+    [Test]
+    public void AceOfSpadesIsRightColor()
+    {
+        TestSuitRankMatchesColor(
+            ShowRandomCardImpl.Suit.Hearts,
+            ShowRandomCardImpl.Rank.Ten,
+            Color.red);
+    }
+
+    [Test]
+    public void TenOfHeartsIsRightColor()
+    {
+        TestSuitRankMatchesColor(
+            ShowRandomCardImpl.Suit.Hearts,
+            ShowRandomCardImpl.Rank.Ten,
+            Color.red);
+    }
+
+    // It&#39;s also a good idea to test that your code fails properly.
+    [Test]
+    public void LabelMissingException()
+    {
+        showRandomCardImpl = new(
+            parent.Object,
+            null,
+            rng.Object,
+            () =&gt; drawCardAction.Object.callOnAction());
+        Assert.Throws&lt;MissingReferenceException&gt;(showRandomCardImpl.Awake);
+    }
+
+    void TestSuitRankMatchesColor(
+        ShowRandomCardImpl.Suit suit,
+        ShowRandomCardImpl.Rank rank,
+        Color color)
+    {
+        // Some people call this the &quot;arrange&quot; phase.
+        SetupRng(suit, rank);
+        SetupCurrentCardLabel();
+        SetupDrawCardAction();
+
+        // Some people call this the &quot;act&quot; phase.
+        DrawCard();
+
+        // And this the &quot;assert&quot; phase.
+        VerifyCurrentCardLabel(suit, rank, color);
+        VerifyDrawCardAction();
+    }
+
+    // Note that I avoid using `Mock.Setup()` inside of our [SetUp].
+    // This helps avoid unused mock errors. [SetUp] is called before
+    // every test.
+    [SetUp]
+    public void SetUp()
+    {
+        currentCardLabel = new Mock&lt;IText&gt;();
+        parent = new Mock&lt;IGameObject&gt;();
+        rng = new Mock&lt;IRandom&gt;();
+        drawCardAction = new Mock&lt;ILambda&gt;();
+        showRandomCardImpl = new(
+            parent.Object,
+            currentCardLabel.Object,
+            rng.Object,
+            () =&gt; drawCardAction.Object.callOnAction());
+    }
+
+    // Instead I put `Mock.Setup()`s into their own helpers.
+    void SetupRng(
+        ShowRandomCardImpl.Suit suit,
+        ShowRandomCardImpl.Rank rank)
+    {
+        int numberofSuits =
+            Enum.GetValues(typeof(ShowRandomCardImpl.Suit)).Length;
+        rng.Setup(x =&gt; x.Next(numberofSuits)).Returns((int)suit);
+
+        int numberofRanks =
+            Enum.GetValues(typeof(ShowRandomCardImpl.Rank)).Length;
+        rng.Setup(x =&gt; x.Next(numberofRanks)).Returns((int)rank);
+    }
+
+    void SetupCurrentCardLabel()
+    {
+        currentCardLabel.SetupSet(x =&gt; x.text = It.IsAny&lt;string&gt;());
+    }
+
+    // I find putting Verify commands into helpers make tests read batter
+    void VerifyCurrentCardLabel(
+        ShowRandomCardImpl.Suit suit,
+        ShowRandomCardImpl.Rank rank,
+        Color color)
+    {
+        currentCardLabel.VerifySet(
+            x =&gt; x.text = $&quot;{rank} of {suit}&quot;, Times.Once);
+        currentCardLabel.VerifySet(x=&gt; x.color = color, Times.Once);
+    }
+
+    void SetupDrawCardAction()
+    {
+        drawCardAction.Setup(x =&gt; x.callOnAction());
+    }
+
+    void VerifyDrawCardAction()
+    {
+        drawCardAction.Verify(x =&gt; x.callOnAction());
+    }
+
+    // Even these small methods help for readability.
+    void DrawCard()
+    {
+        showRandomCardImpl.OnMouseDown();
+    }
+}
+</pre>
+</div></div><ul><li><p>Finally, open the Test runner again and run the edit mode tests. If all goes well, these tests should pass!</p></li></ul><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/754188289/754679827.png" data-image-src="attachments/754188289/754679827.png" data-height="491" data-width="826" data-unresolved-comment-count="0" data-linked-resource-id="754679827" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230706-195540.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="754188289" data-linked-resource-container-version="18" data-media-id="e7d8b2cb-a169-4e83-b001-acf9f4399c20" data-media-type="file"></span><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><strong>Tip:</strong> I recommend referencing the <a class="external-link" href="https://github.com/moq/moq/wiki/Quickstart" rel="nofollow">Moq Quickstart Guide</a> while writing unit tests!</p></div></div><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><strong>Tip: </strong>I’ve made a short page with practical tips for writing unit tests here. If you ever feel your stuck, please give that page a read. It should help correct 90% of peoples problems when writing unit tests for the first time. <a data-card-appearance="inline" href="https://varlab-dev.atlassian.net/wiki/spaces/VAR/pages/805470228/Brandon+s+Tips+for+Unit+level+Testing" rel="nofollow">https://varlab-dev.atlassian.net/wiki/spaces/VAR/pages/805470228/Brandon+s+Tips+for+Unit+level+Testing</a> </p></div></div><h1 id="UnityUnitTestingTutorial-ContinuetoIntegrationTestingTutorial"><a href="Integration-Test-Tutorial_752910337.html" data-linked-resource-id="752910337" data-linked-resource-version="19" data-linked-resource-type="page">Continue to Integration Testing Tutorial</a></h1>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/754188289/754188303.png">image-20230706-171540.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/754188289/754188306.png">image-20230705-145613.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/754188289/754188309.png">image-20230530-160806.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/754188289/754188312.png">image-20230530-155756.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/754188289/754188315.png">image-20230530-155700.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/754188289/754188318.png">image-20230530-153947.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/754188289/754188321.png">image-20230530-152606.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/754188289/754188324.png">image-20230530-152135.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/754188289/754188327.png">image-20230530-151950.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/754188289/754188330.png">image-20230530-151339.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/754188289/754188333.png">image-20230703-171302.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/754188289/754188336.png">image-20230630-154408.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/754188289/754188339.png">image-20230630-154126.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/754188289/754188342.png">image-20230630-152501.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/754188289/754188345.png">image-20230630-152455.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/754188289/754188348.png">image-20230630-152451.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/754188289/754188351.png">image-20230630-152146.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/754188289/754188354.png">image-20230629-192509.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/754188289/754188357.png">image-20230629-190853.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/754188289/754188360.png">image-20230629-185255.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/754188289/754188363.png">image-20230629-184913.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/754188289/754188366.png">image-20230629-184401.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/754188289/754188369.png">image-20230629-183655.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/754188289/754188372.png">image-20230629-183619.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/754188289/754188375.png">image-20230629-183523.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/754188289/754188378.png">image-20230629-182903.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/754188289/754188381.png">image-20230629-181009.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/754188289/754188384.png">image-20230629-180951.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/754188289/754188387.png">image-20230629-180756.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/754188289/754679827.png">image-20230706-195540.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/754188289/755007493.png">image-20230706-183233.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/754188289/755007499.png">image-20230706-183546.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/754188289/754941966.png">image-20230707-033925.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/754188289/754941975.png">image-20230707-034947.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/754188289/755040270.png">image-20230707-035019.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/754188289/755073028.png">image-20230707-035050.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/754188289/768868363.png">image-20230724-191154.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/754188289/775159839.png">image-20230801-142343.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Jul 04, 2025 14:52</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

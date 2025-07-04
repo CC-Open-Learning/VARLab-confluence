@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VARLab : Brandon&#39;s Tips for Unit level Testing</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="How-To-Articles_581435426.html">How-To Articles</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Unity-Development_688324665.html">Unity Development</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Unity-Full-Stack-Testing-Tutorial_749699073.html">Unity Full-Stack Testing Tutorial</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            VARLab : Brandon&#39;s Tips for Unit level Testing
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> User 1f114</span>, last modified on Sept 22, 2023
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p><style>[data-colorid=ts8poaudxq]{color:#ff5630} html[data-color-mode=dark] [data-colorid=ts8poaudxq]{color:#cf2600}</style>I&rsquo;ve seen some confusion about how unit testing should be done. Here&rsquo;s a few tips that should make them easier to understand:</p><p>First, consider if you should have <a href="Integration-Test-Tutorial_752910337.html" data-linked-resource-id="752910337" data-linked-resource-version="19" data-linked-resource-type="page">integration test</a>&rsquo;s instead. Integration tests are broader than unit tests, and are often easier to write. If you need to test specific logic, or if there are dependencies that are difficult to write an integration test for, then read on.</p><p>To write a unit test, make sure you decouple any dependencies from the code you wish to test, using <a href="https://varlab-dev.atlassian.net/wiki/spaces/VAR/pages/749699073/Unity+Full-Stack+Testing+Tutorial#Part-2:-Dependency-Injection" rel="nofollow">dependency injection</a>. You will not be able to unit test code without the dependences factored out. </p><p><strong>Remember:</strong> The point of a unit test is to test specific lines of code. <span data-colorid="ts8poaudxq">Do not</span> attempt to write a unit test without deciding what code you are going to target first.</p><p>I always open the code I wish to test in a side panel. It&rsquo;s much easier to write a unit test while looking at the specific code you want to test, since the specific code <em>drives</em> what the unit test is doing.</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/805470228/805011497.png" data-image-src="attachments/805470228/805011497.png" data-height="719" data-width="1440" data-unresolved-comment-count="0" data-linked-resource-id="805011497" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230918-174112.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="805470228" data-linked-resource-container-version="3" data-media-id="2d4448b5-465a-4d4e-aa9f-672c4f0e9f88" data-media-type="file" /></span><p>Wondering where to start? The very next step should always just be to initialize the class you are trying to test, and mock out it&rsquo;s dependencies. Don&rsquo;t worry about writing <code>.Setup</code> code yet, the empty dependencies are all we need to start.</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/805470228/805371926.png" data-image-src="attachments/805470228/805371926.png" data-height="300" data-width="539" data-unresolved-comment-count="0" data-linked-resource-id="805371926" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230918-174433.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="805470228" data-linked-resource-container-version="3" data-media-id="c9bc0729-084e-4a42-be63-f53402c6bc16" data-media-type="file" /></span><p>Now, we will choose some specific code that we want to test. For example, this will test the first case in this switch statement (We should test the other cases as well for coverage, but this will do for this example). Here&rsquo;s the chosen code:</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/805470228/805568517.png" data-image-src="attachments/805470228/805568517.png" data-height="300" data-width="539" data-unresolved-comment-count="0" data-linked-resource-id="805568517" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230918-174936.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="805470228" data-linked-resource-container-version="3" data-media-id="6a9bcb7a-c435-4407-bc01-d9b4155d487e" data-media-type="file" /></span><p style="margin-left: 60.0px;">Take a look at what the code is doing with it&rsquo;s dependencies. In this example, we see that it is referencing <code>multimeterDial.CuttenDivision.setting</code>. So, this needs to be mocked out for this test. </p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/805470228/805109777.png" data-image-src="attachments/805470228/805109777.png" data-height="300" data-width="539" data-unresolved-comment-count="0" data-linked-resource-id="805109777" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230918-175137.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="805470228" data-linked-resource-container-version="3" data-media-id="adf23b34-de71-472e-bf37-d32bfcb01b1e" data-media-type="file" /></span><p>Now what we need to do is pretty straight forward. We trigger trigger the target code. Then, either verify the expected state using <code>assert</code>, or verify the dependencies are being used properly by using <code>.Verify</code>.</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/805470228/805044270.png" data-image-src="attachments/805470228/805044270.png" data-height="202" data-width="539" data-unresolved-comment-count="0" data-linked-resource-id="805044270" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230918-175254.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="805470228" data-linked-resource-container-version="3" data-media-id="64a6fe14-5177-4185-b961-7b5c6221fef0" data-media-type="file" /></span><p />
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/805470228/805011490.png">image-20230918-174117.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/805470228/805011497.png">image-20230918-174112.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/805470228/805502990.png">image-20230918-174316.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/805470228/805142581.png">image-20230918-174331.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/805470228/805142587.png">image-20230918-174356.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/805470228/805371926.png">image-20230918-174433.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/805470228/805568517.png">image-20230918-174936.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/805470228/805109777.png">image-20230918-175137.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/805470228/805044270.png">image-20230918-175254.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Jul 04, 2025 14:52</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

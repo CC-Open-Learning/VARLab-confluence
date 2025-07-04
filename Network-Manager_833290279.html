@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VARLab : Network Manager</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Exploratory-Research-Projects_800587780.html">Exploratory Research Projects</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Multiplayer_803176449.html">Multiplayer</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="803176461.html">Multiplayer Research/Potential Options</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Mirror-Research-Main-Page_805994513.html">Mirror Research Main Page</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Basics-of-Mirror_826146819.html">Basics of Mirror</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            VARLab : Network Manager
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Talon Ernst</span>, last modified on Oct 25, 2023
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>The NetworkManager is a component that you will <strong>NEED</strong> to add to your Unity project for it to run properly as a multiplayer game.  Attach an empty GameObject to your hierarchy and add the “NetworkManager” component to this GameObject.</p><div class="panel" style="background-color: #EAE6FF;border-color: #998DD9;border-width: 1px;"><div class="panelContent" style="background-color: #EAE6FF;">
+<p><strong>NOTE:</strong> A unity project can only have one active NetworkManager active at a time, if you add two, you won’t crash alone by having two in your heiarchy, but one will be disabled which itself could cause a crash, so be sure to check if you accidently have two.</p>
+</div></div><p>The NetworkManager manages the networking aspects of a multiplayer game all in one manager. This makes it easier to maintain, control and run multiplayer games.</p><p /><p>The NetworkManager has a lot of options in the inspector to control all of this. Here are some of them:</p><p>Under Configuration, you will see “<strong>Don't Destroy On Load</strong>” and “<strong>Run In Background</strong>”. As shown in Figure 1. These should be checked. Run in Background has no use ever being disabled, as if we are running a multiplayer game, we do not want it to be disabled. Don't Destroy on Load has its uses for being disabled, but in the meantime, it should be enabled until a use case for it being destroyed appears.</p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" width="352" loading="lazy" src="attachments/833290279/833224742.png?width=352" data-image-src="attachments/833290279/833224742.png" data-height="67" data-width="274" data-unresolved-comment-count="0" data-linked-resource-id="833224742" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20231023-175048.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="833290279" data-linked-resource-container-version="6" data-media-id="8b9cc2cc-c484-46d4-82da-5ccc8e13afea" data-media-type="file"></span><p>Figure 2 shows the next few settings meant for “<strong>Headless Builds</strong>”. A headless build means the server will run standalone without a GUI or human interaction, or really any client code.  It is essentially useful if we want a dedicated server. These settings do not need to be edited for now and can be left as is.</p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" width="615" loading="lazy" src="attachments/833290279/833224749.png?width=615" data-image-src="attachments/833290279/833224749.png" data-height="89" data-width="615" data-unresolved-comment-count="0" data-linked-resource-id="833224749" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20231023-182315.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="833290279" data-linked-resource-container-version="6" data-media-id="e91fd220-2d1c-49ee-878b-97b8ed65fc7d" data-media-type="file"></span><p>Figure 3 shows two settings related to scene management. “<strong>Offline Scene</strong>” is what Mirror will switch to when a client or server disconnects. This is typically used for main menus. whereas “<strong>Online Scene</strong>” is the scene that Mirror will switch to when the Server is started, and all clients will be redirected to when they connect to the server. This is typically used for the main game scene.</p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" width="620" loading="lazy" src="attachments/833290279/833224755.png?width=620" data-image-src="attachments/833290279/833224755.png" data-height="74" data-width="620" data-unresolved-comment-count="0" data-linked-resource-id="833224755" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20231023-182254.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="833290279" data-linked-resource-container-version="6" data-media-id="3389fdb1-90c0-4611-a37d-bec43ee814bd" data-media-type="file"></span><p>Figure 4 shows some of the basic network information that must be set up. They can vary from game to game based on the game requirements. <strong>Transport </strong>is a more in-depth topic that can be read about <a href="Network-Transport_833552408.html" data-linked-resource-id="833552408" data-linked-resource-version="6" data-linked-resource-type="page">here</a>. “<strong>Network Address” </strong>is the IP address clients will use to connect to the server. For example, if we run the server at the Waterloo Campus for Conestoga College, we will get the IP of the desktop/Laptop running the server and use that. “<strong>Max Connections</strong>” is the maximum allowed number of concurrent clients. “<strong>Disconnect Inactive Connections”</strong> will determine if we will disconnect clients for being idle, with “<strong>Disconnect Inactive Timeout</strong>” being the required idle time for a kickout in seconds.</p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" width="615" loading="lazy" src="attachments/833290279/833224761.png?width=615" data-image-src="attachments/833290279/833224761.png" data-height="128" data-width="615" data-unresolved-comment-count="0" data-linked-resource-id="833224761" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20231023-183112.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="833290279" data-linked-resource-container-version="6" data-media-id="eeb04c33-722d-4693-a97c-4191b7fba4e5" data-media-type="file"></span><p>If we use authentication for our game, it will be attached to the NetworkManager, as shown in Figure 5.</p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" width="619" loading="lazy" src="attachments/833290279/833224767.png?width=619" data-image-src="attachments/833290279/833224767.png" data-height="61" data-width="619" data-unresolved-comment-count="0" data-linked-resource-id="833224767" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20231023-184047.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="833290279" data-linked-resource-container-version="6" data-media-id="035a4fcb-5792-43e1-ab67-617f56715ced" data-media-type="file"></span><p>Next is maintaining the player. As shown in Figure 6, we can control a few things. The first is “<strong>Player Prefab”.</strong> This is the prefab for our player objects. Next is “<strong>Auto Create Playe</strong>r” which determines if a player should be spawned immediately after a scene change. Lastly is “<strong>Player Spawn Method”</strong> which will determine what method we use for spawning our players, assuming we have various spawn points. We have two options, including Round Robin and Random.</p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" width="614" loading="lazy" src="attachments/833290279/833224773.png?width=614" data-image-src="attachments/833290279/833224773.png" data-height="90" data-width="614" data-unresolved-comment-count="0" data-linked-resource-id="833224773" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20231023-184136.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="833290279" data-linked-resource-container-version="6" data-media-id="551ac625-0e55-4c31-a163-6118ee82a5e1" data-media-type="file"></span><p>Lastly, for a prefab to be spawnable over the network, we need to add it to a list of spawnable prefabs, which is found on the NetworkManager, and can be seen in Figure 7. Once a prefab is added to this list, the object can be spawned between servers/clients.</p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" width="613" loading="lazy" src="attachments/833290279/833486868.png?width=613" data-image-src="attachments/833290279/833486868.png" data-height="82" data-width="613" data-unresolved-comment-count="0" data-linked-resource-id="833486868" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20231023-185134.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="833290279" data-linked-resource-container-version="6" data-media-id="f52b0879-f596-4f93-8722-d15d310e70df" data-media-type="file"></span><p>If the NetworkManager that is given does not seem to be providing all the needed functionality, there is something you can do! Instead of adding the “NetworkManager” component to the empty GameObject you created, make a script, and inherit from “NetworkManager” inside the script, as shown in Figure 8.</p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" width="760" loading="lazy" src="attachments/833290279/833257524.png?width=760" data-image-src="attachments/833290279/833257524.png" data-height="36" data-width="844" data-unresolved-comment-count="0" data-linked-resource-id="833257524" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20231023-190325.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="833290279" data-linked-resource-container-version="6" data-media-id="06670801-98ea-4899-9eec-3c4cba7c1d08" data-media-type="file"></span><p>Now that you have done this, you will get all of the functionality from the default NetworkManager from Mirror, but now, you can override some of the methods from the NetworkManager class to perform some more functionality. Figure 9 shows a simple example of this.</p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" width="663" loading="lazy" src="attachments/833290279/833683476.png?width=663" data-image-src="attachments/833290279/833683476.png" data-height="176" data-width="663" data-unresolved-comment-count="0" data-linked-resource-id="833683476" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20231023-190833.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="833290279" data-linked-resource-container-version="6" data-media-id="4f912fce-1fdf-49e0-b242-69e3b0dcf2b2" data-media-type="file"></span><p>Here we override the OnStartServer() function. base.OnStartServer() will perform the original code for this function, with the Debug.Log() being an extra functionality I have added.</p><p>There are a plethora of functions where you can do this, including but not limited to</p><ul><li><p>OnStartHost()</p></li><li><p>OnStartClient()</p></li><li><p>OnStopServer()</p></li><li><p>OnStopClient()</p></li></ul>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/833290279/833224742.png">image-20231023-175048.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/833290279/833224749.png">image-20231023-182315.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/833290279/833224755.png">image-20231023-182254.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/833290279/833224761.png">image-20231023-183112.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/833290279/833224767.png">image-20231023-184047.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/833290279/833224773.png">image-20231023-184136.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/833290279/833486868.png">image-20231023-185134.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/833290279/833716249.png">image-20231023-190121.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/833290279/833650736.png">image-20231023-190257.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/833290279/833257524.png">image-20231023-190325.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/833290279/833683476.png">image-20231023-190833.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Jul 04, 2025 14:41</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

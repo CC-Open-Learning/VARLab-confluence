@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VARLab : Teleportation Guide - Into VARniverse</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Exploratory-Research-Projects_800587780.html">Exploratory Research Projects</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="800489478.html">VARnival/VARNiverse</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            VARLab : Teleportation Guide - Into VARniverse
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Brodin Collins-Robb</span>, last modified on Jan 27, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>Now that you have set up your teleportation out of VARniverse to your project in <a href="Teleportation-Guide---Out-of-VARniverse_861176513.html" data-linked-resource-id="861176513" data-linked-resource-version="6" data-linked-resource-type="page">Teleportation Guide - Out of VARniverse</a>, it's time to set up the teleportation from your project back to VARniverse!</p><h2 id="TeleportationGuide-IntoVARniverse-Instructions"><img class="emoticon emoticon-blue-star" data-emoji-id="1f4d8" data-emoji-shortname=":blue_book:" data-emoji-fallback="\uD83D\uDCD8" src="images/icons/emoticons/72/1f4d8.png" width="16" height="16" data-emoticon-name="blue-star" alt="(blue star)"/> Instructions</h2><p>To begin, you must have your project open in the VARniverse project (to open your project, navigate to the Mini-Games folder in the Project Assets folder and navigate through the semester and project folder to find your projects folder. Then, in your projects folder, find the scene file within your project and double-click the scene file).</p><ol start="1"><li><p>With your scene open, navigate from the Projects Assets window to VARniverse Assets → TeleportationStone → InfoCard. In this folder, there will be the script ‘returnToMain', which contains the following code:</p></li></ol><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class returnToMain : MonoBehaviour
+{
+    // Update is called once per frame (this will allow that any point during your mini-game the player can return to this hardcoded main scene)
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))//checks if you are pressing down the esc key which is the control to telepport
+        {
+            Debug.Log(&quot;interacted time to teleport&quot;);//debug log prints to the console for testing
+            
+            SceneManager.LoadScene(&quot;VARniverse&quot;);
+        }
+    }
+}</pre>
+</div></div><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>This code will make it so that at any point during your project, the user can press the escape key to return to the main scene. </p><p>If you would instead set a different key to return to the main scene, then you can change 'KeyCode.Escape' on line 11 with any other key that you find best suits your project!</p></div></div><ol start="2"><li><p>In your project on your player or any other game object that exists in your scene for the entire duration of your running project, drag and drop the 'returnToMain' script from the folder described in step 1 into the inspector pane. (Remember to select the game object for the project hierarchy that you want to add the script to and drop the script under the existing components in the inspect (wait for the blue bar to appear where the script will be placed before dropping it into place))</p></li></ol><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" width="760" loading="lazy" src="attachments/861176496/861176686.png?width=760" data-image-src="attachments/861176496/861176686.png" data-height="561" data-width="897" data-unresolved-comment-count="0" data-linked-resource-id="861176686" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20231119-213143.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="861176496" data-linked-resource-container-version="7" data-media-id="ab1b82af-38ef-46ff-a97d-da1fbb518984" data-media-type="file"></span><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" width="760" loading="lazy" src="attachments/861176496/860947300.png?width=760" data-image-src="attachments/861176496/860947300.png" data-height="561" data-width="897" data-unresolved-comment-count="0" data-linked-resource-id="860947300" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20231119-213219.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="861176496" data-linked-resource-container-version="7" data-media-id="e6a51de8-bb20-464b-9dc6-ab772091b7b2" data-media-type="file"></span><p>At this point, when your scene is running, and you press the specified key from the returnToMain script, your scene should close, and the player should teleport back to VARniverse in the same position in which they left VARniverse and looking the same way!</p>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/861176496/861111081.png">image-20231119-212829.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/861176496/861176678.png">image-20231119-213043.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/861176496/861111093.png">image-20231119-213055.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/861176496/861176686.png">image-20231119-213143.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/861176496/860947300.png">image-20231119-213219.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/861176496/864551561.png">Screenshot 2023-11-26 at 9.16.10 PM.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Jul 04, 2025 14:41</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

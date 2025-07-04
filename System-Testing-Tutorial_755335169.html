@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VARLab : System Testing Tutorial</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="How-To-Articles_581435426.html">How-To Articles</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Unity-Development_688324665.html">Unity Development</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Unity-Full-Stack-Testing-Tutorial_749699073.html">Unity Full-Stack Testing Tutorial</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            VARLab : System Testing Tutorial
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> User 1f114</span>, last modified by <span class='editor'> Leo Bunting</span> on Aug 03, 2023
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <style type='text/css'>/*<![CDATA[*/
+div.rbtoc1751640746180 {padding: 0px;}
+div.rbtoc1751640746180 ul {list-style: none;margin-left: 0px;}
+div.rbtoc1751640746180 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1751640746180'>
+<ul class='toc-indentation'>
+<li><span class='TOCOutline'>1</span> <a href='#SystemTestingTutorial-Part8:SystemTests'>Part 8: System Tests</a></li>
+</ul>
+</div><h1 style="margin-left: 30.0px;" id="SystemTestingTutorial-Part8:SystemTests">Part 8: System Tests</h1><ul><li><p>System tests are much like integration tests, except they act on actual scenes instead of constructing them in C#. The intention of these tests is to detect common mistakes inside of scenes. They are our last line of defence and make good “smoke tests.“</p></li></ul><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><strong>Note:</strong> System tests tend to be the most fragile tests. In order to keep these stable, create a few broad system tests that test entire “workflows“. Being too specific with your system tests will cause them to break often, and will make it more difficult to alter your scene without breaking them.</p><p>Because system tests are so broad, even a simple one will give you nearly complete code coverage. Thus, these tests must be excluded from code coverage reports.</p></div></div><ul><li><p>The only setup required for these tests is enabling <strong>PlayMode</strong> tests. Create a new file called <code>FullStackTutorialSystemTests.cs</code> inside of the “<strong>PlayMode</strong>” folder, and paste the following code into it:</p></li></ul><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">using NUnit.Framework;
+using System;
+using System.Collections;
+using TMPro;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
+using UnityEngine.TestTools;
+
+// system test classes should be marked with so that they
+// they are skipped during code coverage 
+[TestFixture, ConditionalIgnore(&quot;IgnoreForCoverage&quot;, &quot;This is a system test&quot;)]
+public class FullStackTutorialSystemTests
+{
+    GameObject[] allObjects;
+    ShowRandomCard showRandomCard;
+    WinCondition winCondition;
+    GameObject winLabel;
+    TextMeshProUGUI currentCard;
+
+    // Notice: Lots of asserts &amp; reads like a test case witten in English!
+    [Test]
+    public void WinningWorkflow()
+    {
+        VerifyIsCurrentCardShowing(false);
+        for (int i = 0; i &lt; winCondition.pointsToWin; i++)
+        {
+            VerifyIsWin(false);
+            DrawCard();
+            VerifyIsCurrentCardShowing(true);
+        }
+        VerifyIsWin(true);
+    }
+
+    // Verifying that things are set up in the scene isn&#39;t a bad idea either.
+    [Test]
+    public void CheckExistsCollidersPhysicsRaycastEventSystem()
+    {
+        // Will throw if doesn&#39;t exist.
+        FindGameObject&lt;MeshCollider&gt;(&quot;Safety Hat&quot;);
+        FindGameObject&lt;PhysicsRaycaster&gt;(&quot;Main Camera&quot;);
+        FindGameObject&lt;EventSystem&gt;(&quot;EventSystem&quot;);
+    }
+
+    [UnitySetUp]
+    public IEnumerator SetUp()
+    {
+        SceneManager.LoadScene(&quot;SampleScene&quot;);
+        yield return null; // Scene is loaded on next frame.
+
+        GetAllObjects();
+        (_, showRandomCard) = FindGameObject&lt;ShowRandomCard&gt;(&quot;Safety Hat&quot;);
+        (_, winCondition) = FindGameObject&lt;WinCondition&gt;(&quot;Safety Hat&quot;);
+        (winLabel, _) = FindGameObject&lt;TextMeshProUGUI&gt;(&quot;Win Text&quot;);
+        (_, currentCard) = FindGameObject&lt;TextMeshProUGUI&gt;(&quot;Current Card&quot;);
+    }
+
+    void DrawCard()
+    {
+        showRandomCard.OnMouseDown(); // Raycasting will need to be manually tested.
+    }
+
+    void GetAllObjects()
+    {
+        allObjects = Resources.FindObjectsOfTypeAll(typeof(GameObject)) as GameObject[];
+    }
+
+    (GameObject, T) FindGameObject&lt;T&gt;(string name)
+    {
+        foreach (GameObject gameObject in allObjects)
+        {
+            T component = gameObject.GetComponent&lt;T&gt;();
+            if (component != null &amp;&amp; gameObject.name == name)
+            {
+                return (gameObject, component);
+            }
+        }
+        throw new Exception($&quot;Cannot find {typeof(T)} \&quot;{name}\&quot;&quot;);
+    }
+
+    void VerifyIsWin(bool isWin)
+    {
+        Assert.AreEqual(isWin, winLabel.activeInHierarchy);
+    }
+
+    void VerifyIsCurrentCardShowing(bool isShowing)
+    {
+        Assert.AreEqual(isShowing, currentCard.text.Length &gt; 0);
+    }
+}</pre>
+</div></div><ul><li><p>Now try running these in the test runner. If everything is correct, they willpass! </p></li></ul><div class="confluence-information-macro confluence-information-macro-warning"><span class="aui-icon aui-icon-small aui-iconfont-error confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>If the tests fail, make sure the game object names in the scene are exactly the same as the strings in lines 52-55.</p></div></div><p /><p><u>You’ve completed the full-stack unity testing guide!</u></p>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/755335169/755335178.png">image-20230706-195439.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/755335169/755335181.png">image-20230706-183546.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/755335169/755335184.png">image-20230706-183233.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/755335169/755335187.png">image-20230706-182135.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/755335169/755335190.png">image-20230706-145430.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/755335169/755335193.png">image-20230706-145253.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/755335169/755335196.png">image-20230706-140113.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/755335169/755335199.png">image-20230706-135405.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/755335169/755335202.png">image-20230706-133954.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/755335169/755335205.png">image-20230706-133734.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/755335169/755335208.png">image-20230706-133709.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/755335169/755335211.png">image-20230705-151117.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/755335169/755335214.png">image-20230705-150942.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/755335169/755335217.png">image-20230705-150936.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/755335169/755335220.png">image-20230705-150654.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Jul 04, 2025 14:52</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

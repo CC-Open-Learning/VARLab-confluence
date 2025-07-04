@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VARLab : Testable Behaviour</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="How-To-Articles_581435426.html">How-To Articles</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Unity-Development_688324665.html">Unity Development</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            VARLab : Testable Behaviour
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Talon Ernst</span>, last modified by <span class='editor'> Leo Bunting</span> on Aug 03, 2023
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <style type='text/css'>/*<![CDATA[*/
+div.rbtoc1751640770910 {padding: 0px;}
+div.rbtoc1751640770910 ul {list-style: disc;margin-left: 0px;}
+div.rbtoc1751640770910 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1751640770910'>
+<ul class='toc-indentation'>
+<li><span class='TOCOutline'>1</span> <a href='#TestableBehaviour-Definitions'>Definitions</a></li>
+<li><span class='TOCOutline'>2</span> <a href='#TestableBehaviour-Whatwillyoulearn?'>What will you learn?</a></li>
+<li><span class='TOCOutline'>3</span> <a href='#TestableBehaviour-Risk-BasedCodeCoverage'>Risk-Based Code Coverage</a></li>
+<li><span class='TOCOutline'>4</span> <a href='#TestableBehaviour-UserBugsvsDeveloperBugs'>User Bugs vs Developer Bugs</a>
+<ul class='toc-indentation'>
+<li><span class='TOCOutline'>4.1</span> <a href='#TestableBehaviour-UserBugs'>User Bugs</a></li>
+<li><span class='TOCOutline'>4.2</span> <a href='#TestableBehaviour-DeveloperBugs'>Developer Bugs</a></li>
+</ul>
+</li>
+<li><span class='TOCOutline'>5</span> <a href='#TestableBehaviour-Examplesofwhattotest'>Examples of what to test</a>
+<ul class='toc-indentation'>
+<li><span class='TOCOutline'>5.1</span> <a href='#TestableBehaviour-Complexcode'>Complex code</a></li>
+<li><span class='TOCOutline'>5.2</span> <a href='#TestableBehaviour-ErrorProneCode'>Error Prone Code</a></li>
+<li><span class='TOCOutline'>5.3</span> <a href='#TestableBehaviour-ComplexGetters/Setters'>Complex Getters/Setters</a></li>
+<li><span class='TOCOutline'>5.4</span> <a href='#TestableBehaviour-ComplexConstructors'>Complex Constructors</a></li>
+</ul>
+</li>
+<li><span class='TOCOutline'>6</span> <a href='#TestableBehaviour-Examplesofwhatnottotest'>Examples of what not to test</a>
+<ul class='toc-indentation'>
+<li><span class='TOCOutline'>6.1</span> <a href='#TestableBehaviour-UnityCode'>Unity Code</a></li>
+<li><span class='TOCOutline'>6.2</span> <a href='#TestableBehaviour-Microsoft’slibraries(oranyotherlanguage)'>Microsoft’s libraries (or any other language)</a></li>
+<li><span class='TOCOutline'>6.3</span> <a href='#TestableBehaviour-TrustedLibraries'>Trusted Libraries</a></li>
+</ul>
+</li>
+</ul>
+</div><h1 id="TestableBehaviour-Definitions">Definitions</h1><ul><li><p><strong>User Acceptance Testing (UAT) </strong>- This is when software is tested in the “real world” by actual users to try and spot things that may have been missed during development, or that could be improved for better user experience.</p></li><li><p><strong>Code Coverage </strong>- This is a metric, typically represented as a percentage amount, of how much of your code is covered by tests. The closer to 100% this is, the closer your project is to being fully tested.</p></li></ul><h1 id="TestableBehaviour-Whatwillyoulearn?">What will you learn?</h1><p>To write effective tests, it is essential to understand exactly what we are and are not trying to test, and why.</p><p>If this is not understood, many tests will be ineffective, leading to problems such as a bloated test suite or tests that have been rushed.</p><p>It can be easy to fall into the habit of writing tests blindly to reach 100% code coverage. This document is intended to teach you what exactly you should be looking to write a test for when working on a project.</p><h1 id="TestableBehaviour-Risk-BasedCodeCoverage">Risk-Based Code Coverage</h1><p>When writing tests, it is essential you follow the mindset of Risk Based Code Coverage. This means thoroughly testing the riskiest sections of your code, instead of only writing tests to achieve 100% Code Coverage.</p><p>This is an example of “Quality over Quantity.” Having ten tests that expose three severe bugs and ensure the most complex sections of code work, but only cover 45% of your code, is more effective than having 100% Code Coverage with thirty tests where you are testing things that have a low chance of breaking.</p><p>While you still want to aim for a good Code Coverage percentage, a higher percentage does not equal useful tests. There is a balance between having good Code Coverage and ensuring tests are purposeful and testing meaningful code.</p><p>Furthermore, be sure to avoid strict code coverage restrictions within your project. Estimates at certain points in development may be helpful, but you should not have a strict percentage. This might lead developers to write tests purely to hit that goal rather than focus on quality.</p><h1 id="TestableBehaviour-UserBugsvsDeveloperBugs">User Bugs vs Developer Bugs</h1><p>It is essential to know the difference between User Bugs and Developer Bugs, and which ones we’ll tackle with testing.</p><h2 id="TestableBehaviour-UserBugs">User Bugs</h2><p>User Bugs are typically found during UAT, usually when we, as developers, expect the user to do one specific thing, and they get lost and do something off course from our expectations. This is <strong>NOT </strong>what we are aiming to test. It is what UAT is for.</p><h2 id="TestableBehaviour-DeveloperBugs">Developer Bugs</h2><p>Developer bugs are typically gaps in logic in the code. Maybe something was multiplied wrong, or a high score was incorrectly saved. These bugs are what we are hoping to find with our tests. Adding automated tests to this type of logic helps us verify that it works exactly how we intend.</p><p>It is crucial to know the difference between the two because developer bugs can still appear in UAT. A developer should be able to recognize the difference between them in this case. Ideally, testing will catch them before ever reaching the UAT stage.</p><h1 id="TestableBehaviour-Examplesofwhattotest">Examples of what to test</h1><p>The following are some examples of things that should be tested:</p><h2 id="TestableBehaviour-Complexcode">Complex code</h2><p>If you have complex code, you will want to write tests to ensure it works as intended and that there are no gaps in logic that could result in something like a crash.</p><p>Complex code could include but is not limited to, loops, nested code and complex calculations.</p><h2 id="TestableBehaviour-ErrorProneCode">Error Prone Code</h2><p>If you have code that could cause errors, this should be tested. You do not want an unexpected crash to appear after the project is live. Check for all possible crashes and ensure you are handling them.</p><p>Error-prone code could include anything File IO. Even if you are unsure if the code you have written is error-prone, it might fall under this category.</p><h2 id="TestableBehaviour-ComplexGetters/Setters">Complex Getters/Setters</h2><p>If you have default getters/setters that look like the snippet below, you do not need to test these, since there is nothing to test.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">int age { get; set; }
+string name { get; set; }</pre>
+</div></div><p>However, if you have getters/setters that look like the following, it may be worthwhile to test it as it does have some semi-complex logic. If this logic fails, it could cause a bug.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence"> public double finalPrice
+        {
+            get =&gt; finalPrice;
+
+            set
+            {
+                if (value &gt;= 0)
+                {
+                  finalPrice = value + (value * 0.13);
+                }       
+            }</pre>
+</div></div><p>Here the setter of the final price variable includes a calculation. It is worth it to write a single test to ensure it works properly. The get is still the default, so there is no need to test it.</p><h2 id="TestableBehaviour-ComplexConstructors">Complex Constructors</h2><p>Constructors are treated similarly to getters and setters. The more complicated a constructor becomes, the more useful it is to write a test for it.</p><p>If you have a constructor like the snippet below, there is no need to write a test for it.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">public Person(string name, int age)
+{
+  this.Name = name;
+  this.Age = age;
+}</pre>
+</div></div><p>However, if you have a constructor like the following, writing a test for it may be necessary to ensure it works properly.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence"> public InventoryImpl(
+        Action onWin,
+        Action onLose,
+        IText gemCountText,
+        IText countDownTimerText,
+        IText currentLifeText)
+    {
+        OnWinEvent = onWin;
+        OnLoseEvent = onLose;
+
+        GemCountText = gemCountText;
+        CountDownTimerText = countDownTimerText;
+        CurrentLifeText = currentLifeText;
+    }</pre>
+</div></div><h1 id="TestableBehaviour-Examplesofwhatnottotest">Examples of what not to test</h1><p>The following are some examples of things that should <em>not </em>be tested. It is important to know when not to test, so that time is not wasted.</p><h2 id="TestableBehaviour-UnityCode">Unity Code</h2><p>We should avoid testing Unity code. We should trust that the code provided by Unity will work correctly, so there is no point to testing it. </p><p>As an example, consider the transform.Position function. Unity provides it, and has tested it, so we can trust it works and do not need to test it ourselves.</p><h2 id="TestableBehaviour-Microsoft’slibraries(oranyotherlanguage)">Microsoft’s libraries (or any other language)</h2><p>The same rule applies to Microsoft’s native C# functions. For example, we do not need to test the C# String.Equals method, because it is provided to us and already tested.</p><h2 id="TestableBehaviour-TrustedLibraries">Trusted Libraries</h2><p>Lastly, we do not need to test code from trustworthy libraries. Again, it has already been tested and proven to work. </p><p /><p>In conclusion, focus on writing tests only for code that you have written, since the code provided by external frameworks and libraries has usually already been tested.</p>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Jul 04, 2025 14:52</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

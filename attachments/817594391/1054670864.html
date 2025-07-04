@@ -1,0 +1,409 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0059)https://www.csus.edu/indiv/k/kaym/rubric/edgamesrubric.html -->
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252"><title>Educational Electronic Games Rubric</title>
+
+<meta content="Educational Games Rubric" name="Title">
+<meta content="Electronic Games Group at CSU Sacramento" name="Author">
+<meta content="This is a sample rubric for evaluating educational electronic games." name="Description">
+<meta content="rubric, evaluating, educational, electronic, games" name="Keywords">
+<meta content="MSHTML 6.00.2900.2523" name="GENERATOR">
+<meta content="30 days" name="revist-after">
+<meta content="en-us" name="Language">
+<meta content="All" name="robots">
+<link href="./Cooking Simulator_files/edgamesrubric.css" type="text/css" rel="stylesheet">
+
+<script language="JavaScript" type="text/javascript">
+<!--
+var my_total_score = 0
+
+function calculate(form) {
+<!-- Set constant values -->
+  var min_pts = 0
+  var max_pts = 5
+  var min_effective_pts = 3
+  var min_exemplary_pts = 4
+  var max_effective = 39
+  var max_baseline = 29.99
+
+<!-- Set error values -->
+  var alert1="Incorrect point value for LAYOUT AND DESIGN. Please try again."
+  var alert2="Incorrect point value for NAVIGATION. Please try again."
+  var alert3="Incorrect point value for OBJECTIVES. Please try again."
+  var alert4="Incorrect point value for DIFFERENT LEARNING STYLES. Please try again."
+  var alert5="Incorrect point value for HIGHER LEVEL LEARNING SKILLS. Please try again."
+  var alert6="Incorrect point value for RULES. Please try again."
+  var alert7="Incorrect point value for GOALS. Please try again."
+  var alert8="Incorrect point value for FEEDBACK. Please try again."
+  var alert9="Incorrect point value for INTERACTION. Please try again."
+  var alert10="Incorrect point value for SUBJECT. Please try again."
+
+<!-- Convert scores entered to numeric --> 
+  var layout_score = parseFloat(form.layout.value)
+  var nav_score = parseFloat(form.nav.value)
+  var objectives_score = parseFloat(form.objectives.value)
+  var learn_styles_score = parseFloat(form.learn_styles.value)
+  var learn_skills_score = parseFloat(form.learn_skills.value)
+  var rules_score = parseFloat(form.rules.value)
+  var goals_score = parseFloat(form.goals.value)
+  var feedback_score = parseFloat(form.feedback.value)
+  var interaction_score = parseFloat(form.interaction.value)
+  var subject_score = parseFloat(form.subject.value)
+
+<!-- Check if errors in scores entered -->
+  if ((isNaN(layout_score)) || (form.layout.value < min_pts) || (form.layout.value > max_pts)) {
+  	alert(alert1); return false}
+  if ((isNaN(nav_score)) || (form.nav.value < min_pts) || (form.nav.value > max_pts)) {
+  	alert(alert2); return false}
+  if ((isNaN(objectives_score)) || (form.objectives.value < min_pts) || (form.objectives.value > max_pts)) {
+  	alert(alert3); return false}
+  if ((isNaN(learn_styles_score)) || (form.learn_styles.value < min_pts) || (form.learn_styles.value > max_pts)) {
+  	alert(alert4); return false}
+  if ((isNaN(learn_skills_score)) || (form.learn_skills.value < min_pts) || (form.learn_skills.value > max_pts)) {
+  	alert(alert5); return false}
+  if ((isNaN(rules_score)) || (form.rules.value < min_pts) || (form.rules.value > max_pts)) {
+  	alert(alert6); return false}
+  if ((isNaN(goals_score)) || (form.goals.value < min_pts) || (form.goals.value > max_pts)) {
+  	alert(alert7); return false}
+  if ((isNaN(feedback_score)) || (form.feedback.value < min_pts) || (form.feedback.value > max_pts)) {
+  	alert(alert8); return false}
+  if ((isNaN(interaction_score)) || (form.interaction.value < min_pts) || (form.interaction.value > max_pts)) {
+  	alert(alert9); return false}
+  if ((isNaN(subject_score)) || (form.subject.value < min_pts) || (form.subject.value > max_pts)) {
+  	alert(alert10); return false}
+  
+<!-- Calculate total score --> 
+  form.totalscore.value = layout_score + nav_score + objectives_score + learn_styles_score + learn_skills_score + rules_score + goals_score + feedback_score + interaction_score + subject_score
+  my_total_score = form.totalscore.value
+
+<!-- Calculate number of criteria rated at each level -->
+  var num_exemplary = 0
+  var num_effective = 0
+  var num_baseline = 0
+
+  if (form.layout.value >= min_effective_pts) {
+  	if (form.layout.value >= min_exemplary_pts ) { ++num_exemplary } else { ++num_effective }
+	} else { ++num_baseline }
+  if (form.nav.value >= min_effective_pts) {
+  	if (form.nav.value >= min_exemplary_pts ) { ++num_exemplary } else { ++num_effective }
+	} else { ++num_baseline }
+  if (form.objectives.value >= min_effective_pts) {
+  	if (form.objectives.value >= min_exemplary_pts ) { ++num_exemplary } else { ++num_effective }
+	} else { ++num_baseline }
+  if (form.learn_styles.value >= min_effective_pts) {
+  	if (form.learn_styles.value >= min_exemplary_pts ) { ++num_exemplary } else { ++num_effective }
+	} else { ++num_baseline }
+  if (form.learn_skills.value >= min_effective_pts) {
+  	if (form.learn_skills.value >= min_exemplary_pts ) { ++num_exemplary } else { ++num_effective }
+	} else { ++num_baseline }
+  if (form.rules.value >= min_effective_pts) {
+  	if (form.rules.value >= min_exemplary_pts ) { ++num_exemplary } else { ++num_effective }
+	} else { ++num_baseline }
+  if (form.goals.value >= min_effective_pts) {
+  	if (form.goals.value >= min_exemplary_pts ) { ++num_exemplary } else { ++num_effective }
+	} else { ++num_baseline }
+  if (form.feedback.value >= min_effective_pts) {
+  	if (form.feedback.value >= min_exemplary_pts ) { ++num_exemplary } else { ++num_effective }
+	} else { ++num_baseline }
+  if (form.interaction.value >= min_effective_pts) {
+  	if (form.interaction.value >= min_exemplary_pts ) { ++num_exemplary } else { ++num_effective }
+	} else { ++num_baseline }
+  if (form.subject.value >= min_effective_pts) {
+  	if (form.subject.value >= min_exemplary_pts ) { ++num_exemplary } else { ++num_effective }
+	} else { ++num_baseline }
+  
+  form.exemplary.value = num_exemplary
+  form.effective.value = num_effective
+  form.baseline.value = num_baseline
+
+<!-- Display calculated rating -->
+  document.getElementById("eval_exemplary").style.visibility = "hidden"
+  document.getElementById("eval_effective").style.visibility = "hidden"
+  document.getElementById("eval_baseline").style.visibility = "hidden"
+
+  if (my_total_score > max_effective) {
+	document.getElementById("eval_exemplary").style.visibility = "visible"
+	}
+  else { 
+    if (my_total_score > max_baseline) {
+      document.getElementById("eval_effective").style.visibility = "visible"
+    }
+    else {
+      document.getElementById("eval_baseline").style.visibility = "visible"
+    }
+  }
+   
+  alert("Congratulations! Your total score has been calculated.")
+  return false
+}
+//-->
+</script>
+</head>
+
+<body>
+<noscript><b>Your browser has JavaScript turned off.</b><br />
+Some features on this page will not work if you DO NOT turn JavaScript on.<br />
+Open your browser preferences and enable JavaScript.<br />
+You do not have to restart your browser or your computer after enabling JavaScript. Simple click the 'Reload' button.<hr />
+</noscript>
+<h1 align="center"><a id="top" name="top"></a>Educational Electronic Games Rubric</h1>
+<p>Educational electronic games can be utilized in a variety of teaching 
+situations. This rubric will help you evaluate your electronic game in an 
+educational setting. If a criteria rating falls between two levels of 
+achievement, you may score it with a point value between the two levels. To calculate your total score online: enter your score for each criteria, then click the <em>Calculate Totals</em> button below the Total Score box.</p>
+
+<p align="center"><a href="https://www.csus.edu/indiv/k/kaym/rubric/edgamesrubric.html#rating">Evaluation of Total Score</a></p>
+
+<form action="https://www.csus.edu/indiv/k/kaym/rubric/edgamesrubric.html#">
+<table cellspacing="0" cellpadding="4" border="1">
+  <tbody>
+  <tr align="middle">
+    <th width="15%" rowspan="2" align="center" valign="middle"><strong>CRITERIA</strong></th>
+    <th colspan="3" align="center" valign="middle" bgcolor="#cccc99"><strong>Levels of Achievement</strong></th>
+    <th width="10%" rowspan="2" align="center" valign="middle"><strong>Score</strong> </th>
+  </tr>
+  <tr align="middle">
+    <th width="25%" align="center" valign="middle" bgcolor="#cccc99"><strong>Baseline</strong></th>
+    <th width="25%" align="center" valign="middle" bgcolor="#cccc99"><strong>Effective</strong></th>
+    <th width="25%" align="center" valign="middle" bgcolor="#cccc99"><strong>Exemplary</strong></th>
+  </tr>
+  <tr bgcolor="#ffcc00">
+    <td width="100%" colspan="5">
+      <p class="category">Organization and Design</p></td></tr>
+  <tr>
+    <td width="15%" bgcolor="#cccc99">
+      <p align="right"><strong>Layout &amp;<br>
+        Design</strong></p></td>
+    <td valign="top" width="25%">
+      <p>0 points</p>
+      <p>There are few or no graphic elements, no variation in layout and/or the colors interfere with the readability.</p></td>
+    <td valign="top" width="25%">
+      <p>3 points</p>
+      <p>There are some graphic elements and limited variation in layout. Design elements sometimes assist students in understanding concepts and ideas.</p></td>
+    <td valign="top" width="25%">
+      <p>5 points</p>
+      <p>There are multiple graphic elements and variation in layout. Design elements assist students in understanding concepts and ideas.</p></td>
+    <td width="10%">
+      <div align="center"><input id="layout" maxlength="3" size="3" value="0" name="layout"> 
+      </div></td></tr>
+  <tr>
+    <td width="15%" bgcolor="#cccc99">
+      <div align="right"><strong>Navigation</strong></div></td>
+    <td valign="top" width="25%">
+      <p>0 points</p>
+      <p>Navigating the game is confusing and information cannot be found easily.</p></td>
+    <td valign="top" width="25%">
+      <p>3 points</p>
+      <p>Some navigation is unclear, resulting in a few places where students can become lost.</p></td>
+    <td valign="top" width="25%">
+      <p>5 points</p>
+      <p>The game is well-organized and easy to navigate. Students can clearly understand where they are and where to go next.</p></td>
+    <td width="10%">
+      <div align="center"><input id="nav" maxlength="3" size="3" value="0" name="nav"></div>
+	</td>
+	</tr>
+  <tr bgcolor="#ffcc00">
+    <td width="100%" colspan="5">
+      <p class="category">Instructional Design and Delivery</p></td>
+  </tr>
+  <tr>
+    <td width="15%" bgcolor="#cccc99">
+      <p align="right"><strong>Objectives</strong></p></td>
+    <td valign="top" width="25%">
+      <p>0 points</p>
+      <p>Learning objectives are unclear or non-existent.</p></td>
+    <td valign="top" width="25%">
+      <p>3 points</p>
+      <p>Some learning objectives are identified.</p></td>
+    <td valign="top" width="25%">
+      <p>5 points</p>
+      <p>Learning objectives are clearly identified.</p></td>
+    <td width="10%">
+      <div align="center"><input id="objectives" maxlength="3" size="3" value="0" name="objectives"> 
+      </div></td>
+	</tr>
+  <tr>
+    <td width="15%" bgcolor="#cccc99">
+      <p align="right"><strong>Different<br>Learning<br>Styles</strong></p></td>
+    <td valign="top" width="25%">
+      <p>0 points</p>
+      <p>The game provides few auditory, kinesthetic, textual and/or visual activities to enhance student learning.</p></td>
+    <td valign="top" width="25%">
+      <p>3 points</p>
+      <p>The game provides some auditory, kinesthetic, textual and/or visual activities to enhance student learning.</p></td>
+    <td valign="top" width="25%">
+      <p>5 points</p>
+      <p>The game provides multiple auditory, kinesthetic, textual and/or visual activities to enhance student learning.</p></td>
+    <td width="10%">
+      <div align="center"><input id="learn_styles" maxlength="3" size="3" value="0" name="learn_styles"> 
+      </div></td>
+  </tr>
+  <tr>
+    <td width="15%" bgcolor="#cccc99">
+      <p align="right"><strong>Higher<br>Level<br>Learning<br>Skills</strong></p></td>
+    <td valign="top" width="25%">
+      <p>0 points</p>
+      <p>The game provides limited or no activities to help students increase their cognitive skills, such as analysis, synthesis and evaluation.</p></td>
+    <td valign="top" width="25%">
+      <p>3 points</p>
+      <p>The game provides some activities to help students increase their cognitive skills, such as analysis, synthesis and evaluation.</p></td>
+    <td valign="top" width="25%">
+      <p>5 points</p>
+      <p>The game provides multiple activities to help students increase their cognitive skills, such as analysis, synthesis and evaluation.</p></td>
+    <td width="10%">
+      <div align="center"><input id="learn_skills" maxlength="3" size="3" value="0" name="learn_skills"> 
+      </div></td>
+	</tr>
+  <tr bgcolor="#ffcc00">
+    <td width="100%" colspan="5">
+      <p class="category">Game-Based Learning</p></td>
+	</tr>
+  <tr>
+    <td width="15%" bgcolor="#cccc99">
+      <p align="right"><strong>Rules </strong></p></td>
+    <td valign="top" width="25%">
+      <p>0 points</p>
+      <p>Rules are not clearly stated.</p></td>
+    <td valign="top" width="25%">
+      <p>3 points</p>
+      <p>Some rules are given, but there is missing information. Students might be confused.</p></td>
+    <td valign="top" width="25%">
+      <p>5 points</p>
+      <p>Every rule is clearly stated.</p></td>
+    <td width="10%">
+      <div align="center"><input id="rules" maxlength="3" size="3" value="0" name="rules"> 
+      </div></td>
+	</tr>
+  <tr>
+    <td width="15%" bgcolor="#cccc99">
+      <p align="right"><strong>Goals</strong></p></td>
+    <td valign="top" width="25%">
+      <p>0 points</p>
+      <p>Goals are vague or incomplete.</p></td>
+    <td valign="top" width="25%">
+      <p>3 points</p>
+      <p>Goals are at least partially described.</p></td>
+    <td valign="top" width="25%">
+      <p>5 points</p>
+      <p>Goals are clearly stated and measure what students must know and be able to do to accomplish the game.</p></td>
+    <td width="10%">
+      <div align="center"><input id="goals" maxlength="3" size="3" value="0" name="goals"></div>
+	  </td>
+	</tr>
+  <tr>
+    <td width="15%" bgcolor="#cccc99">
+      <p align="right"><strong>Feedback</strong></p></td>
+    <td valign="top" width="25%">
+      <p>0 points</p>
+      <p>There are few or no opportunities for students to receive feedback on their performance.</p></td>
+    <td valign="top" width="25%">
+      <p>3 points</p>
+      <p>There are some opportunities for students to receive feedback on their performance.</p></td>
+    <td valign="top" width="25%">
+      <p>5 points</p>
+      <p>There are frequent opportunities for students to receive timely feedback on their performance.</p></td>
+    <td width="10%">
+      <div align="center">
+	    <input id="feedback" maxlength="3" size="3" value="0" name="feedback"> 
+      </div></td>
+	</tr>
+  <tr>
+    <td width="15%" bgcolor="#cccc99">
+      <p align="right"><strong>Interaction</strong></p></td>
+    <td valign="top" width="25%">
+      <p>0 points</p>
+      <p>Student-to-computer and student-to-student interactions are limited or non-existent.</p></td>
+    <td valign="top" width="25%">
+      <p>3 points</p>
+      <p>Student-to-computer and student-to-student interactions are at least partially identified.</p></td>
+    <td valign="top" width="25%">
+      <p>5 points</p>
+      <p>Student-to-computer and student-to-student interactions can be clearly identified. There is a definitive increase in social interaction.</p></td>
+    <td width="10%">
+      <div align="center">
+	    <input id="interaction" maxlength="3" size="3" value="0" name="interaction">
+	  </div></td>
+	</tr>
+  <tr>
+    <td width="15%" bgcolor="#cccc99">
+      <p align="right"><strong>Subject</strong></p></td>
+    <td valign="top" width="25%">
+      <p>0 points</p>
+      <p>The subject or topic of the game is vague or incomplete.</p></td>
+    <td valign="top" width="25%">
+      <p>3 points</p>
+      <p>The subject or topic of the game is at least partially described.</p></td>
+    <td valign="top" width="25%">
+      <p>5 points</p>
+      <p>The subject or topic of the game is clearly stated.</p></td>
+    <td width="10%">
+      <div align="center">
+	    <input id="subject" maxlength="3" size="3" value="0" name="subject">
+	  </div></td>
+	</tr>
+  <tr>
+    <td width="100%" bgcolor="#ffcc00" colspan="4">
+      <p class="category">Total Score</p></td>
+    <td align="center" width="10%" bgcolor="#ffcc00">
+	  <input id="totalscore" maxlength="4" size="4" value="0" name="totalscore"></td>
+  </tr>
+  </tbody>
+</table>
+
+<div align="right">
+  <input onclick="calculate(this.form)" type="button" value="Calculate Totals" name="calc"> 
+</div>
+
+<a id="rating" name="rating"></a>
+<h2>Evaluation of Total Score:</h2>
+<table cellspacing="3" cellpadding="3" width="100%" border="1">
+  <tbody>
+  <tr align="middle" bgcolor="#ffff99">
+    <th width="25%">Rating</th>
+    <th width="25%">Total Point Range</th>
+    <th width="25%">Number of Criteria Rated at this Level</th>
+    <th width="25%">Your<br>Rating</th>
+  </tr>
+  <tr valign="middle">
+    <td width="25%" align="center">Exemplary</td>
+    <td width="25%" align="center">40-50 points</td>
+    <td width="25%" align="center">
+		<input id="exemplary" maxlength="2" size="2" value="0" name="exemplary"> </td>
+    <td width="25%" align="center">&nbsp;
+		<div id="eval_exemplary" style="display: inline; visibility: visible;">
+			<strong>** Exemplary **</strong>
+		</div>
+	</td>
+  </tr>
+  <tr valign="middle">
+    <td width="25%" align="center">Effective</td>
+    <td width="25%" align="center">30-39 points</td>
+    <td width="25%" align="center">
+		<input id="effective" maxlength="2" size="2" value="0" name="effective"> </td>
+    <td width="25%" align="center">&nbsp;
+		<div id="eval_effective" style="display: inline; visibility: hidden">
+			<strong>** Effective **</strong>
+		</div>
+	</td>
+  </tr>
+  <tr valign="middle">
+    <td width="25%" align="center">Baseline</td>
+    <td width="25%" align="center">less than 30 points</td>
+	<td width="25%" align="center">
+		<input id="baseline" maxlength="2" size="2" value="0" name="baseline"> </td>
+	<td width="25%" align="center">&nbsp;
+		<div id="eval_baseline" style="display: inline; visibility: hidden">
+			<strong>** Baseline **</strong>
+		</div>
+  </td>
+  </tr>
+  </tbody>
+</table>
+<a href="https://www.csus.edu/indiv/k/kaym/rubric/edgamesrubric.html#top"><br>Return to top </a>
+</form>
+
+<p align="center">© 2004 California State University, Sacramento<br>last reviewed: 
+<!-- #BeginDate format:Am1 -->March 16, 2007<!-- #EndDate --> 
+</p>
+
+
+</body></html>

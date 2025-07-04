@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VARLab : Asset Store Developments</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Asset-Team-Bravo_1115783180.html">Asset Team Bravo</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Asset-Store-Super-Search_1128431654.html">Asset Store Super Search</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            VARLab : Asset Store Developments
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Alistair Campbell</span>, last modified on Jul 23, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h2 id="AssetStoreDevelopments-APIThings">API Things</h2><p>These API calls have been created by analyzing network traffic on the sites while performing various actions. We need to make sure that we are good to use them before we depend on this, but these calls are very powerful and we will be able to serve much better information by using them.</p><p>API calls must be made through a cors-anywhere server on <strong>port 27000</strong>.</p><h3 id="AssetStoreDevelopments-Thisistheminification/standardizationsystemforSketchfabthatshouldbethestandardforallgoingforwards">This is the minification/standardization system for Sketchfab that should be the standard for all going forwards</h3><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: false; theme: Confluence" data-theme="Confluence">            let miniResult = {
+                name: result.name,
+                price: result.price/100,
+                thumbnails: result.thumbnails,
+                storePage: &#39;https://sketchfab.com/3d-models/&#39; + result.uid,
+                store: &#39;sketchfab&#39;,
+                animated: !!result.animationCount
+            }</pre>
+</div></div><h3 id="AssetStoreDevelopments-Sketchfab">Sketchfab</h3><p><a class="external-link" href="https://sketchfab.com/i/search?count=24&amp;in_store=1&amp;processing_status=succeeded&amp;q=car&amp;restricted=1&amp;sort_by=-relevance&amp;type=models&amp;cursor=bz05Ng%3D%3D%27" rel="nofollow">https://sketchfab.com/i/search?count=24&amp;in_store=1&amp;processing_status=succeeded&amp;q=car&amp;restricted=1&amp;sort_by=-relevance&amp;type=models&amp;cursor=bz05Ng%3D%3D'</a></p><h3 id="AssetStoreDevelopments-Params">Params</h3><ul><li><p>count = number of items to serve</p></li><li><p>in_store = ???</p></li><li><p>processing_status = ???</p></li><li><p>q = search term</p></li><li><p>restricted = include nsfw content (1 = yes I think)</p></li><li><p>sort_by = sorting system</p><ul><li><p>Options: ‘relevance’, ‘-orderCount’ (best selling), ‘-rating’, ‘-publishedAt’ (newest), ‘publishedAt’ (oldest), ‘price’ (low to high), ‘-price’ (high to low)</p></li></ul></li><li><p>max_face_count</p></li><li><p>min_face_count</p></li><li><p>licenses=783b685da9bf457d81e829fa283f3567 (this is the standard license that allows commercial use, because SF wants to make up their own licenses)</p></li><li><p><strong>Formats</strong></p><ul><li><p>3ds Max</p><ul><li><p>file_formats=3ds</p></li><li><p>file_formats=max</p></li></ul></li><li><p>file_formats=fbx</p></li><li><p>file_formats=blend</p></li><li><p>file_formats=obj</p></li><li><p>file_formats=c4d</p></li><li><p>Lightwave = file_formats=lwo</p></li><li><p>Maya</p><ul><li><p>file_formats=ma</p></li><li><p>file_formats=mb</p></li></ul></li><li><p>Unity</p><ul><li><p>file_formats=unitypackage</p></li></ul></li><li><p>stl = file_formats=stl</p></li><li><p>Sketchup = file_formats=skp</p></li><li><p>Modo = file_formats=lxo</p></li><li><p>polygon? = file_formats=ply</p></li><li><p>colladata = file_formats=dae</p></li><li><p>Unreal</p><ul><li><p>file_formats=uasset</p></li></ul></li></ul></li></ul><p /><p>Sketchfab uses SSR for their product pages, scraping data is the only way to really gather it from there.</p><p>Getting all of the model information from viewing a model page is under a div with the class <code>c-model-3d-information__col</code>, and all the information total is under the div with the class<code>store-informations</code>.</p><h3 id="AssetStoreDevelopments-UsefulResults(bykey)">Useful Results (by key)</h3><ul><li><p>name</p></li><li><p>animationCount</p></li><li><p>thumbnails</p><ul><li><p>images (array)</p><ul><li><p>width</p></li><li><p>height</p></li><li><p>url</p></li></ul></li></ul></li><li><p>price</p></li></ul><p>Damn, really no license or poly count huh</p><h3 id="AssetStoreDevelopments-CGTrader">CGTrader</h3><p><a class="external-link" href="https://www.cgtrader.com/search.json?page=2&amp;keywords=car" rel="nofollow">https://www.cgtrader.com/search.json?page=1&amp;keywords=car</a></p><h3 id="AssetStoreDevelopments-Fullyfiltered">Fully filtered</h3><p><a class="external-link" href="https://www.cgtrader.com/search?animated=1&amp;rigged=1&amp;keywords=car&amp;price_range%5B%5D=range_20_1000&amp;polygon_range%5B%5D=range_10_1000000" rel="nofollow">https://www.cgtrader.com/search?animated=1&amp;rigged=1&amp;keywords=car&amp;price_range[]=range_20_1000&amp;polygon_range[]=range_10_1000000</a></p><p /><ul><li><p>page = pagination page. We may need to integrate a pagination system into our search to continue to generate results in case the initial search is not sufficient</p></li><li><p>keywords = The search term</p></li><li><p>Animated = (1 for true, dont include for false)</p></li><li><p>Rigged = (1 for true, dont include for false)</p></li><li><p>price_range[]=range_X_Y = X is lower limit, Y is upper limit (default upper is 1000)</p></li><li><p>polygon_range[]=range_X_Y = same as above, default upper is 1000000</p></li><li><p><strong>File Formats</strong></p><ul><li><p>FBX = file_types[]=5</p></li><li><p>OBJ = file_types[]=12</p></li><li><p>STL = file_types[]=51</p></li><li><p>MAX = file_types[]=17</p></li><li><p>blend = file_types[]=21</p></li><li><p>c4d = file_types[]=6</p></li><li><p>maya = file_types[]=11</p></li><li><p>glb = file_types[]=117</p></li></ul></li></ul><h3 id="AssetStoreDevelopments-ArtStation">ArtStation</h3><p>Artstation has no API to hook into and they do all of their document rendering on the server. The only way to pull data from them would be to build a web scraper into our search engine. This <em><strong>is</strong> </em>feasible because ArtStation does not use generated class names.</p><h3 id="AssetStoreDevelopments-UnityAssetStore">Unity Asset Store</h3><p>Unity uses GraphQL. This makes it a lot more complicated to pull data from their store. The API returns readable and useful values, but it is much harder to query.</p><h3 id="AssetStoreDevelopments-3DModels.org">3DModels.org</h3><p>Data can be scraped out of the response to the request</p><p><a class="external-link" href="https://3dmodels.org/page/3/?s=car" rel="nofollow">https://3dmodels.org/page/3/?s=car</a> </p><h2 id="AssetStoreDevelopments-KnownIssues">Known Issues</h2><ul><li><p>Sketchfab thumbnail images are not always a consistent size. <em>usually</em> 300x150, but sometimes are considerably smaller than that</p></li><li><p>Sketchfab delivers 10 results on the search endpoint with their developer API. We can increase this number by using the API call above</p></li><li><p>Sketchfab Developer API does not provide the price of models when doing a search. (again, the one above doesn’t have this issue)</p></li></ul><p />
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Jul 04, 2025 14:51</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

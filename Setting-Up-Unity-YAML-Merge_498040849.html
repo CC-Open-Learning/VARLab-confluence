@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VARLab : Setting Up Unity YAML Merge</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="How-To-Articles_581435426.html">How-To Articles</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Advanced-Git-Techniques_497385729.html">Advanced Git Techniques</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            VARLab : Setting Up Unity YAML Merge
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Jordan Robinson</span>, last modified by <span class='editor'> David Inglis</span> on Nov 02, 2022
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>In this article we’ll cover how to set up Unity’s YAML Merge tool that is bundled with the Unity Editor for use in Sourcetree.</p><h2 id="SettingUpUnityYAMLMerge-LocatingtheMergeTool">Locating the Merge Tool</h2><p>Each installation of the Unity Editor comes with an executable that’s used by the Perforce/PlasticSCM plugins to help with prefab and scene merge conflicts. Luckily for us we can also manually set up this exe to run as our external merge tool in Sourcetree.</p><p>First we need to find the merge tool and all the files we’ll need to edit. These are located in <strong>C:\Program Files\Unity\Hub\Editor\2020.3.2f1\Editor\Data\Tools</strong> on Windows 10 by default. If the VARLab moves to a different Unity version, you will have to look there instead of in the <strong>2020.3.2f1</strong> folder.</p><h2 id="SettingUpUnityYAMLMerge-Editingmergespecfile.txt">Editing mergespecfile.txt</h2><p>In the tools folder we just opened, find <strong>mergespecfile.txt</strong>, open it up, and replace the file contents with the ones below in the expandable section.</p><div id="expander-959134824" class="expand-container"><div id="expander-control-959134824" class="expand-control"><span class="expand-control-icon"><img style="vertical-align:middle;" class="expand-control-image" src="images/icons/grey_arrow_down.png"></span><span class="expand-control-text">File Contents</span></div><div id="expander-content-959134824" class="expand-content"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">#
+# UnityYAMLMerge fallback file
+#
+
+# Modify the next two lines if scene or prefab files should fallback
+# on other that the default fallbacks listed below.
+#
+# %l is replaced with the path of you local version
+# %r is replaced with the path of the incoming remote version
+# %b is replaced with the common base version
+# %d is replaced with a path where the result should be written to
+# On Windows %programs% is replaced with &quot;C:\Program Files&quot; and &quot;C:\Program Files (x86)&quot; there by resulting in two entries to try out
+# On OSX %programs% is replaced with &quot;/Applications&quot; and &quot;$HOME/Applications&quot; thereby resulting in two entries to try out
+
+unity use &quot;%programs%\Meld\meld.exe&quot; &quot;%r&quot; &quot;%l&quot; &quot;%b&quot; -o &quot;%d&quot; --auto-merge
+prefab use &quot;%programs%\Meld\meld.exe&quot; &quot;%r&quot; &quot;%l&quot; &quot;%b&quot; -o &quot;%d&quot; --auto-merge
+
+#
+# Default fallbacks for unknown files. First tool found is used
+#
+* use &quot;%programs%\Meld\meld.exe&quot; &quot;%r&quot; &quot;%l&quot; &quot;%b&quot; -o &quot;%d&quot; --auto-merge
+
+# Apple File Merge
+* use &quot;/usr/bin/opendiff&quot; %r %l -ancestor %b -merge %d
+
+# Beyond Compare
+* use &quot;%programs%\Beyond Compare 4\bcomp.exe&quot; &quot;%r&quot; &quot;%l&quot; &quot;%b&quot; &quot;%d&quot;
+* use &quot;%programs%\Beyond Compare 3\bcomp.exe&quot; &quot;%r&quot; &quot;%l&quot; &quot;%b&quot; &quot;%d&quot;
+* use &quot;%programs%/Beyond Compare.app/Contents/MacOS/bcomp&quot; &quot;%r&quot; &quot;%l&quot; &quot;%b&quot; &quot;%d&quot;
+* use &quot;/usr/bin/bcompare&quot; &quot;%r&quot; &quot;%l&quot; &quot;%b&quot; &quot;%d&quot;
+
+# Araxis Merge
+* use &quot;%programs%\Araxis\Araxis Merge\compare.exe&quot; /3 /a2 /wait /title1:&quot;Other&quot; /title2:&quot;Base&quot; /title3:&quot;Local&quot; &quot;%l&quot; &quot;%b&quot; &quot;%r&quot; &quot;%d&quot;
+* use &quot;%programs%/Araxis Merge.app/Contents/Utilities/compare&quot; -3 -a2 -wait -title1:&quot;Other&quot; -title2:&quot;Base&quot; -title3:&quot;Local&quot; &quot;%l&quot; &quot;%b&quot; &quot;%r&quot; &quot;%d&quot;
+
+# Perforce merge
+* use &quot;%programs%\Perforce\p4merge.exe&quot; &quot;%b&quot; &quot;%r&quot; &quot;%l&quot; &quot;%d&quot;
+* use &quot;%programs%/p4merge.app/Contents/Resources/launchp4merge&quot; &quot;%b&quot; &quot;%r&quot; &quot;%l&quot; &quot;%d&quot;
+
+# PlasticSCM merge
+* use &quot;%programs%\PlasticSCM5\client\mergetool.exe&quot; -b=%b -s=%l -d=%r -r=%d
+* use &quot;%programs%\PlasticSCM4\client\mergetool.exe&quot; -b=%b -s=%l -d=%r -r=%d
+* use &quot;%programs%/PlasticSCM/client/mergetool&quot; -b=%b -s=%l -d=%r -r=%d
+* use &quot;/opt/plasticscm/client/mergetool&quot; -b=%b -s=%l -d=%r -r=%d
+* use &quot;/opt/plasticscm4/client/mergetool&quot; -b=%b -s=%l -d=%r -r=%d
+
+# SourceGear DiffMerge
+* use &quot;%programs%\SourceGear\DiffMerge\DiffMerge.exe&quot; --nosplash -m -t1=&quot;Incoming Changes&quot;  -t2=&quot;Base&quot; -t3=&quot;Working Copy&quot; -r=&quot;%d&quot; &quot;%l&quot; &quot;%b&quot; &quot;%r&quot;
+* use &quot;%programs%\SourceGear\Common\DiffMerge\sgdm.exe&quot; --nosplash -m -t1=&quot;Incoming Changes&quot;  -t2=&quot;Base&quot; -t3=&quot;Working Copy&quot; -r=&quot;%d&quot; &quot;%l&quot; &quot;%b&quot; &quot;%r&quot;
+* use &quot;%programs%/DiffMerge.app/Contents/MacOS/DiffMerge&quot; --nosplash -m -t1=&quot;Incoming Changes&quot;  -t2=&quot;Base&quot; -t3=&quot;Working Copy&quot; -r=&quot;%d&quot; &quot;%l&quot; &quot;%b&quot; &quot;%r&quot;
+* use &quot;%programs%/Utilities/DiffMerge.app/Contents/MacOS/DiffMerge&quot; --nosplash -m -t1=&quot;Incoming Changes&quot;  -t2=&quot;Base&quot; -t3=&quot;Working Copy&quot; -r=&quot;%d&quot; &quot;%l&quot; &quot;%b&quot; &quot;%r&quot;</pre>
+</div></div></div></div><p>This will force the Unity YAML Merge tool to use another tool called Meld to help deal with conflicts that it can’t automatically resolve. This gives us the ability to manually resolve those conflicts.</p><h2 id="SettingUpUnityYAMLMerge-InstallingMeld">Installing Meld</h2><p>The external diff tool we’ll be using to deal with merge conflicts is <a class="external-link" href="https://meldmerge.org/" rel="nofollow">Meld</a>. Follow that link and install Meld on your PC so that Unity YAML Merge can load it.</p><h2 id="SettingUpUnityYAMLMerge-SettingUpExternalDiff/MergeinSourcetree">Setting Up External Diff/Merge in Sourcetree</h2><p>With Unity’s YAML Merge and Meld ready to go, we need to tell Sourcetree to use it.</p><p>In Sourcetree, head to <strong>Tools &gt; Options &gt; Diff.</strong></p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/498040849/497844250.png" data-image-src="attachments/498040849/497844250.png" data-height="137" data-width="203" data-unresolved-comment-count="0" data-linked-resource-id="497844250" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20220705-185907.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="498040849" data-linked-resource-container-version="3" data-media-id="bf72df2b-55c1-4ab4-9c35-ceb4c923515e" data-media-type="file"></span><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/498040849/497909800.png" data-image-src="attachments/498040849/497909800.png" data-height="596" data-width="681" data-unresolved-comment-count="0" data-linked-resource-id="497909800" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20220705-185915.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="498040849" data-linked-resource-container-version="3" data-media-id="e9c86ee0-9f0b-475b-9a74-128abffedf60" data-media-type="file"></span><p>In this menu, we want to set <strong>External Diff Tool</strong> and <strong>Merge Tool</strong> to <strong>Custom</strong>.</p><p>Under Diff Command and Merge Command we want to paste the path to UnityYAMLMerge.exe which by default is <strong>C:\Program Files\Unity\Hub\Editor\2020.3.2f1\Editor\Data\Tools\UnityYAMLMerge.exe</strong></p><p>In the arguments for both we want to set those to <strong>merge -p &quot;$BASE&quot; &quot;$REMOTE&quot; &quot;$LOCAL&quot; &quot;$MERGED&quot;</strong></p><p>With everything set up we can now use the Unity YAML Merge tool and Meld to handle scene and prefab merge conflicts when they arise.</p><p>To use these tools, right-click on a merge conflict and select <strong>Resolve Conflicts &gt; Launch External Merge Tool.</strong></p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/498040849/497942583.png" data-image-src="attachments/498040849/497942583.png" data-height="426" data-width="515" data-unresolved-comment-count="0" data-linked-resource-id="497942583" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20220705-190216.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="498040849" data-linked-resource-container-version="3" data-media-id="3359b870-11f3-44c6-a689-75b4235d3846" data-media-type="file"></span><p>If the tool can automatically resolve the conflict it will do so without requiring any input. If it can partially resolve the conflicts it will load Meld and allow you to manually fix the sections it could not resolve. When there are so many changes the two files cannot resolve whatsoever, the merge tool will do nothing and you will need to <strong>Resolve Using ‘Mine’</strong> or <strong>‘Theirs’</strong> as usual.</p><p />
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/498040849/497844250.png">image-20220705-185907.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/498040849/497909800.png">image-20220705-185915.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/498040849/497942583.png">image-20220705-190216.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Jul 04, 2025 14:51</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

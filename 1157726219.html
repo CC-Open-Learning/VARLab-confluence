@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VARLab : Security Testing(IN PROGRESS)</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="VARLab_44990773.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="DLX-Test-Plans-and-Procedures_1096417282.html">DLX Test Plans and Procedures</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            VARLab : Security Testing(IN PROGRESS)
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Sana Javeed</span>, last modified on Oct 10, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p><style>[data-colorid=ucr64ct799]{color:#ff5630} html[data-color-mode=dark] [data-colorid=ucr64ct799]{color:#cf2600}</style>It is necessary to guarantee the DLX platform&rsquo;s dependability and stability through security testing.</p><p><strong>Goals</strong>:  To identify vulnerabilities &amp; potential security threats and to then mitigate any risks involved through proposed proven solutions.</p><ul><li><p>Verify the DLX implements proper authentication methods</p><ul><li><p>Check if it protects user accounts</p></li><li><p>Check if it protects against unauthorized access, protects privacy and<span class="inline-comment-marker" data-ref="d2bc67bd-6ad8-4d56-9e50-1b10b4905ac9"> confidentiality of any sensitive data.</span></p></li></ul></li></ul><div class="table-wrap"><table data-table-width="760" data-layout="default" data-local-id="1bbdbb9f-575e-45ba-8be5-8d8c834fc42e" class="confluenceTable"><tbody><tr><th class="confluenceTh"><p><strong>Priority Security Concerns</strong></p></th><th class="confluenceTh"><p><strong>Additional information</strong></p></th></tr><tr><td class="confluenceTd"><p>unencrypted data - concerns with cloud save - like plain text passwords</p><p>email credentials</p></td><td class="confluenceTd"><p>cloud save package development 
+
+    
+
+            
+
+
+
+
+    <span class="confluence-jim-macro jira-issue" data-jira-key="CORE-100">
+                <a href="https://varlab-dev.atlassian.net/browse/CORE-100" class="jira-issue-key"><img class="icon" src="https://varlab-dev.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium" />CORE-100</a>
+                    -
+            <span class="summary"> As a developer I want DLX projects to authenticate with the API endpoint using established best practices for security.</span>
+                                                            <span class="aui-lozenge aui-lozenge-subtle aui-lozenge-complete jira-macro-single-issue-export-pdf">To Do</span>
+            </span>
+</p></td></tr><tr><td class="confluenceTd"><p><strong>Sensitive data: </strong>Development console houses information like answer keys that should be <strong>NOT </strong>available on the production builds</p></td><td class="confluenceTd"><p>Development data that is often logged to the &ldquo;console&rdquo; and would be visible to more tech-savvy users, or anyone who pressed <strong>F12</strong> on their keyboard. This data should only be visible in &ldquo;<strong>development</strong>&rdquo;-level builds and should never be present in production.</p></td></tr><tr><td class="confluenceTd"><p>SCORM uses the unique identifiers generated when the student gets added to econestoga that is used to retrieve the save / load details on the DLX. This exposes information like Student information email, passwords and student number.</p></td><td class="confluenceTd"><p /></td></tr><tr><td class="confluenceTd"><p><strong>LTI </strong>encodes student personal information (name, email, student number) as well as enrolment information (course code and so on) in the security token returned from authentication.</p></td><td class="confluenceTd"><p /></td></tr><tr><td class="confluenceTd"><p><strong>Cross Site Scripting (XSS) </strong>is enabled when user input on a web application is saved exactly as entered and then displayed again exactly as entered. This can even be a threat when the information is only shown to the user who originally entered the data.</p></td><td class="confluenceTd"><p>The threat here is that the user input can include JavaScript that will be executed by the web browser when it tries to render the input. In testing we would use a script that pops up an Alert dialog but a real attack would include a malicious library that would install severe exploits on the user&rsquo;s device.</p><p>In a single-user risk case the input text would be entered by an attacker looking for unattended computers and open sessions.</p></td></tr><tr><td class="confluenceTd"><p><strong>Cross Site Request Forgery </strong>attacks use a malicious link to cause an authenticated user to make an unwanted action. These attacks can be mitigated by use of per-session or per-request tokens generated by the server, and user confirmation dialogs on any significant action.</p></td><td class="confluenceTd"><p /></td></tr></tbody></table></div><h3 id="SecurityTesting(INPROGRESS)-Toolscurrentlyused"><strong>Tools currently used</strong></h3><p><strong>POSTMAN </strong>tool for crafting network packets ( can be used for network testing)</p><p><strong>WIRESHARK</strong>- tool for watching network packets, can view the packets  - used for cloud save package - can see the password in plain text , overal package size (network security)</p><h3 id="SecurityTesting(INPROGRESS)-On-goingresearchoftoolsinthemarket(pending)"><span data-colorid="ucr64ct799">On-going research of tools in the market (pending)</span></h3><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon" /><div class="confluence-information-macro-body"><p>Any tools will be consulted with the team before confirming their usage.</p></div></div><ol start="1"><li><p><strong>Infrastructure Testing</strong>:</p><ul><li><p><strong>Qualys</strong>: Great for vulnerability scanning across network components and servers, helping you identify and mitigate potential security risks.</p></li><li><p><strong>CloudCheckr</strong>: Useful for assessing vulnerabilities in cloud services, ensuring your cloud infrastructure is secure and compliant.</p></li></ul></li><li><p><strong>Application Testing</strong>:</p><ul><li><p><strong>Snyk</strong>: Excellent for scanning your application code for vulnerabilities, helping you find and fix issues early in the development process.</p></li></ul></li></ol><h3 id="SecurityTesting(INPROGRESS)-Additionstosecuritychecks"><strong>Additions to security checks</strong></h3><ul><li><p>Verify that the DLX can run smoothly with different security settings like anti-virus programs and firewalls installed on the system</p><ul><li><p>To check if the DLX is accessible because of incompatibility issues with the security settings.</p></li></ul></li></ul><h3 id="SecurityTesting(INPROGRESS)-Trainingfocusforteam,ifneeded"><strong>Training focus for team, if needed</strong></h3><ul><li><p>What will be the primary focus in security testing at CVRI?</p><ul><li><p>web security</p><ul><li><p>site exploits - OWASP top 10, e.g. XSS, CSRF</p></li><li><p>multiplayer game exploits</p></li></ul></li><li><p>server hardening - secure configurations and credentials</p></li><li><p>input handling - other invalid and potentially program-crashing inputs outside of web vulnerabilities</p></li><li><p>data sanitization in console and server log output</p></li></ul></li><li><p>What are the potential security threats with examples</p><ul><li><p>student user</p><ul><li><p>obtain personal information for other students or faculty</p></li><li><p>disrupt class activities</p></li><li><p>cheating on evaluations or submitting falsified grades</p></li></ul></li><li><p>faculty</p><ul><li><p>disrupt activities</p></li><li><p>disrupt infrastructure</p></li></ul></li><li><p>developer</p><ul><li><p>leave insecure code or infrastructure in order to facilitate attacks as above</p></li><li><p>disrupt CVRI activities or infrastructure</p></li><li><p>ransomware attack</p></li></ul></li><li><p>outside attacker</p><ul><li><p>must discover services and capabilities</p></li><li><p>disrupt school activities</p></li><li><p>ransomware attack</p></li></ul></li></ul></li><li><p>What are the proven practices and solutions</p></li></ul><p /><p />
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Jul 04, 2025 14:39</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

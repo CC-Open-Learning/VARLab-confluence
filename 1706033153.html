@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VARLab : Project Intake &amp; Test Request Handling</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="VARLab_44990773.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="DLX-Product-Playbook_953614343.html">DLX Product Playbook</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Quality-Assurance-Team_1493794818.html">Quality Assurance Team</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Test-Process-Improvements_1705934850.html">Test Process Improvements</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            VARLab : Project Intake &amp; Test Request Handling
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Ruwini Perera</span>, last modified on Apr 04, 2025
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <blockquote><style>[data-colorid=euhg7codu8]{color:#97a0af} html[data-color-mode=dark] [data-colorid=euhg7codu8]{color:#505968}</style><p><em><strong><span data-colorid="euhg7codu8">&ldquo; Test request handling is crucial to ensure the quality and the reliability of testing .&rdquo;</span></strong></em></p></blockquote><div class="toc-macro"><a href="#ProjectIntake&amp;TestRequestHandling-Purpose">Purpose</a> | <a href="#ProjectIntake&amp;TestRequestHandling-EarliestWaysofHandlingTestRequests">Earliest Ways of Handling Test Requests</a> | <a href="#ProjectIntake&amp;TestRequestHandling-ImplementedSolution">Implemented Solution</a> | <a href="#ProjectIntake&amp;TestRequestHandling-1.ProjectIntakeMSForms">1. Project Intake MS Forms</a> | <a href="#ProjectIntake&amp;TestRequestHandling-2.SharePointList(Automated)">2. SharePoint List (Automated)</a> | <a href="#ProjectIntake&amp;TestRequestHandling-3.Dashboard">3. Dashboard</a></div><h3 id="ProjectIntake&amp;TestRequestHandling-Purpose">Purpose</h3><p>The purpose of this research is to propose a solution to address the issue of not having a centralized platform to store and view the testing requests which often confuses the team.</p><h3 id="ProjectIntake&amp;TestRequestHandling-EarliestWaysofHandlingTestRequests">Earliest Ways of Handling Test Requests</h3><p>VARLab had no centralized way to store or analyze test requests. Most of the time, teams used MS Teams chats and channels to share this data.</p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon" /><div class="confluence-information-macro-body"><p><strong>Challenges:</strong></p><ul><li><p>Lack of clarity in tracking test requests.</p></li><li><p>Difficulty in retrieving information due to the need to scroll through chat histories.</p></li></ul></div></div><hr /><h3 id="ProjectIntake&amp;TestRequestHandling-ImplementedSolution">Implemented Solution</h3><div class="confluence-information-macro confluence-information-macro-tip"><span class="aui-icon aui-icon-small aui-iconfont-approve confluence-information-macro-icon" /><div class="confluence-information-macro-body"><ul><li><p><strong>MS Forms</strong> is used to collect test requests from Principal Investigators.</p></li><li><p><strong>SharePoint List</strong> automatically triggers when a request is submitted.</p></li><li><p>A <strong>dashboard</strong> is populated using data from the SharePoint list, providing clear visibility into all requests.</p></li></ul></div></div><h4 id="ProjectIntake&amp;TestRequestHandling-1.ProjectIntakeMSForms"><strong>1. Project Intake MS Forms</strong></h4><p>This form is designed to collect essential details about new projects testing , including testing scope, release type, required number of resources, and key dependencies and risks. The information gathered via the application will help in test planning, resource allocation, and providing priority to ensure smooth test execution.</p><p><em>Intended Audience : Principle Investigators</em></p><p><span style="background-color: rgb(220,223,228);">When to fill the document ? This document should be completed whenever test planning is taking place and resources need to be allocated for testing.</span></p><p>The fields that need to be filled Includes ; <span style="background-color: rgb(254,222,200);">Project Name , Project Description , Release Type (General , Milestone , Sprint Demo ), Number of Resources Requires , Test Duration Estimate ( For how long are you requesting the testing for? ) Key Dependencies &amp; Risks and Additional Comments.</span></p><p>Access the Form here :<a class="external-link" href="https://forms.office.com/r/NVA4JztutK" rel="nofollow"> VARLab | Project Intake &amp; Resource Planning Form</a></p><p>Duplicate Link to Copy my Work : <a class="external-link" data-card-appearance="inline" href="https://forms.office.com/Pages/ShareFormPage.aspx?id=OjndTYrpBESEH8S-zdklpTLVQ-38hcBIuiVVNQvVxapUNjRBVzE1SExCVTg5V1ZQUk5QRkpRRFNINC4u&amp;sharetoken=TxVSkHtDfhBe8IhAxK6a" rel="nofollow">https://forms.office.com/Pages/ShareFormPage.aspx?id=OjndTYrpBESEH8S-zdklpTLVQ-38hcBIuiVVNQvVxapUNjRBVzE1SExCVTg5V1ZQUk5QRkpRRFNINC4u&amp;sharetoken=TxVSkHtDfhBe8IhAxK6a</a> </p><hr /><h4 id="ProjectIntake&amp;TestRequestHandling-2.SharePointList(Automated)"><strong>2. SharePoint List (Automated)</strong></h4><p>When a request is submitted through the list, the SharePoint list is automatically populated with relevant details using Power Automate.</p><p><strong>Priority Setting:</strong> As part of the automation, an additional column is populated with the <strong>Priority</strong> of the request. This is determined based on the <strong>Release Type</strong> selected by the user when submitting the request.</p><p>General Release <span class="status-macro aui-lozenge aui-lozenge-visual-refresh aui-lozenge-error">HIGH</span>  | Milestone Release <span class="status-macro aui-lozenge aui-lozenge-visual-refresh aui-lozenge-current">MEDUIM</span> | Sprint Demo <span class="status-macro aui-lozenge aui-lozenge-visual-refresh aui-lozenge-success">LOW</span> </p><p><em> Snippet displays the view of Sharepoint List which has been populated with some sample data : </em></p><p> Access the SharePoint List here : <a class="external-link" href="https://stuconestogacon.sharepoint.com/:l:/s/VARLab/FACL-j8B1vdCknfrDAS4ut8B59HYetiPOvoFw-WVxu7iSg?e=l1pzAg" rel="nofollow">SharePoint List | Project Intake &amp; Resource Planning</a></p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" alt="SharePoint List.png" width="626" loading="lazy" src="attachments/1706033153/1706000406.png?width=626" data-image-src="attachments/1706033153/1706000406.png" data-height="571" data-width="1148" data-unresolved-comment-count="0" data-linked-resource-id="1706000406" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20250321-063057.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1706033153" data-linked-resource-container-version="13" data-media-id="27720f71-a61e-43fb-9a3e-7e77ef339dd0" data-media-type="file" /></span><hr /><h4 id="ProjectIntake&amp;TestRequestHandling-3.Dashboard"><strong>3. Dashboard</strong></h4><p>A dashboard is automatically created using the data populated in the SharePoint list.This dashboard can be customized based on various parameters, such as status and priority.</p><ul><li><p><em>The dashboard can be accessed directly from the SharePoint list, offering a real-time view of the requests with dynamic filtering options based on <strong>status</strong> and <strong>priority</strong>.</em></p></li></ul><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" alt="image-20250321-070207.png" width="664" loading="lazy" src="attachments/1706033153/1706164312.png?width=664" data-image-src="attachments/1706033153/1706164312.png" data-height="666" data-width="1148" data-unresolved-comment-count="0" data-linked-resource-id="1706164312" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20250321-070207.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1706033153" data-linked-resource-container-version="13" data-media-id="25dde076-833a-4ace-a561-ef69d3541ff0" data-media-type="file" /></span>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1706033153/1706229775.png">image-20250321-062734.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1706033153/1706000406.png">image-20250321-063057.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1706033153/1706164312.png">image-20250321-070207.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Jul 04, 2025 14:39</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

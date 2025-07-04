@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VARLab : Bonus: Prefab Testing Tutorial</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="How-To-Articles_581435426.html">How-To Articles</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Unity-Development_688324665.html">Unity Development</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Unity-Full-Stack-Testing-Tutorial_749699073.html">Unity Full-Stack Testing Tutorial</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            VARLab : Bonus: Prefab Testing Tutorial
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Carolina Naoum Junqueira</span>, last modified by <span class='editor'> Leo Bunting</span> on Aug 03, 2023
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h2 id="Bonus:PrefabTestingTutorial-SettinguptheTestPrefab">Setting up the Test Prefab</h2><p>We should test prefabs to ensure they have the required components and whether they are Active/Inactive in the Hierarchy. To test prefabs, we must create a script in the <strong>Assets &gt; Resources </strong>folder.</p><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>If the <strong>Resources </strong>folder does not exist, you must create it.</p></div></div><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/758677505/758284304.png" data-image-src="attachments/758677505/758284304.png" data-height="379" data-width="812" data-unresolved-comment-count="0" data-linked-resource-id="758284304" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230711-194430.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="758677505" data-linked-resource-container-version="9" data-media-id="a0b4ba09-3f04-467c-996c-1ed9d3053b09" data-media-type="file"></span><ol start="1"><li><p>In the <strong>Resources </strong>folder, right-click and create a prefab. Name the prefab <strong>TestReferences</strong>.</p></li></ol><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/758677505/758153248.png" data-image-src="attachments/758677505/758153248.png" data-height="582" data-width="566" data-unresolved-comment-count="0" data-linked-resource-id="758153248" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230711-194600.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="758677505" data-linked-resource-container-version="9" data-media-id="64db54b0-7efb-4e9a-a7f4-8d14d78251a4" data-media-type="file"></span><ol start="2"><li><p>In the <strong>Scripts</strong> folder, create a C# script named <strong>TestReferences.cs </strong>and add the following code to it:</p></li></ol><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">using System.Collections.Generic;
+using UnityEngine;
+
+public class TestReferences : MonoBehaviour
+{
+    public List&lt;GameObject&gt; prefabs;
+}</pre>
+</div></div><p /><ol start="3"><li><p>Drag and Drop the <strong>Win Text </strong>and <strong>Current Card </strong>objects from the Hierarchy to the <strong>ExampleAssets &gt; Prefabs</strong> folder to make them prefabs.</p></li></ol><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/758677505/758710278.png" data-image-src="attachments/758677505/758710278.png" data-height="218" data-width="609" data-unresolved-comment-count="0" data-linked-resource-id="758710278" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230711-195333.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="758677505" data-linked-resource-container-version="9" data-media-id="ebc0b067-410d-4d59-a09f-edc79065fde6" data-media-type="file"></span><p /><ol start="4"><li><p>Add <strong>TestReferences.cs</strong> as a component to the <strong>TestReference prefab</strong>. Select the prefabs from the <strong>Prefabs </strong>folder and add them to the Prefabs list in the <strong>TestReference </strong>prefab.</p></li></ol><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/758677505/758513684.png" data-image-src="attachments/758677505/758513684.png" data-height="462" data-width="469" data-unresolved-comment-count="0" data-linked-resource-id="758513684" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230711-195146.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="758677505" data-linked-resource-container-version="9" data-media-id="e9d71466-0ffc-47e9-a20c-da7fc586281e" data-media-type="file"></span><ol start="5"><li><p><span class="inline-comment-marker" data-ref="1a9673d7-d5d2-486f-876a-f69bd7e914aa">Create a test file called </span><strong><span class="inline-comment-marker" data-ref="1a9673d7-d5d2-486f-876a-f69bd7e914aa">PrefabTests.cs</span></strong><span class="inline-comment-marker" data-ref="1a9673d7-d5d2-486f-876a-f69bd7e914aa"> inside of “the PlayMode“ test directory,</span><strong><span class="inline-comment-marker" data-ref="1a9673d7-d5d2-486f-876a-f69bd7e914aa"> </span></strong><span class="inline-comment-marker" data-ref="1a9673d7-d5d2-486f-876a-f69bd7e914aa">and copy the following code into it:</span></p></li></ol><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">using NUnit.Framework;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class PrefabTests
+{
+    private List&lt;GameObject&gt; prefabs;
+    private GameObject workbenchPrefab;
+    private GameObject safetyHat;
+    private GameObject currentCardPrefab;
+    private GameObject winTextPrefab;
+
+    [SetUp]
+    public void SetUp()
+    {
+        ClearScene();
+        // List of prefabs in the TestReference prefab
+        prefabs = ((GameObject)Resources.Load(&quot;TestReferences&quot;, typeof(GameObject))).GetComponent&lt;TestReferences&gt;().prefabs;
+
+        // Finding and assigning each of the prefabs
+        workbenchPrefab = prefabs.Find(p =&gt; p.name == &quot;Workbench&quot;);
+        currentCardPrefab = prefabs.Find(p =&gt; p.name == &quot;Current Card&quot;);
+        winTextPrefab = prefabs.Find(p =&gt; p.name == &quot;Win Text&quot;);
+
+        // Safety Hat is not a prefab, but a child of the workbench prefab and we need to 
+        // test if it has all of the required components.
+        safetyHat = workbenchPrefab.GetComponentInChildren&lt;ShowRandomCard&gt;().gameObject;
+    }
+
+    int sceneCounter = 0;
+    void ClearScene()
+    {
+        SceneManager.SetActiveScene(SceneManager.CreateScene($&quot;TestScene{sceneCounter}&quot;));
+        if (sceneCounter &gt; 0)
+        {
+            SceneManager.UnloadSceneAsync($&quot;TestScene{sceneCounter - 1}&quot;);
+        }
+        sceneCounter++;
+    }
+
+    // Safety Hat Tests
+    [Test]
+    public void Workbench_Prefab_Exists()
+    {
+        Assert.NotNull(workbenchPrefab);
+    }
+
+    [Test]
+    public void SafetyHat_GameObject_Exists()
+    {
+        Assert.NotNull(safetyHat);
+    }
+
+    [Test]
+    public void SafetyHat_Has_ShowRandomCard_Component()
+    {
+        // Arrange
+
+        var comp = safetyHat.GetComponent&lt;ShowRandomCard&gt;();
+
+        // Assert
+        Assert.NotNull(comp);
+    }
+
+    [Test]
+    public void SafetyHat_Has_WinCondition_Component()
+    {
+        // Arrange
+
+        var comp = safetyHat.GetComponent&lt;WinCondition&gt;();
+
+        // Assert
+        Assert.NotNull(comp);
+    }
+
+    // Current Card Tests
+    [Test]
+    public void CurrentCard_Prefab_Exists()
+    {
+        Assert.NotNull(currentCardPrefab);
+    }
+
+    [Test]
+    public void CurrentCard_Prefab_Has_TextMeshPro_Component()
+    {
+        // Arrange
+        var comp = currentCardPrefab.GetComponent&lt;TextMeshProUGUI&gt;();
+
+        //Act
+        Assert.NotNull(comp);
+    }
+
+    [Test]
+    public void CurrentCard_Prefab_IsActive()
+    {
+        // Arrange
+        var isActive = currentCardPrefab.activeSelf;
+
+        //Act
+        Assert.AreEqual(true, isActive);
+    }
+
+    //Win Text Tests
+    [Test]
+    public void WinTextPrefabExists()
+    {
+        Assert.NotNull(winTextPrefab);
+    }
+
+    [Test]
+    public void WinText_Prefab_Has_TextMeshPro_Component()
+    {
+        // Arrange
+        var comp = winTextPrefab.GetComponent&lt;TextMeshProUGUI&gt;();
+
+        //Act
+        Assert.NotNull(comp);
+    }
+
+    [Test]
+    public void WinText_Prefab_IsNotActive()
+    {
+        // Arrange
+        var isActive = currentCardPrefab.gameObject.activeInHierarchy;
+
+        //Act
+        Assert.AreEqual(false, isActive);
+    }
+}</pre>
+</div></div><p /><ol start="6"><li><p>Run all of the tests in the <strong>Test Runner</strong> and verify that all tests are passing.</p></li></ol><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/758677505/758841381.png" data-image-src="attachments/758677505/758841381.png" data-height="424" data-width="816" data-unresolved-comment-count="0" data-linked-resource-id="758841381" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230712-180501.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="758677505" data-linked-resource-container-version="9" data-media-id="dbbf81df-37c2-4b96-b595-7bb7c2f3025d" data-media-type="file"></span><p />
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/758677505/758251551.png">image-20230711-152938.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/758677505/758186017.png">image-20230711-170833.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/758677505/758120503.png">image-20230711-173534.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/758677505/758284304.png">image-20230711-194430.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/758677505/758153248.png">image-20230711-194600.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/758677505/758513684.png">image-20230711-195146.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/758677505/758710278.png">image-20230711-195333.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/758677505/758841381.png">image-20230712-180501.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Jul 04, 2025 14:52</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

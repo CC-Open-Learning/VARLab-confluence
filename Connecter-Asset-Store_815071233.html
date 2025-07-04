@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VARLab : Connecter Asset Store</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="947650564.html">Art/Asset Department</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            VARLab : Connecter Asset Store
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Jonathan Bezeau</span>, last modified on Sept 28, 2023
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <style type='text/css'>/*<![CDATA[*/
+div.rbtoc1751640609842 {padding: 0px;}
+div.rbtoc1751640609842 ul {list-style: disc;margin-left: 0px;}
+div.rbtoc1751640609842 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1751640609842'>
+<ul class='toc-indentation'>
+<li><a href='#ConnecterAssetStore-Components'>Components</a></li>
+<li><a href='#ConnecterAssetStore-Procedure'>Procedure</a>
+<ul class='toc-indentation'>
+<li><a href='#ConnecterAssetStore-Setupon-campusaccesstoFileShare'>Set up on-campus access to File Share</a>
+<ul class='toc-indentation'>
+<li><a href='#ConnecterAssetStore-Verification'>Verification</a></li>
+</ul>
+</li>
+<li><a href='#ConnecterAssetStore-InstallandConfigureVPNClient,andMountFileShare'>Install and Configure VPN Client, and Mount File Share</a>
+<ul class='toc-indentation'>
+<li><a href='#ConnecterAssetStore-Verification.1'>Verification</a></li>
+</ul>
+</li>
+<li><a href='#ConnecterAssetStore-InvitationtoConnecterServerWorkspace'>Invitation to Connecter Server Workspace</a></li>
+<li><a href='#ConnecterAssetStore-InstallConnecterandImportSharedAssetFolder'>Install Connecter and Import Shared Asset Folder</a>
+<ul class='toc-indentation'>
+<li><a href='#ConnecterAssetStore-Verification.2'>Verification</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div><p>VARLab is beginning to use Connecter as a platform for sharing, versioning, and workflow on our art assets. This will make it easy for developers and artists to find and re-use assets across projects, as well as seeing progress through workflow statuses.</p><p>The Connecter application previews assets from a file share that we operate, but uses online accounts through Connecter Server to orchestrate collaboration, workflow, team roles, and access control. The file share is stored in our Azure Cloud services and we need VPN software to ensure secure access from remote networks.</p><h1 id="ConnecterAssetStore-Components">Components</h1><p>Connecter - workstation software that previews 3D models and more</p><p /><p>Connecter Server - an online service that manages the Connecter application’s user accounts</p><ul><li><p>concurrent access between team members</p></li><li><p>access rights to content within the file share depending on folder, team, role, etc.</p></li></ul><p /><p>Azure File Share - storage for all of our art, hosted in Conestoga’s cloud account</p><p /><p>Azure VPN Client - a networking tool for secure access to the Azure File Share from remote locations</p><ul><li><p>any VPN client software that can understand the configuration file could work, this needs testing</p></li></ul><h1 id="ConnecterAssetStore-Procedure">Procedure</h1><h2 id="ConnecterAssetStore-Setupon-campusaccesstoFileShare">Set up on-campus access to File Share</h2><p>Open terminal and run the attached script file to mount the connecter-asset-store share to Z: on your computer. This script will only run successfully and your Z: drive will only be available while connected to the campus network.</p><p class="media-group"><span class="confluence-embedded-file-wrapper"><a class="confluence-embedded-file" href="attachments/815071233/814776366.ps1" data-nice-type="null" data-file-src="/wiki/download/attachments/815071233/asset_store_connect.ps1?version=1&amp;modificationDate=1695915865077&amp;cacheVersion=1&amp;api=v2" data-linked-resource-id="814776366" data-linked-resource-type="attachment" data-linked-resource-container-id="815071233" data-linked-resource-default-alias="asset_store_connect.ps1" data-mime-type="binary/octet-stream" data-has-thumbnail="true" data-linked-resource-version="1" data-media-id="9bb81229-b4c8-489e-b981-cdd563dcaa1a" data-media-type="file"><img src="attachments/thumbnails/815071233/814776366" height="250"/></a></span></p><h3 id="ConnecterAssetStore-Verification">Verification</h3><p>The script should complete without error messages, and you should be able to see files in the Z: drive through File Explorer (only while connected to campus network)</p><h2 id="ConnecterAssetStore-InstallandConfigureVPNClient,andMountFileShare">Install and Configure VPN Client, and Mount File Share</h2><p><a href="https://varlab-dev.atlassian.net/wiki/spaces/VAR/pages/809238560/Connecting+to+Azure+Storage+Account+varlabsazurestorage+via+VPN" rel="nofollow">Connecting to Azure Storage Account &quot;varlabsazurestorage&quot; via VPN - VARLab - Confluence (atlassian.net)</a></p><p>It is important to note that the VPN Client only connects successfully from outside of the Conestoga network.</p><p>VLT Developers will be onboarded to Bitwarden (this requires an invite from an admin) and use those instructions for access to the file share credentials. Other developers should have the file share configured by ITOps or the VLT Developer on their team.</p><p>Remember to mount the files share to a different drive letter (instructions will expect it is Y:)</p><p>When working remotely, open your VPN client and connect to P2S_vnet so that you can see contents in Y:</p><h3 id="ConnecterAssetStore-Verification.1">Verification</h3><p>The Azure VPN Client application connects successfully (only from a non-campus network)</p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" width="453" loading="lazy" src="attachments/815071233/815169562.png?width=453" data-image-src="attachments/815071233/815169562.png" data-height="459" data-width="757" data-unresolved-comment-count="0" data-linked-resource-id="815169562" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230928-154854.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="815071233" data-linked-resource-container-version="2" data-media-id="513a2fc2-26f3-4da4-8e5b-415777db61aa" data-media-type="file"></span><p>The contents of Y: are visible (only with VPN client connected)</p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" width="340" loading="lazy" src="attachments/815071233/814547012.png?width=340" data-image-src="attachments/815071233/814547012.png" data-height="253" data-width="278" data-unresolved-comment-count="0" data-linked-resource-id="814547012" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230928-184558.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="815071233" data-linked-resource-container-version="2" data-media-id="8263111e-c7b2-493b-9047-e6abee39c7f3" data-media-type="file"></span><p /><h2 id="ConnecterAssetStore-InvitationtoConnecterServerWorkspace">Invitation to Connecter Server Workspace</h2><p>You will be sent an email when you are invited to the Conestoga VARLab Connecter Workspace. Please click the link to Connecter.</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/815071233/815038497.png" data-image-src="attachments/815071233/815038497.png" data-height="213" data-width="796" data-unresolved-comment-count="0" data-linked-resource-id="815038497" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230928-180343.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="815071233" data-linked-resource-container-version="2" data-media-id="12e00767-5e1e-485b-a369-10c74fd251f5" data-media-type="file"></span><h2 id="ConnecterAssetStore-InstallConnecterandImportSharedAssetFolder">Install Connecter and Import Shared Asset Folder</h2><p>Log in to <a class="external-link" data-card-appearance="inline" href="https://teamwork.connecterapp.com/" rel="nofollow">https://teamwork.connecterapp.com/</a> and click the top right menu icon on the page to see the download link.</p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" width="453" loading="lazy" src="attachments/815071233/814776359.png?width=453" data-image-src="attachments/815071233/814776359.png" data-height="753" data-width="1282" data-unresolved-comment-count="0" data-linked-resource-id="814776359" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230928-150239.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="815071233" data-linked-resource-container-version="2" data-media-id="1bc16105-dbfb-4ea6-bdd2-a05fa403931b" data-media-type="file"></span><p>Download and install the software</p><p>Run Connecter on your workstation and log in using the menu on the top right of the title bar</p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" width="448" loading="lazy" src="attachments/815071233/814743600.png?width=448" data-image-src="attachments/815071233/814743600.png" data-height="752" data-width="1280" data-unresolved-comment-count="0" data-linked-resource-id="814743600" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230928-150509.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="815071233" data-linked-resource-container-version="2" data-media-id="f31cb808-6e30-4046-94ee-fef3c7ffa660" data-media-type="file"></span><p>Add the mounted network file share by clicking the <strong>+ </strong>icon in the Folders pane header.</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/815071233/814940187.png" data-image-src="attachments/815071233/814940187.png" data-height="96" data-width="250" data-unresolved-comment-count="0" data-linked-resource-id="814940187" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230928-150712.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="815071233" data-linked-resource-container-version="2" data-media-id="212a544b-3cf3-4fbb-b69e-6ac853486153" data-media-type="file"></span><p>When switching between on-campus and remote work you will have to re-locate your asset folder from Z: to Y: because the network share connections are not mutually compatible with VPN and local access.</p><h3 id="ConnecterAssetStore-Verification.2">Verification</h3><p>The asset storage contents should be visible in the Connecter application (on- or off-campus depending on appropriate use of Y: or Z: drive)</p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" width="453" loading="lazy" src="attachments/815071233/814612830.png?width=453" data-image-src="attachments/815071233/814612830.png" data-height="752" data-width="1280" data-unresolved-comment-count="0" data-linked-resource-id="814612830" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230928-184855.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="815071233" data-linked-resource-container-version="2" data-media-id="5c2d2b43-6432-4ee8-94dc-0ab8c02ad9b3" data-media-type="file"></span><p />
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/815071233/814776332.png">image-20230928-150019.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/815071233/814776359.png">image-20230928-150239.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/815071233/814743600.png">image-20230928-150509.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/815071233/814940187.png">image-20230928-150712.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/815071233/814514197.png">image-20230928-150714.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/815071233/814776366.ps1">asset_store_connect.ps1</a> (binary/octet-stream)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/815071233/815169562.png">image-20230928-154854.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/815071233/815038497.png">image-20230928-180343.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/815071233/814547012.png">image-20230928-184558.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/815071233/814612830.png">image-20230928-184855.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Jul 04, 2025 14:50</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

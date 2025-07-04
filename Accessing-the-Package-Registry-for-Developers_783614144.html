@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VARLab : Accessing the Package Registry for Developers</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Onboarding_162726084.html">Onboarding</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            VARLab : Accessing the Package Registry for Developers
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> David Inglis</span>, last modified on May 22, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h2 id="AccessingthePackageRegistryforDevelopers-Summary">Summary</h2><p>The steps below are intended to describe the one-time workflow for authenticating a developer’s machine with the <strong>UPM Package Registry </strong>using their existing <strong>Bitbucket</strong> account in order to access packages and DLX projects built with CORE Framework. </p><h2 id="AccessingthePackageRegistryforDevelopers-AuthenticationSetupforUnityDevelopment">Authentication Setup for Unity Development</h2><style type='text/css'>/*<![CDATA[*/
+div.rbtoc1751639989274 {padding: 0px;}
+div.rbtoc1751639989274 ul {list-style: disc;margin-left: 0px;}
+div.rbtoc1751639989274 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1751639989274'>
+<ul class='toc-indentation'>
+<li><a href='#AccessingthePackageRegistryforDevelopers-InstallingNodeJSandNPM'>Installing NodeJS and NPM</a></li>
+<li><a href='#AccessingthePackageRegistryforDevelopers-GeneratinganAppPasswordfromBitbucket'>Generating an App Password from Bitbucket</a></li>
+<li><a href='#AccessingthePackageRegistryforDevelopers-InitialAuthenticationwiththeRegistry'>Initial Authentication with the Registry</a></li>
+<li><a href='#AccessingthePackageRegistryforDevelopers-CreatingtheAuthenticationConfigurationFile'>Creating the Authentication Configuration File</a></li>
+<li><a href='#AccessingthePackageRegistryforDevelopers-ValidatingtheAuthentication'>Validating the Authentication</a></li>
+</ul>
+</div><h3 id="AccessingthePackageRegistryforDevelopers-InstallingNodeJSandNPM">Installing NodeJS and NPM</h3><p>If NodeJS and <code>npm</code> are not already installed, follow the link below to install NodeJS and the companion <code>npm</code> application for Windows, Mac, or Linux.</p><a class="external-link" data-card-appearance="block" href="https://nodejs.org/en/download" rel="nofollow">https://nodejs.org/en/download</a><p>After installing NodeJS, open a new terminal to be able to use the <code>npm</code> command.</p><h3 id="AccessingthePackageRegistryforDevelopers-GeneratinganAppPasswordfromBitbucket">Generating an App Password from Bitbucket</h3><p>Navigate to the <strong>Personal Bitbucket Settings</strong> menu and select the <strong>App Passwords</strong> tab.</p><blockquote><p>App passwords allow users to access their Bitbucket account through apps such as Sourcetree.</p></blockquote><p>Select the <strong>Create app password </strong>button and enter a unique name as the label. The app password must be given the <code>Account: Email</code><strong> </strong>and <code>Account: Read</code> permissions - no other permissions are required.</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/783614144/792821775.png" data-image-src="attachments/783614144/792821775.png" data-height="185" data-width="411" data-unresolved-comment-count="0" data-linked-resource-id="792821775" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230830-164205.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="783614144" data-linked-resource-container-version="5" data-media-id="da980162-489c-47fe-bcc7-c462c2b846da" data-media-type="file"></span><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Bitbucket will display the newly created password in a dialogue window. Save this password separately in a password manager, as you will <strong>not be able to view it again</strong> through Bitbucket.</p></div></div><h3 id="AccessingthePackageRegistryforDevelopers-InitialAuthenticationwiththeRegistry">Initial Authentication with the Registry</h3><p>Run the command <code>npm login --registry http://upm.core.varlab.org:4873/</code> and enter your Bitbucket account credentials as above when prompted, using your username (not your email) and the app password generated in the previous step. Bitbucket usernames are case-insensitive and should be entered in all lowercase.</p><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Note that the password field will appear blank as you are entering the password. It is recommended to copy-and-paste the app password into this field.</p></div></div><h3 id="AccessingthePackageRegistryforDevelopers-CreatingtheAuthenticationConfigurationFile">Creating the Authentication Configuration File</h3><p>A successful login will generate a <code>.npmrc</code> file in your home directory, typically <code>C:\Users\{username}\.npmrc</code>, which contains a unique <code>_authToken</code> field.</p><p>Create the file <code>.upmconfig.toml</code> in the same directory <code>C:\Users\{username}\</code> containing the following:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">[npmAuth.&quot;http://upm.core.varlab.org:4873/&quot;] 
+token = &quot;_authToken field from .npmrc&quot; 
+email = &quot;your Bitbucket email&quot;
+alwaysAuth = true</pre>
+</div></div><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Ensure that <code>_authToken</code> is taken from <code>.npmrc</code> and dropped into the new <code>.upmconfig.toml</code> file as the value for the <code>token</code> field</p></div></div><h3 id="AccessingthePackageRegistryforDevelopers-ValidatingtheAuthentication">Validating the Authentication</h3><p>The <strong>My Registries</strong> section of the <strong>Package Manager</strong> will show all available and installed packages from the registry. When opening or reloading a Unity project, packages will automatically check for new packages and indicate if there are updates available.</p><p>The package list can also be manually reloaded by clicking the <strong>Refresh </strong>button in the Package Manager window.</p>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/783614144/793214981.png">image-20230830-164056.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/783614144/793411586.png">image-20230830-164158.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/783614144/792821775.png">image-20230830-164205.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Jul 04, 2025 14:39</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

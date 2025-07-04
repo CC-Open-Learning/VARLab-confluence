@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VARLab : Retrofitting Photon Fusion</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Exploratory-Research-Projects_800587780.html">Exploratory Research Projects</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Multiplayer_803176449.html">Multiplayer</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="803176461.html">Multiplayer Research/Potential Options</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Fusion-Research_805961748.html">Fusion Research</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Out-of-the-Box-Functionality_840532001.html">Out-of-the-Box Functionality</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            VARLab : Retrofitting Photon Fusion
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Hayden Auterhoff</span>, last modified on Nov 23, 2023
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>Photon Fusion has built-in networking functionality and documentation guides on how to build a multiplayer network program using the Fusion package from the ground up. However, the question of interest with this multiplayer package was; “How easy is it to retro an existing project to have network capabilities?”.</p><div class="confluence-information-macro confluence-information-macro-tip"><span class="aui-icon aui-icon-small aui-iconfont-approve confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Short answer: Doable</p></div></div><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Long Answer: Depends (Lack of Documentation and the complexity of network requirements)</p></div></div><style type='text/css'>/*<![CDATA[*/
+div.rbtoc1751640084827 {padding: 0px;}
+div.rbtoc1751640084827 ul {list-style: disc;margin-left: 0px;}
+div.rbtoc1751640084827 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1751640084827'>
+<ul class='toc-indentation'>
+<li><a href='#RetrofittingPhotonFusion-Overview'>Overview</a></li>
+<li><a href='#RetrofittingPhotonFusion-Retrofitting'>Retrofitting</a>
+<ul class='toc-indentation'>
+<li><a href='#RetrofittingPhotonFusion-PlayerObject'>Player Object</a>
+<ul class='toc-indentation'>
+<li><a href='#RetrofittingPhotonFusion-NetworkInput'>Network Input</a></li>
+<li><a href='#RetrofittingPhotonFusion-PlayerSpawn'>Player Spawn</a></li>
+</ul>
+</li>
+<li><a href='#RetrofittingPhotonFusion-MainCamera'>Main Camera</a>
+<ul class='toc-indentation'>
+<li><a href='#RetrofittingPhotonFusion-UpdateCameraController'>Update Camera Controller</a></li>
+<li><a href='#RetrofittingPhotonFusion-UpdatePlayerController'>Update Player Controller</a></li>
+</ul>
+</li>
+<li><a href='#RetrofittingPhotonFusion-PickupObject'>Pickup Object</a>
+<ul class='toc-indentation'>
+<li><a href='#RetrofittingPhotonFusion-PrefabModification'>Prefab Modification</a></li>
+<li><a href='#RetrofittingPhotonFusion-NetworkObject/Rigidbody'>Network Object / Rigidbody</a></li>
+</ul>
+</li>
+<li><a href='#RetrofittingPhotonFusion-CanvasElements'>Canvas Elements</a></li>
+<li><a href='#RetrofittingPhotonFusion-NetworkSynchronization'>Network Synchronization</a>
+<ul class='toc-indentation'>
+<li><a href='#RetrofittingPhotonFusion-SyncNetworkObjects'>Sync Network Objects</a></li>
+<li><a href='#RetrofittingPhotonFusion-Lobby/PlayerQueue'>Lobby / Player Queue</a></li>
+</ul>
+</li>
+<li><a href='#RetrofittingPhotonFusion-Conclusion'>Conclusion</a></li>
+</ul>
+</li>
+</ul>
+</div><hr/><h1 id="RetrofittingPhotonFusion-Overview"><u>Overview</u></h1><p>For the research, the existing project for retrofitting Photon Fusion was the <a class="external-link" href="https://youtube.com/playlist?list=PLX2vGYjWbI0TiP080ELGDurOmz5NAg5CI&amp;si=xJCM4W_otr8HJlXS" rel="nofollow"><u>Unity Roll-a-Ball tutorial</u></a>.</p><a class="external-link" data-card-appearance="block" href="https://youtube.com/playlist?list=PLX2vGYjWbI0TiP080ELGDurOmz5NAg5CI&amp;si=xJCM4W_otr8HJlXS" rel="nofollow">https://youtube.com/playlist?list=PLX2vGYjWbI0TiP080ELGDurOmz5NAg5CI&amp;si=xJCM4W_otr8HJlXS</a><p>For retrofitting the Unity Roll-a-Ball program with Photon Fusion, there were some criteria needed to validate the ease of completing this task:</p><ol start="1"><li><p>Don’t overhaul existing implementation (Keep it as true to Roll-a-Ball as possible)</p></li><li><p>No additional functionality outside of the out-of-the-box functionality of the package</p></li></ol><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Note: this page assumes knowledge about the Roll-a-Ball program</p></div></div><hr/><h1 id="RetrofittingPhotonFusion-Retrofitting"><u>Retrofitting</u></h1><p>To learn more about the out-of-the-box functionality of Photon Fusion, check out this <a href="Out-of-the-Box-Functionality_840532001.html" data-linked-resource-id="840532001" data-linked-resource-version="1" data-linked-resource-type="page"><u>page</u></a>. </p><a href="Out-of-the-Box-Functionality_840532001.html" data-linked-resource-id="840532001" data-linked-resource-version="1" data-linked-resource-type="page">Out-of-the-Box Functionality</a><p>To begin the retrofitting of Roll-a-Ball with Photon Fusion, right-click in the hierarchy of the scene and select the “Fusion” option. In the Fusion tab, select “Setup”, then “Add Networking to a Scene”.</p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" width="760" loading="lazy" src="attachments/840761408/848592909.png?width=760" data-image-src="attachments/840761408/848592909.png" data-height="680" data-width="1261" data-unresolved-comment-count="0" data-linked-resource-id="848592909" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20231108-182351.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="840761408" data-linked-resource-container-version="3" data-media-id="f8efb3b2-7d35-4d58-ad86-c24ddd8477f9" data-media-type="file"></span><p>By doing this, the objects “Prototype Network Start” and “Prototype Runner” are available and will provide the basis of the network capabilities of Roll-a-Ball.</p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" width="760" loading="lazy" src="attachments/840761408/849149971.png?width=760" data-image-src="attachments/840761408/849149971.png" data-height="747" data-width="1536" data-unresolved-comment-count="0" data-linked-resource-id="849149971" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20231108-183335.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="840761408" data-linked-resource-container-version="3" data-media-id="051461b0-269f-4076-98c7-42a0e6d32cb1" data-media-type="file"></span><hr/><h2 id="RetrofittingPhotonFusion-PlayerObject">Player Object</h2><p>For converting the player object into a network object, there are two things to be considered:</p><ol start="1"><li><p>Network Input</p></li><li><p>Player Spawn</p></li></ol><h3 id="RetrofittingPhotonFusion-NetworkInput"><strong>Network Input</strong></h3><p>With Photon Fusion, there is built-in input for player objects. However, Roll-a-Ball has its own movement script within the Player Controller script. For retrofitting the player input of Roll-a-Ball, there are two options:</p><ol start="1"><li><p>Use the built-in network input</p></li><li><p>Refactor movement input with network </p></li></ol><p>Due to the retro criteria for this research, the decision to use built-in network input was chosen. Creating and refactoring the player input using the InputActions in the Network Events overhauled too much of the code for retro purposes and was more difficult as the InputActions in the Network Events caused weird behaviours that were difficult to debug.</p><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><u>Note</u>: Network Events is the custom script used to interface custom functionality to the network</p></div></div><p>The use of the Input Behaviour Prototype script in the Prototype Runner and the Network Character Controller Prototype on the player object was simple and gave similar movement input as InputActions.</p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" width="395" loading="lazy" src="attachments/840761408/849182731.png?width=395" data-image-src="attachments/840761408/849182731.png" data-height="351" data-width="367" data-unresolved-comment-count="0" data-linked-resource-id="849182731" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20231108-185547.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="840761408" data-linked-resource-container-version="3" data-media-id="07bb6524-dacf-457b-b778-3772887fe7b5" data-media-type="file"></span><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" width="380" loading="lazy" src="attachments/840761408/848920586.png?width=380" data-image-src="attachments/840761408/848920586.png" data-height="301" data-width="356" data-unresolved-comment-count="0" data-linked-resource-id="848920586" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20231108-185658.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="840761408" data-linked-resource-container-version="3" data-media-id="e33f30d5-957d-4b41-99b8-9fd5ac7638a6" data-media-type="file"></span><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><u>Note</u>: Creating Network Input from the ground up is relatively easy using Network Events. However, the use of InputActions from Roll-a-Ball caused weird behaviour, so any future retro needs to take into consideration the input of the player over the network.</p></div></div><h3 id="RetrofittingPhotonFusion-PlayerSpawn"><strong>Player Spawn</strong></h3><p>Using Photon Fusion and multiplayer networking, users will enter server rooms to play with other clients. As a result, players are able to spawn into the scene using the Player Spawner Prototype. Without this script, players will spawn on top of each other or beside each other causing weird collision behaviours. Using this built-in functionality allows for spawn points to be used to have players spawn away from each other. These spawn points are created using empty game objects and using the Player Spawn Point Prototype script.</p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" width="760" loading="lazy" src="attachments/840761408/848560178.png?width=760" data-image-src="attachments/840761408/848560178.png" data-height="700" data-width="1536" data-unresolved-comment-count="0" data-linked-resource-id="848560178" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20231108-190658.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="840761408" data-linked-resource-container-version="3" data-media-id="456320df-7b45-4bb1-b71f-7e7847ba67fc" data-media-type="file"></span><p>Unfortunately, the consequence of using spawn points is that the player object has to be removed from the scene hierarchy and exists only as a prefab. The player prefab is used to create as many player objects as are needed for the server room, allowing for the network to be scalable.</p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" width="760" loading="lazy" src="attachments/840761408/849215517.png?width=760" data-image-src="attachments/840761408/849215517.png" data-height="726" data-width="1533" data-unresolved-comment-count="0" data-linked-resource-id="849215517" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20231108-190119.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="840761408" data-linked-resource-container-version="3" data-media-id="fce49a55-4cc5-4598-8648-758a9de2eb42" data-media-type="file"></span><p>With the player object as a prefab, there are some extra considerations needed for the retro of the player object in a network environment. Firstly, Photon Fusion requires the reference to an interpolation target or a child object in the prefab. </p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>In a simple object, such as a sphere, this isn’t a big change. However, this could be a headache with a more complex player object. As the child object is meant to be the main object while the parent is the empty object with all of the scripts.</p></div></div><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" width="760" loading="lazy" src="attachments/840761408/848527367.png?width=760" data-image-src="attachments/840761408/848527367.png" data-height="769" data-width="1536" data-unresolved-comment-count="0" data-linked-resource-id="848527367" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20231108-192403.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="840761408" data-linked-resource-container-version="3" data-media-id="c579a426-392e-48b6-9245-124307a9d0ac" data-media-type="file"></span><p>Secondly, any references or serialized objects to the Player Object from roll-a-ball with the Player Object as an object in the hierarchy, have to be refactored to consider that the Player Object is a prefab and not in the hierarchy of the scene. Therefore, serialized objects are not directly referenced as public, but as SerializeField.</p><p><u>Object Reference in Roll-a-Ball</u> (Direct)</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public TextMeshProUGUI countText;
+public GameObject winTextObject;</pre>
+</div></div><p><u>SerializeField Reference in Network</u> (Indirect)</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">[SerializeField] private string countTextName;
+[SerializeField] private string winTextObjectName;
+
+private TestMeshProUGUI countText;
+private winTextObjects</pre>
+</div></div><h2 id="RetrofittingPhotonFusion-MainCamera">Main Camera</h2><p>Depending on the configuration of the Camera used in a program, there may or may not be the need for special handling required with the Network Object. The <a href="Out-of-the-Box-Functionality_840532001.html" data-linked-resource-id="840532001" data-linked-resource-version="1" data-linked-resource-type="page"><u>Out-Of-The-Box</u></a> functionality of the Photon Fusion provides black-box functionality that maintains local objects, including cameras. </p><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>The Black Box functionality of Photon Fusion assumes no spawn points</p></div></div><p>However, in the case of Roll-a-Ball, the camera is coupled to the Player Object to maintain a distance from the Player Object while not rotating with the ball itself. With the use of spawn points, the Player Object is removed from the hierarchy and exists as a prefab as a Network Object, so the Camera Controller script doesn’t have a Player Object that can be serialized and referenced.</p><div class="confluence-information-macro confluence-information-macro-tip"><span class="aui-icon aui-icon-small aui-iconfont-approve confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Fortunately, the solution is relatively simple!</p></div></div><h3 id="RetrofittingPhotonFusion-UpdateCameraController"><u>Update Camera Controller</u></h3><p>In the Camera Controller script, change the serialized public components for a player from GameObject to Transform. This will allow the Camera Controller to reference the Player Object prefab once it has spawned into the network.</p><p><u>Roll-a-Ball Camera Controller</u> - Player Component</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public GameObject player;</pre>
+</div></div><p><u>Retro Camera Controller</u> - Player Component</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public Transform player;</pre>
+</div></div><div class="panel" style="background-color: #EAE6FF;border-color: #998DD9;border-width: 1px;"><div class="panelContent" style="background-color: #EAE6FF;">
+<p>Remember to re-serialize the Player Object prefab to the script</p>
+</div></div><h3 id="RetrofittingPhotonFusion-UpdatePlayerController"><u>Update Player Controller</u></h3><p>In the Player Controller script, reference to the Main Camera has been modified to not use the Game Object component of the Player Object, so the Player object needs to inform the network when the Player Object has spawned into the program. The Camera Controller is only tracking the position of the Player Object, so when the Player Object is placed into the scene, the Player Controller will get the Component of the camera using the Camera Controller as a reference.</p><p>First, let’s allow the Player Controller to indirectly reference the camera by using SerializeFields. This is similar to the UI elements from updating the Player Object to a Network Object.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">[SerializeField] private string mainCamera;
+
+private winTextObjects;</pre>
+</div></div><p>Secondly, when a Player Object spawns into the program from the network, it will be the responsibility of the Player Controller to spawn a camera into the scene. Using documentation from Photon Fusion, the Network Events for Spawned() will be used to initialize the spawn of the camera.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">    public override void Spawned()
+    {
+        if (HasInputAuthority)
+        {
+            camera = Camera.main;
+            camera.GetComponent&lt;CameraController&gt;().player = GetComponent&lt;NetworkTransform&gt;().InterpolationTarget;
+        }
+    }</pre>
+</div></div><div class="confluence-information-macro confluence-information-macro-tip"><span class="aui-icon aui-icon-small aui-iconfont-approve confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Everything should be set up for each Player Object to have the camera following within the network.</p></div></div><h2 id="RetrofittingPhotonFusion-PickupObject">Pickup Object</h2><p>As with the Player Object, the Pickup Object needs to be a Network Object to properly update across the network. Fortunately, based on the Roll-a-Ball, the Pickup Objects are set locations. The retro requirements for the Pickup Object involve:</p><ol start="1"><li><p>Prefab modification</p></li><li><p>Network Object / Rigidbody</p></li></ol><h3 id="RetrofittingPhotonFusion-PrefabModification"><strong>Prefab Modification</strong></h3><p>Similar to the Player Object, the Pickup Object has to be a prefab for networking capabilities using the built-in functionality of Photon Fusion. Fortunately, Roll-a-Ball has the Pickup Objects as a Prefab. However, extra consideration is required for having the Pickup Object as a Network Object, as Photon Fusion requires the reference in the prefab to be an interpolation target or child object of the prefab.  </p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" width="760" loading="lazy" src="attachments/840761408/864288924.png?width=760" data-image-src="attachments/840761408/864288924.png" data-height="679" data-width="1536" data-unresolved-comment-count="0" data-linked-resource-id="864288924" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20231122-222414.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="840761408" data-linked-resource-container-version="3" data-media-id="fe02d93b-72f3-4260-a736-c02636f03434" data-media-type="file"></span><p>The child object ‘model’ is the physical properties of the object with a box collider and material. The parent has the Network Object components.</p><h3 id="RetrofittingPhotonFusion-NetworkObject/Rigidbody"><strong>Network Object / Rigidbody</strong></h3><p>With the Pickup Object having an interpolation target, the Pickup Object can be referenced and serialized by the Network Rigidbody. This allows the PickUp Object to be a Network Object for the program.</p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" width="399" loading="lazy" src="attachments/840761408/864551108.png?width=399" data-image-src="attachments/840761408/864551108.png" data-height="500" data-width="399" data-unresolved-comment-count="0" data-linked-resource-id="864551108" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20231122-231930.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="840761408" data-linked-resource-container-version="3" data-media-id="38286ed4-8364-45ac-a39d-e73a72c15ad4" data-media-type="file"></span><div class="confluence-information-macro confluence-information-macro-tip"><span class="aui-icon aui-icon-small aui-iconfont-approve confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Everything should be set up for the Pickup Object to be a Network Object within the network.</p></div></div><h2 id="RetrofittingPhotonFusion-CanvasElements">Canvas Elements</h2><p>Work in Progress</p><h2 id="RetrofittingPhotonFusion-NetworkSynchronization">Network Synchronization</h2><p>With Photon Fusion, the network is synchronized when multiple players queue into the program at the same time, however if another player joins the program after the network room has been created, then there is a desync of the objects in the network and the new player will have Pickup Objects created while the other players are using the previous Pickup Objects.</p><p>There are two solutions:</p><ol start="1"><li><p>Sync Network Objects to store the state of the network and objects</p></li><li><p>Create a Lobby to Queue players</p></li></ol><h3 id="RetrofittingPhotonFusion-SyncNetworkObjects"><strong>Sync Network Objects</strong></h3><p>From Photon Fusion, there is documentation about Network Properties. The documentation can be viewed <a class="external-link" href="https://doc.photonengine.com/fusion/current/tutorials/shared-mode-basics/4-network-properties" rel="nofollow"><u>here</u></a>: <a class="external-link" data-card-appearance="inline" href="https://doc.photonengine.com/fusion/current/tutorials/shared-mode-basics/4-network-properties" rel="nofollow">https://doc.photonengine.com/fusion/current/tutorials/shared-mode-basics/4-network-properties</a> </p><a class="external-link" data-card-appearance="block" href="https://doc.photonengine.com/fusion/current/tutorials/shared-mode-basics/4-network-properties" rel="nofollow">https://doc.photonengine.com/fusion/current/tutorials/shared-mode-basics/4-network-properties</a><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Difficult to retro using existing Photon Fusion Implementation without changing too much</p></div></div><h3 id="RetrofittingPhotonFusion-Lobby/PlayerQueue"><strong>Lobby / Player Queue</strong></h3><p>From Photon Fusion, there is documentation for Game Samples with existing implementation of some of the functionality available with Photon Fusion. For the purposes of having a game sample with a lobby, check out the <a class="external-link" href="https://doc.photonengine.com/fusion/current/game-samples/fusion-golf" rel="nofollow">Fusion Golf</a> game sample here: <a class="external-link" data-card-appearance="inline" href="https://doc.photonengine.com/fusion/current/game-samples/fusion-golf" rel="nofollow">https://doc.photonengine.com/fusion/current/game-samples/fusion-golf</a> </p><a class="external-link" data-card-appearance="block" href="https://doc.photonengine.com/fusion/current/game-samples/fusion-golf" rel="nofollow">https://doc.photonengine.com/fusion/current/game-samples/fusion-golf</a><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Difficult to retro using existing Photon Fusion Implementation without changing too much</p></div></div><h2 id="RetrofittingPhotonFusion-Conclusion"><strong>Conclusion</strong></h2><p>Overall, the built-in functionality of Photon Fusion along with the documentation provides a great resource for building a network project from the ground-up. However, in the possibility of retrofitting an existing project with Photon Fusion, there is no supporting documentation for retrofitting an existing project. In the research to retrofit Roll-a-Ball, there was a lot of information that had to be reverse-engineered from the documentation. </p><p>The goal of the retro of Photon Fusion with Roll-a-Ball was meant to be an exercise in using the built-in functionality of Photon Fusion while not overhauling the existing implementation of the Roll-a-Ball. There is an element that is feasible to retrofit Photon Fusion, but the package is meant to be built from the ground up. Without a massive commitment to overhaul more complex projects, the ability to retrofit Photon Fusion is not likely a feasible solution.</p><p />
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/840761408/848592909.png">image-20231108-182351.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/840761408/849149971.png">image-20231108-183335.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/840761408/849182731.png">image-20231108-185547.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/840761408/848920586.png">image-20231108-185658.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/840761408/849215517.png">image-20231108-190119.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/840761408/848789542.png">image-20231108-190630.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/840761408/848560178.png">image-20231108-190658.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/840761408/848527367.png">image-20231108-192403.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/840761408/864288924.png">image-20231122-222414.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/840761408/864551108.png">image-20231122-231930.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Jul 04, 2025 14:41</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

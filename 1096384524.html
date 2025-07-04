@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VARLab : Network Testing (Web) Procedure</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="VARLab_44990773.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="DLX-Test-Plans-and-Procedures_1096417282.html">DLX Test Plans and Procedures</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            VARLab : Network Testing (Web) Procedure
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Russell Foubert</span>, last modified on May 04, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>This process guide should be followed when assessing a DLX simulation build as a potential playable or releasable candidate build. This would include receiving incremental or ‘hotfix’ builds from an external vendor. </p><p>The goal of this network testing protocol is to arrive at a level of confidence that the sim can be played in its network context with little to no worry of negative impact on CE’s, students, or other testers.</p><h1 id="NetworkTesting(Web)Procedure-Overview">Overview</h1><ol start="1"><li><p><strong>Baseline Network Systems Tests</strong> – Track a minimal, but necessary set of network performance metrics</p></li><li><p><strong>Single Player Experience Tests</strong> – Run tests that confirm stability and support for single player experiences with the sim</p></li><li><p><strong>Multiplayer Experience Tests</strong> – Similar to above, but extends testing for the multiplayer context </p></li></ol><h2 id="NetworkTesting(Web)Procedure-Whodoesthistesting?">Who does this testing?</h2><p>Anyone with familiarity with computer networks and some of the tools mentioned below that would assist in capturing quantitative measures of network performance. ITOps personnel are a good standard of the experience required. Anyone may consider teaming up to conduct these tests (esp. when Multiplayer is in context for the testing).</p><h1 id="NetworkTesting(Web)Procedure-A)BaselineNetworkSystemsTests">A)     Baseline Network Systems Tests</h1><p>To document baseline performance, use tools such as Task Manager and/or Wireshark running on the user’s PC AND from the web host/server to collect following metrics:</p><ol start="1"><li><p>Latency: Measure the time it takes for data to travel between players and the server.</p></li><li><p>Bandwidth: Monitor data transfer rates.</p></li><li><p>Packet loss: Detect dropped packets.</p></li><li><p><span class="inline-comment-marker" data-ref="137177ca-8ec6-4163-916a-d52527c1f504">Server load: Assess how well the server handles multiple connections.</span></p></li><li><p>Test under various conditions (e.g., different browsers, network speeds) to identify bottlenecks and optimize performance.</p></li></ol><p><em><strong><u>Document findings in Confluence for the candidate build.</u></strong></em></p><h1 id="NetworkTesting(Web)Procedure-B)SinglePlayerExperienceTests">B)     Single Player Experience Tests</h1><p>Intended to validate that single player modes of gameplay are supportive of network play.</p><ol start="1"><li><p><span class="inline-comment-marker" data-ref="d8f56ed5-1518-4418-a0aa-c35f8617cbdd">Record wait time(s) to load and launch the sim</span>. How long until you can play?</p></li><li><p>Can go in and out of Fullscreen without problem.</p></li><li><p>Is progress saved automatically or manually by the player? (if a requirement)</p></li><li><p>What is the outcome if the player closes their web browser?</p></li><li><p>Disconnect from the network or go into airplane mode. What happens when the network goes away?</p></li><li><p>Throttle bandwidth <span class="inline-comment-marker" data-ref="60cb38f6-afbf-49d9-bb03-c36d580c5a12">lower</span> (some browsers support this) and/or access the sim from a known slow/poorly performing network. Document performance impact (e.g. appx what bandwidth or performance impact was inflicted?).</p></li></ol><p><em><strong><u>Document findings in Confluence for the candidate build.</u></strong></em> </p><h1 id="NetworkTesting(Web)Procedure-C)MultiplayerExperience(MP)Tests">C)    Multiplayer Experience (MP) Tests</h1><ol start="1"><li><p>Record wait time(s) to load and launch the sim, including lobby access (if applicable). How long until you can play with others, assuming reasonable conditions for all?</p></li><li><p>Is progress saved automatically or manually by the player? (if a requirement)</p><ol start="1"><li><p>Is this achievable according to spec in the MP context?</p></li></ol></li><li><p>What is the outcome if the player closes their web browser?</p><ol start="1"><li><p>What happens to the rest of the game experience for the other players?</p></li><li><p>Can the MP session be easily rejoined by the disconnected player?</p></li></ol></li><li><p>Disconnect from the network or go into airplane mode. What happens when the network goes away?</p><ol start="1"><li><p>What happens to the rest of the game experience for the other players?</p></li><li><p>Can the MP session be easily rejoined by the disconnected player?</p></li></ol></li><li><p>Throttle bandwidth lower (some browsers support this) and/or access the sim from a known slow/poorly performing network. Document performance impact (e.g. appx what bandwidth or performance impact was inflicted?).</p><ol start="1"><li><p>What happens to the rest of the game experience for the other players?</p></li></ol></li></ol><p><em><strong><u>Document findings in Confluence for the candidate build.</u></strong></em></p>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Jul 04, 2025 14:39</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

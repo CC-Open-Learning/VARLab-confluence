@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VARLab : Using Bitbucket &amp; Sourcetree</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Onboarding_162726084.html">Onboarding</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            VARLab : Using Bitbucket &amp; Sourcetree
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> David Inglis</span>, last modified on Sept 01, 2022
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>In this article we’ll cover how to use Bitbucket and Sourcetree after you have them installed.</p><p>For information on how to install and set up your Bitbucket and Sourcetree, check out <a href="497123337.html" data-linked-resource-id="497123337" data-linked-resource-version="20" data-linked-resource-type="page">Setting Up Bitbucket &amp; Sourcetree</a>.</p><style type='text/css'>/*<![CDATA[*/
+div.rbtoc1751639971438 {padding: 0px;}
+div.rbtoc1751639971438 ul {list-style: circle;margin-left: 0px;}
+div.rbtoc1751639971438 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1751639971438'>
+<ul class='toc-indentation'>
+<li><a href='#UsingBitbucket&amp;Sourcetree-StandardGitWorkflow'>Standard Git Workflow</a>
+<ul class='toc-indentation'>
+<li><a href='#UsingBitbucket&amp;Sourcetree-CreatingabranchfromaJiraissue'>Creating a branch from a Jira issue</a></li>
+<li><a href='#UsingBitbucket&amp;Sourcetree-Checkingoutabranch'>Checking out a branch</a></li>
+<li><a href='#UsingBitbucket&amp;Sourcetree-Committingandpushingchanges'>Committing and pushing changes</a></li>
+<li><a href='#UsingBitbucket&amp;Sourcetree-Creatingapullrequest'>Creating a pull request</a></li>
+<li><a href='#UsingBitbucket&amp;Sourcetree-AdvancedGitPractices'>Advanced Git Practices</a></li>
+</ul>
+</li>
+<li><a href='#UsingBitbucket&amp;Sourcetree-Resources'>Resources</a></li>
+</ul>
+</div><h2 id="UsingBitbucket&amp;Sourcetree-StandardGitWorkflow">Standard Git Workflow</h2><h3 id="UsingBitbucket&amp;Sourcetree-CreatingabranchfromaJiraissue">Creating a branch from a Jira issue</h3><p>A new branch can be made directly from a Jira issue either on a Jira board or from Bitbucket. </p><ol><li><p>Select a :task: <strong>Task</strong>, :story: <strong>Story</strong>, :epic: <strong>Epic</strong>, or <img class="emoticon emoticon-blue-star" data-emoji-id="2f990849-ea25-4b1f-aac2-45bfaaf0968c" data-emoji-shortname=":bug:" data-emoji-fallback=":bug:" src="images/icons/emoticons/72/1f41b.png" width="16" height="16" data-emoticon-name="blue-star" alt="(blue star)"/> <strong>Bug </strong>from a <a class="external-link" href="https://varlab-dev.atlassian.net/jira/projects" rel="nofollow">Jira board</a> or the <strong>Jira Issues</strong> tab on <a class="external-link" href="https://bitbucket.org/VARLab/core-engine/src/development/" rel="nofollow">Bitbucket</a></p><ul><li><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/1835072/333840523.png" data-image-src="attachments/1835072/333840523.png" data-height="579" data-width="1272" data-unresolved-comment-count="0" data-linked-resource-id="333840523" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20210709-175033.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1835072" data-linked-resource-container-version="18" data-media-id="eb3297c3-daf4-487d-8cf7-c1aa05b45dcf" data-media-type="file"></span></li></ul></li><li><p>Click <strong>Create branch</strong> to open a new tab on Bitbucket and create a branch</p><ul><li><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/1835072/333774966.png" data-image-src="attachments/1835072/333774966.png" data-height="203" data-width="343" data-unresolved-comment-count="0" data-linked-resource-id="333774966" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20210709-175106.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1835072" data-linked-resource-container-version="18" data-media-id="528bd555-0bea-4335-b7f1-fc97564def69" data-media-type="file"></span></li></ul></li><li><p>On the <strong>From branch</strong> dropdown, select the main branch for the project, typically <em>main</em> or <em>development</em></p><ul><li><p>If you would like to branch off of other work currently in progress, you can choose the branch for that work instead.</p></li></ul></li><li><p>The <strong>Branch name</strong> field will automatically be filled out with the ticket ID and its title</p><ul><li><p>Change this name to contain the name of the project you’re working on followed by the ticked ID and a brief set of keywords to describe what the branch is for</p><ul><li><p>In this example, we will name it <code>motivepower/MP-230-Task-Grouping</code></p></li></ul></li><li><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/1835072/333840537.png" data-image-src="attachments/1835072/333840537.png" data-height="424" data-width="520" data-unresolved-comment-count="0" data-linked-resource-id="333840537" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20210709-175216.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1835072" data-linked-resource-container-version="18" data-media-id="f6909642-9531-404c-8fe6-2165eb74b7cd" data-media-type="file"></span><p /></li></ul></li><li><p>See the section below on <strong>Checking out a branch</strong> to switch to the newly created branch</p></li></ol><h3 id="UsingBitbucket&amp;Sourcetree-Checkingoutabranch">Checking out a branch</h3><ol><li><p>Click the <strong>Fetch</strong> button along the top menu bar of Sourcetree to get updates from the Bitbucket repository </p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" width="646" loading="lazy" src="attachments/1835072/1835112.png?width=646" data-image-src="attachments/1835072/1835112.png" data-height="59" data-width="588" data-unresolved-comment-count="0" data-linked-resource-id="1835112" data-linked-resource-version="3" data-linked-resource-type="attachment" data-linked-resource-default-alias="sourcetree-buttons.PNG" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1835072" data-linked-resource-container-version="18" data-media-id="4a19e18b-3067-4104-b147-78b8a99cb76b" data-media-type="file"></span><p /></li><li><p>It is best to have a clean working directory before checking out a new branch. Any file changes should either be <strong>Commit</strong>ed (to save those changes to the current branch), <strong>Stash</strong>ed (to temporarily save the files locally, which can be retrieved later), or <strong>Discard</strong>ed (to permanently delete any untracked changes).</p></li><li><p>If the branch you want to check out is listed under the <strong>Branches</strong> tab on the left sidebar, right-click on the branch and select <em>Checkout &lt;branch name&gt;</em></p></li><li><p>If the branch is not listed in the <strong>Branches</strong> tab, you will have to first create a local copy of the branch. The <strong>Remotes</strong> tab on the left sidebar of Sourcetree lists all branches of the remote repositories (the <em>origin</em> remote corresponds to the Bitbucket repo). Right-click on the desired branch and select <em>Checkout origin/&lt;branch name&gt;</em> to open the checkout dialog in Sourcetree. Keep the default settings and select <strong>Ok</strong> to create a local copy of the remote branch</p></li><li><p>After checking out a branch, the branch name will become bolded in the <strong>Branches</strong> tab with a circle bullet on the left indicating it is the working branch</p></li><li><p>The <strong>Pull</strong> button may show a notification indicating if there are new changes. If there is new code on the remote branch that is not yet in your local copy, you will have to <strong>Pull</strong> the new changes to your machine. After clicking the button and launching the Pull dialog, ensure that the branch indicated by the <em>Remote branch to pull</em> dropdown matches the <em>Pull into local branch</em> field</p></li></ol><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" width="544" loading="lazy" src="attachments/1835072/1835118.png?width=544" data-image-src="attachments/1835072/1835118.png" data-height="742" data-width="1280" data-unresolved-comment-count="0" data-linked-resource-id="1835118" data-linked-resource-version="2" data-linked-resource-type="attachment" data-linked-resource-default-alias="checkout1.PNG" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1835072" data-linked-resource-container-version="18" data-media-id="04fb88c8-6af1-4c7f-a061-eed4ac6d9129" data-media-type="file"></span><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" width="544" loading="lazy" src="attachments/1835072/1835124.png?width=544" data-image-src="attachments/1835072/1835124.png" data-height="742" data-width="1280" data-unresolved-comment-count="0" data-linked-resource-id="1835124" data-linked-resource-version="2" data-linked-resource-type="attachment" data-linked-resource-default-alias="checkout2.PNG" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1835072" data-linked-resource-container-version="18" data-media-id="43b35463-cec8-4472-8214-12d1f101291b" data-media-type="file"></span><p /><h3 id="UsingBitbucket&amp;Sourcetree-Committingandpushingchanges">Committing and pushing changes</h3><p>A <em>commit</em> is a checkpoint for one or more file changes, additions, or deletions. A <em>push</em> sends one or more <em>commits</em> from the local repository to the remote Bitbucket repository.</p><ol><li><p>Click the <strong>Commit</strong> button on the top menu bar of Sourcetree to bring up the Commit dialog </p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" width="646" loading="lazy" src="attachments/1835072/1835112.png?width=646" data-image-src="attachments/1835072/1835112.png" data-height="59" data-width="588" data-unresolved-comment-count="0" data-linked-resource-id="1835112" data-linked-resource-version="3" data-linked-resource-type="attachment" data-linked-resource-default-alias="sourcetree-buttons.PNG" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1835072" data-linked-resource-container-version="18" data-media-id="4a19e18b-3067-4104-b147-78b8a99cb76b" data-media-type="file"></span><p /></li><li><p>Click the <strong>+</strong> button beside any files in the <strong>Unstaged files</strong> window you wish to include. This will add them to the <strong>Staged files</strong> window, and similarly they can be removed before committing by clicking the <strong>-</strong> button if a file was unintentionally staged</p></li><li><p>Leave a message describing the changes in the commit, then click the <strong>Commit</strong> button at the bottom right below the message window when ready</p></li><li><p>After creating one or more commits, the changes can be pushed to the remote Bitbucket repository. Clicking the <strong>Push</strong> button on the Sourcetree menu bar brings up the Push dialog (the default options in the dialog are usually sufficient, as it sets up a push on the working branch from the local to remote copy)</p></li></ol><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" width="544" loading="lazy" src="attachments/1835072/1835130.png?width=544" data-image-src="attachments/1835072/1835130.png" data-height="665" data-width="1158" data-unresolved-comment-count="0" data-linked-resource-id="1835130" data-linked-resource-version="2" data-linked-resource-type="attachment" data-linked-resource-default-alias="commit.PNG" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1835072" data-linked-resource-container-version="18" data-media-id="d15a0887-14c4-45ef-8a88-1907fd64dc26" data-media-type="file"></span><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Referencing Jira issues by number in commit messages will automatically create hyperlinks on Bitbucket for those issues when reviewing the commit. </p><p><br/>For example: “This fix resolves issue <strong>CORE-53</strong>, which blocks <strong>CORE-56</strong>”</p></div></div><h3 id="UsingBitbucket&amp;Sourcetree-Creatingapullrequest">Creating a <em>pull request</em></h3><p>After working on a feature or bugfix on a dedicated branch, a <em>pull request </em>indicates that the branch should be merged back into <em>development</em> to have the new changes integrated with the workflow of the other team members. </p><ol><li><p>In <strong>Sourcetree</strong>, right-clicking on a branch under the <strong>Branches</strong> tab and selecting <em>Create pull request</em>… opens the Bitbucket <em>pull request</em> dialog in a web browser</p></li><li><p>This dialog can also be reached from <strong>Bitbucket</strong> by navigating to the <strong>Branches</strong> tab on the left sidebar, then selecting the branch to be merged. The hamburger menu on the top right of the page hides the <em>Create pull request</em> link</p></li><li><p>Ensure that the selected branch on the left is the feature/bugfix branch to be merged, and that the selected branch on the right is the <em>development</em> branch</p></li><li><p>The <em>Title</em> and <em>Description</em> fields will be auto-populated with information from the commit messages for that branch</p></li><li><p>In the <em>Reviewers</em> field, team members can be referenced who will review the <em>pull request</em>, check out the code, and merge the branch into <em>development</em> if no issues arise</p></li><li><p>If the branch to be merged resolves the corresponding Jira issue, the <em>Close branch</em> option should be checked. Otherwise, if there is still work to be done on that specific branch, leave it unchecked</p></li><li><p>Click <strong>Create pull request</strong> to send a notification to the <em>Reviewers</em></p></li></ol><div class="panel" style="background-color: #EAE6FF;border-color: #998DD9;border-width: 1px;"><div class="panelContent" style="background-color: #EAE6FF;">
+<p>For all visual changes such as UI layouts, 3D assets, color changes or anything else that requires someone to be able to see it to review it, make sure to include screenshots in your description field for easier viewing.</p>
+</div></div><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" width="544" loading="lazy" src="attachments/1835072/1835136.png?width=544" data-image-src="attachments/1835072/1835136.png" data-height="661" data-width="1194" data-unresolved-comment-count="0" data-linked-resource-id="1835136" data-linked-resource-version="2" data-linked-resource-type="attachment" data-linked-resource-default-alias="pull-request1.PNG" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1835072" data-linked-resource-container-version="18" data-media-id="0af2f978-1eed-421d-abd9-06b86537ad7b" data-media-type="file"></span><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" width="544" loading="lazy" src="attachments/1835072/1835142.png?width=544" data-image-src="attachments/1835072/1835142.png" data-height="734" data-width="1232" data-unresolved-comment-count="0" data-linked-resource-id="1835142" data-linked-resource-version="2" data-linked-resource-type="attachment" data-linked-resource-default-alias="pull-request2.PNG" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1835072" data-linked-resource-container-version="18" data-media-id="9b3ff24e-58ae-48ca-9c85-5ebce813ded6" data-media-type="file"></span><h3 id="UsingBitbucket&amp;Sourcetree-AdvancedGitPractices">Advanced Git Practices</h3><p>For information on how to do more advanced operations in git, check out <a href="Advanced-Git-Techniques_497385729.html" data-linked-resource-id="497385729" data-linked-resource-version="11" data-linked-resource-type="page">Advanced Git Techniques</a>.</p><h2 id="UsingBitbucket&amp;Sourcetree-Resources">Resources</h2><p>Check out the links below for more information on Git concepts and the Git-flow workflow</p><ul><li><p><a class="external-link" href="https://www.linkedin.com/learning/learning-git-and-github" rel="nofollow">LinkedIn Learning: Learning Git and GitHub</a></p></li><li><p><a class="external-link" href="https://nvie.com/posts/a-successful-git-branching-model/" rel="nofollow">Vincent Driessen's &quot;A successful Git branching model&quot;</a></p></li><li><p><a class="external-link" href="https://www.atlassian.com/git/tutorials/learn-git-with-bitbucket-cloud" rel="nofollow">Atlassian Tutorials: Learn Git with Bitbucket Cloud</a></p></li><li><p><a class="external-link" href="https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow" rel="nofollow">Atlassian Tutorials: Gitflow Workflow</a></p></li><li><p><a class="external-link" href="https://www.atlassian.com/git/tutorials/rewriting-history" rel="nofollow">Atlassian Tutorials: Rewriting History</a> </p></li><li><p><a class="external-link" href="https://www.atlassian.com/git/tutorials/rewriting-history/git-rebase" rel="nofollow">Atlassian Tutorials: Git Rebase</a> </p></li></ul>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1835072/1835148.png">sourcetree.PNG</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1835072/1900556.png">branching1.PNG</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1835072/1835165.png">branching2.PNG</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1835072/1867802.png">sourcetree-buttons.PNG</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1835072/1835191.png">checkout1.PNG</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1835072/1867813.png">checkout2.PNG</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1835072/1867826.png">commit.PNG</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1835072/1867837.png">pull-request1.PNG</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1835072/1835217.png">pull-request2.PNG</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1835072/1835176.png">sourcetree.PNG</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1835072/1835100.png">branching1.PNG</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1835072/1835106.png">branching2.PNG</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1835072/1835093.png">sourcetree.PNG</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1835072/1835204.png">sourcetree-buttons.PNG</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1835072/1835118.png">checkout1.PNG</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1835072/1835124.png">checkout2.PNG</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1835072/1835112.png">sourcetree-buttons.PNG</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1835072/1835130.png">commit.PNG</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1835072/1835136.png">pull-request1.PNG</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1835072/1835142.png">pull-request2.PNG</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1835072/175047206.png">bitbucket-reg.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1835072/175211024.png">browser-login.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1835072/175145453.png">auth-success.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1835072/222069208.png">lfs adapter.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1835072/221905432.png">git lfs pull.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1835072/221839854.png">git lfs pull.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1835072/221905424.png">git lfs pull.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1835072/333840516.png">image-20210709-175020.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1835072/333840523.png">image-20210709-175033.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1835072/333840529.png">image-20210709-175103.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1835072/333774966.png">image-20210709-175106.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1835072/333840537.png">image-20210709-175216.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1835072/333774974.png">image-20210709-175354.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1835072/333807776.png">image-20210709-175417.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1835072/513867802.png">image-20220901-144850.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Jul 04, 2025 14:39</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

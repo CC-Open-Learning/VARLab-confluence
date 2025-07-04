@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VARLab : Network Identity</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Exploratory-Research-Projects_800587780.html">Exploratory Research Projects</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Multiplayer_803176449.html">Multiplayer</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="803176461.html">Multiplayer Research/Potential Options</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Mirror-Research-Main-Page_805994513.html">Mirror Research Main Page</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Basics-of-Mirror_826146819.html">Basics of Mirror</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            VARLab : Network Identity
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Talon Ernst</span>, last modified on Nov 13, 2023
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>The NetworkIdentity is a component you will need to add to any GameObject you want to spawn on and over the network. If you do not add it, the GameObject will not be able to be seen over the network. This component is meant to give it an identity over the network, hence the name. <br/><br/>It has the following inspector menu.</p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" width="627" loading="lazy" src="attachments/834043973/834502733.png?width=627" data-image-src="attachments/834043973/834502733.png" data-height="116" data-width="627" data-unresolved-comment-count="0" data-linked-resource-id="834502733" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20231025-023454.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="834043973" data-linked-resource-container-version="3" data-media-id="25e0b4a4-5520-4f27-a11d-f1cd7f67a83e" data-media-type="file"></span><p /><p>There is no need to change the “Asset Id”. It is automatically assigned. “Server Only” will only spawn the object the component is attached to on the server if it is checked, not the clients. Visibility can be changed <br/>to either “ForceHidden” or “ForceShown” which will either hide or show the GameObject.<br/></p><div class="panel" style="background-color: #EAE6FF;border-color: #998DD9;border-width: 1px;"><div class="panelContent" style="background-color: #EAE6FF;">
+<p><strong>NOTE: </strong>In our hierarchy, if we have a parent GameObject with child GameObjects inside of it, only the parent GameObject should have a NetworkIdentity on it, the children can access it through code and can still be spawned on the network as long as their parent has a NetworkIdentity.</p>
+</div></div><p />
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/834043973/834502733.png">image-20231025-023454.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Jul 04, 2025 14:41</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

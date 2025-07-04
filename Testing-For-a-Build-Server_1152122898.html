@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VARLab : Testing For a Build Server</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="How-To-Articles_581435426.html">How-To Articles</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Unity-Development_688324665.html">Unity Development</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Unity-Full-Stack-Testing-Tutorial_749699073.html">Unity Full-Stack Testing Tutorial</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            VARLab : Testing For a Build Server
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> User aa77f</span> on Jun 04, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>As we Introduce DLX to the Pipelines, our Unity experiences will be running tests and building on a remote server to automatically run tests. The result of this is that we need to account for tests running in an environment with no graphics/display. A way to work around the limitations of the build server is to introduce the idea of Test Categories. </p><h2 id="TestingForaBuildServer-WhatisaTestCategory?">What is a Test Category?</h2><p>This is essentially tagging individual tests with a string, so when we run the tests on the server we run only the subset of tests that can run without issue! They are simple to add as shown below. </p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" alt="image-20240604-170327.png" width="501" loading="lazy" src="attachments/1152122898/1152155667.png?width=501" data-image-src="attachments/1152122898/1152155667.png" data-height="127" data-width="501" data-unresolved-comment-count="0" data-linked-resource-id="1152155667" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20240604-170327.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1152122898" data-linked-resource-container-version="1" data-media-id="88661499-9faf-4f77-853b-108671a3380f" data-media-type="file"></span><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" alt="image-20240604-172135.png" width="204" loading="lazy" src="attachments/1152122898/1152221216.png?width=204" data-image-src="attachments/1152122898/1152221216.png" data-height="57" data-width="204" data-unresolved-comment-count="0" data-linked-resource-id="1152221216" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20240604-172135.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1152122898" data-linked-resource-container-version="1" data-media-id="4ca03a76-d350-4aae-a5af-8de5e0dc0233" data-media-type="file"></span><p>Just add <strong>[Category(&quot;BuildServer&quot;)] </strong>under <strong>[UnityTest] </strong>for each test and the tests are now categorized!</p><h2 id="TestingForaBuildServer-Whentoaddthecategory?">When to add the category?</h2><p>For now every <strong>PlayMode</strong> test should have the category added to it. EditMode tests can be left unchanged as they run using the Nunit framework.</p><h2 id="TestingForaBuildServer-Whentoremovethecategory?">When to remove the category?</h2><p>This is important, we remove the category to tell the build server to exclude tests from running on it!</p><ul><li><p>The test or code uses <strong>WaitForEndOfFrame()</strong>,<strong> </strong>this relies on graphics and can’t be run on the build server.</p></li><li><p>The test or code uses a camera to capture a screenshot or render texture, again this would rely on having graphics to capture.</p></li><li><p>To be expanded as we find more things that cause issues with the build server!</p></li></ul>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1152122898/1152155667.png">image-20240604-170327.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1152122898/1152221216.png">image-20240604-172135.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Jul 04, 2025 14:52</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

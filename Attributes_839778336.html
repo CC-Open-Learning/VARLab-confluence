@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VARLab : Attributes</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Exploratory-Research-Projects_800587780.html">Exploratory Research Projects</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Multiplayer_803176449.html">Multiplayer</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="803176461.html">Multiplayer Research/Potential Options</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Mirror-Research-Main-Page_805994513.html">Mirror Research Main Page</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Basics-of-Mirror_826146819.html">Basics of Mirror</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            VARLab : Attributes
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Talon Ernst</span>, last modified on Dec 13, 2023
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>Mirror offers various attributes that can help with various networking aspects, such as synchronization, authority and RPCs. This document will review the available attributes and why and when to use them.</p><h1 id="Attributes-[SyncVar]">[SyncVar]</h1><p>This can be added as an attribute to variables you wish to be automatically synced between all clients. Please note that the server must change this value in order for it to be synced across all clients. Once it is updated, all the clients will automatically get the variable's new value. This attribute can be added to basic data types such as int, long, float, string, etc. It can be added to NetworkIdentitys and GameObjects if the GameObject has a NetworkIdentity attached to it. The following is what the code may look like.</p><div class="panel" style="background-color: #EAE6FF;border-color: #998DD9;border-width: 1px;"><div class="panelContent" style="background-color: #EAE6FF;">
+<p><strong>NOTE:</strong> It is important to know that not every client will share the same instance of a variable, each client has their OWN instance of the SyncVar, and every client is able to see this variable and will be updated everytime it is changed.</p>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">[SyncVar] int counter = 0;</pre>
+</div></div><p>When the server updates this int, all the clients will get the update. Furthermore, we can add a “hook“ to the attribute, allowing us to run a method on the client side when they receive the update. This may look like the following.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">[SyncVar (hook=nameof(PrintNewCounterValue))] int counter = 0;
+
+public void PrintNewCounterValue(int oldValue, int newValue)
+{
+  Debug.Log($&quot;This is client: {this.netIdentity.name} and my count is now: {counter}&quot;);
+}</pre>
+</div></div><p>It is important to note that if you want a function to be a hook, it must have “int oldValue” and “int newValue” as parameters. They are the old and new values of what was changed.</p><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>This code and example are on this repository's “SyncVarExample” scene.</p></div></div><h1 id="Attributes-[Server]">[Server]</h1><p>This attribute can be included on a method that you only want the Server to be able to run. A warning will be thrown if a Client attempts to run this method. The following code snippet is a short example of what this may look like.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">[Server]
+private void RunOnServer()
+{
+  Debug.Log(&quot;This is and can only be ran on the server.&quot;);
+}</pre>
+</div></div><div class="panel" style="background-color: #EAE6FF;border-color: #998DD9;border-width: 1px;"><div class="panelContent" style="background-color: #EAE6FF;">
+<p><strong>NOTE: </strong>If there is no dedicated server, meaning that a Client is acting as the Server, then the method will run fine on that Client if they attempt to run it, but no other client.</p>
+</div></div><h1 id="Attributes-[ServerCallback]">[ServerCallback]</h1><p>This attribute is the exact same as the [Server] attribute, with the only difference being that no warning is thrown when a Client attempts to run the method.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">[ServerCallback]
+private void RunOnServer()
+{
+  Debug.Log(&quot;This is and can only be ran on the server.&quot;);
+}</pre>
+</div></div><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>The code for [Server] and [ServerCallback] can be found in this repositories “ServerExample” scene</p></div></div><h1 id="Attributes-[Client]">[Client]</h1><p>The Client attribute is similar in nature to the Server attribute, the only difference being that if it is on a method, only a Client is allowed to run said method, not the Server.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">    [Client]
+    private void SomeClientMethod()
+    {
+        Debug.Log(&quot;This is a client side method&quot;);
+    }</pre>
+</div></div><h1 id="Attributes-[ClientCallback]">[ClientCallback]</h1><p>Again, ClientCallback is similar to ServerCallback in that no warning will be thrown if a Server attempts to run a method with this attribute on it.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence"> [ClientCallback]
+ private void SomeClientMethod()
+ {
+     Debug.Log(&quot;This is a client side method&quot;);
+ }</pre>
+</div></div>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Jul 04, 2025 14:41</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

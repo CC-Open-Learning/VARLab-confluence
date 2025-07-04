@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VARLab : Design and Engineering of Features</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Exploratory-Research-Projects_800587780.html">Exploratory Research Projects</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Heuristic-NPCs_1338343427.html">Heuristic NPCs</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Supply-Chain-adjacent-focus_1422065665.html">Supply Chain adjacent focus</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            VARLab : Design and Engineering of Features
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Hayden Auterhoff</span>, last modified by <span class='editor'> Alistair Campbell</span> on Nov 14, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h1 id="DesignandEngineeringofFeatures-SystemRequirements">System Requirements</h1><h2 id="DesignandEngineeringofFeatures-InventorySystem">Inventory System</h2><ul><li><p><u>NPC Items (Work-Use)</u></p><ul><li><p>Number of Orders</p><ul><li><p>Generating a set number? Random number? (If random, we need to limit orders based on truck size - 10 pallets) → Ans: Set Number, but minimum of 10 items</p><ul><li><p><em>Set Number:</em></p><ul><li><p><em>A satisficed work order is a full pallet, but a partial pallet will be considered full for the truck.</em></p><ul><li><p><em>Ex. An order of 3 items (10/16) satisfies the work order, and is considered full for the truck</em></p></li></ul></li></ul></li></ul></li><li><p>Work orders should be viewable when checking an NPC stats (Current Work Order) and all orders should be viewable when selecting the Order Table.</p><ul><li><p>UI Button to view Works Orders</p></li></ul></li></ul></li><li><p>Number of Full Pallets</p><ul><li><p>Old pallets are destroyed once placed in wrapping station (pallet inventory increments in truck)</p></li></ul></li><li><p>Number of Empty Pallets</p><ul><li><p>New pallets are instantiated from an area</p></li></ul></li><li><p>Number of Pallet Jacks</p><ul><li><p>Pallet Jacks are assigned to specific NPCs</p></li><li><p>Pickup / Drop-off jack at specific area during the start and end of the day.</p></li></ul></li><li><p>Interacting with Stock</p><ul><li><p>Get to waypoint, inventory is automatically placed on pallet, and reduced on shelve</p></li><li><p>1-2s action timer</p></li></ul></li></ul></li><li><p><u>Work Orders</u></p><ul><li><p>1 order for each pallet</p></li><li><p>pallets can be less than the 16 items, but need a minimum of 10.</p></li><li><p>Items (36 total):</p><ul><li><p>Red (Item: 0 - first)</p></li><li><p>Blue (Item: 1 - second)</p></li><li><p>Green (Item: 2 - third)</p></li><li><p>Etc.</p></li></ul></li><li><p>Items are scriptable objects, and define how many to use (similar to the Utility AI tutorial for resources)</p><ul><li><p>Sorting based on location</p></li></ul></li><li><p>How are we creating this List-Work Order relationship</p><ul><li><p>Lists are generated first using the reference of the number of item classes to initiate. </p></li></ul></li></ul></li><li><p><u>Stock (on shelf)</u></p><ul><li><p>Number of stock available</p><ul><li><p>Restock threshold or is restocking based on when a delivery arrives?</p><ul><li><p>Ans: Restock threshold: 0 stock available</p><ul><li><p>There is a finite amount of stock for restocking </p></li></ul></li></ul></li></ul></li><li><p>Sections of the stock available within an aisle</p><ul><li><p><strong>Specific stock is available in multiple nearby places, or just beside the parking space for this stock?</strong></p><ul><li><p>Ans: beside parking space for this stock</p></li><li><p>Dealing with potential queues will involve 1 NPC blocking the area until done.</p></li></ul></li></ul></li></ul></li><li><p><u>Stock (on pallet)</u></p><ul><li><p>Number of stock on pallet displayed as a resource</p><ul><li><p>Enable visual object when first item is placed on the prefab</p></li></ul></li><li><p>When <del>full</del> work order (or sub work order) is fulfilled, NPC heads to the area to drop it off.</p></li></ul></li><li><p><u>Finish Work Order</u></p><ul><li><p><strong>Are pallets being placed on the truck or just being tracked in a storage bay?</strong></p><ul><li><p>Ans: placed in wrapping station, then destroy the object and have the truck visual increment.</p></li></ul></li></ul></li><li><p><u>Truck (Visual Stats)</u></p><ul><li><p>The truck is a place with a stats</p></li></ul></li></ul><h2 id="DesignandEngineeringofFeatures-NPCNavigation">NPC Navigation</h2><ul><li><p><u>Navigation Directions</u></p><ul><li><p>Navigation modifiers</p></li><li><p>Check the Order Sorting of Supply Chain MVP for NPCs navigating to select pickup items </p></li></ul></li><li><p><u>Checkpoints / Parking</u></p><ul><li><p>Set waypoint</p></li></ul></li><li><p><u>Work Order Pickup </u></p><ul><li><p><del>NPC queue</del> NPC blocks access until available (Will likely iterate)</p><ul><li><p><strong>Potential iteration</strong>: find nearest available resource</p></li></ul></li></ul></li><li><p><u>Stock Pickup</u></p><ul><li><p><del>NPC queue</del> NPC blocks access until available </p><ul><li><p><strong>Potential iteration</strong>: find nearest available resource</p></li></ul></li></ul></li><li><p><u>Restock Drop-off</u></p><ul><li><p>Close off aisle</p><ul><li><p><del>Notify NPC workers by evaluating if the NavMesh can’t determine how to get to next item</del></p></li><li><p><del>Go to next item in list, and return when able</del></p></li><li><p>Employees must wait until restocked</p></li></ul></li><li><p>Navigation modifiers</p></li></ul></li><li><p><u>Pallet Pickup / Drop-off</u></p><ul><li><p>Set waypoint</p></li></ul></li><li><p><u>Pallet Jack Pickup / Drop-off</u></p><ul><li><p>Assigned NPCs, with specific waypoint in destination for assigned NPCs</p></li></ul></li></ul><h2 id="DesignandEngineeringofFeatures-NPCFeatures(ThisisassumingUtilityAI)-returnafterwarehousesetup">NPC Features (This is assuming Utility AI) - return after warehouse setup</h2><ul><li><p><u>Actions</u></p><ul><li><p>Work</p><ul><li><p>Break / Quitting Time</p></li><li><p>Responsible (Told to work, and motivation influences it)</p></li></ul></li><li><p>Eat</p><ul><li><p>Break / Lunch Time</p></li></ul></li><li><p>Arrive / Leave</p><ul><li><p>Time based that starts or ends the day for the NPC</p></li></ul></li></ul></li><li><p><u>Considerations</u></p><ul><li><p>Energy</p><ul><li><p>NPC can’t act on low energy if non-smoker, just becomes slower</p></li><li><p>NPC can act on low energy if smoker, by taking unscheduled break</p></li></ul></li><li><p>Hunger</p><ul><li><p>NPC won’t act on hunger if smoker, will just take a break</p></li><li><p>NPC can’t act on hunger, just becomes slower.</p></li></ul></li></ul></li><li><p><u>Attributes</u></p><ul><li><p>Initiative / Motivation</p></li><li><p>Efficiency / Skill</p></li><li><p>Smoker</p><ul><li><p>Reduces energy faster, but not hunger</p></li></ul></li><li><p>Speed</p></li></ul></li></ul><h2 id="DesignandEngineeringofFeatures-CameraSystem">Camera System</h2><ul><li><p>Top-down isomeric camera</p><ul><li><p>Like a mini-map</p></li><li><p>Cities: Skylines (3D overhead - stretch) </p></li></ul></li></ul><p /><p>Rough Stretches</p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" alt="image-20241029-201900.png" width="760" loading="lazy" src="attachments/1422884887/1425702919.png?width=760" data-image-src="attachments/1422884887/1425702919.png" data-height="602" data-width="945" data-unresolved-comment-count="0" data-linked-resource-id="1425702919" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20241029-201900.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1422884887" data-linked-resource-container-version="6" data-media-id="0d5b3c8f-8ef7-4502-9ea5-6872d5b8f15a" data-media-type="file"></span><p>Rough Architecture Outline on Work Order System</p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" alt="image-20241107-184556.png" width="974" loading="lazy" src="attachments/1422884887/1450934291.png?width=974" data-image-src="attachments/1422884887/1450934291.png" data-height="934" data-width="1568" data-unresolved-comment-count="0" data-linked-resource-id="1450934291" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20241107-184556.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1422884887" data-linked-resource-container-version="6" data-media-id="b48f6d5c-b863-4896-8742-792b3b942e0a" data-media-type="file"></span><p /><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" alt="image-20241114-214526.png" width="496" loading="lazy" src="attachments/1422884887/1466990605.png?width=496" data-image-src="attachments/1422884887/1466990605.png" data-height="1264" data-width="1299" data-unresolved-comment-count="0" data-linked-resource-id="1466990605" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20241114-214526.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1422884887" data-linked-resource-container-version="6" data-media-id="68165284-7c17-414d-8ee9-9b82e32cdbba" data-media-type="file"></span><p />
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1422884887/1422327867.png">image-20241028-194517.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1422884887/1421967389.png">image-20241028-194533.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1422884887/1422458916.png">image-20241028-194537.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1422884887/1421836303.png">image-20241028-201332.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1422884887/1425702919.png">image-20241029-201900.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1422884887/1451261987.png">image-20241107-184530.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1422884887/1450934291.png">image-20241107-184556.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1422884887/1466990605.png">image-20241114-214526.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Jul 04, 2025 14:42</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

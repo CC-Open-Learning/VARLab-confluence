@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VARLab : Network Transport</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Exploratory-Research-Projects_800587780.html">Exploratory Research Projects</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Multiplayer_803176449.html">Multiplayer</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="803176461.html">Multiplayer Research/Potential Options</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Mirror-Research-Main-Page_805994513.html">Mirror Research Main Page</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Basics-of-Mirror_826146819.html">Basics of Mirror</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            VARLab : Network Transport
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Talon Ernst</span>, last modified on Oct 25, 2023
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>The <strong>NetworkTransport</strong> is a vital component you <strong>must </strong>create to have a multiplayer game. In your hierarchy, you need to locate your NetworkManager. You need to add a transport to your NetworkManager GameObject as a component, then find your NetworkManager component on your GameObject, and drag and drop your Transport component into the spot shown in Figure 1.</p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" width="618" loading="lazy" src="attachments/833552408/833421350.png?width=618" data-image-src="attachments/833552408/833421350.png" data-height="123" data-width="618" data-unresolved-comment-count="0" data-linked-resource-id="833421350" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20231023-224820.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="833552408" data-linked-resource-container-version="6" data-media-id="4ad0db1b-316c-44e3-9483-ce299732bbb9" data-media-type="file"></span><p>The Transport is used to determine how you want your Transport layer to be handled in your game. This includes what ports to use, what protocols to use (TCP/UDP), message sizes and more!</p><p>Mirror offers various options for your Transport. I will not go through them in heavy detail because that would be a long read. I will instead go over the basics for each.<br/></p><div class="panel" style="background-color: #EAE6FF;border-color: #998DD9;border-width: 1px;"><div class="panelContent" style="background-color: #EAE6FF;">
+<p>Before we begin, please make sure you understand TCP/UDP protocols because I will not be explaining them here. If you need to read up on them, you can do so using the following link:<br/><a class="external-link" data-card-appearance="inline" href="https://www.geeksforgeeks.org/differences-between-tcp-and-udp/" rel="nofollow">https://www.geeksforgeeks.org/differences-between-tcp-and-udp/</a> </p>
+</div></div><h3 id="NetworkTransport-KCPTransport">KCP Transport</h3><p>KCP Transport is now the Mirror default. This is because it is both fast and reliable. It uses UDP for its protocol, has high test coverage and is 100% C#. The main issue is that KCP does not work with WebGL builds, so it immediately seems dead in the water as an option for VARLab.</p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" width="257" loading="lazy" src="attachments/833552408/834109537.png?width=257" data-image-src="attachments/833552408/834109537.png" data-height="517" data-width="317" data-unresolved-comment-count="0" data-linked-resource-id="834109537" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20231025-025522.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="833552408" data-linked-resource-container-version="6" data-media-id="8c4e8a5e-c9bd-46ff-be07-3d11adf03f1b" data-media-type="file"></span><h3 id="NetworkTransport-Telepathy">Telepathy</h3><p>Telepathy is a transport that was specifically designed to be used in MMO games. It was designed using the <a class="external-link" href="https://en.wikipedia.org/wiki/KISS_principle" rel="nofollow">KISS principle</a>. As a result, it is only 400 lines of code, extremely fast and easy to understand. Since it was made for MMO games, it does not seem like the right choice for VARLab.</p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" width="318" loading="lazy" src="attachments/833552408/834109544.png?width=318" data-image-src="attachments/833552408/834109544.png" data-height="375" data-width="318" data-unresolved-comment-count="0" data-linked-resource-id="834109544" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20231025-025637.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="833552408" data-linked-resource-container-version="6" data-media-id="77c32a6e-c1d9-440f-8b8d-ba09ff483083" data-media-type="file"></span><h3 id="NetworkTransport-WebSocketsTransport">WebSockets Transport</h3><p>WebSockets uses TCP for its protocol. While it is a bit slower, it is safer as TCP requires the TCP handshake for secure connections and responses for each packet sent. Websockets also supports WebGL builds, which is awesome for VARLab. WebSockets will require us to set up SSL or use a reverse proxy to work on an HTTPS domain. This seems like the right choice for VARLab as it allows us to use WebGL builds. However, the note about requiring extra setup should be noted and tested before proceeding.</p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" width="320" loading="lazy" src="attachments/833552408/834502754.png?width=320" data-image-src="attachments/833552408/834502754.png" data-height="456" data-width="320" data-unresolved-comment-count="0" data-linked-resource-id="834502754" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20231025-025722.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="833552408" data-linked-resource-container-version="6" data-media-id="2e137ea6-204c-487c-b7bb-5e4eb6fa9cfa" data-media-type="file"></span><h3 id="NetworkTransport-Multiplex">Multiplex </h3><p>The Multiplex option itself is not a Transport option. What it does is allow you to use multiple transport options at once. So we can use the Multiplex option if we want to use both WebSockets Transport and KCP Transport. This option could be viable for VARLab as it doesn’t restrict us to one transport option. This would be our option if we eventually want to move away from or try doing something other than a WebGL build while still supporting it.</p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" width="318" loading="lazy" src="attachments/833552408/834043999.png?width=318" data-image-src="attachments/833552408/834043999.png" data-height="127" data-width="318" data-unresolved-comment-count="0" data-linked-resource-id="834043999" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20231025-025819.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="833552408" data-linked-resource-container-version="6" data-media-id="be999c42-951c-4fdc-8560-0a4a5a27eaee" data-media-type="file"></span><div class="panel" style="background-color: #EAE6FF;border-color: #998DD9;border-width: 1px;"><div class="panelContent" style="background-color: #EAE6FF;">
+<p><strong>NOTE: </strong>If we are using multiple transport options, we may need to switch the ports that each are listening on. For example if we use KCP and WebSockets transports, they can not listen on the same port. These can easily be changed in the inspector tool for each respective transport.</p>
+</div></div><p><strong>Latency Simulation</strong><br/>The last option is Latency Simulation. This allows us to test our project under non-ideal networking conditions. We can simulate it to our liking. We can control three things:</p><ul><li><p>Latency in milliseconds</p></li><li><p>Packet loss in %</p></li><li><p>Packet scramble/reorder</p></li></ul><p>This option is not meant to be used in our final project. It is simply meant to be used for testing and is a great tool to have available.</p><p>If you would like to read more about these options and the ones that I did not mention, you can read Mirrors documentation on the subject: <a class="external-link" data-card-appearance="inline" href="https://mirror-networking.gitbook.io/docs/manual/transports" rel="nofollow">https://mirror-networking.gitbook.io/docs/manual/transports</a> </p>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/833552408/833421350.png">image-20231023-224820.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/833552408/834109537.png">image-20231025-025522.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/833552408/834109544.png">image-20231025-025637.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/833552408/834502754.png">image-20231025-025722.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/833552408/834043999.png">image-20231025-025819.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Jul 04, 2025 14:41</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VARLab : Pull Request Checklist</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Onboarding_162726084.html">Onboarding</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="1835072.html">Using Bitbucket &amp; Sourcetree</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            VARLab : Pull Request Checklist
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Balazs Karner</span>, last modified on Sept 03, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="table-wrap"><table data-table-width="760" data-layout="default" data-local-id="023b8977-b193-41f1-8f96-ed7b86deceaa" class="confluenceTable"><colgroup><col style="width: 216.0px;"/><col style="width: 544.0px;"/></colgroup><tbody><tr><td data-highlight-colour="#f4f5f7" class="confluenceTd"><p><strong>On this Page</strong></p></td><td class="confluenceTd"><style type='text/css'>/*<![CDATA[*/
+div.rbtoc1751639985349 {padding: 0px;}
+div.rbtoc1751639985349 ul {list-style: none;margin-left: 0px;}
+div.rbtoc1751639985349 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1751639985349'>
+<ul class='toc-indentation'>
+<li><a href='#PullRequestChecklist-PullRequestFormatting'>Pull Request Formatting</a></li>
+<li><a href='#PullRequestChecklist-Scripting'>Scripting</a></li>
+<li><a href='#PullRequestChecklist-Engine'>Engine</a></li>
+<li><a href='#PullRequestChecklist-UI(Toolkit)'>UI (Toolkit)</a></li>
+<li><a href='#PullRequestChecklist-ProjectFiles'>Project Files</a></li>
+<li><a href='#PullRequestChecklist-Art'>Art</a></li>
+</ul>
+</div></td></tr></tbody></table></div><p /><p>Below is a quick checklist of topics that your peer reviewer will look for when you submit a PR. Please be kind to your reviewer, double check this checklist before creating a PR, and include a brief summary of changes to help guide your reviewer in the right direction. If your changes do not follow anything in this checklist, expect to receive a “Requested Changes”.</p><p /><h1 id="PullRequestChecklist-PullRequestFormatting">Pull Request Formatting</h1><ol start="1"><li><p>Commit messages get automatically pulled in as the description for your pull request. Save yourself time, and build a good habit of writing good commit messages</p><ol start="1"><li><p>The best commit messages describe &quot;<strong>why</strong>&quot; a change was made, in addition to &quot;<strong>what</strong>&quot; the change was</p></li></ol></li><li><p>Ensure your PR title is a short descriptive summary of the changes</p></li><li><p>Include screenshots, and comparisons of before and after your changes in the description</p></li><li><p>Include a brief description to help guide your PR reviewer</p></li><li><p>Use the tasks feature in Bitbucket as desired to track concrete changes requested during the review process</p></li></ol><p /><h1 id="PullRequestChecklist-Scripting">Scripting</h1><ol start="1"><li><p><span class="inline-comment-marker" data-ref="c768ed44-27d1-4074-9844-471f21527018">Was anything added along the way during development that isn’t needed anymore?</span></p><ol start="1"><li><p>It can be useful to mark test changes that you are unsure about about with a “//DEBUG” comment, and Ctrl-F through the project before committing</p></li><li><p>Are there any using statements that are not used? Specifically editor or experimental namespaces accidentally added</p></li><li><p>Are there any variables/methods that are not used?</p></li><li><p>Do you have any zombie code blocks or debug logs that should be removed?</p></li></ol></li><li><p><span class="inline-comment-marker" data-ref="ed4d1d38-7309-4794-b381-8af488cd323c">Are all naming conventions up to date? Were any variables changed from public to private, etc. and not updated?</span></p><ol start="1"><li><p>Reminder that [SerializedField] variables will lose references in the inspector after name or scope changes</p></li><li><p><a href="Code-Style-Guide_59507580.html" data-linked-resource-id="59507580" data-linked-resource-version="15" data-linked-resource-type="page">Code Style Guide</a> </p></li><li><p>Run Code Cleanup in VS before committing</p></li><li><p>Check over compiler warnings (There should be none)</p></li><li><p>Check formatting info (Green underlines)</p></li></ol></li><li><p>Do classes/methods have more than one responsibility?</p><ol start="1"><li><p>Review <strong>SOLID </strong>principles</p></li><li><p>Can anything from the class be separated into other classes, helper classes, etc.</p></li><li><p>Is there any duplicate behaviour between this class and another class?</p></li></ol></li><li><p>Are USS classes in scripts that need to be toggled in constants? </p><ol start="1"><li><p>USS classes are toggled using .EnableClassInList(“className“)</p></li></ol></li><li><p>Make sure there are comments</p><ol start="1"><li><p>Methods should have the default function header “///”</p></li><li><p>Reminder that it doesn’t have to be all or nothing, comment methods and explain <strong>why </strong>for confusing or complex blocks</p></li></ol></li><li><p>Double check that all automated tests pass</p></li></ol><p /><h1 id="PullRequestChecklist-Engine">Engine</h1><ol start="1"><li><p>Are the scene changes necessary? The Unity scene is a merge conflict hotspot which should be avoided as much as possible. Always work in the lowest level prefab possible </p></li><li><p>Do prefabs have any unapplied overrides?</p></li><li><p>Are the chosen colliders appropriate for the context? Are they optimized for performance?</p><ol start="1"><li><p>Are colliders box colliders where possible?</p></li><li><p>Are mesh colliders marked as “Convex” where possible?</p></li></ol></li><li><p>Do your changes need to be a separate prefab? If you are adding objects or components that are significantly complex or if the object is going to be reused then it should be its own prefab</p><ol start="1"><li><p>Always work in the prefab you are intending to change</p></li><li><p>Double check overrides on child/parent prefabs. Sometimes they have the same value but it is still marked as an override</p></li><li><p>Make sure overrides are intentional in parent prefabs. We might want to override values for scene specific changes that we do not want applied to the child prefab</p></li></ol></li></ol><p /><h1 id="PullRequestChecklist-UI(Toolkit)">UI (Toolkit)</h1><ol start="1"><li><p>Are there any inline styles that should be USS classes?</p></li><li><p>Is there duplicated USS in multiple classes that can be separated into a shared class?</p></li><li><p>Do USS classes contain properties that are defined within <strong>velcro-structure.uss</strong>, or <strong>velcro-style.uss</strong> and can be applied from those files?</p></li><li><p>Do USS classes follow the <a class="external-link" href="https://docs.unity3d.com/Manual/UIE-USS-WritingStyleSheets.html" rel="nofollow">BEM naming convention</a>?</p></li><li><p>Do USS classes avoid the use of <strong>complex selectors</strong> (&gt;, #, etc.) where possible?</p></li><li><p>How does the new piece of UI scale when stretched/shrank? Does it break, and at what point?</p><ol start="1"><li><p>Does text wrap, or collapse into “…”, or does it run off the UI?</p></li><li><p>Does the new piece of UI stay within the safe bounds of your screen? UI should have sensible maximum horizontal values and then proceed to wrap to scale vertically when scaling with text </p></li></ol></li><li><p>Does the new piece of UI match the Figma look and feel when in play mode?</p></li></ol><p /><h1 id="PullRequestChecklist-ProjectFiles">Project Files</h1><ol start="1"><li><p>Are any new files in the correct location?</p></li><li><p>Are old files that aren’t needed anymore deleted?</p><ol start="1"><li><p>Replace existing files as opposed to adding &lt;filename&gt;<strong>_new or &lt;</strong>filename&gt; <strong>(1)</strong></p></li></ol></li><li><p>Do new files follow the project’s naming convention?</p><ol start="1"><li><p>Some projects have import presets set up, which auto change the texture type as long as it follows the correct naming convention</p><ol start="1"><li><p>Ex. &quot;<strong>*_Normal</strong>&quot; for normal maps, &quot;*<strong>_Sprite</strong>&quot; for sprites</p></li></ol></li></ol></li><li><p>Replace files in the window file explorer rather than the unity editor</p><ol start="1"><li><p>A common workflow is deleting the old one, importing the new one, and renaming the new one to match the old name. <strong>This keeps the same identifier in the </strong><code>.meta</code><strong> file</strong></p></li></ol></li><li><p>Make sure to only stage files that you meant to change. Always review files instead of clicking the “<strong>Stage All</strong>” immediately</p></li></ol><p /><h1 id="PullRequestChecklist-Art">Art</h1><ol start="1"><li><p>Are materials created and applied to the fbx “<strong>Materials</strong>” tab in the import settings?</p></li><li><p>Are there any animations involved? If yes, has the avatar been generated from the “<strong>Rig</strong>” tab in the import settings? </p></li><li><p>Is the origin/pivot set correctly? </p></li><li><p>Are the scales looking correct? </p></li><li><p>Are there any abnormal rotations? </p></li><li><p>Is the model named correctly?</p><ol start="1"><li><p><a href="On-Universal-Naming-Conventions_743866369.html" data-linked-resource-id="743866369" data-linked-resource-version="24" data-linked-resource-type="page">On Universal Naming Conventions</a>  </p></li></ol></li><li><p>Is a prefab required? </p></li><li><p>Are any faces being removed due to ngons?</p></li></ol><div class="confluence-information-macro confluence-information-macro-warning"><span class="aui-icon aui-icon-small aui-iconfont-error confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><em>A polygon of modelName is self-intersecting and has been discarded. UnityEditorInternal.InternalEditorUtility:ProjectWindowDrag(HierarchyProperty, Boolean) UnityEngine.GUIUtility:ProcessEvent(Int32, IntPtr)</em></p></div></div>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Jul 04, 2025 14:39</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

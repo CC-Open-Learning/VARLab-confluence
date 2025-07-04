@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VARLab : Unity Full-Stack Testing Tutorial</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="How-To-Articles_581435426.html">How-To Articles</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Unity-Development_688324665.html">Unity Development</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            VARLab : Unity Full-Stack Testing Tutorial
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> User 1f114</span>, last modified by <span class='editor'> Balazs Karner</span> on Mar 31, 2025
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <style type='text/css'>/*<![CDATA[*/
+div.rbtoc1751640718230 {padding: 0px;}
+div.rbtoc1751640718230 ul {list-style: disc;margin-left: 0px;}
+div.rbtoc1751640718230 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1751640718230'>
+<ul class='toc-indentation'>
+<li><a href='#UnityFull-StackTestingTutorial-WhatWillYouLearn?'>What Will You Learn?</a></li>
+<li><a href='#UnityFull-StackTestingTutorial-ImagineTestinganAirplane'>Imagine Testing an Airplane</a></li>
+<li><a href='#UnityFull-StackTestingTutorial-Terms'>Terms</a>
+<ul class='toc-indentation'>
+<li><a href='#UnityFull-StackTestingTutorial-DependencyInjection(DI)'>Dependency Injection (DI)</a></li>
+<li><a href='#UnityFull-StackTestingTutorial-Mocking'>Mocking</a></li>
+<li><a href='#UnityFull-StackTestingTutorial-UnitTest'>Unit Test</a></li>
+<li><a href='#UnityFull-StackTestingTutorial-IntegrationTest'>Integration Test</a></li>
+<li><a href='#UnityFull-StackTestingTutorial-SystemTest'>System Test</a></li>
+</ul>
+</li>
+<li><a href='#UnityFull-StackTestingTutorial-Part1:SettingUptheProject'>Part 1: Setting Up the Project</a></li>
+<li><a href='#UnityFull-StackTestingTutorial-Part2:DependencyInjection'>Part 2: Dependency Injection</a>
+<ul class='toc-indentation'>
+<li><a href='#UnityFull-StackTestingTutorial-UsingDependencyInjection'>Using Dependency Injection</a></li>
+</ul>
+</li>
+<li><a href='#UnityFull-StackTestingTutorial-ContinuetoUnitTestTutorial'>Continue to Unit Test Tutorial</a></li>
+</ul>
+</div><h1 id="UnityFull-StackTestingTutorial-WhatWillYouLearn?">What Will You Learn?</h1><p>In this tutorial, we’ll walk through creating a fully-tested Unity Script. The Unity script will be decoupled from Unity using constructor dependency injection (ie, DI). Then, we will write unit tests which will test the logic of this behaviour. Integration tests will be written to ensure this behaviour works properly with Unity. Finally, System tests will be written to ensure the scene works as intended.</p><h1 id="UnityFull-StackTestingTutorial-ImagineTestinganAirplane">Imagine Testing an Airplane</h1><p>A Unit test is a lot like testing the individual transistors of the radio. Integration testing is much like testing a radio before it leaves the factory. A system test is like getting a drone pilot to fly a plane before putting humans on board.</p><p>If you have a problem with transistors dying prematurely, flying the plane is a terrible test to determine the tolerances on the transistors. Conversely, if your only tests are on individual transistors, wires, and steel, you’ll certainly find no one willing to fly on such a plane. You’ll want all three levels of testing before you trust it enough to fly with passengers.</p><h1 id="UnityFull-StackTestingTutorial-Terms">Terms</h1><h2 id="UnityFull-StackTestingTutorial-DependencyInjection(DI)">Dependency Injection (DI)</h2><p>DI is a method of decoupling logic away from Unity and other dependencies. It works by referring to dependencies via interfaces and passing in dependencies as constructor arguments. This decoupling is necessary in order to be able to run unit tests.</p><h2 id="UnityFull-StackTestingTutorial-Mocking">Mocking</h2><p>Given an interface, mocking creates an implementation of that interface for purposes of unit testing. It allows you to verify that it’s used correctly, as well as capture data passed into the mock.</p><h2 id="UnityFull-StackTestingTutorial-UnitTest">Unit Test</h2><p>Unit tests are designed to test logic in one (and only one) component. This implementation must be decoupled from Unity/dependencies using DI. These dependencies are then mocked out for the test.</p><p>This is the most involved level of testing. It creates extremely thorough and stable logic tests (a failure almost always indicates some bug). These tests also pinpoint the root cause of the bug. Unfortunately, not all code can be covered by unit tests (ie, Monobehaviours &amp; wrappers).</p><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>We should use unit testing on non-trivial scripts that contain logic. For example, if the script contains loops or if-statements.</p></div></div><h2 id="UnityFull-StackTestingTutorial-IntegrationTest">Integration Test</h2><p>Integration tests are designed to test groups of component scripts. They ensure a script works inside of a minimal scene constructed in C#, along with its minimal dependencies. </p><p>These are broader than Unit tests. They cover what unit tests cannot (Monobehaviours &amp; wrappers) but are less stable than unit tests. Integration tests are also a great way to document how to use and set up a feature!</p><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>We should use integration testing on features. Sometimes a single feature may be a single script, or multiple scripts working together.</p></div></div><h2 id="UnityFull-StackTestingTutorial-SystemTest"><span class="inline-comment-marker" data-ref="8375acb7-ae1c-418b-8a63-9ca5232f6e30">System Test</span></h2><p>A system test is our broadest form of test, and is designed to make sure that a scene is set up properly. They tend to test “workflows.“</p><p>These are the broadest form of testing. If these tests are too specific, they can be quite unstable, especially in projects missing integration and unit tests. These tests are great for trying to stop simple mistakes in the Unity editor. They also make good smoke tests.</p><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>We should use system tests on scenes and prefabs. These should ensure that the general scene functionality works and is flexible enough to prevent it from breaking each time new features are added.</p></div></div><p>The following tutorial assumes that you already have a basic understanding of Unity. </p><hr/><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><strong>IMPORTANT:</strong> This tutorial will cover two options: <strong>Writing your own interfaces and wrappers</strong>, or <strong>using interfaces and wrappers provided by CORE-Interfaces</strong>. Throughout the tutorial, both options will be available to you via expand tags. Please choose one method to follow along with when doing this tutorial.</p></div></div><h1 id="UnityFull-StackTestingTutorial-Part1:SettingUptheProject">Part 1: Setting Up the Project</h1><p /><ul><li><p>Open Unity Hub and select <em>New Project</em>. Select <em>Sample</em> in the templates list on the left and choose the <strong>3D Sample Scene (URP). </strong>You may also use the search bar and search it by name. You may need to press “Download Template“ if you do not have this downloaded already. Choose a project name, and click “Create Project.“</p></li></ul><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" width="680" loading="lazy" src="attachments/749699073/749928454.png?width=680" data-image-src="attachments/749699073/749928454.png" data-height="591" data-width="1019" data-unresolved-comment-count="0" data-linked-resource-id="749928454" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230629-181009.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="749699073" data-linked-resource-container-version="79" data-media-id="fa21e12d-e0e9-4e28-8cd0-6db004af5326" data-media-type="file"></span><div class="panel" style="background-color: #EAE6FF;border-color: #998DD9;border-width: 1px;"><div class="panelContent" style="background-color: #EAE6FF;">
+<p><strong>For Faster Rendering of the Project (OPTIONAL)</strong></p><p>To make this project render faster, open the <strong>SampleScene</strong> and delete “<strong>Post-process Volume</strong>,“ “<strong>Reflection Probes</strong>,“ and “<strong>Light Probe Group</strong>“ from the <strong>Hierarchy</strong>. You can also go to <strong>Window-&gt;Rendering-&gt;Lighting</strong>, and disable “<strong>Baked Global Illumination</strong>”.</p><ul><li><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/749699073/750813185.png" data-image-src="attachments/749699073/750813185.png" data-height="157" data-width="216" data-unresolved-comment-count="0" data-linked-resource-id="750813185" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230630-152501.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="749699073" data-linked-resource-container-version="79" data-media-id="8025b1c3-6b85-49ee-ad50-2fdeae106dbc" data-media-type="file"></span></li></ul>
+</div></div><p /><div class="panel" style="background-color: #EAE6FF;border-color: #998DD9;border-width: 1px;"><div class="panelContent" style="background-color: #EAE6FF;">
+<p><strong>Setting Up Git (OPTIONAL)</strong></p><p>To set this up on a local git repo, use Github’s <a class="external-link" href="https://github.com/github/gitignore/blob/main/Unity.gitignore" rel="nofollow">.gitignore</a> for Unity as your .gitignore, and run <code>git init</code> . You can now track this as a typical local git repo, for example, with SourceTree.</p><p /><ul><li><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" width="612" loading="lazy" src="attachments/749699073/749862924.png?width=612" data-image-src="attachments/749699073/749862924.png" data-height="243" data-width="983" data-unresolved-comment-count="0" data-linked-resource-id="749862924" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230629-183655.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="749699073" data-linked-resource-container-version="79" data-media-id="6b455304-b590-42fe-b2f9-c13cbbbac844" data-media-type="file"></span></li></ul><p />
+</div></div><p /><ul><li><p>Create a new assembly definition inside the <strong>Scripts </strong>folder by right-clicking inside the folder and selecting <strong>Create &gt; Assembly Definition</strong>. In this tutorial we are naming the assembly <strong>FullStackTutorial.</strong></p></li></ul><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/749699073/775159825.png" data-image-src="attachments/749699073/775159825.png" data-height="414" data-width="580" data-unresolved-comment-count="0" data-linked-resource-id="775159825" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230801-133216.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="749699073" data-linked-resource-container-version="79" data-media-id="350f8911-ed2f-46a0-be77-2e3238dda6f3" data-media-type="file"></span><p /><ul><li><p> Select the<strong> FullStackTutorial </strong>assembly and in the inspector, under the <strong>Assembly Definition References</strong> include <code>Unity.TextMeshPro</code>and apply your changes:</p></li></ul><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/749699073/767852556.png" data-image-src="attachments/749699073/767852556.png" data-height="719" data-width="1107" data-unresolved-comment-count="0" data-linked-resource-id="767852556" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230724-154506.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="749699073" data-linked-resource-container-version="79" data-media-id="a518ddb5-6ecc-460c-aba8-1f8e54ea5dd9" data-media-type="file"></span><ul><li><p>Create a script called <code>ShowRandomCard.cs</code> inside the <strong>Scripts </strong>folder. This will eventually be a simple script that displays a random standard playing card on the screen, in suit colour.</p></li></ul><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/749699073/750026755.png" data-image-src="attachments/749699073/750026755.png" data-height="253" data-width="405" data-unresolved-comment-count="0" data-linked-resource-id="750026755" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230629-184401.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="749699073" data-linked-resource-container-version="79" data-media-id="1c9b0feb-0ced-4f19-ac32-85f29832d20c" data-media-type="file"></span><ul><li><p><span class="inline-comment-marker" data-ref="2e7b1969-23dc-4401-ac8f-6a22a714fa5b">Attach a “</span><strong><span class="inline-comment-marker" data-ref="2e7b1969-23dc-4401-ac8f-6a22a714fa5b">Physics Raycaster</span></strong><span class="inline-comment-marker" data-ref="2e7b1969-23dc-4401-ac8f-6a22a714fa5b">” to the </span><strong><span class="inline-comment-marker" data-ref="2e7b1969-23dc-4401-ac8f-6a22a714fa5b">Main Camera</span></strong><span class="inline-comment-marker" data-ref="2e7b1969-23dc-4401-ac8f-6a22a714fa5b"> in the </span><strong><span class="inline-comment-marker" data-ref="2e7b1969-23dc-4401-ac8f-6a22a714fa5b">Hierarchy</span></strong>. This will cause mouse clicks from the players' camera to cast rays into the scene.</p></li></ul><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/749699073/749830160.png" data-image-src="attachments/749699073/749830160.png" data-height="651" data-width="1017" data-unresolved-comment-count="0" data-linked-resource-id="749830160" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230629-184913.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="749699073" data-linked-resource-container-version="79" data-media-id="0546916a-16d7-473a-871f-ebeb8dc7e5d6" data-media-type="file"></span><ul><li><p><span class="inline-comment-marker" data-ref="a378843e-4eb6-4338-bf87-42494649c92e">Locate the </span><strong><span class="inline-comment-marker" data-ref="a378843e-4eb6-4338-bf87-42494649c92e">Safety Hat</span></strong><span class="inline-comment-marker" data-ref="a378843e-4eb6-4338-bf87-42494649c92e"> inside of </span><strong><span class="inline-comment-marker" data-ref="a378843e-4eb6-4338-bf87-42494649c92e">Props-&gt;Workbench</span></strong><span class="inline-comment-marker" data-ref="a378843e-4eb6-4338-bf87-42494649c92e">. Add a “</span><strong><span class="inline-comment-marker" data-ref="a378843e-4eb6-4338-bf87-42494649c92e">Mesh Collider</span></strong><span class="inline-comment-marker" data-ref="a378843e-4eb6-4338-bf87-42494649c92e">” and “</span><strong><span class="inline-comment-marker" data-ref="a378843e-4eb6-4338-bf87-42494649c92e">Show Random Card</span></strong><span class="inline-comment-marker" data-ref="a378843e-4eb6-4338-bf87-42494649c92e">” to the </span><strong><span class="inline-comment-marker" data-ref="a378843e-4eb6-4338-bf87-42494649c92e">Safety Hat</span></strong><span class="inline-comment-marker" data-ref="a378843e-4eb6-4338-bf87-42494649c92e">. It is good practice to do this in the Workbench prefab (press the right arrow beside </span><strong><span class="inline-comment-marker" data-ref="a378843e-4eb6-4338-bf87-42494649c92e">Workbench</span></strong><span class="inline-comment-marker" data-ref="a378843e-4eb6-4338-bf87-42494649c92e"> and then attach these components). </span>This will trigger <code>OnMouseDown()</code> when a mouse click ray collides with this mesh.</p></li></ul><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/749699073/749731848.png" data-image-src="attachments/749699073/749731848.png" data-height="651" data-width="1017" data-unresolved-comment-count="0" data-linked-resource-id="749731848" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230629-185255.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="749699073" data-linked-resource-container-version="79" data-media-id="7db33b55-9d79-4f1f-b5ea-423f32757a68" data-media-type="file"></span><ul><li><p><span class="inline-comment-marker" data-ref="c49ca0e3-9a36-4ee1-a389-3a3736ad2599">Add a </span><strong><span class="inline-comment-marker" data-ref="c49ca0e3-9a36-4ee1-a389-3a3736ad2599">UI-&gt;Canvas</span></strong><span class="inline-comment-marker" data-ref="c49ca0e3-9a36-4ee1-a389-3a3736ad2599"> to the </span><strong><span class="inline-comment-marker" data-ref="c49ca0e3-9a36-4ee1-a389-3a3736ad2599">Scene</span></strong><span class="inline-comment-marker" data-ref="c49ca0e3-9a36-4ee1-a389-3a3736ad2599">, and add a </span><strong><span class="inline-comment-marker" data-ref="c49ca0e3-9a36-4ee1-a389-3a3736ad2599">UI-&gt;Text Mesh Pro</span></strong><span class="inline-comment-marker" data-ref="c49ca0e3-9a36-4ee1-a389-3a3736ad2599"> named “</span><strong><span class="inline-comment-marker" data-ref="c49ca0e3-9a36-4ee1-a389-3a3736ad2599">Current Card</span></strong><span class="inline-comment-marker" data-ref="c49ca0e3-9a36-4ee1-a389-3a3736ad2599">“ to the </span><strong><span class="inline-comment-marker" data-ref="c49ca0e3-9a36-4ee1-a389-3a3736ad2599">Canvas</span></strong><span class="inline-comment-marker" data-ref="c49ca0e3-9a36-4ee1-a389-3a3736ad2599">. </span>It may ask you to install essential assets. </p></li><li><p>Press “2D“ in Scene View, and double-click on the Canvas to see it. This is the UI element that we will be writing our coloured text to. It’s good practice to rename this and give it better placeholder text.</p></li></ul><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/749699073/750190596.png" data-image-src="attachments/749699073/750190596.png" data-height="651" data-width="1017" data-unresolved-comment-count="0" data-linked-resource-id="750190596" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230629-190853.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="749699073" data-linked-resource-container-version="79" data-media-id="567e7f18-d3ee-4482-9013-2d1f40256382" data-media-type="file"></span><ul><li><p>Open the <code>ShowRandomCard.cs</code> script in Visual Studio to edit it. Copy and paste the following source code into this script. Please take time to get familiar with and understand this code.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">using System;
+using UnityEngine;
+using TMPro;
+using UnityEngine.Events;
+
+public class ShowRandomCard : MonoBehaviour
+{
+    public TextMeshProUGUI currentCardLabel;
+    public UnityEvent drawCard = new(); // We&#39;ll use this later
+
+    static readonly System.Random rng = new();
+
+    enum Suit
+    {
+        Spades, Hearts, Clubs, Diamonds
+    }
+
+    enum Rank
+    {
+        Ace, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten,
+        Jack, Queen, King
+    }
+
+    // Select a random element from an enum.
+    T RandomSelect&lt;T&gt;()
+    {
+        Array values = Enum.GetValues(typeof(T));
+        return (T)values.GetValue(rng.Next(values.Length));
+    }
+
+    Color SuitToColor(Suit suit)
+    {
+        switch (suit)
+        {
+            case Suit.Spades:
+            case Suit.Clubs:
+                return Color.black;
+            case Suit.Hearts:
+            case Suit.Diamonds:
+                return Color.red;
+            default:
+                throw new InvalidOperationException($&quot;Unknown suit: {suit}.&quot;);
+        }
+    }
+
+    (string, Color) RandomCard()
+    {
+        Suit suit = RandomSelect&lt;Suit&gt;();
+        Rank rank = RandomSelect&lt;Rank&gt;();
+        return ($&quot;{rank} of {suit}&quot;, SuitToColor(suit));
+    }
+
+    void Awake()
+    {
+        // Good defensive practice.
+        if (currentCardLabel == null)
+        {
+            throw new MissingReferenceException(
+                &quot;Missing Current Card Label in Show Random Card on &quot; +
+                $&quot;{this.name}.&quot;);
+        }
+    }
+
+    void Start()
+    {
+        currentCardLabel.text = &quot;&quot;;
+    }
+
+    public void OnMouseDown()
+    {
+        (currentCardLabel.text, currentCardLabel.color) = RandomCard();
+        drawCard?.Invoke();
+    }
+}</pre>
+</div></div></li><li><p>Finally, <span class="inline-comment-marker" data-ref="b031789e-6e22-4bc3-95df-9ccf0560240c">serialize the </span><strong><span class="inline-comment-marker" data-ref="b031789e-6e22-4bc3-95df-9ccf0560240c">Current Card GameObject</span></strong><span class="inline-comment-marker" data-ref="b031789e-6e22-4bc3-95df-9ccf0560240c"> </span>into “<strong>Current Card Label</strong>” in “<strong>Show Random Card</strong>” on Safety Hat. This cannot be done inside the Workbench prefab because an object from the scene cannot be referenced in a prefab.</p></li></ul><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/749699073/753860638.png" data-image-src="attachments/749699073/753860638.png" data-height="678" data-width="1108" data-unresolved-comment-count="0" data-linked-resource-id="753860638" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230706-171540.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="749699073" data-linked-resource-container-version="79" data-media-id="21880760-ae05-4f43-9cb9-d3faebe7e35b" data-media-type="file"></span><ul><li><p>When you play the game, if you click on the safety hat, a random card in suit colour should be displayed!</p></li></ul><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/749699073/749895690.png" data-image-src="attachments/749699073/749895690.png" data-height="441" data-width="739" data-unresolved-comment-count="0" data-linked-resource-id="749895690" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230630-154408.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="749699073" data-linked-resource-container-version="79" data-media-id="821d8bff-b5b4-4174-84b5-8b22687bc703" data-media-type="file"></span><h1 id="UnityFull-StackTestingTutorial-Part2:DependencyInjection">Part 2: Dependency Injection</h1><p /><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>This is only necessary for components we want to unit test, ie, component scripts with significant logic. To learn more about testable behaviours: <a href="Testable-Behaviour_775225368.html" data-linked-resource-id="775225368" data-linked-resource-version="23" data-linked-resource-type="page">Testable Behaviour</a> </p></div></div><p /><ul><li><p>As an exercise, try to find ALL of the dependencies in <code>ShowRandomCard.cs</code>. In this example, there are 10: </p><ul><li><p><code>System.Enum</code></p></li><li><p> <code>System.Array</code></p></li><li><p> <code>System.InvalidOperationException</code></p></li><li><p> <code>System.MissingReferenceException</code></p></li><li><p><code>UnityEngine.Color</code></p></li><li><p><code>System.Random</code></p></li><li><p><code>TMPro.TextMeshProUGUI</code></p></li><li><p><code>UnityEngine.Event.UnityEvent</code></p></li><li><p><code>UnityEngine.GameObject</code></p></li><li><p><code>UnityEngine.Monobehaviour</code>.</p></li></ul></li></ul><p /><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>As a rule of thumb, we don’t need to decouple from dependencies that are both standalone and formally released in a trusted library. Everything else we should consider decoupling from.</p></div></div><p /><ul><li><p>Typically we <em>don’t</em> inject dependencies from <code>System</code>, but we <em>do </em>inject dependencies from <code>UnityEngine</code>, though there are a few exceptions:</p><ul><li><p>We’ll need control over the RNG, so <code>Random</code> must be injected.</p></li><li><p><code>UnityEngine.Color</code> is clearly standalone and released in a trusted library, so we don’t need to decouple it.</p></li><li><p>Thus, we need to decouple from <code>System.Random</code>, <code>TMPro.TextMeshProUGUI</code>, <code>UnityEvent.Event.UnityEvent</code>, <code>UnityEngine.GameObject</code>, and <code>UnityEngine.Monobehaviour</code>.</p></li></ul></li><li><p>The first step is to decouple our logic away from <code>Monobehaviour</code>. Create a new C# file called <code>ShowRandomCardImpl.cs</code> inside of the <strong>Scripts </strong>folder:</p></li></ul><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/749699073/751173657.png" data-image-src="attachments/749699073/751173657.png" data-height="718" data-width="1224" data-unresolved-comment-count="0" data-linked-resource-id="751173657" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230703-171302.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="749699073" data-linked-resource-container-version="79" data-media-id="a58706d9-4e96-4182-8e5f-6e7ef4620896" data-media-type="file"></span><ul><li><p>Now we move the logic of <code>ShowRandomCard</code> into <code>ShowRandomCardImpl</code>. Paste the following code into <code>ShowRandomCardImpl.cs</code>:</p></li></ul><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">using System;
+using TMPro;
+using UnityEngine;
+using UnityEngine.Events;
+
+public class ShowRandomCardImpl
+{
+    TextMeshProUGUI currentCardLabel;
+    GameObject parent;
+    Action drawCard;
+
+    static readonly System.Random rng = new();
+
+    public ShowRandomCardImpl(
+      GameObject parent,
+      TextMeshProUGUI currentCardLabel,
+      Action drawCard)
+    {
+        this.parent = parent;
+        this.currentCardLabel = currentCardLabel;
+        this.drawCard = drawCard;
+    }
+
+    public enum Suit
+    {
+        Spades, Hearts, Clubs, Diamonds
+    }
+
+    public enum Rank
+    {
+        Ace, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten,
+        Jack, Queen, King
+    }
+
+    T RandomSelect&lt;T&gt;()
+    {
+        Array values = Enum.GetValues(typeof(T));
+        return (T)values.GetValue(rng.Next(values.Length));
+    }
+
+    Color SuitToColor(Suit suit)
+    {
+        switch (suit)
+        {
+            case Suit.Spades:
+            case Suit.Clubs:
+                return Color.black;
+            case Suit.Hearts:
+            case Suit.Diamonds:
+                return Color.red;
+            default:
+                throw new InvalidOperationException($&quot;Unknown suit: {suit}.&quot;);
+        }
+    }
+
+    (string, Color) RandomCard()
+    {
+        Suit suit = RandomSelect&lt;Suit&gt;();
+        Rank rank = RandomSelect&lt;Rank&gt;();
+        return ($&quot;{rank} of {suit}&quot;, SuitToColor(suit));
+    }
+
+    public void Awake()
+    {
+        if (currentCardLabel == null)
+        {
+            throw new MissingReferenceException(
+                &quot;Missing Current Card Label in Show Random Card on &quot; +
+                $&quot;{parent.name}.&quot;);
+        }
+    }
+
+    public void Start()
+    {
+        currentCardLabel.text = &quot;&quot;;
+    }
+
+    public void OnMouseDown()
+    {
+        (currentCardLabel.text, currentCardLabel.color) = RandomCard();
+        drawCard?.Invoke();
+    }
+}</pre>
+</div></div><p /><ul><li><p>Now <code>ShowRandomCard</code> needs to be modified to use <code>ShowRandomCardImpl</code>. Update <code>ShowRandomCard.cs</code> so it looks like this:</p></li></ul><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">using UnityEngine;
+using TMPro;
+using UnityEngine.Events;
+
+public class ShowRandomCard : MonoBehaviour
+{
+    public TextMeshProUGUI currentCardLabel;
+    public UnityEvent drawCard;
+
+    ShowRandomCardImpl _showRandomCardImpl;
+    ShowRandomCardImpl ShowRandomCardImpl
+    {
+        get {
+            if (_showRandomCardImpl == null)
+            {
+                _showRandomCardImpl = new(
+                    this.gameObject,
+                    currentCardLabel,
+                    () =&gt; drawCard?.Invoke());
+            }
+            return _showRandomCardImpl;
+        }
+    }
+
+    void Awake()
+    {
+        ShowRandomCardImpl.Awake();
+    }
+
+    void Start()
+    {
+        ShowRandomCardImpl.Start();
+    }
+
+    public void OnMouseDown()
+    {
+        ShowRandomCardImpl.OnMouseDown();
+    }
+}</pre>
+</div></div><p /><h2 id="UnityFull-StackTestingTutorial-UsingDependencyInjection">Using Dependency Injection </h2><p /><ul><li><p>Now use dependency injection to decouple from <code>UnityEvent</code>, <code>Random</code>, <code>GameObject</code>, and <code>TextMeshProUGUI</code>. The <code>UnityEvent</code> is special and can be wrapped in an Action.</p></li></ul><p /><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>VARLab’s CORE-Interfaces library will contain common wrappers and interfaces for unity, so in practice you don’t always need to write these yourself.</p><p>You may select on of the options below and follow along with it through the tutorial.</p><p><strong>Option 1</strong> will show you how to use DI using CORE-Interfaces</p><p><strong>Option 2</strong> will show how to use DI by creating your own interfaces and wrappers.</p></div></div><p /><div id="expander-1734017241" class="expand-container"><div id="expander-control-1734017241" class="expand-control"><span class="expand-control-icon"><img style="vertical-align:middle;" class="expand-control-image" src="images/icons/grey_arrow_down.png"></span><span class="expand-control-text">Option 1 - Using Core-Interfaces</span></div><div id="expander-content-1734017241" class="expand-content"><p><strong>Add the Core-Interfaces package</strong></p><ul><li><p>Right-click on the <strong>Packages </strong>folder in the <strong>Project </strong>and select <strong>Show in Explorer</strong></p></li></ul><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/749699073/768868353.png" data-image-src="attachments/749699073/768868353.png" data-height="943" data-width="816" data-unresolved-comment-count="0" data-linked-resource-id="768868353" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230724-172824.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="749699073" data-linked-resource-container-version="79" data-media-id="d1a3d278-399b-4ad7-ad27-d61802d5aac3" data-media-type="file"></span><ul><li><p>Double-click the <strong>Packages </strong>folder in the <strong>Explorer </strong>and open the file <strong>manifest.json</strong></p></li></ul><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/749699073/768770051.png" data-image-src="attachments/749699073/768770051.png" data-height="154" data-width="516" data-unresolved-comment-count="0" data-linked-resource-id="768770051" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230724-173236.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="749699073" data-linked-resource-container-version="79" data-media-id="e41c8a68-b00b-4b06-b6dc-831512a4f726" data-media-type="file"></span><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Windows might prompt you to select a program to open the file, you may select Visual Studio, VSCode, Notepad, Notepad++…</p></div></div><p /><ul><li><p>Add to following line to the list of dependencies and save:</p></li></ul><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">&quot;com.varlab.core.interfaces&quot;: &quot;ssh://git@bitbucket.org/VARLab/core-interfaces.git#upm&quot;</pre>
+</div></div><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/749699073/768442371.png" data-image-src="attachments/749699073/768442371.png" data-height="401" data-width="837" data-unresolved-comment-count="0" data-linked-resource-id="768442371" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230724-173709.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="749699073" data-linked-resource-container-version="79" data-media-id="087d769b-0bff-4669-874b-f30966290430" data-media-type="file"></span><ul><li><p>Add the <strong>com.varlab.core.interfaces</strong> dll to the <strong>FullstackTutorial </strong>assembly definition located in the <strong>Scripts </strong>folder and click <strong>Apply</strong>.</p></li></ul><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/749699073/768999432.png" data-image-src="attachments/749699073/768999432.png" data-height="490" data-width="510" data-unresolved-comment-count="0" data-linked-resource-id="768999432" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230724-185927.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="749699073" data-linked-resource-container-version="79" data-media-id="938375f2-4a79-43a4-940c-b21d0a782b5f" data-media-type="file"></span><ul><li><p>Now, we can use interfaces in <code>ShowRandomCardImpl</code>. Update <code>ShowRandomCardImpl.cs</code> so it looks like:</p></li></ul><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">using System;
+using UnityEngine;
+using VARLab.Interfaces;
+
+public class ShowRandomCardImpl
+{
+    // Now accessed via interface only!
+    IText currentCardLabel;
+    IGameObject parent;
+    Action drawCard;
+
+    IRandom rng;
+
+    // We can inject anything that implements these interfaces!
+    public ShowRandomCardImpl(
+        IGameObject parent,
+        IText currentCardLabel,
+        IRandom rng,
+        Action drawCard)
+    {
+        this.parent = parent;
+        this.currentCardLabel = currentCardLabel;
+        this.rng = rng;
+        this.drawCard = drawCard;
+    }
+
+    public enum Suit
+    {
+        Spades, Hearts, Clubs, Diamonds
+    }
+
+    public enum Rank
+    {
+        Ace, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten,
+        Jack, Queen, King
+    }
+
+    T RandomSelect&lt;T&gt;()
+    {
+        Array values = Enum.GetValues(typeof(T));
+        return (T)values.GetValue(rng.Next(values.Length));
+    }
+
+    Color SuitToColor(Suit suit)
+    {
+        switch (suit)
+        {
+            case Suit.Spades:
+            case Suit.Clubs:
+                return Color.black;
+            case Suit.Hearts:
+            case Suit.Diamonds:
+                return Color.red;
+            default:
+                throw new InvalidOperationException($&quot;Unknown suit: {suit}.&quot;);
+        }
+    }
+
+    (string, Color) RandomCard()
+    {
+        Suit suit = RandomSelect&lt;Suit&gt;();
+        Rank rank = RandomSelect&lt;Rank&gt;();
+        return ($&quot;{rank} of {suit}&quot;, SuitToColor(suit));
+    }
+
+    public void Awake()
+    {
+        if (currentCardLabel == null)
+        {
+            throw new MissingReferenceException(
+                &quot;Missing Current Card Label in Show Random Card on &quot; +
+                $&quot;{parent.name}.&quot;);
+        }
+    }
+
+    public void Start()
+    {
+        currentCardLabel.text = &quot;&quot;;
+    }
+
+    public void OnMouseDown()
+    {
+        (currentCardLabel.text, currentCardLabel.color) = RandomCard();
+        drawCard?.Invoke();
+    }
+}</pre>
+</div></div></div></div><div id="expander-625895982" class="expand-container"><div id="expander-control-625895982" class="expand-control"><span class="expand-control-icon"><img style="vertical-align:middle;" class="expand-control-image" src="images/icons/grey_arrow_down.png"></span><span class="expand-control-text">Option 2 - Creating your own Interfaces and Wrappers</span></div><div id="expander-content-625895982" class="expand-content"><ul><li><p>For the others, we'll create 3 new interfaces and 3 new classes: <code>IRandom</code>, <code>IGameObject</code>, <code>IText</code>, <code>RandomWrapper</code>, <code>GameObjectWrapper</code>, and <code>TextMeshProWrapper</code>.</p></li><li><p>Paste the following into <code>IRandom.cs</code>. Notice that we’re only interested in specifying the methods and properties that our code actually uses.</p></li></ul><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">public interface IRandom
+{
+    int Next(int max);
+}</pre>
+</div></div><ul><li><p>Paste the following into <code>IGameObject.cs</code>:</p></li></ul><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">public interface IGameObject
+{
+    string name { get; set; }
+}</pre>
+</div></div><ul><li><p>Paste the following into <code>IText.cs</code>:</p></li></ul><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">using UnityEngine;
+
+public interface IText
+{
+    string text { get; set; }
+
+    Color color { get; set; }
+}</pre>
+</div></div><ul><li><p>Paste the following into <code>RandomWrapper.cs</code>. This wrapper pattern is extremely common for code that we do not own. If we owned the <code>Random</code> class, we would prefer to make <code>Random</code> implement <code>IRandom</code> from the beginning.</p></li></ul><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">using System;
+
+public class RandomWrapper : IRandom
+{
+    static readonly Random rng = new();
+
+    public int Next(int max)
+    {
+        return rng.Next(max);
+    }
+}</pre>
+</div></div><p>Paste the following into <code>GameObjectWrapper.cs</code>:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">using UnityEngine;
+
+public class GameObjectWrapper : IGameObject
+{
+    GameObject gameObject;
+
+    public GameObjectWrapper(GameObject gameObject)
+    {
+        this.gameObject = gameObject;
+    }
+
+    public string name {
+        get =&gt; gameObject.name;
+        set =&gt; gameObject.name = value;
+    }
+}</pre>
+</div></div><ul><li><p>Paste the following into <code>TextMeshProWrapper.cs</code>:</p></li></ul><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">using TMPro;
+using UnityEngine;
+
+public class TextMeshProWrapper : IText
+{
+    TextMeshProUGUI tmpro;
+
+    public TextMeshProWrapper(TextMeshProUGUI tmpro)
+    {
+        this.tmpro = tmpro;
+    }
+
+    public string text { get =&gt; tmpro.text; set =&gt; tmpro.text = value; }
+
+    public Color color { get =&gt; tmpro.color; set =&gt; tmpro.color = value; }
+}</pre>
+</div></div><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><strong>Important</strong>: As you can see, creating this wrappers and interfaces can be a bit of work, which is why we have CORE-Interfaces to provide these for Unity. If you are working on ANY library, make sure ALL public classes implement interfaces! It will save everyone else from the work of creating wrappers/interfaces themselves!</p></div></div><ul><li><p>Now, we can use interfaces in <code>ShowRandomCardImpl</code>. Update <code>ShowRandomCardImpl.cs</code> so it looks like this:</p></li></ul><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">using System;
+using UnityEngine;
+
+public class ShowRandomCardImpl
+{
+    // Now accessed via interface only!
+    IText currentCardLabel;
+    IGameObject parent;
+    Action drawCard;
+
+    IRandom rng;
+
+    // We can inject anything that implements these interfaces!
+    public ShowRandomCardImpl(
+        IGameObject parent,
+        IText currentCardLabel,
+        IRandom rng,
+        Action drawCard)
+    {
+        this.parent = parent;
+        this.currentCardLabel = currentCardLabel;
+        this.rng = rng;
+        this.drawCard = drawCard;
+    }
+
+    public enum Suit
+    {
+        Spades, Hearts, Clubs, Diamonds
+    }
+
+    public enum Rank
+    {
+        Ace, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten,
+        Jack, Queen, King
+    }
+
+    T RandomSelect&lt;T&gt;()
+    {
+        Array values = Enum.GetValues(typeof(T));
+        return (T)values.GetValue(rng.Next(values.Length));
+    }
+
+    Color SuitToColor(Suit suit)
+    {
+        switch (suit)
+        {
+            case Suit.Spades:
+            case Suit.Clubs:
+                return Color.black;
+            case Suit.Hearts:
+            case Suit.Diamonds:
+                return Color.red;
+            default:
+                throw new InvalidOperationException($&quot;Unknown suit: {suit}.&quot;);
+        }
+    }
+
+    (string, Color) RandomCard()
+    {
+        Suit suit = RandomSelect&lt;Suit&gt;();
+        Rank rank = RandomSelect&lt;Rank&gt;();
+        return ($&quot;{rank} of {suit}&quot;, SuitToColor(suit));
+    }
+
+    public void Awake()
+    {
+        if (currentCardLabel == null)
+        {
+            throw new MissingReferenceException(
+                &quot;Missing Current Card Label in Show Random Card on &quot; +
+                $&quot;{parent.name}.&quot;);
+        }
+    }
+
+    public void Start()
+    {
+        currentCardLabel.text = &quot;&quot;;
+    }
+
+    public void OnMouseDown()
+    {
+        (currentCardLabel.text, currentCardLabel.color) = RandomCard();
+        drawCard();
+    }
+}</pre>
+</div></div><p /></div></div><ul><li><p>Finally, we need to inject these dependencies into <code>ShowRandomCardImpl</code>. Update <code>ShowRandomCard.cs</code> so it looks like this:</p></li></ul><div id="expander-299191647" class="expand-container"><div id="expander-control-299191647" class="expand-control"><span class="expand-control-icon"><img style="vertical-align:middle;" class="expand-control-image" src="images/icons/grey_arrow_down.png"></span><span class="expand-control-text">Option 1 - Using Core-Interfaces</span></div><div id="expander-content-299191647" class="expand-content"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">using UnityEngine;
+using TMPro;
+using UnityEngine.Events;
+
+public class ShowRandomCard : MonoBehaviour
+{
+    public TextMeshProUGUI currentCardLabel;
+    public UnityEvent drawCard;
+
+    ShowRandomCardImpl _showRandomCardImpl;
+    ShowRandomCardImpl ShowRandomCardImpl
+    {
+        get {
+            if (_showRandomCardImpl == null)
+            {
+                // Notice how we wrap these dependencies up.
+                _showRandomCardImpl = new(
+                    new GameObjectWrapper(this.gameObject),
+                    new TextWrapper(currentCardLabel),
+                    new RandomWrapper(),
+                    () =&gt; drawCard?.Invoke());
+            }
+            return _showRandomCardImpl;
+        }
+    }
+
+    void Awake()
+    {
+        ShowRandomCardImpl.Awake();
+    }
+
+    void Start()
+    {
+        ShowRandomCardImpl.Start();
+    }
+
+    public void OnMouseDown()
+    {
+        ShowRandomCardImpl.OnMouseDown();
+    }
+}</pre>
+</div></div></div></div><div id="expander-5356927" class="expand-container"><div id="expander-control-5356927" class="expand-control"><span class="expand-control-icon"><img style="vertical-align:middle;" class="expand-control-image" src="images/icons/grey_arrow_down.png"></span><span class="expand-control-text">Option 2 - Creating your own Interfaces and Wrappers</span></div><div id="expander-content-5356927" class="expand-content"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">using UnityEngine;
+using TMPro;
+using UnityEngine.Events;
+
+public class ShowRandomCard : MonoBehaviour
+{
+    public TextMeshProUGUI currentCardLabel;
+    public UnityEvent drawCard;
+
+    ShowRandomCardImpl _showRandomCardImpl;
+    ShowRandomCardImpl ShowRandomCardImpl
+    {
+        get {
+            if (_showRandomCardImpl == null)
+            {
+                // Notice how we wrap these dependencies up.
+                _showRandomCardImpl = new(
+                    new GameObjectWrapper(this.gameObject),
+                    new TextMeshProWrapper(currentCardLabel),
+                    new RandomWrapper(),
+                    () =&gt; drawCard?.Invoke());
+            }
+            return _showRandomCardImpl;
+        }
+    }
+
+    void Awake()
+    {
+        ShowRandomCardImpl.Awake();
+    }
+
+    void Start()
+    {
+        ShowRandomCardImpl.Start();
+    }
+
+    public void OnMouseDown()
+    {
+        ShowRandomCardImpl.OnMouseDown();
+    }
+}</pre>
+</div></div></div></div><h1 id="UnityFull-StackTestingTutorial-ContinuetoUnitTestTutorial"><a href="Unity-Unit-Testing-Tutorial_754188289.html" data-linked-resource-id="754188289" data-linked-resource-version="18" data-linked-resource-type="page">Continue to Unit Test Tutorial</a></h1><p />
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/749699073/750354434.png">image-20230629-180756.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/749699073/750059524.png">image-20230629-180951.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/749699073/749928454.png">image-20230629-181009.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/749699073/750125061.png">image-20230629-182903.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/749699073/750256133.png">image-20230629-183523.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/749699073/749862918.png">image-20230629-183619.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/749699073/749862924.png">image-20230629-183655.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/749699073/750026755.png">image-20230629-184401.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/749699073/749830160.png">image-20230629-184913.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/749699073/749731848.png">image-20230629-185255.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/749699073/750190596.png">image-20230629-190853.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/749699073/749731854.png">image-20230629-192509.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/749699073/750551057.png">image-20230630-152146.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/749699073/750682116.png">image-20230630-152451.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/749699073/750714884.png">image-20230630-152455.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/749699073/750813185.png">image-20230630-152501.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/749699073/750551063.png">image-20230630-154126.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/749699073/749895690.png">image-20230630-154408.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/749699073/751173657.png">image-20230703-171302.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/749699073/752877575.png">image-20230530-151339.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/749699073/752877581.png">image-20230530-151950.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/749699073/752877587.png">image-20230530-152135.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/749699073/752877593.png">image-20230530-152606.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/749699073/752877599.png">image-20230530-153947.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/749699073/752877605.png">image-20230530-155700.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/749699073/752877611.png">image-20230530-155756.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/749699073/752877617.png">image-20230530-160806.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/749699073/752844803.png">image-20230705-145613.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/749699073/753860638.png">image-20230706-171540.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/749699073/767983630.png">image-20230724-145235.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/749699073/767918086.png">image-20230724-145344.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/749699073/767983636.png">image-20230724-145358.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/749699073/767852550.png">image-20230724-145407.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/749699073/767852556.png">image-20230724-154506.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/749699073/768507907.png">image-20230724-172552.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/749699073/768868353.png">image-20230724-172824.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/749699073/768770051.png">image-20230724-173236.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/749699073/768442371.png">image-20230724-173709.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/749699073/768999432.png">image-20230724-185927.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/749699073/775159825.png">image-20230801-133216.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/749699073/774864904.png">image-20230801-133923.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Jul 04, 2025 14:51</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

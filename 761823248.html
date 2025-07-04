@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VARLab : Bonus: Realtime Coroutine Unit Testing Tutorial</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="How-To-Articles_581435426.html">How-To Articles</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Unity-Development_688324665.html">Unity Development</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Unity-Full-Stack-Testing-Tutorial_749699073.html">Unity Full-Stack Testing Tutorial</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            VARLab : Bonus: Realtime Coroutine Unit Testing Tutorial
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> User 1f114</span>, last modified by <span class='editor'> Leo Bunting</span> on Aug 03, 2023
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <style type='text/css'>/*<![CDATA[*/
+div.rbtoc1751640749808 {padding: 0px;}
+div.rbtoc1751640749808 ul {list-style: none;margin-left: 0px;}
+div.rbtoc1751640749808 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1751640749808'>
+<ul class='toc-indentation'>
+<li><span class='TOCOutline'>1</span> <a href='#Bonus:RealtimeCoroutineUnitTestingTutorial-Createareal-timecoroutine'>Create a real-time coroutine</a></li>
+</ul>
+</div><p>This tutorial is intended for the rare circumstances where we want to test a real-time coroutine. These coroutines can be difficult to write and difficult to test. However, they can become a source of problems, especially when modifying existing coroutines. It is worth taking the time to write good tests for these!</p><h1 id="Bonus:RealtimeCoroutineUnitTestingTutorial-Createareal-timecoroutine">Create a real-time coroutine</h1><p>To start, we need to add a real-time script to our scene. In this case, the paint bucket is going to be filled with helium, and it will float up into the air. </p><div id="expander-1326363337" class="expand-container"><div id="expander-control-1326363337" class="expand-control"><span class="expand-control-icon"><img style="vertical-align:middle;" class="expand-control-image" src="images/icons/grey_arrow_down.png"></span><span class="expand-control-text">Option 2 - Creating your own Interfaces and Wrappers</span></div><div id="expander-content-1326363337" class="expand-content"><p>First, we’ll need to extend our GameObject proxy so it exposes <strong>position</strong>. Paste the following into <code>IGameObject.cs</code>:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">using UnityEngine;
+
+public interface IGameObject
+{
+    string name { get; set; }
+    ITransform transform { get; }
+}</pre>
+</div></div><p>Paste the corresponding changes into <code>GameObjectWrapper.cs</code>:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">using UnityEngine;
+
+public class GameObjectWrapper : IGameObject
+{
+    GameObject gameObject;
+
+    public GameObjectWrapper(GameObject gameObject)
+    {
+        this.gameObject = gameObject;
+    }
+
+    public string name
+    {
+        get =&gt; gameObject.name;
+        set =&gt; gameObject.name = value;
+    }
+
+    public ITransform transform
+    {
+        get =&gt; new TransformWrapper (gameObject.transform);
+    }
+}</pre>
+</div></div><p>Our real-time script also needs to be decoupled from time itself, so we’ll create a time service. Create a file called <code>ITime.cs</code>, and past the following into it:</p><div class="panel" style="background-color: #EAE6FF;border-color: #998DD9;border-width: 1px;"><div class="panelContent" style="background-color: #EAE6FF;">
+<p>Imagine trying to wait exactly 2ms between frames for 10 minutes. The test would be inexact, potentially completely wrong in slower cloud environments. Also, you’d need to wait 10 minutes for the test to complete. </p><p>Our strategy is to mock an alternative timeline out by injecting a TimeService. This allows us to “choose“ the exact time between frames, and run all of these frames instantly.</p>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">public interface ITime
+{
+    float deltaTime { get; }
+}</pre>
+</div></div><p>And here’s the corresponding <code>TimeService.cs</code>:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">using UnityEngine;
+
+public class TimeService : ITime
+{
+    public float deltaTime { get =&gt; Time.deltaTime;  }
+}</pre>
+</div></div><p>Finally, we’ll need an interface and service to start coroutines. Paste the following code into <code>ICoroutineService.cs</code>:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">using System.Collections;
+
+public interface ICoroutineService
+{
+    void StartCoroutine(IEnumerator coroutine);
+}</pre>
+</div></div><p>And the corresponding code for <code>CoroutineService.cs</code>:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">using System.Collections;
+using UnityEngine;
+
+public class CoroutineService : ICoroutineService
+{
+    MonoBehaviour parent;
+
+    public CoroutineService(MonoBehaviour parent)
+    {
+        this.parent = parent;
+    }
+
+    public void StartCoroutine(IEnumerator coroutine)
+    {
+        parent.StartCoroutine(coroutine);
+    }
+}</pre>
+</div></div><p>Add the corresponding code for <code>ITransform.cs</code></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public interface ITransform
+{
+    Vector3 position { get; set; }
+}
+</pre>
+</div></div><p>Add the corresponding code for <code>TransformWrapper</code>:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class TransformWrapper : ITransform
+{
+    Transform transform;
+
+    public TransformWrapper(Transform transform)
+    {
+        this.transform = transform;
+    }
+
+    public Vector3 position 
+    { 
+        get =&gt; transform.position; 
+        set =&gt; transform.position = value;
+    }
+}
+</pre>
+</div></div><p>We have everything we need to write our real-time code! In <code>Floatable.cs</code>, paste the following:</p><p /></div></div><p>In <code>Floatable.cs</code> paste the following code:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">using UnityEngine;
+
+// Only add this using statement if you are using CORE-Interfaces
+using VARLab.Interfaces;
+
+public class Floatable : MonoBehaviour
+{
+    public float Speed
+    {
+        get =&gt; FloatableImpl.Speed;
+        set =&gt; FloatableImpl.Speed = value;
+    }
+
+    public float Ceiling
+    {
+        get =&gt; FloatableImpl.Ceiling;
+        set =&gt; FloatableImpl.Ceiling = value;
+    }
+
+    FloatableImpl _floatableImpl;
+    FloatableImpl FloatableImpl
+    {
+        get
+        {
+            if (_floatableImpl == null)
+            {
+                _floatableImpl = new(
+                    new CoroutineService(this),
+                    new GameObjectWrapper(gameObject),
+                    new TimeService());
+            }
+            return _floatableImpl;
+        }
+    }
+
+    void Start()
+    {
+        FloatableImpl.Start();
+    }
+}</pre>
+</div></div><p>And in <code>FloatableImpl.cs</code>, paste the following:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">using System.Collections;
+using UnityEngine;
+
+// Only add this using statement if you are using CORE-Interfaces
+using VARLab.Interfaces;
+
+public class FloatableImpl
+{
+    public float Ceiling { get; set; } = 1000;
+    public float Speed { get; set; } = 1f;
+
+    ICoroutineService coroutineService;
+    IGameObject objectToFloat;
+    ITime timeService;
+
+    public FloatableImpl(
+        ICoroutineService coroutineService,
+        IGameObject objectToFloat,
+        ITime timeService
+    )
+    {
+        this.coroutineService = coroutineService;
+        this.objectToFloat = objectToFloat;
+        this.timeService = timeService;
+    }
+
+    public void Start()
+    {
+        coroutineService.StartCoroutine(StartFloating());
+    }
+
+    IEnumerator StartFloating()
+    {
+        while (objectToFloat.transform.position.y &lt; Ceiling)
+        {
+            float displacement = Speed * timeService.deltaTime;
+            objectToFloat.transform.position += new Vector3(0, displacement, 0);
+            yield return null;
+        }
+    }
+}</pre>
+</div></div><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Take your time to review the <code>Floatable.cs</code> and <code>FloatableImpl.cs</code> script to understand how they work.</p></div></div><p /><ul><li><p>To use this script, we simply attach the <code>Floatable</code> component to the 5G bucket. Running this should cause the bucket to float:</p></li></ul><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/761823248/765657096.png" data-image-src="attachments/761823248/765657096.png" data-height="720" data-width="1107" data-unresolved-comment-count="0" data-linked-resource-id="765657096" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230720-185011.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="761823248" data-linked-resource-container-version="18" data-media-id="f9fae5c1-48cf-4417-bca9-d7c7960d3e7f" data-media-type="file"></span><ul><li><p>Now, let's look at creating the unit test for this behaviour. In the <strong>EditMode </strong>test folder, create a new test called <code>FloatableUnitTest.cs</code></p></li><li><p>Notice that to get the coroutine <code>IEnumerator</code>, we set up a mock with a captor that sets <code>capturedCoroutine</code>. </p></li><li><p>Also, notice that we have a helper function <code>SetUpTimeService</code> to help us convert frame timestamps into delta times (it is often easier to think about time in terms of timestamps instead of the time between frames).</p></li></ul><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">using Moq;
+using NUnit.Framework;
+using System;
+using System.Collections;
+using UnityEngine;
+
+// Only add this using statement if you are using CORE-Interfaces
+using VARLab.Interfaces;
+
+public class FloatableUnitTest
+{
+    const float SPEED = 1f;
+    const float CEILING = 1000f;
+
+    FloatableImpl floatableImpl;
+
+    Mock&lt;ICoroutineService&gt; coroutineService;
+    Mock&lt;IGameObject&gt; floatableObject;
+    Mock&lt;ITime&gt; timeService;
+
+    IEnumerator capturedCoroutine;
+
+    [Test]
+    public void FloatAndStopAtCeiling()
+    {
+        // This will capture the coroutine from StartCoroutine.
+        SetUpCoroutineCaptor();
+        SetUpPosition();
+        // Instead of using actual time, we want to simulate time.
+        float[] frameTimeStamps = {
+            0f,
+            0.02f,
+            1f,
+            1.05f,
+            CEILING-0.01f,
+            CEILING,
+            CEILING+0.01f
+        };
+        SetUpTimeService(frameTimeStamps);
+
+        floatableImpl.Start();
+
+        VerifyCoroutineStart();
+        VerifyNoDisplacement();
+
+        // Step through and verify each frame.
+        foreach (float frameTimeStamp in frameTimeStamps)
+        {
+            if (frameTimeStamp == CEILING) break;
+            NextFrame();
+            VerifyDisplacement(floatableImpl.Speed * frameTimeStamp);
+        }
+
+        NextFrame();
+        VerifyCoroutineStopped();
+    }
+
+    [SetUp]
+    public void Setup()
+    {
+        coroutineService = new Mock&lt;ICoroutineService&gt;();
+        floatableObject = new Mock&lt;IGameObject&gt;();
+        timeService = new Mock&lt;ITime&gt;();
+
+        floatableImpl = new(coroutineService.Object, floatableObject.Object, timeService.Object);
+        floatableImpl.Speed = SPEED;
+        floatableImpl.Ceiling = CEILING;
+    }
+
+    void VerifyDisplacement(float expectedDisplacement)
+    {
+        Assert.AreEqual(new Vector3(0, expectedDisplacement, 0), floatableObject.Object.transform.position);
+    }
+
+    void SetUpPosition()
+    {
+        // SetupProperty will keep track of the current vector.
+        floatableObject.SetupProperty(x =&gt; x.transform.position, new Vector3(0, 0, 0));
+    }
+
+    void SetUpCoroutineCaptor()
+    {
+        CaptureMatch&lt;IEnumerator&gt; coroutineMatch = new(x =&gt; capturedCoroutine = x);
+        coroutineService.Setup((x) =&gt; x.StartCoroutine(Capture.With(coroutineMatch)));
+    }
+
+    // Given a set of time stamps, this constructs the corresponding
+    // time deltas.
+    void SetUpTimeService(params float[] frameTimeStamps)
+    {
+        var sequence = timeService.SetupSequence(x =&gt; x.deltaTime);
+        float prevTime = 0;
+
+        foreach (float currTime in frameTimeStamps)
+        {
+            if (prevTime &gt; currTime) throw new InvalidOperationException(
+                $&quot;Cannot time travel from {prevTime} to {currTime}&quot;);
+
+            float delta = currTime - prevTime;
+            sequence.Returns(delta);
+            prevTime = currTime;
+        }
+    }
+
+    void VerifyNoDisplacement()
+    {
+        floatableObject.VerifySet(x =&gt; x.transform.position = It.IsAny&lt;Vector3&gt;(), Times.Never);
+    }
+
+    void VerifyCoroutineStopped()
+    {
+        Assert.IsFalse(capturedCoroutine.MoveNext());
+    }
+
+    void NextFrame()
+    {
+        capturedCoroutine.MoveNext();
+    }
+
+    void VerifyCoroutineStart()
+    {
+        coroutineService.Verify(x =&gt; x.StartCoroutine(It.IsAny&lt;IEnumerator&gt;()), Times.Once);
+    }
+}</pre>
+</div></div><ul><li><p>Run all of your tests and ensure everything is still passing.</p></li></ul>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/761823248/761823256.png">image-20230705-150654.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/761823248/761823259.png">image-20230705-150936.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/761823248/761823262.png">image-20230705-150942.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/761823248/761823265.png">image-20230705-151117.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/761823248/761823268.png">image-20230706-133709.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/761823248/761823271.png">image-20230706-133734.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/761823248/761823274.png">image-20230706-133954.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/761823248/761823277.png">image-20230706-135405.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/761823248/761823280.png">image-20230706-140113.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/761823248/761823283.png">image-20230706-145253.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/761823248/761823286.png">image-20230706-145430.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/761823248/761823289.png">image-20230706-182135.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/761823248/761823292.png">image-20230706-183233.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/761823248/761823295.png">image-20230706-183546.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/761823248/761823298.png">image-20230706-195439.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/761823248/765657096.png">image-20230720-185011.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Jul 04, 2025 14:52</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

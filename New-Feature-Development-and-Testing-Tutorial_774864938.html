@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VARLab : New Feature Development and Testing Tutorial</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="How-To-Articles_581435426.html">How-To Articles</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Unity-Development_688324665.html">Unity Development</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Unity-Full-Stack-Testing-Tutorial_749699073.html">Unity Full-Stack Testing Tutorial</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            VARLab : New Feature Development and Testing Tutorial
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> User 68e34</span>, last modified by <span class='editor'> Leo Bunting</span> on Aug 16, 2023
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p /><style type='text/css'>/*<![CDATA[*/
+div.rbtoc1751640755949 {padding: 0px;}
+div.rbtoc1751640755949 ul {list-style: disc;margin-left: 0px;}
+div.rbtoc1751640755949 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1751640755949'>
+<ul class='toc-indentation'>
+<li><a href='#NewFeatureDevelopmentandTestingTutorial-OverviewofcreatinganewfeaturewithTDD'>Overview of creating a new feature with TDD</a>
+<ul class='toc-indentation'>
+<li><a href='#NewFeatureDevelopmentandTestingTutorial-1.Startwithaticket'>1. Start with a ticket</a></li>
+<li><a href='#NewFeatureDevelopmentandTestingTutorial-2.Writeatestplan'>2. Write a test plan</a></li>
+<li><a href='#NewFeatureDevelopmentandTestingTutorial-3.Implementthefeature'>3. Implement the feature</a></li>
+<li><a href='#NewFeatureDevelopmentandTestingTutorial-4.Implementthetests'>4. Implement the tests</a></li>
+<li><a href='#NewFeatureDevelopmentandTestingTutorial-5.MakeaPR'>5. Make a PR</a></li>
+</ul>
+</li>
+<li><a href='#NewFeatureDevelopmentandTestingTutorial-Example-AddasmallfeaturetotheextendedRoll-A-Ball'>Example - Add a small feature to the extended Roll-A-Ball</a>
+<ul class='toc-indentation'>
+<li><a href='#NewFeatureDevelopmentandTestingTutorial-1.Startwithaticket.1'>1. Start with a ticket</a></li>
+<li><a href='#NewFeatureDevelopmentandTestingTutorial-2.Writeatestplan.1'>2. Write a test plan</a></li>
+<li><a href='#NewFeatureDevelopmentandTestingTutorial-3.Implementthefeature.1'>3. Implement the feature</a>
+<ul class='toc-indentation'>
+<li><a href='#NewFeatureDevelopmentandTestingTutorial-Here’showwe’regoingtoimplementthis.'>Here’s how we’re going to implement this.</a></li>
+<li><a href='#NewFeatureDevelopmentandTestingTutorial-Code:'>Code:</a></li>
+</ul>
+</li>
+<li><a href='#NewFeatureDevelopmentandTestingTutorial-4.Testsimplementation'>4. Tests implementation</a></li>
+<li><a href='#NewFeatureDevelopmentandTestingTutorial-5.MakeaPR.1'>5. Make a PR</a></li>
+</ul>
+</li>
+<li><a href='#NewFeatureDevelopmentandTestingTutorial-FurtherReading'>Further Reading</a>
+<ul class='toc-indentation'>
+<li><a href='#NewFeatureDevelopmentandTestingTutorial-NOTE'>NOTE</a></li>
+</ul>
+</li>
+</ul>
+</div><p>In this tutorial we will add a new feature to the <a class="external-link" href="https://bitbucket.org/VARLab/roll-a-ball-testing-example" rel="nofollow">roll-a-ball-testing-example</a>. Check out this repo and follow along.</p><h2 id="NewFeatureDevelopmentandTestingTutorial-OverviewofcreatinganewfeaturewithTDD">Overview of creating a new feature with TDD</h2><h3 id="NewFeatureDevelopmentandTestingTutorial-1.Startwithaticket">1. Start with a ticket</h3><p>Take time to understand the ticket! If you don’t know, remember to ask and clarify.</p><h3 id="NewFeatureDevelopmentandTestingTutorial-2.Writeatestplan">2. Write a test plan</h3><p>If the ticket you are implementing involves changing C# code, write a test plan. This is a simple table with the following columns: <strong>name, test case, expected result</strong>. The test plan does not need to include unit tests!</p><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>A thorough test plan doesn’t just check “happy paths“: ie, the paths the code follows if everything works properly. They also check “unhappy paths“: ie, the paths the code follows when things go wrong. For example, if you have code that can throw an exception, it’s a good idea to write a test that ensures the exception is properly triggered.</p><p>At minimum, all new C# classes should come with one “happy path“ integration test.</p></div></div><h3 id="NewFeatureDevelopmentandTestingTutorial-3.Implementthefeature">3. Implement the feature</h3><p>Please write clean code <img class="emoticon emoticon-heart" data-emoji-id="2764" data-emoji-shortname=":heart:" data-emoji-fallback="❤️" src="images/icons/emoticons/heart.png" width="16" height="16" data-emoticon-name="heart" alt="(heart)"/>. Consider using <a href="Unity-Full-Stack-Testing-Tutorial_749699073.html" data-linked-resource-id="749699073" data-linked-resource-version="79" data-linked-resource-type="page">dependency injection</a> for complex scripts. </p><h3 id="NewFeatureDevelopmentandTestingTutorial-4.Implementthetests">4. Implement the tests</h3><p>Now implement every test in the test plan. Remember to run the tests as well, to verify that they all pass. At this stage, you could write additional unit tests to verify that your implementation logic is correct. This is recommended for complex code.</p><h3 id="NewFeatureDevelopmentandTestingTutorial-5.MakeaPR">5. Make a PR</h3><p>Make a PR. Link or write the test plan in the comments. Someone reviewing your PR should verify that </p><ol start="1"><li><p>all tests pass,</p></li><li><p>the tests are appropriate and match the test plan and,</p></li><li><p>the feature is implemented correctly.</p></li></ol><h2 id="NewFeatureDevelopmentandTestingTutorial-Example-AddasmallfeaturetotheextendedRoll-A-Ball">Example - Add a small feature to the extended Roll-A-Ball</h2><h3 id="NewFeatureDevelopmentandTestingTutorial-1.Startwithaticket.1">1. Start with a ticket</h3><p>Add a jump pad to the Roll-a-Ball game. When the ball hits the jump pad, it will jump. A new jump pad will be added on the ground. Whenever the ball hits the jump pad, the ball will change its vertical axis (jump).</p><h3 id="NewFeatureDevelopmentandTestingTutorial-2.Writeatestplan.1">2. Write a test plan</h3><div class="table-wrap"><table data-layout="default" data-local-id="f3976b63-d029-49ed-bcf5-30d8cd520c30" class="confluenceTable"><colgroup><col style="width: 257.0px;"/><col style="width: 214.0px;"/><col style="width: 189.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p><strong>Test Name</strong></p></th><th class="confluenceTh"><p><strong>Test Case</strong></p></th><th class="confluenceTh"><p><strong>Expected Result</strong></p></th></tr><tr><td class="confluenceTd"><p>Player_Hits_JumpPad_Then_Jump()</p><p>(happy path)</p></td><td class="confluenceTd"><p>Create a ball and a jump pad at different positions.</p><p>Wait until next fixed update.</p><p>Verify that the ball's velocity is not upward.</p><p>Change ball position so it’s on jump pad.</p><p>Wait until next fixed update.</p><p>Verify that the balls velocity is upward.</p></td><td class="confluenceTd"><p>The ball only bounces when colliding with a jump pad.</p></td></tr></tbody></table></div><ul><li><p>It’s a good idea to have someone review your test plan. This helps verify that the ticket is understood, and that the test plan is good.</p></li></ul><h3 id="NewFeatureDevelopmentandTestingTutorial-3.Implementthefeature.1">3. Implement the feature</h3><h4 id="NewFeatureDevelopmentandTestingTutorial-Here’showwe’regoingtoimplementthis."><strong>Here’s how we’re going to implement this.</strong></h4><p>We need to make some changes to the scene: </p><ol start="1"><li><p>Add a cube object to the scene and rename it to “JumpPad”</p></li><li><p>Adjust the scale to (X: 6.04, Y: 0, Z: 3.18) </p></li><li><p>Create and add a pink material</p></li><li><p>Leave the box collider enabled.</p></li></ol><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/774864938/774996004.png" data-image-src="attachments/774864938/774996004.png" data-height="831" data-width="2044" data-unresolved-comment-count="0" data-linked-resource-id="774996004" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230725-151621.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="774864938" data-linked-resource-container-version="3" data-media-id="0380ff59-51ca-4af1-8d52-6d75f19ddb4d" data-media-type="file"></span><p>To create the jump pad’s behaviour, we’ll first create a new monobehaviour. The script will implement the <strong>OnTriggerEnter()</strong> method. When the player collids with the jump pad, a force will be applied to the player's Y-axis.</p><p>In this example we will be making unit tests, so we need to use the <a href="Unity-Full-Stack-Testing-Tutorial_749699073.html" data-linked-resource-id="749699073" data-linked-resource-version="79" data-linked-resource-type="page">dependency injection</a> strategy.</p><p><u>Class details</u>:</p><ul><li><p><strong>JumPadImpl.cs</strong> - This will contain the logic of the implementation. We will manipulate the player through an interface in this class.</p></li><li><p><strong>JumpPad.cs</strong> -  This will contain the actual monobehaviour, and set up JumpPadImpl.</p></li></ul><h4 id="NewFeatureDevelopmentandTestingTutorial-Code:"><strong>Code:</strong></h4><ul><li><p><strong>JumpPad.cs (new file)</strong></p></li></ul><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">using UnityEngine;
+using VARLab.Interfaces;
+
+public class JumpPad : MonoBehaviour
+{
+    JumpPadImpl jumpPadImpl;
+
+    [SerializeField] float upwardBounce = 100f;
+
+    JumpPadImpl JumpPadImpl
+    {
+        get
+        {
+            if (jumpPadImpl == null)
+            {
+                jumpPadImpl = new JumpPadImpl(PlayerController.Instance, upwardBounce);
+            }
+            
+            return jumpPadImpl;
+        }
+    }
+
+    private void OnTriggerEnter(Collider collider)
+    {
+        JumpPadImpl.OnTriggerEnter(new GameObjectWrapper(collider.gameObject));
+    }
+}
+</pre>
+</div></div><p /><ul><li><p><strong>JumpPadImpl.cs (new file)</strong></p></li></ul><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">using VARLab.Interfaces;
+
+public class JumpPadImpl
+{
+    /// &lt;summary&gt; Ref to the player controller. &lt;/summary&gt;
+    IPlayerController playerController;
+
+    private float upwardBounce;
+    public float UpwardBounce { get =&gt; upwardBounce; set =&gt; upwardBounce = value; }
+
+    /// &lt;summary&gt; Constructor that take a PlayerController. &lt;/summary&gt;
+    /// &lt;param name=&quot;_playerController&quot;&gt; Player controller. &lt;/param&gt;
+    public JumpPadImpl(IPlayerController _playerController, float _upwardBounce)
+    {
+        playerController = _playerController;
+        upwardBounce = _upwardBounce;
+    }
+
+    /// &lt;summary&gt; Trigger the collision once the player hits the jumppad. &lt;/summary&gt;
+    /// &lt;param name=&quot;collider&quot;&gt; Collider of the player. &lt;/param&gt;
+    public void OnTriggerEnter(IGameObject collider)
+    {
+        // If other collider is the player
+        if (collider.CompareTag(&quot;Player&quot;))
+        {
+            // Apply the force to the Player
+            playerController.OnHitJumpPad(upwardBounce);
+        }
+    }
+}
+</pre>
+</div></div><p /><ul><li><p><strong>PlayerController.cs (existing file)</strong></p></li></ul><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">    /// &lt;summary&gt; Player hits the jumppad. &lt;/summary&gt;
+    /// &lt;param name=&quot;upwardBounce&quot;&gt; The bounce param that is applied to the y-axis. &lt;/param&gt;
+    public void OnHitJumpPad(float upwardBounce)
+    {
+        PlayerControllerImpl.OnHitJumpPad(upwardBounce);
+    }</pre>
+</div></div><p /><ul><li><p><strong>PlayerControllerImpl.cs (existing file)</strong></p></li></ul><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">    /// &lt;summary&gt;
+    /// Apply the force to the RigidBody once player hits the JumpPad.
+    /// &lt;/summary&gt;
+    /// &lt;param name=&quot;upwardBounce&quot;&gt;&lt;/param&gt;
+    public void OnHitJumpPad(float upwardBounce)
+    {
+        body.velocity = new Vector3(0, upwardBounce, 0);
+    }</pre>
+</div></div><h3 id="NewFeatureDevelopmentandTestingTutorial-4.Testsimplementation">4. Tests implementation</h3><ul><li><p><strong>Unit Tests</strong></p></li></ul><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">using Moq;
+using NUnit.Framework;
+using VARLab.Interfaces;
+
+[TestFixture]
+public class JumpPadTests
+{
+    JumpPadImpl jumpPadImpl;
+    float upwardBounce = 0;
+
+    Mock&lt;IPlayerController&gt; playerControllerMock;
+
+    [SetUp]
+    public void SetUp()
+    {
+        playerControllerMock = new Mock&lt;IPlayerController&gt;();
+
+        jumpPadImpl = new JumpPadImpl(playerControllerMock.Object, upwardBounce);
+    }
+
+    [Test]
+    public void PlayerHitsJumpPadTest()
+    {
+        // Arrange
+        jumpPadImpl.UpwardBounce = 10f;
+
+        var colliderMock = new Mock&lt;IGameObject&gt;();
+        colliderMock.Setup(x =&gt; x.CompareTag(&quot;Player&quot;)).Returns(true);
+
+        // Assert
+        playerControllerMock.Verify(x =&gt; x.OnHitJumpPad(jumpPadImpl.UpwardBounce), Times.Never);
+
+        // Act
+        jumpPadImpl.OnTriggerEnter(colliderMock.Object);
+
+        // Assert
+        colliderMock.Verify(x =&gt; x.CompareTag(&quot;Player&quot;), Times.Once);
+        playerControllerMock.Verify(x =&gt; x.OnHitJumpPad(jumpPadImpl.UpwardBounce), Times.Once);
+    }
+}
+</pre>
+</div></div><p /><ul><li><p><strong>Integration Tests</strong></p></li></ul><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">using NUnit.Framework;
+using System.Collections;
+using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.SceneManagement;
+using UnityEngine.TestTools;
+
+public class JumpPadIntegrationTests
+{
+    private GameObject playerPrefab;
+    private GameObject jumpPadPrefab;
+    private PlayerController playerController;
+    private JumpPad jumpPad;
+
+    private Vector3 defaultPlayerPosition = new Vector3(50, 50, 50);
+    private Vector3 defaultJumpPadPosition = new Vector3(10, 10, 10);
+
+    int sceneCounter = 0;
+
+    [SetUp]
+    public void SetUp()
+    {
+        ClearScene();
+
+        // Setting up Player Controller
+        playerPrefab = new GameObject();
+        playerPrefab.SetActive(false);
+        playerPrefab.AddComponent&lt;Rigidbody&gt;();
+        playerPrefab.AddComponent&lt;SphereCollider&gt;();
+
+        playerController = playerPrefab.AddComponent&lt;PlayerController&gt;();
+        playerController.tag = &quot;Player&quot;;
+        playerController.GetComponent&lt;PlayerController&gt;().OnWallCollision = new UnityEvent();
+        playerController.transform.position = defaultPlayerPosition;
+
+        // Setting up the JumpPad
+        jumpPadPrefab = new GameObject();
+        jumpPadPrefab.SetActive(false);
+        jumpPadPrefab.AddComponent&lt;BoxCollider&gt;().isTrigger = true;
+        jumpPadPrefab.AddComponent&lt;Rigidbody&gt;();
+
+        jumpPad = jumpPadPrefab.AddComponent&lt;JumpPad&gt;();
+        jumpPad.transform.position = defaultJumpPadPosition;
+
+        // Activate prefabs
+        jumpPadPrefab.SetActive(true);
+        playerPrefab.SetActive(true);
+    }
+
+    [TearDown]
+    public void TearDown()
+    {
+        foreach (GameObject gameObject in Object.FindObjectsOfType&lt;GameObject&gt;())
+        {
+            if (gameObject != null)
+            {
+                Object.DestroyImmediate(gameObject);
+            }
+        }
+    }
+
+    void ClearScene()
+    {
+        SceneManager.SetActiveScene(SceneManager.CreateScene($&quot;TestScene{sceneCounter}&quot;));
+
+        if (sceneCounter &gt; 0)
+        {
+            SceneManager.UnloadSceneAsync($&quot;TestScene{sceneCounter - 1}&quot;);
+        }
+
+        sceneCounter++;
+    }
+
+    [UnityTest]
+    public IEnumerator Player_Hits_JumpPad_Then_Jump()
+    {
+        // Arrange
+        Vector3 expectedVelocityAfterJump = new Vector3(0, 100f, 0);
+
+        // Act - player hits the jumppad
+        playerController.transform.position = defaultJumpPadPosition;
+        yield return new WaitForFixedUpdate();
+
+        // Assert
+        Assert.AreEqual(playerController.gameObject.GetComponent&lt;Rigidbody&gt;().velocity, expectedVelocityAfterJump);
+    }
+}
+</pre>
+</div></div><p>Execute the tests and verify that all of them pass!</p><h3 id="NewFeatureDevelopmentandTestingTutorial-5.MakeaPR.1">5. Make a PR</h3><p>Make sure you add the test plan to the PR in a comment. The reviewer should verify that:</p><ol start="1"><li><p>all tests pass,</p></li><li><p>the tests and test plan are acceptable and,</p></li><li><p>the feature works as intended.</p></li></ol><h2 id="NewFeatureDevelopmentandTestingTutorial-FurtherReading">Further Reading</h2><ul><li><p><a href="https://varlab-dev.atlassian.net/wiki/spaces/~278530990/pages/765427713/WIP+-+Software+Testing+Life+Cycle+STLC" rel="nofollow">STLC</a> (The Software Testing Life Cycle document)</p></li></ul><h3 id="NewFeatureDevelopmentandTestingTutorial-NOTE">NOTE</h3><p><a class="external-link" href="https://bitbucket.org/VARLab/roll-a-ball-testing-example/src/main/" rel="nofollow">Roll-a-Ball-testing-example repository</a></p><p><a class="external-link" href="https://bitbucket.org/VARLab/roll-a-ball-testing-example/branch/feature/CORE-377-new-feature-sdlc?dest=main" rel="nofollow">JumpPad feature and tests branch</a></p><p>In the next tutorial, we’ll create an intentional bug by removing the “Player“ tag in the player. This bug prevents the player from jumping when they hit the jump pad. However, all of our unit tests and integration tests in this example will still pass despite the bug. </p><p>This bug will be solved using a regression test.</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/774864938/775585797.png" data-image-src="attachments/774864938/775585797.png" data-height="236" data-width="827" data-unresolved-comment-count="0" data-linked-resource-id="775585797" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230802-141944.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="774864938" data-linked-resource-container-version="3" data-media-id="4158bcff-3b2c-49f7-bc88-c20f3398c95e" data-media-type="file"></span><p><strong>Next: </strong><a class="external-link" href="https://varlab-dev.atlassian.net/l/cp/VCAQ1cCz" rel="nofollow"><strong>Bug Regression Tutorial</strong></a></p>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/774864938/774996004.png">image-20230725-151621.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/774864938/775585797.png">image-20230802-141944.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Jul 04, 2025 14:52</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

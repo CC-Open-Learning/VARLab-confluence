@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VARLab : Video Playback in WebGL</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="How-To-Articles_581435426.html">How-To Articles</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Unity-Development_688324665.html">Unity Development</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            VARLab : Video Playback in WebGL
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> User 2002e</span>, last modified on Feb 09, 2023
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p /><p>The Video player is a built-in unity function allowing users to play videos within unity. In addition, the content can be directly projected on a target, such as a render Texture or camera background. <br/><br/>There are two ways of playing video clips in unity, video clips and a URL.</p><p /><h2 id="VideoPlaybackinWebGL-Set-Up">Set-Up</h2><p>In the menu, create a raw Image as the Raw Image takes a texture input and accepts a render texture as an input. Right-click in the Hierarchy &gt; UI &gt; Raw Image</p><p /><p>Right-click in the project window &gt; Create &gt; Custom Render Texture. </p><p>Reference that Render Texture in the texture field within the raw texture component in the inspector window<br/></p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/623443969/622952453.png" data-image-src="attachments/623443969/622952453.png" data-height="284" data-width="311" data-unresolved-comment-count="0" data-linked-resource-id="622952453" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230206-164610.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="623443969" data-linked-resource-container-version="2" data-media-id="d1b2ee33-4a0c-460e-ba3b-ad5f2b4431c1" data-media-type="file"></span><p>Set the size of the render texture to the desired output. It needs to have a size to display the output. I am using a 480 output <br/></p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/623443969/623083529.png" data-image-src="attachments/623443969/623083529.png" data-height="259" data-width="282" data-unresolved-comment-count="0" data-linked-resource-id="623083529" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230206-165201.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="623443969" data-linked-resource-container-version="2" data-media-id="719924da-f997-4e5c-a347-22afb29bcc75" data-media-type="file"></span><p>Add the Video player component to a game object and set the render mode to render texture along with that, set the target texture to the render texture that was just created.</p><p /><h2 id="VideoPlaybackinWebGL-Source">Source</h2><p>There are two sources for the Video player to play Videos in the Video Player.<br/></p><ul><li><p><strong>Video Clips</strong><br/>    Video files can directly be stored into unity and a reference for that file can be put into the video player to have that video play on the render texture.<br/></p></li><li><p><strong>URL</strong><br/>    Video can be played through a URL into unity. The video player uses the windows media encoder to process videos and play it on the inspector. Do keep in mind that the link need to be a Direct Download Link and not a link to the view the file.<br/><br/> For example</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">https://www.dropbox.com/s/1vrl8ipy1zgdui7/2022-03-31%2010-19-58_Trim_Trim.mp4?dl=0</pre>
+</div></div><p>This like for dropbox takes to the video but this link will not work in the video player as this is not a direct download link. This is a direct download link for dropbox.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">https://dl.dropbox.com/s/1vrl8ipy1zgdui7/2022-03-31%2010-19-58_Trim_Trim.mp4?dl=1</pre>
+</div></div><p><br/></p></li></ul><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>All online storage platforms have different ways of converting the normal link to a direct download links</p></div></div><p /><h2 id="VideoPlaybackinWebGL-VideoHostingPlatforms">Video Hosting Platforms</h2><p>Videos can be stored on several different platforms The only caveat being that there must be a way to convert the video link to a direct download link and there should be no authentication on those links. The following platforms have been tested to work with unity <br/></p><ul><li><p><strong>Dropbox </strong><img class="emoticon emoticon-thumbs-up" data-emoji-id="1f44d" data-emoji-shortname=":thumbsup:" data-emoji-fallback="👍" src="images/icons/emoticons/thumbs_up.png" width="16" height="16" data-emoticon-name="thumbs-up" alt="(thumbs up)"/> <br/>    Dropbox was by far the easiest and the most compliant with storing videos and getting the direct link. To get the direct link replace the WWW with dl and at the end change dl=0 to dl=1<br/></p></li><li><p><strong>Google Drive </strong><img class="emoticon emoticon-thumbs-down" data-emoji-id="1f44e" data-emoji-shortname=":thumbsdown:" data-emoji-fallback="👎" src="images/icons/emoticons/thumbs_down.png" width="16" height="16" data-emoticon-name="thumbs-down" alt="(thumbs down)"/> <br/>    Google drive allowed users to store videos and get a direct download link as well but due to it’s structure downloading files over 25mb made a virus scan pop up and bypassing that popup in the direct download is not possible. I combed through the internet to find something but I was not successful and in the interest of time I decided to move on <a class="external-link" data-card-appearance="inline" href="https://stackoverflow.com/questions/14728038/disabling-the-large-file-notification-from-google-drive" rel="nofollow">https://stackoverflow.com/questions/14728038/disabling-the-large-file-notification-from-google-drive</a> <br/></p></li><li><p><strong>One Drive </strong><img class="emoticon emoticon-thumbs-up" data-emoji-id="1f44d" data-emoji-shortname=":thumbsup:" data-emoji-fallback="👍" src="images/icons/emoticons/thumbs_up.png" width="16" height="16" data-emoticon-name="thumbs-up" alt="(thumbs up)"/> <br/>    One drive works with storing the videos and getting a direct download link. Getting the direct download link is very tricky for one drive.  <br/><br/>Open the video in one drive &gt; 3 dots icon &gt; embed &gt; copy the Iframe code.</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/623443969/623083541.png" data-image-src="attachments/623443969/623083541.png" data-height="850" data-width="1889" data-unresolved-comment-count="0" data-linked-resource-id="623083541" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230206-175127.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="623443969" data-linked-resource-container-version="2" data-media-id="82ac156e-9625-4672-a814-159356d69eaf" data-media-type="file"></span></li></ul><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">&lt;iframe src=&quot;https://onedrive.live.com/embed?cid=A620E94F9B94D0C5&amp;resid=A620E94F9B94D0C5%21394&amp;authkey=AKSZEZqqKVXtkak&quot; width=&quot;320&quot; height=&quot;180&quot; frameborder=&quot;0&quot; scrolling=&quot;no&quot; allowfullscreen&gt;&lt;/iframe&gt;</pre>
+</div></div><p><br/>Only get the link in the src</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">https://onedrive.live.com/embed?cid=A620E94F9B94D0C5&amp;resid=A620E94F9B94D0C5%21394&amp;authkey=AKSZEZqqKVXtkak</pre>
+</div></div><p><br/>Change the embed before the ? to download</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">https://onedrive.live.com/download?cid=A620E94F9B94D0C5&amp;resid=A620E94F9B94D0C5%21394&amp;authkey=AKSZEZqqKVXtkak</pre>
+</div></div><p><br/>The final product is a direct link that can be used in unity.</p><p /><p><strong>Authentication Based Platforms (Sharepoint, AzurePortal) </strong><img class="emoticon emoticon-thumbs-down" data-emoji-id="1f44e" data-emoji-shortname=":thumbsdown:" data-emoji-fallback="👎" src="images/icons/emoticons/thumbs_down.png" width="16" height="16" data-emoticon-name="thumbs-down" alt="(thumbs down)"/> <br/>    Platforms which require authentication cannot be used simply because there is no direct method to get a verified link within the Video Player.<br/></p><h2 id="VideoPlaybackinWebGL-VideoPlayerinWebGL"><br/><strong>Video Player in WebGL</strong></h2><p>Unfortunately the results conducted from testing one drive and dropbox direct download links in WebGL produced unfavorable results. For some users it worked as intended and for some it didn’t. Chrome browsers have a larger number of positive outcomes but there were cases that failed for dropbox while all test results for one drive failed.<br/><br/>This was happening because <strong>CORS header 'Access-Control-Allow-Origin'</strong> was missing from the Video player. Video Player is not a part of the standard library and thus cannot be edited to add the cors header<br/></p><div id="expander-132897285" class="expand-container"><div id="expander-control-132897285" class="expand-control"><span class="expand-control-icon"><img style="vertical-align:middle;" class="expand-control-image" src="images/icons/grey_arrow_down.png"></span><span class="expand-control-text">Cross Origin Resource Sharing (CORS)</span></div><div id="expander-content-132897285" class="expand-content"><p><strong>Cross Origin Resource Sharing (CORS)</strong>, is a mechanism for browsers to let a site running at origin A to request resources from origin B.</p><p>Origin is not just the hostname, but a combination of port, hostname and scheme, such as - <code>http://mysite.example.com:8080/</code></p><p>Here's an example of where this comes into action -</p><ol start="1"><li><p>I have an origin A: <code>http://mysite.com</code> and I want to get resources from origin B: <code>http://yoursite.com</code>.</p></li><li><p>To protect your security, the browser will not let me access resources from <a class="external-link" href="http://yoursite.com" rel="nofollow">yoursite.com</a> and will block my request.</p></li></ol><p>In order to allow origin A to access your resources, your origin B will need to let the browser know that it is okay for me to get resources from your origin.</p></div></div><p><br/>This leaves us with Video Clips but even that has some caveats. The video files need to be contained in a special folder called Streaming Assets and only then these files can be accessed in WebGL.<br/></p><div id="expander-1238119595" class="expand-container"><div id="expander-control-1238119595" class="expand-control"><span class="expand-control-icon"><img style="vertical-align:middle;" class="expand-control-image" src="images/icons/grey_arrow_down.png"></span><span class="expand-control-text">Streaming Assets</span></div><div id="expander-content-1238119595" class="expand-content"><p>A streaming asset it just that: an asset placed in a specific folder that would be loaded by the Unity Player when needed. That asset will be placed in an easy to find address within the target platform.</p></div></div><p />
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/623443969/622952453.png">image-20230206-164610.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/623443969/623443978.png">image-20230206-164632.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/623443969/622985221.png">image-20230206-164819.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/623443969/623083529.png">image-20230206-165201.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/623443969/623083541.png">image-20230206-175127.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/623443969/623181841.png">image-20230206-175145.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Jul 04, 2025 14:52</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

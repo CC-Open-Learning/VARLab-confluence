@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VARLab : Adding Embedded Video for WebGL Deployments</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="How-To-Articles_581435426.html">How-To Articles</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Unity-Development_688324665.html">Unity Development</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            VARLab : Adding Embedded Video for WebGL Deployments
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Stacey Dineen</span>, last modified by <span class='editor'> User abfce</span> on Aug 11, 2022
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>Currently, trying to play a video in WebGL is a limitation and if you do it by dragging a video in the video player object, all you will have is a black screen and wondering what happened. Luckily, we have a workaround to avoid this issue.</p><h2 id="AddingEmbeddedVideoforWebGLDeployments-Instructions"><img class="emoticon emoticon-blue-star" data-emoji-id="1f4d8" data-emoji-shortname=":blue_book:" data-emoji-fallback="\uD83D\uDCD8" src="images/icons/emoticons/72/1f4d8.png" width="16" height="16" data-emoticon-name="blue-star" alt="(blue star)"/> Instructions</h2><p></p><ol><li><p>Create inside the Assets folder a folder named StreamingAssets. It should be located normally where you clone your project (Project Name/Assets).</p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" width="414" loading="lazy" src="attachments/508592156/508428352?width=414" data-image-src="attachments/508592156/508428352" data-height="307" data-width="740" data-unresolved-comment-count="0" data-linked-resource-id="508428352" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="a47bcbae-d050-4313-bbb1-8b0c6c69b5ca#media-blob-url=true&amp;id=46aec0b9-7a52-4362-ad24-605a339382ec&amp;collection=&amp;contextId=16491&amp;mimeType=image%2Fpng&amp;name=image-20220722-230322.png&amp;size=14715&amp;height=307&amp;width=740" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="508592156" data-linked-resource-container-version="5" data-media-id="82adc4b8-8ea0-479d-b9d0-ef6e8bdfb52a" data-media-type="file"></span></li><li><p>Inside the StreamingAssets folder, add all your videos.</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/508592156/508592180.png" data-image-src="attachments/508592156/508592180.png" data-height="114" data-width="682" data-unresolved-comment-count="0" data-linked-resource-id="508592180" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20220811-192140.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="508592156" data-linked-resource-container-version="5" data-media-id="7906b764-ae15-4d28-8732-3d221057eff0" data-media-type="file"></span></li></ol><p /><p>To get the videos to play, we need to get the videos via URL and play them by calling the play method of the Video Player. To be more precise:</p><ul><li><p>Make sure to serialize the Video Player object:</p></li></ul><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" width="453" loading="lazy" src="attachments/508592156/508428359.png?width=453" data-image-src="attachments/508592156/508428359.png" data-height="42" data-width="507" data-unresolved-comment-count="0" data-linked-resource-id="508428359" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20220811-194233.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="508592156" data-linked-resource-container-version="5" data-media-id="18393ea6-6d8a-4a79-ab7b-31a5474e197f" data-media-type="file"></span><ul><li><p>To set the videos for the Video Player:</p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" width="659" loading="lazy" src="attachments/508592156/508592192.png?width=659" data-image-src="attachments/508592156/508592192.png" data-height="20" data-width="803" data-unresolved-comment-count="0" data-linked-resource-id="508592192" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20220811-194427.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="508592156" data-linked-resource-container-version="5" data-media-id="e65169f6-15bd-4ed2-bab3-d83bdb434b3c" data-media-type="file"></span><ul><li><p>Application.streamingAssetsPath - this will point to the created StreamingAssets folder inside Assets.</p></li><li><p>Video name - make sure that the whole name is correct together with the file extension.</p></li></ul></li><li><p>To play the videos, just call manually the play method of the VideoPlayer.</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/508592156/508526649.png" data-image-src="attachments/508592156/508526649.png" data-height="18" data-width="140" data-unresolved-comment-count="0" data-linked-resource-id="508526649" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20220811-194457.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="508592156" data-linked-resource-container-version="5" data-media-id="d6997ad5-39a5-4348-889e-8feae021ef2f" data-media-type="file"></span></li></ul><h2 id="AddingEmbeddedVideoforWebGLDeployments-Relatedarticles"><img class="emoticon emoticon-blue-star" data-emoji-id="1f4cb" data-emoji-shortname=":clipboard:" data-emoji-fallback="\uD83D\uDCCB" src="images/icons/emoticons/72/1f4cb.png" width="16" height="16" data-emoticon-name="blue-star" alt="(blue star)"/> Related articles</h2><p></p>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="content-by-label macro-blank-experience ">
+                    <h5>Filter by label</h5>
+                <p>
+            There are no items with the selected labels at this time.
+                    </p>
+    </div>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/508592156/508428352">a47bcbae-d050-4313-bbb1-8b0c6c69b5ca#media-blob-url=true&amp;id=46aec0b9-7a52-4362-ad24-605a339382ec&amp;collection=&amp;contextId=16491&amp;mimeType=image%2Fpng&amp;name=image-20220722-230322.png&amp;size=14715&amp;height=307&amp;width=740</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/508592156/508592180.png">image-20220811-192140.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/508592156/508657707.png">image-20220811-193528.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/508592156/508461116.png">image-20220811-193746.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/508592156/508428359.png">image-20220811-194233.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/508592156/508461138.png">image-20220811-194338.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/508592156/508592192.png">image-20220811-194427.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/508592156/508526649.png">image-20220811-194457.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Jul 04, 2025 14:52</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

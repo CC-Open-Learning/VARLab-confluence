@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VARLab : Integration Test Tutorial</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="How-To-Articles_581435426.html">How-To Articles</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Unity-Development_688324665.html">Unity Development</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Unity-Full-Stack-Testing-Tutorial_749699073.html">Unity Full-Stack Testing Tutorial</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            VARLab : Integration Test Tutorial
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> User 6fa8c</span>, last modified by <span class='editor'> Leo Bunting</span> on Aug 03, 2023
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <style type='text/css'>/*<![CDATA[*/
+div.rbtoc1751640742445 {padding: 0px;}
+div.rbtoc1751640742445 ul {list-style: none;margin-left: 0px;}
+div.rbtoc1751640742445 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1751640742445'>
+<ul class='toc-indentation'>
+<li><span class='TOCOutline'>1</span> <a href='#IntegrationTestTutorial-Part5:TheWinningComponent'>Part 5: The Winning Component</a></li>
+<li><span class='TOCOutline'>2</span> <a href='#IntegrationTestTutorial-Part6:SetupPlayModeTestAssembly'>Part 6: Set up PlayMode Test Assembly</a></li>
+<li><span class='TOCOutline'>3</span> <a href='#IntegrationTestTutorial-Part7:CreatingIntegrationTests'>Part 7: Creating Integration Tests</a></li>
+<li><span class='TOCOutline'>4</span> <a href='#IntegrationTestTutorial-ContinuetoSystemTestingTutorial'>Continue to System Testing Tutorial</a></li>
+</ul>
+</div><h1 id="IntegrationTestTutorial-Part5:TheWinningComponent">Part 5: The Winning Component</h1><ul><li><p><span class="inline-comment-marker" data-ref="a384bf67-f1fa-4c35-9a47-246b6c4ef0ab">Integration testing focuses on testing how groups of components interact with both each other and Unity. These tests will run in a Unity scene created in C#. For the sake of integration testing, we’ll add a new component called </span><code>WinCondition</code> that will check to see if the user has won by drawing 5 cards. Create a new script in <code>Scripts</code> called <code>WinCondition.cs</code></p></li><li><p>Paste the following code into <code>WinCondition.cs</code>. <span class="inline-comment-marker" data-ref="76747a09-61e1-493b-80eb-176a374b1f3e">Take </span>the time to become familiar with it.</p></li></ul><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">using TMPro;
+using UnityEngine;
+
+public class WinCondition : MonoBehaviour
+{
+    public int currentPoints;
+    public int pointsToWin;
+    public TextMeshProUGUI winningLabel;
+
+    public void AddPoints(int input)
+    {
+        currentPoints += input;
+        if (currentPoints &gt;= pointsToWin )
+        {
+            winningLabel.gameObject.SetActive(true);
+        }
+    }
+}</pre>
+</div></div><ul><li><p>Add a new <strong>TextMeshPro</strong> onto the <strong>Canvas</strong>, and set the text to “You won!“. Name this <code>Win Text</code>, then disable this component.</p></li><li><p><span class="inline-comment-marker" data-ref="a66e7a02-05ca-4558-9093-abe1c65792bc">Inside the </span><strong><span class="inline-comment-marker" data-ref="a66e7a02-05ca-4558-9093-abe1c65792bc">Workbench </span></strong><span class="inline-comment-marker" data-ref="a66e7a02-05ca-4558-9093-abe1c65792bc">prefab add the </span><code><span class="inline-comment-marker" data-ref="a66e7a02-05ca-4558-9093-abe1c65792bc">WinCondition</span></code> component<span class="inline-comment-marker" data-ref="a66e7a02-05ca-4558-9093-abe1c65792bc"> onto the </span><strong><span class="inline-comment-marker" data-ref="a66e7a02-05ca-4558-9093-abe1c65792bc">Safety Hat. </span></strong></p></li><li><p><span class="inline-comment-marker" data-ref="a66e7a02-05ca-4558-9093-abe1c65792bc">Drag and drop the </span><strong><span class="inline-comment-marker" data-ref="a66e7a02-05ca-4558-9093-abe1c65792bc">Safety Hat</span></strong><span class="inline-comment-marker" data-ref="a66e7a02-05ca-4558-9093-abe1c65792bc"> into the </span><strong><span class="inline-comment-marker" data-ref="a66e7a02-05ca-4558-9093-abe1c65792bc">DrawCard() </span></strong><span class="inline-comment-marker" data-ref="a66e7a02-05ca-4558-9093-abe1c65792bc">event in the </span><code><span class="inline-comment-marker" data-ref="a66e7a02-05ca-4558-9093-abe1c65792bc">Show Random Card</span></code><span class="inline-comment-marker" data-ref="a66e7a02-05ca-4558-9093-abe1c65792bc"> component. </span></p></li><li><p><span class="inline-comment-marker" data-ref="a66e7a02-05ca-4558-9093-abe1c65792bc">Select </span><strong><span class="inline-comment-marker" data-ref="a66e7a02-05ca-4558-9093-abe1c65792bc">WinCondition.AddPoints</span></strong><span class="inline-comment-marker" data-ref="a66e7a02-05ca-4558-9093-abe1c65792bc"> from the dropdown menu and set the value to 1. </span></p></li><li><p><span class="inline-comment-marker" data-ref="a66e7a02-05ca-4558-9093-abe1c65792bc">Set</span><strong><span class="inline-comment-marker" data-ref="a66e7a02-05ca-4558-9093-abe1c65792bc"> Points To Win</span></strong><span class="inline-comment-marker" data-ref="a66e7a02-05ca-4558-9093-abe1c65792bc"> in the </span><code><span class="inline-comment-marker" data-ref="a66e7a02-05ca-4558-9093-abe1c65792bc">Winning Condition</span></code><span class="inline-comment-marker" data-ref="a66e7a02-05ca-4558-9093-abe1c65792bc"> component to 5. </span></p></li><li><p><span class="inline-comment-marker" data-ref="a66e7a02-05ca-4558-9093-abe1c65792bc">Exit prefab mode and serialize the </span><strong><span class="inline-comment-marker" data-ref="a66e7a02-05ca-4558-9093-abe1c65792bc">Win Text</span></strong><span class="inline-comment-marker" data-ref="a66e7a02-05ca-4558-9093-abe1c65792bc"> into the </span><strong><span class="inline-comment-marker" data-ref="a66e7a02-05ca-4558-9093-abe1c65792bc">Winning </span>Label</strong> field in the<strong><span class="inline-comment-marker" data-ref="a66e7a02-05ca-4558-9093-abe1c65792bc"> Safety Hat’s</span></strong> <code><span class="inline-comment-marker" data-ref="a66e7a02-05ca-4558-9093-abe1c65792bc">Winning Condition</span></code> component. </p></li></ul><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/752910337/753664056.png" data-image-src="attachments/752910337/753664056.png" data-height="678" data-width="1108" data-unresolved-comment-count="0" data-linked-resource-id="753664056" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230706-182135.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="752910337" data-linked-resource-container-version="19" data-media-id="651332f2-cf5a-4b36-9c06-ac551f415a18" data-media-type="file"></span><h1 id="IntegrationTestTutorial-Part6:SetupPlayModeTestAssembly">Part 6: Set up PlayMode Test Assembly</h1><ul><li><p>Select the “<strong>Tests</strong>” folder. Open the Test Runner, go to the <strong>Play Mode</strong> test tab, and click “<strong>Create Playmode Test Assembly Folder</strong>“.</p></li></ul><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/752910337/753926193.png" data-image-src="attachments/752910337/753926193.png" data-height="486" data-width="825" data-unresolved-comment-count="0" data-linked-resource-id="753926193" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230706-183233.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="752910337" data-linked-resource-container-version="19" data-media-id="816a072c-be17-4195-b21c-165877ee4b07" data-media-type="file"></span><ul><li><p>Inside of the new <strong>PlayMode</strong> folder, select “<strong>PlayMode</strong>“, and add <code>FullStackTutorial</code> and <code>TextMeshPro</code> to the GUIDs as shown in images below.</p></li></ul><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/752910337/754155571.png" data-image-src="attachments/752910337/754155571.png" data-height="376" data-width="1106" data-unresolved-comment-count="0" data-linked-resource-id="754155571" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230706-183546.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="752910337" data-linked-resource-container-version="19" data-media-id="defddce4-0227-4472-82a3-749dfad70fab" data-media-type="file"></span><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>In some circumstances, it is necessary to use mocking in integration tests. For example, if you want to control an RNG, or if something is too difficult to set up outside of a scene file. If you need Moq, add it to the Assembly References.</p></div></div><h1 id="IntegrationTestTutorial-Part7:CreatingIntegrationTests">Part 7: Creating Integration Tests</h1><ul><li><p>Create the <code>ShowRandomCardIntegrationTests</code> file inside of the <strong>Play Mode</strong> folder. Paste the following code inside. Take some time to see how these tests are written.</p></li></ul><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">using System.Collections;
+using NUnit.Framework;
+using TMPro;
+using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.SceneManagement;
+using UnityEngine.TestTools;
+
+public class ShowRandomCardIntegrationTests
+{
+    const int POINTS_TO_WIN = 10;
+
+    ShowRandomCard randomCard;
+    WinCondition winCondition;
+    TextMeshProUGUI currentCardLabel;
+    TextMeshProUGUI winLabel;
+
+    // Notice: Lots of asserts, and reads like an English test case.
+    [Test]
+    public void Draw10Cards_WinEvent()
+    {
+        VerifyIsWinLabelActive(false);
+        for (int i = 0; i &lt; POINTS_TO_WIN; i++)
+        {
+            VerifyIsWinLabelActive(false);
+            DrawCard();
+        }
+        VerifyIsWinLabelActive(true);
+    }
+
+    // Let&#39;s make this one an IEnumerator [UnityTest],
+    // which allows us to advance to future frames.
+    [UnityTest]
+    public IEnumerator MouseDownOnce_UpdateCardText()
+    {
+        VerifyIsCurrentCardLabelEmpty(true);
+        DrawCard();
+
+        //  The following will advance us one frame.
+        // &quot;yield return new WaitForFixedUpdate();&quot; is more useful for physics
+        yield return null;
+
+        VerifyIsCurrentCardLabelEmpty(false);
+    }
+
+    [SetUp]
+    public void SetUp()
+    {
+        ClearScene(); // Stop state from persisting between tests!
+        SetupCurrentCardLabel();
+        SetupWinLabel();
+        SetupRandomCard();
+    }
+
+    // Even methods like these help with readability!
+    void DrawCard()
+    {
+        randomCard.OnMouseDown();
+    }
+
+    void SetupCurrentCardLabel()
+    {
+        GameObject currentCardLabelContainer = new GameObject();
+        currentCardLabelContainer.SetActive(false); // Avoid calling Awake()/Start() early.
+
+        currentCardLabelContainer.AddComponent&lt;TextMeshProUGUI&gt;();
+        currentCardLabel = currentCardLabelContainer.GetComponent&lt;TextMeshProUGUI&gt;();
+
+        currentCardLabelContainer.SetActive(true); // Awake()/Start() is called now.
+    }
+
+    void SetupWinLabel()
+    {
+        GameObject winLabelContainer = new GameObject();
+        winLabelContainer.SetActive(false);
+
+        winLabelContainer.AddComponent&lt;TextMeshProUGUI&gt;();
+        winLabel = winLabelContainer.GetComponent&lt;TextMeshProUGUI&gt;();
+
+        // Don&#39;t activate this yet!
+    }
+
+    void SetupRandomCard()
+    {
+        GameObject randomCardContainer = new GameObject();
+        randomCardContainer.SetActive(false);
+
+        randomCard = randomCardContainer.AddComponent&lt;ShowRandomCard&gt;();
+        randomCard.currentCardLabel = currentCardLabel;
+        randomCard.drawCard = new UnityEvent();
+        randomCard.drawCard.AddListener(() =&gt; winCondition.AddPoints(1));
+
+        winCondition = randomCardContainer.AddComponent&lt;WinCondition&gt;();
+        winCondition.winningLabel = winLabel;
+        winCondition.pointsToWin = POINTS_TO_WIN;
+        winCondition.currentPoints = 0;
+
+        randomCardContainer.SetActive(true);
+    }
+
+    // We prefer creating a new scene vs. trying to reset the current scene inside of a [TearDown].
+    int sceneCounter = 0;
+    void ClearScene()
+    {
+        SceneManager.SetActiveScene(SceneManager.CreateScene($&quot;TestScene{sceneCounter}&quot;));
+        if (sceneCounter &gt; 0)
+        {
+            SceneManager.UnloadSceneAsync($&quot;TestScene{sceneCounter-1}&quot;);
+        }
+        sceneCounter++;
+    }
+
+    void VerifyIsCurrentCardLabelEmpty(bool isEmpty)
+    {
+        Assert.AreEqual(isEmpty, currentCardLabel.text.Length == 0);
+    }
+
+    void VerifyIsWinLabelActive(bool isActive)
+    {
+        Assert.AreEqual(isActive, winLabel.isActiveAndEnabled);
+    }
+}</pre>
+</div></div><ul><li><p>Now run the tests in the test runner. If everything was followed correctly, they will pass!</p></li></ul><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/752910337/754810884.png" data-image-src="attachments/752910337/754810884.png" data-height="491" data-width="826" data-unresolved-comment-count="0" data-linked-resource-id="754810884" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230706-195439.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="752910337" data-linked-resource-container-version="19" data-media-id="800d9f62-61f7-48d3-90e7-6985fb61f8fd" data-media-type="file"></span><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p><strong>FAQ</strong>: The difference between a unit test and an integration test is that a unit test targets specific logic using dependency injection and mocking, while an integration tests targets groups of components inside of a Unity scene created in C#. An integration test does not rely on dependency injection or mocking. However, there are a few edge cases where mocking is useful for integration testing.</p><p>Unit tests are much more involved then integration tests, and they cover less code. Though they are much more thorough, stable, and pinpoint root causes. </p><p>For simple components, integration testing will often be enough. For components with involved logic, unit testing and integration testing is recommended.</p></div></div><h1 id="IntegrationTestTutorial-ContinuetoSystemTestingTutorial"><a href="https://varlab-dev.atlassian.net/wiki/spaces/VAR/pages/755335169/WIP+System+Testing+Tutorial" rel="nofollow">Continue to System Testing Tutorial</a></h1>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/752910337/752320526.png">image-20230705-150654.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/752910337/752353291.png">image-20230705-150936.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/752910337/752517136.png">image-20230705-150942.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/752910337/752812041.png">image-20230705-151117.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/752910337/753664001.png">image-20230706-133709.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/752910337/753565698.png">image-20230706-133734.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/752910337/753795073.png">image-20230706-133954.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/752910337/753958913.png">image-20230706-135405.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/752910337/753991684.png">image-20230706-140113.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/752910337/753795080.png">image-20230706-145253.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/752910337/754089988.png">image-20230706-145430.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/752910337/753664056.png">image-20230706-182135.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/752910337/753926193.png">image-20230706-183233.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/752910337/754155571.png">image-20230706-183546.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/752910337/754810884.png">image-20230706-195439.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Jul 04, 2025 14:52</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

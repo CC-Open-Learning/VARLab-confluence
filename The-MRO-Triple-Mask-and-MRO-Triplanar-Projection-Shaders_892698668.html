@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VARLab : The MRO Triple Mask and MRO Triplanar Projection Shaders</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="947650564.html">Art/Asset Department</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            VARLab : The MRO Triple Mask and MRO Triplanar Projection Shaders
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Topher Rouleau</span>, last modified on Jul 02, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="panel" style="background-color: #EAE6FF;border-color: #998DD9;border-width: 1px;"><div class="panelContent" style="background-color: #EAE6FF;">
+<p>These pages are very much under construction</p>
+</div></div><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Several shaders have been created in-house to operate under the MRO workflow. These shaders are on their maiden voyage in Public Health Inspection, Trades Electrical, and Ambulance. Feedback and feature requests are welcome!</p></div></div><h2 id="TheMROTripleMaskandMROTriplanarProjectionShaders-Introduction"><span class="inline-comment-marker" data-ref="ec21c850-04cc-438c-a72b-25b15cdb5a1c">Introduction</span></h2><p>So you want to learn about some of the proprietary shaders used in DLX projects? You’ve come to the right place!</p><p>Several shaders have been created now, and each has its own benefits and trade-offs. Some are more purpose-built than others. This page an its sub-pages will walk you through the general uses for each shader, why their different, and how to use each one. </p><p><span class="inline-comment-marker" data-ref="ec21c850-04cc-438c-a72b-25b15cdb5a1c">All of the in-house shaders that have been created use the MRO workflow. Under this workflow we can achieve PBR materials using only 3 texture maps: A Colour map, a Normal map, and the namesake MRO map. This is two fewer map than the Unity default lit shader would require, meaning we’re making a modest saving on file space.</span><br/><br/><span class="inline-comment-marker" data-ref="ec21c850-04cc-438c-a72b-25b15cdb5a1c">An MRO map contains information for </span><u><span class="inline-comment-marker" data-ref="ec21c850-04cc-438c-a72b-25b15cdb5a1c">M</span></u><span class="inline-comment-marker" data-ref="ec21c850-04cc-438c-a72b-25b15cdb5a1c">etallic, </span><u><span class="inline-comment-marker" data-ref="ec21c850-04cc-438c-a72b-25b15cdb5a1c">R</span></u><span class="inline-comment-marker" data-ref="ec21c850-04cc-438c-a72b-25b15cdb5a1c">oughness and Ambient </span><u><span class="inline-comment-marker" data-ref="ec21c850-04cc-438c-a72b-25b15cdb5a1c">O</span></u><span class="inline-comment-marker" data-ref="ec21c850-04cc-438c-a72b-25b15cdb5a1c">cclusion maps combined into one. As these are all greyscale maps, we can socket them each into a colour channel in an RGB image. The Metallic is in the Red channel, Roughness in the Green channel, and Occlusion in the Blue channel. </span></p><p><span class="inline-comment-marker" data-ref="ec21c850-04cc-438c-a72b-25b15cdb5a1c">Reducing the file size is not our only concern here though, as teach shader has some extra built-in utility, but it also gives us some more flexibility on creating feature-rich shaders before we max out the number of texture samples we can access. In these documents we will go through setting up a material and what each of the other features can do and how to configure them.</span></p><p>There are currently three main types of shadergraphs available. Note that each one will require foundational knowledge of the others. </p><p>Below you will find a brief explanation of what type does and a link to a more detailed article. </p><h2 id="TheMROTripleMaskandMROTriplanarProjectionShaders-GeneralMROShaders">General MRO Shaders</h2><p>These are often referred to as “Universal” shaders, though this is far from the truth. These shaders are any of those that rely on a model that has been <strong>fully UV unwrapped.</strong> UV doesn’t actually stand for anything, but UV is where the “Universal” nomenclature comes from. This will be the shader that sees the widest use, thus “<strong>U</strong>ni<strong>V</strong>ersal”. Its very silly and backwards but also hopefully that help you remember!</p><p>Models that have UVs allow us to put details in very specific places. You can find more information on configuring the general use MRO shadergraph here:</p><p><a href="General-MRO-Shaders_1090715711.html" data-linked-resource-id="1090715711" data-linked-resource-version="2" data-linked-resource-type="page">General MRO Shaders</a> </p><h2 id="TheMROTripleMaskandMROTriplanarProjectionShaders-TriplanarShaders">Triplanar Shaders</h2><p><span class="inline-comment-marker" data-ref="ec21c850-04cc-438c-a72b-25b15cdb5a1c">Triplanar Projection Shaders do not rely on having a UV-unwrapped object. Instead It uses the object’s word-space information or local space information to tile a material across the object’s surface. This allows us to slap a material onto an object designed with this workflow in mind. Generally speaking, any surface that has a continuous surface of a single material make a good fit for this type of shader - walls, floors, and ceilings come to minds, but also things like rocks.</span></p><p>Some things to consider with these shaders are </p><ol start="1"><li><p> They don’t play well with being moved around the scene - this can make the texture appear to ripple and distort as the texture is being pushed onto the object based on where it is. </p></li><li><p>These shaders can be fairly optimal as they are easily recycled onto another object. </p></li></ol><p>Learn  more about Triplanar shaders here:</p><p><a href="Triplanar-Shaders_1091600406.html" data-linked-resource-id="1091600406" data-linked-resource-version="1" data-linked-resource-type="page">Triplanar Shaders</a> </p><h2 id="TheMROTripleMaskandMROTriplanarProjectionShaders-VertexPaintingShaders">Vertex Painting Shaders</h2><p>These shaders are interesting as they allow us to use a model’s geometry to paint other detail onto the model. This requires multiple texture sets to be prepared, but we can get really cool results! Some of the biggest uses are for breaking up a noticeably tiled texture, like a wall, floor, or field of grass. They are also very useful for painting grime onto a surface like a floor or a wall. A less practical use for us might be to have procedural generated textures or wear on an object, or to have something grow moss or develop rust over time. </p><p>Learn more about vertex painting shaders here:</p><p><a href="Vertex-Painting-Shaders_1091993623.html" data-linked-resource-id="1091993623" data-linked-resource-version="2" data-linked-resource-type="page">Vertex Painting Shaders</a> </p>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/892698668/892600362.png">image-20231219-172733.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/892698668/892436587.png">image-20231219-172903.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/892698668/892108900.png">image-20231219-173230.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/892698668/892174386.png">image-20231219-173523.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/892698668/892469327.png">image-20231219-184601.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/892698668/892174403.png">image-20231219-185124.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/892698668/892174412.png">image-20231219-190136.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/892698668/892698730.png">image-20231219-204643.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/892698668/892436637.png">image-20231219-205157.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/892698668/892502097.png">image-20231219-205852.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/892698668/892928126.png">image-20231219-211818.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Jul 04, 2025 14:43</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

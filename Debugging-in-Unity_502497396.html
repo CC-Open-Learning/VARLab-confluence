@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VARLab : Debugging in Unity</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="How-To-Articles_581435426.html">How-To Articles</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Unity-Development_688324665.html">Unity Development</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            VARLab : Debugging in Unity
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Jordan Robinson</span> on Jul 25, 2022
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>While Unity uses the C# language for its scripts, the techniques we use to debug our Unity projects are not necessarily going to be the same.</p><p>In this article we’ll cover effective debugging techniques within the Unity engine and what situations you would use them in.</p><style type='text/css'>/*<![CDATA[*/
+div.rbtoc1751640764806 {padding: 0px;}
+div.rbtoc1751640764806 ul {list-style: disc;margin-left: 0px;}
+div.rbtoc1751640764806 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1751640764806'>
+<ul class='toc-indentation'>
+<li><a href='#DebugginginUnity-Debug.Logvs.Breakpoints'>Debug.Log vs. Breakpoints</a></li>
+<li><a href='#DebugginginUnity-FeaturesofDebug.Log'>Features of Debug.Log</a>
+<ul class='toc-indentation'>
+<li><a href='#DebugginginUnity-Double-ClicktoOpenScript'>Double-Click to Open Script</a></li>
+<li><a href='#DebugginginUnity-AttachingGameObjectReferences'>Attaching GameObject References</a></li>
+<li><a href='#DebugginginUnity-Timestamps'>Timestamps</a></li>
+</ul>
+</li>
+<li><a href='#DebugginginUnity-WhentoUseBreakpoints'>When to Use Breakpoints</a></li>
+<li><a href='#DebugginginUnity-VisualStudioDebuggingTips'>Visual Studio Debugging Tips</a>
+<ul class='toc-indentation'>
+<li><a href='#DebugginginUnity-FindAllReferences'>Find All References</a></li>
+<li><a href='#DebugginginUnity-GoToDefinition'>Go To Definition</a></li>
+</ul>
+</li>
+</ul>
+</div><h2 id="DebugginginUnity-Debug.Logvs.Breakpoints">Debug.Log vs. Breakpoints</h2><p>Coming from C# WPF or API programming, we’re all familiar with using breakpoints to halt our code at a specific point rather than use Console.WriteLine to debug our programs.</p><p>This is turned on its head a bit with Unity. While we can absolutely use breakpoints for debugging in Unity, it’s almost never required and certainly not as fast as adding a <code>Debug.Log(&quot;Some Information&quot;);</code> call.</p><p>The reason for this is that to use breakpoints you have to attach the debugger to Unity which slows down compilation times considerably. Once you are in the game and actively debugging, the breakpoints will halt the program every time they’re encountered which for a game can be unwanted behaviour.</p><p>Usually you’re looking for information over time rather than information at a specific point in time which is why a log statement will usually be more useful than breakpoints and proper debug tools.</p><h2 id="DebugginginUnity-FeaturesofDebug.Log">Features of Debug.Log</h2><p>The obvious feature of Debug.Log is to print a log message, however it also has a bit more functionality that really helps diagnose issues quickly.</p><h3 id="DebugginginUnity-Double-ClicktoOpenScript">Double-Click to Open Script</h3><p>If you double click on an error or log message, Unity will automatically launch into your IDE to the exact line of code that caused it.</p><p>In certain cases such as delegates or library methods that fail, you will need to click on the error message to see the full stack trace. From here you can click on the last call in the stack trace that was within our codebase and open it by clicking on the link.</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/502497396/502857733.png" data-image-src="attachments/502497396/502857733.png" data-height="38" data-width="895" data-unresolved-comment-count="0" data-linked-resource-id="502857733" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20220725-182018.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="502497396" data-linked-resource-container-version="1" data-media-id="850a3f66-f841-4298-bbc0-db0f0008db4d" data-media-type="file"></span><h3 id="DebugginginUnity-AttachingGameObjectReferences">Attaching GameObject References</h3><p>You can attach a GameObject to a Debug.Log allowing you to click the log message and highlight that GameObject when you do.</p><p><code>Debug.Log(&quot;Click me to see the object&quot;, someObject);</code> for example would highlight <code>someObject</code> if the developer clicks on this log message. This can be very useful if you’re trying to figure out which specific object is causing an issue if you’re unable to put that information in the log message.</p><h3 id="DebugginginUnity-Timestamps">Timestamps</h3><p>If you click the kebab button on the far right of the console window, you can enable timestamps that get placed next to your messages.</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/502497396/502792193.png" data-image-src="attachments/502497396/502792193.png" data-height="126" data-width="241" data-unresolved-comment-count="0" data-linked-resource-id="502792193" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20220725-181513.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="502497396" data-linked-resource-container-version="1" data-media-id="e8979ce2-69e8-4ffb-9196-c208bd42c5db" data-media-type="file"></span><h2 id="DebugginginUnity-WhentoUseBreakpoints">When to Use Breakpoints</h2><p>Breakpoints still have a use in Unity, and that’s when you need to verify data at a specific point in time and the features of Debug.Log are sub-optimal for the job.</p><p>As an example, if you needed to check the exact memory address of an object to diagnose a weird case where <code>object1 == object2</code> is false even though the objects should be the same.</p><p>To use breakpoints in Unity, click Attach to Unity in Visual Studio and return to the Unity Editor.</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/502497396/502923269.png" data-image-src="attachments/502497396/502923269.png" data-height="111" data-width="312" data-unresolved-comment-count="0" data-linked-resource-id="502923269" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20220725-182849.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="502497396" data-linked-resource-container-version="1" data-media-id="51c9848f-69bc-4634-85b1-01b15bbdd61c" data-media-type="file"></span><p>Now when you enter playmode it will take a bit longer due to the debugging tools but you will be able to use breakpoints as you’re accustomed to.</p><h2 id="DebugginginUnity-VisualStudioDebuggingTips">Visual Studio Debugging Tips</h2><p>Often times when a bug spans multiple classes or you’re trying to find a way to refactor or build upon existing code you will need to figure out what leads to where.</p><h3 id="DebugginginUnity-FindAllReferences">Find All References</h3><p>One of the most helpful tools is the ability to right-click anything and select <strong>Find All References</strong> to see where in the codebase it’s used.</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/502497396/502923277.png" data-image-src="attachments/502497396/502923277.png" data-height="228" data-width="369" data-unresolved-comment-count="0" data-linked-resource-id="502923277" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20220725-183342.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="502497396" data-linked-resource-container-version="1" data-media-id="c65dc304-e639-4368-8ef6-0573df181c40" data-media-type="file"></span><p>After clicking this option, I can see everywhere that <code>TruckingSaveManager.LoadCheckpoint</code> is called.</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/502497396/503021582.png" data-image-src="attachments/502497396/503021582.png" data-height="172" data-width="344" data-unresolved-comment-count="0" data-linked-resource-id="503021582" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20220725-183411.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="502497396" data-linked-resource-container-version="1" data-media-id="761d8631-faa0-4e9a-8c10-ecd7663d375e" data-media-type="file"></span><p>Clicking on any of these options will automatically navigate me to the exact line of code where they are used.</p><h3 id="DebugginginUnity-GoToDefinition">Go To Definition</h3><p>If you want to quickly see how/where something is defined you can right-click it and select <strong>Go To Definition</strong>.</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/502497396/502792212.png" data-image-src="attachments/502497396/502792212.png" data-height="167" data-width="444" data-unresolved-comment-count="0" data-linked-resource-id="502792212" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20220725-184055.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="502497396" data-linked-resource-container-version="1" data-media-id="c23288cc-e9f7-4a66-b5cf-655284a10425" data-media-type="file"></span><p>In this case I’ve right-clicked on UpdateQuiteDialog in the ModeController file.</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/502497396/503021598.png" data-image-src="attachments/502497396/503021598.png" data-height="220" data-width="666" data-unresolved-comment-count="0" data-linked-resource-id="503021598" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20220725-184127.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="502497396" data-linked-resource-container-version="1" data-media-id="bbf35e6f-f003-4bb0-8ba9-0b8851cdb0a3" data-media-type="file"></span><p />
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/502497396/502792193.png">image-20220725-181513.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/502497396/502857733.png">image-20220725-182018.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/502497396/502923269.png">image-20220725-182849.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/502497396/502923277.png">image-20220725-183342.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/502497396/503021582.png">image-20220725-183411.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/502497396/502792212.png">image-20220725-184055.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/502497396/503021598.png">image-20220725-184127.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Jul 04, 2025 14:52</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

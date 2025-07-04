@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VARLab : Vertex Painting Shaders</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="947650564.html">Art/Asset Department</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="The-MRO-Triple-Mask-and-MRO-Triplanar-Projection-Shaders_892698668.html">The MRO Triple Mask and MRO Triplanar Projection Shaders</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            VARLab : Vertex Painting Shaders
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Topher Rouleau</span>, last modified on Apr 30, 2024
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="panel" style="background-color: #EAE6FF;border-color: #998DD9;border-width: 1px;"><div class="panelContent" style="background-color: #EAE6FF;">
+<p>This page is under construction</p>
+</div></div><p>First, an apology - the Vertex Painting set-up is held together by a piece of duct tape and a dream. This system is very temperamental and requires some additional plugins in order to function properly. I wish I could say this was my fault, but let me regale you with a story before we get into the shader stuff<br/></p><blockquote><p><em>Once upon a time there were a pair of third-party Unity Plugins: ProBuilder and PolyBrush. </em></p><p><em>ProBuilder and PolyBrush never needed to work together because they had been developed to be mostly self contained, and to have all the features that they needed. While ProBuilder was certainly better at geometry stuff, and PolyBrush was bcertainly better at surface painting and deformation, both were capable at least capable of adding geometry to an object and then adding a coloured splattermap to work with a vertex shader.</em></p><p><em>But that all changed when Mr Unity and his Big Bad Wallet bought out both third party plugins. After that day the vertex painting tools were gutted from ProBuilder, and the geometry tools from inside PolyBrush were smashed beyond recognition. While both tools were once able to do vertex painting perfectly fine alone, they now found they they needed each other.</em></p><p><em>Luckily Mr Unity and his Big Bad Wallet had a lot of money at their disposal. They quickly worked together to not document anything they did to these plugins. Mr Unity never saw fit to actually make these two disparate code bases work well together after taking half of what made them cool away. He simply destroyed both tools and tucked his Big Bad Wallet into his pocket and walked away, mumbling something about making developers pay a fee every time an end-user installed one of their games.</em></p></blockquote><p>Jokes aside, both of these systems used to be able to do this alone, now neither of them can. We want one thing from each of these plugins:</p><p>For the Probuilder side we want to be able to Probuilderize a model (or add a probuilder model from the beginning) as Probuilderized meshes can be subdivided in engine. Without this too we would need to edit the model file outside of engine and reimport.</p><p>For PolyBrush, we want the ability to paint colours to the individual vertices. It is this colour map that allows our shader to blender different materials into the surface. However, without the ability to subdivide the mesh in engine, we’re stuck with the vertices that exist on the model as-is. It is entirely likely that the model does not contain a bunch of otherwise wasteful triangles and vertices as not every model we’ve ever made is ready to be vertex painted. </p><p><em>Technically</em> we only need PolyBrush , but ProBuilder gives us a bunch of QOL tools</p><p>The Vertex Painting shadergraphs currently come in two flavours: Universal and Triplanar. That is, UV unwrapped models, and UV independant models. Both have roughly the same inputs and features, but the workflow of using worldspace vs UV space was diffferent enough to demand two different types of shaders. For more information on what a “Universal” or “Triplanar” shader means, take a look at the sister page:</p><p><a href="General-MRO-Shaders_1090715711.html" data-linked-resource-id="1090715711" data-linked-resource-version="2" data-linked-resource-type="page">General MRO Shaders</a> </p><p><a href="Triplanar-Shaders_1091600406.html" data-linked-resource-id="1091600406" data-linked-resource-version="1" data-linked-resource-type="page">Triplanar Shaders</a> </p>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Jul 04, 2025 14:43</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

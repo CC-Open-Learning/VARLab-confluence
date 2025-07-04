@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VARLab : Lighting In Unity</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="947650564.html">Art/Asset Department</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            VARLab : Lighting In Unity
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Ian Kennaley</span>, last modified on Jan 26, 2025
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Article In-Draft</p></div></div><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Purpose of this document is to cover a general workflow to setting up lighting in Unity. This document isn’t meant to be all-inclusive and some troubleshooting through self-research is to be expected. That said, this article should cover most of the basics of setting up lighting in Unity that you’ll encounter.</p></div></div><style type='text/css'>/*<![CDATA[*/
+div.rbtoc1751640612216 {padding: 0px;}
+div.rbtoc1751640612216 ul {list-style: none;margin-left: 0px;}
+div.rbtoc1751640612216 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1751640612216'>
+<ul class='toc-indentation'>
+<li><a href='#LightingInUnity-Step1:EnsurethattheGenerateLightmapUV’soptionisenabledonyourmodelimports'>Step 1: Ensure that the Generate Lightmap UV’s option is enabled on your model imports</a></li>
+<li><a href='#LightingInUnity-Step2:Createnewfolderinanappropriatelocationandnameit“Lighting”orsomethingsimilar,andcreateanewLightSettingsentryandnameit“MainSceneLighting”orsomethingsimilar'>Step 2: Create new folder in an appropriate location and name it “Lighting” or something similar, and create a new Light Settings entry and name it “Main Scene Lighting” or something similar</a></li>
+<li><a href='#LightingInUnity-Step3:OpentheLightingPanel,DockIt,andthenconfigureyoursettingsas-needed'>Step 3: Open the Lighting Panel, Dock It, and then configure your settings as-needed</a></li>
+<li><a href='#LightingInUnity-Step4:Placeyourlightsinyourscene,configurethem,andensurethatlightsaresetto“Bake”modeappropriately'>Step 4: Place your lights in your scene, configure them, and ensure that lights are set to “Bake” mode appropriately</a></li>
+<li><a href='#LightingInUnity-Step5:AddLightProbeGroupandconfigureaccordinglytoyourspace'>Step 5: Add Light Probe Group and configure accordingly to your space</a></li>
+<li><a href='#LightingInUnity-Step6:RunyourLightingBake'>Step 6: Run your Lighting Bake</a></li>
+<li><a href='#LightingInUnity-AdditionalNotesI:OnOptimization'>Additional Notes I: On Optimization</a></li>
+</ul>
+</div><h1 id="LightingInUnity-Step1:EnsurethattheGenerateLightmapUV’soptionisenabledonyourmodelimports">Step 1: Ensure that the Generate Lightmap UV’s option is enabled on your model imports </h1><p /><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" alt="image-20250116-192637.png" width="760" loading="lazy" src="attachments/1560870926/1560477725.png?width=760" data-image-src="attachments/1560870926/1560477725.png" data-height="846" data-width="1028" data-unresolved-comment-count="0" data-linked-resource-id="1560477725" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20250116-192637.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1560870926" data-linked-resource-container-version="3" data-media-id="8e1e3b28-6eed-426f-b69f-49f7a60ccd4f" data-media-type="file"></span><p /><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" alt="image-20250116-192646.png" width="501" loading="lazy" src="attachments/1560870926/1560805386.png?width=501" data-image-src="attachments/1560870926/1560805386.png" data-height="146" data-width="501" data-unresolved-comment-count="0" data-linked-resource-id="1560805386" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20250116-192646.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1560870926" data-linked-resource-container-version="3" data-media-id="c30b61f2-059a-4356-bc28-cd43169a9738" data-media-type="file"></span><h1 id="LightingInUnity-Step2:Createnewfolderinanappropriatelocationandnameit“Lighting”orsomethingsimilar,andcreateanewLightSettingsentryandnameit“MainSceneLighting”orsomethingsimilar">Step 2: Create new folder in an appropriate location and name it “Lighting” or something similar, and create a new Light Settings entry and name it “Main Scene Lighting” or something similar</h1><p /><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" alt="image-20250116-193146.png" width="760" loading="lazy" src="attachments/1560870926/1561165844.png?width=760" data-image-src="attachments/1560870926/1561165844.png" data-height="1025" data-width="1535" data-unresolved-comment-count="0" data-linked-resource-id="1561165844" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20250116-193146.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1560870926" data-linked-resource-container-version="3" data-media-id="dce72b21-508f-4aed-ace4-4ba70db6f067" data-media-type="file"></span><p /><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" alt="image-20250116-193103.png" width="325" loading="lazy" src="attachments/1560870926/1560281102.png?width=325" data-image-src="attachments/1560870926/1560281102.png" data-height="136" data-width="325" data-unresolved-comment-count="0" data-linked-resource-id="1560281102" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20250116-193103.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1560870926" data-linked-resource-container-version="3" data-media-id="c1d5a083-dd08-41f1-992b-9eb5fe5d47ae" data-media-type="file"></span><h1 id="LightingInUnity-Step3:OpentheLightingPanel,DockIt,andthenconfigureyoursettingsas-needed">Step 3: Open the Lighting Panel, Dock It, and then configure your settings as-needed</h1><p /><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" alt="image-20250116-194103.png" width="760" loading="lazy" src="attachments/1560870926/1560248357.png?width=760" data-image-src="attachments/1560870926/1560248357.png" data-height="752" data-width="890" data-unresolved-comment-count="0" data-linked-resource-id="1560248357" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20250116-194103.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1560870926" data-linked-resource-container-version="3" data-media-id="34144518-c5d8-43b1-ac84-c88a1c04d6a4" data-media-type="file"></span><p /><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" alt="image-20250116-194702.png" width="760" loading="lazy" src="attachments/1560870926/1560215586.png?width=760" data-image-src="attachments/1560870926/1560215586.png" data-height="677" data-width="1073" data-unresolved-comment-count="0" data-linked-resource-id="1560215586" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20250116-194702.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1560870926" data-linked-resource-container-version="3" data-media-id="2ba7ccb9-53de-4f80-acb8-fdd44b04c471" data-media-type="file"></span><p /><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" alt="image-20250116-194720.png" width="760" loading="lazy" src="attachments/1560870926/1560543248.png?width=760" data-image-src="attachments/1560870926/1560543248.png" data-height="149" data-width="1092" data-unresolved-comment-count="0" data-linked-resource-id="1560543248" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20250116-194720.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1560870926" data-linked-resource-container-version="3" data-media-id="cb5fb8ef-ce0e-474f-b6bf-e9d39c1a17df" data-media-type="file"></span><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" alt="image-20250116-194742.png" width="760" loading="lazy" src="attachments/1560870926/1561133075.png?width=760" data-image-src="attachments/1560870926/1561133075.png" data-height="98" data-width="1057" data-unresolved-comment-count="0" data-linked-resource-id="1561133075" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20250116-194742.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1560870926" data-linked-resource-container-version="3" data-media-id="5ad33c02-2b42-4323-9246-e74ac21da7c3" data-media-type="file"></span><p>[Baked Realtime Disabled Screenshot]</p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" alt="image-20250116-194911.png" width="760" loading="lazy" src="attachments/1560870926/1560641574.png?width=760" data-image-src="attachments/1560870926/1560641574.png" data-height="94" data-width="1068" data-unresolved-comment-count="0" data-linked-resource-id="1560641574" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20250116-194911.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1560870926" data-linked-resource-container-version="3" data-media-id="c4fa6163-6c9f-43ed-91a2-295e65026b13" data-media-type="file"></span><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" alt="image-20250116-195033.png" width="760" loading="lazy" src="attachments/1560870926/1561231395.png?width=760" data-image-src="attachments/1560870926/1561231395.png" data-height="502" data-width="1050" data-unresolved-comment-count="0" data-linked-resource-id="1561231395" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20250116-195033.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1560870926" data-linked-resource-container-version="3" data-media-id="95cd4dcd-1079-412d-ad27-bc5b63d98062" data-media-type="file"></span><h1 id="LightingInUnity-Step4:Placeyourlightsinyourscene,configurethem,andensurethatlightsaresetto“Bake”modeappropriately">Step 4: Place your lights in your scene, configure them, and ensure that lights are set to “Bake” mode appropriately</h1><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Add overview on lighting </p></div></div><p><br/></p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" alt="image-20250116-200302.png" width="760" loading="lazy" src="attachments/1560870926/1560543254.png?width=760" data-image-src="attachments/1560870926/1560543254.png" data-height="1300" data-width="2946" data-unresolved-comment-count="0" data-linked-resource-id="1560543254" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20250116-200302.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1560870926" data-linked-resource-container-version="3" data-media-id="86c1bebb-9c7b-4fbe-9def-828a1342df54" data-media-type="file"></span><p /><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" alt="image-20250116-200409.png" width="760" loading="lazy" src="attachments/1560870926/1560805394.png?width=760" data-image-src="attachments/1560870926/1560805394.png" data-height="580" data-width="1044" data-unresolved-comment-count="0" data-linked-resource-id="1560805394" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20250116-200409.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1560870926" data-linked-resource-container-version="3" data-media-id="a542dad6-1adf-430d-b262-b5a6c3c34db2" data-media-type="file"></span><h1 id="LightingInUnity-Step5:AddLightProbeGroupandconfigureaccordinglytoyourspace">Step 5: Add Light Probe Group and configure accordingly to your space</h1><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Add a Light Probe Group explanation section to the setup</p></div></div><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" alt="image-20250116-200549.png" width="760" loading="lazy" src="attachments/1560870926/1560477735.png?width=760" data-image-src="attachments/1560870926/1560477735.png" data-height="1016" data-width="833" data-unresolved-comment-count="0" data-linked-resource-id="1560477735" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20250116-200549.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1560870926" data-linked-resource-container-version="3" data-media-id="3ed73d49-373a-4c96-ace8-c156b95d8981" data-media-type="file"></span><p /><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" alt="image-20250116-200835.png" width="760" loading="lazy" src="attachments/1560870926/1560477741.png?width=760" data-image-src="attachments/1560870926/1560477741.png" data-height="1367" data-width="2042" data-unresolved-comment-count="0" data-linked-resource-id="1560477741" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20250116-200835.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1560870926" data-linked-resource-container-version="3" data-media-id="eb05abb3-b505-4e94-8077-c8a6aba9e3ca" data-media-type="file"></span><p /><h1 id="LightingInUnity-Step6:RunyourLightingBake">Step 6: Run your Lighting Bake</h1><p /><p>[Insert]</p><p /><h1 id="LightingInUnity-AdditionalNotesI:OnOptimization">Additional Notes I: On Optimization</h1><ul><li><p>Enabling RealTime Light baking will result in a heavily bloated Lighting Data Asset. Enabling this feature will likely result in a Lighting Data Asset file size being in the 10’s - 100+ range, while leaving this feature disabled will result in a file size being in the 100kb+ - low 10’s mb range. <br/><br/>The reason this feature causes such a large file size is that it will bake out a separate set of lightmaps for the realtime lighting in the scene. This is generally not necessary and is a very expensive (file size wise) feature to use as a result.</p><ul><li><p>EX: In the Warehouse Scene used as the subject for this document, the RealTime Light Baking feature was used and this resulted in a Lighting Data Asset file size of 180mb. Disabling this feature resulted in a Lighting Data Asset file size of 173kb.</p></li></ul></li></ul><p />
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1560870926/1560477725.png">image-20250116-192637.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1560870926/1560805386.png">image-20250116-192646.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1560870926/1560281102.png">image-20250116-193103.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1560870926/1561165844.png">image-20250116-193146.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1560870926/1560248357.png">image-20250116-194103.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1560870926/1560215586.png">image-20250116-194702.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1560870926/1560543248.png">image-20250116-194720.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1560870926/1561133075.png">image-20250116-194742.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1560870926/1560346661.png">image-20250116-194853.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1560870926/1560641574.png">image-20250116-194911.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1560870926/1561231395.png">image-20250116-195033.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1560870926/1560543254.png">image-20250116-200302.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1560870926/1560805394.png">image-20250116-200409.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1560870926/1560477735.png">image-20250116-200549.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1560870926/1560477741.png">image-20250116-200835.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Jul 04, 2025 14:50</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

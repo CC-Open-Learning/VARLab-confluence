@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VARLab : Bug Fix and Regression Test Tutorial</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">VARLab</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="How-To-Articles_581435426.html">How-To Articles</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Unity-Development_688324665.html">Unity Development</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Unity-Full-Stack-Testing-Tutorial_749699073.html">Unity Full-Stack Testing Tutorial</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            VARLab : Bug Fix and Regression Test Tutorial
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> User 68e34</span>, last modified by <span class='editor'> Leo Bunting</span> on Aug 16, 2023
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <style type='text/css'>/*<![CDATA[*/
+div.rbtoc1751640756696 {padding: 0px;}
+div.rbtoc1751640756696 ul {list-style: disc;margin-left: 0px;}
+div.rbtoc1751640756696 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1751640756696'>
+<ul class='toc-indentation'>
+<li><a href='#BugFixandRegressionTestTutorial-Overview-FixingaBugUsingRegressionTesting'>Overview - Fixing a Bug Using Regression Testing</a>
+<ul class='toc-indentation'>
+<li><a href='#BugFixandRegressionTestTutorial-1.Startwithabugticket'>1. Start with a bug ticket</a></li>
+<li><a href='#BugFixandRegressionTestTutorial-2.Implementaregressiontest'>2. Implement a regression test</a></li>
+<li><a href='#BugFixandRegressionTestTutorial-3.Fixthebug'>3. Fix the bug</a></li>
+<li><a href='#BugFixandRegressionTestTutorial-4.Executetheregressiontest'>4. Execute the regression test</a></li>
+<li><a href='#BugFixandRegressionTestTutorial-5.MakeaPullRequest(PR)'>5. Make a Pull Request (PR)</a></li>
+</ul>
+</li>
+<li><a href='#BugFixandRegressionTestTutorial-Example-FixingaBugintheExtendedRoll-A-BallGame'>Example - Fixing a Bug in the Extended Roll-A-Ball Game</a>
+<ul class='toc-indentation'>
+<li><a href='#BugFixandRegressionTestTutorial-1.Startwithaticket'>1. Start with a ticket</a></li>
+<li><a href='#BugFixandRegressionTestTutorial-2.Implementaregressiontest.1'>2. Implement a regression test</a></li>
+<li><a href='#BugFixandRegressionTestTutorial-3.Fixthebug.1'>3. Fix the bug</a></li>
+<li><a href='#BugFixandRegressionTestTutorial-4.Executetheregressiontest.1'>4. Execute the regression test</a></li>
+<li><a href='#BugFixandRegressionTestTutorial-5.MakeaPR'>5. Make a PR</a></li>
+</ul>
+</li>
+</ul>
+</div><h2 id="BugFixandRegressionTestTutorial-Overview-FixingaBugUsingRegressionTesting">Overview - Fixing a Bug Using Regression Testing</h2><h3 id="BugFixandRegressionTestTutorial-1.Startwithabugticket">1. Start with a bug ticket</h3><p>Take time to understand the bug and the steps to reproduce it. If you are unsure, clarify it with the reporter who wrote the ticket.</p><h3 id="BugFixandRegressionTestTutorial-2.Implementaregressiontest">2. Implement a regression test</h3><p>If the bug ticket involves changes to C# code, you should plan and implement regression tests.</p><ul><li><p>First, using the steps for reproducing the bug, write a new test that fails. This helps with root cause analysis. Instead of manually following steps for reproducing a bug, you now have an automated way to trigger it with multiple debugger points!</p></li><li><p>Additionally, check any existing tests that cover the bugged feature. One or more of them might fail. </p></li></ul><h3 id="BugFixandRegressionTestTutorial-3.Fixthebug">3. Fix the bug</h3><p>It’s time to fix the bug. Please write clean code.</p><h3 id="BugFixandRegressionTestTutorial-4.Executetheregressiontest">4. Execute the regression test</h3><ul><li><p>Execute all related test cases. If the bug is fixed, they should all pass.</p></li><li><p>Update existing unit tests for any new logic introduced while fixing the bug, or write additional unit tests (optional in <em>Introductory stage</em>).</p></li></ul><h3 id="BugFixandRegressionTestTutorial-5.MakeaPullRequest(PR)">5. Make a Pull Request (PR)</h3><p>Create a PR. Link or write the updated test plan in the description. Someone reviewing your PR should verify that:</p><ol start="1"><li><p>all tests pass,</p></li><li><p>the tests are appropriate and match the updated test plan, and</p></li><li><p>the bug is fixed correctly.</p></li></ol><p /><h2 id="BugFixandRegressionTestTutorial-Example-FixingaBugintheExtendedRoll-A-BallGame">Example - Fixing a Bug in the Extended Roll-A-Ball Game</h2><p>Refer to the <a class="external-link" href="https://bitbucket.org/VARLab/roll-a-ball-testing-example/branch/feature/CORE-377-new-feature-sdlc?dest=main" rel="nofollow">branch example for the new JumpPad feature</a> in the Roll-A-Ball repo. This tutorial will involve the JumpPad.</p><p>Also, check out the <a href="New-Feature-Development-and-Testing-Tutorial_774864938.html" data-linked-resource-id="774864938" data-linked-resource-version="3" data-linked-resource-type="page">tutorial </a>for implementing the JumpPad as well as its unit tests and integration tests.</p><h3 id="BugFixandRegressionTestTutorial-1.Startwithaticket">1. Start with a ticket</h3><p><em><u>Bug ticket example:</u></em> When the player hits the jump pad, it doesn’t cause them to jump.</p><h3 id="BugFixandRegressionTestTutorial-2.Implementaregressiontest.1">2. <span class="inline-comment-marker" data-ref="3bd3defa-d7fb-439e-9c3d-7592b0309667">Implement a regression test</span></h3><ul><li><p><em><u><span class="inline-comment-marker" data-ref="018db8d9-4572-4f77-ac11-eaf7b8ea66c9">Implement a failing tes</span>t</u></em>: </p></li></ul><p>First, decide which kind of test should would best cover the bug: unit, integration, or system test? If we check the<a href="https://varlab-dev.atlassian.net/wiki/spaces/VAR/pages/774864938/New+Feature+Development+and+Testing+Tutorial#4.-Tests-implementation" rel="nofollow"> existing tests</a> for this feature, we can see that all have passed, even the integration test case that verified the velocity of the player when they hit the jump pad.</p><p>So, let’s add a new system test. This test will load the jump pad and check if the player actually hits it, causing them to jump. Create <strong>PlayerHitsJumppadSystemTests.cs</strong></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: c#; gutter: false; theme: Confluence" data-theme="Confluence">using NUnit.Framework;
+using System.Collections;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.TestTools;
+
+[TestFixture, ConditionalIgnore(&quot;IgnoreForCoverage&quot;, &quot;This is a system test&quot;)]
+public class PlayerHitsJumppadSystemTests
+{
+    [UnityTest]
+    public IEnumerator PlayerHitsJumppad_SystemTest()
+    {
+        // Load the scene
+        SceneManager.LoadScene(&quot;MiniGame&quot;);
+        yield return null;
+
+        // Player
+        PlayerController player = Object.FindObjectOfType&lt;PlayerController&gt;();
+
+        // JumpPad
+        JumpPad jumpPad = Object.FindObjectOfType&lt;JumpPad&gt;();
+        jumpPad.UpwardBounce = 5f;
+        Vector3 expectedVelocityAfterJump = new Vector3(0, jumpPad.UpwardBounce, 0);
+
+        // Player hits jumppad
+        player.transform.position = jumpPad.transform.position;
+        yield return new WaitForFixedUpdate();
+
+        Assert.AreEqual(expectedVelocityAfterJump, player.gameObject.GetComponent&lt;Rigidbody&gt;().velocity);
+    }
+
+    [TearDown]
+    public void TearDown()
+    {
+        SceneManager.SetActiveScene(SceneManager.CreateScene(&quot;Testing&quot;));
+        SceneManager.UnloadSceneAsync(&quot;MiniGame&quot;);
+    }
+}</pre>
+</div></div><p /><p>Here we can see the test has failed. The velocity of the player did not change.</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/774832196/776011849.png" data-image-src="attachments/774832196/776011849.png" data-height="87" data-width="249" data-unresolved-comment-count="0" data-linked-resource-id="776011849" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230802-182749.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="774832196" data-linked-resource-container-version="9" data-media-id="b53214b1-8853-4548-b3b6-64b52387dd47" data-media-type="file"></span><p /><p><em><u><span class="inline-comment-marker" data-ref="e0f5b026-6f80-4da3-abe4-c16873809759">Investigating the bug</span></u></em>: Now, we need to troubleshoot to find the cause of the bug. This is simple:</p><ul><li><p>In <strong>JumpPadImpl.cs</strong>, the <strong>OnTriggerEnter() </strong>method first checks if the collider has the <strong>“Player“ </strong>tag.<strong> </strong>Then, it will call the <strong>OnHitJumpPad()</strong> method inside the player controller. Here, we’ll put a debug log on line #27 to make sure it enters the condition.</p></li></ul><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/774832196/775028791.png" data-image-src="attachments/774832196/775028791.png" data-height="664" data-width="761" data-unresolved-comment-count="0" data-linked-resource-id="775028791" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230801-183524.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="774832196" data-linked-resource-container-version="9" data-media-id="7d96a455-430e-4616-ac83-2d64ab324164" data-media-type="file"></span><ul><li><p>If we run the game, the debug log we wrote in <strong>JumpPadImpl.cs</strong> never prints. If we look at the Player object in the Unity inspector, the Player tag seems to be missing, so the if condition is never hit.</p></li></ul><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" width="680" loading="lazy" src="attachments/774832196/775028803.png?width=680" data-image-src="attachments/774832196/775028803.png" data-height="217" data-width="817" data-unresolved-comment-count="0" data-linked-resource-id="775028803" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20230801-184156.png" data-base-url="https://varlab-dev.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="774832196" data-linked-resource-container-version="9" data-media-id="f34265e0-b36d-415e-bc79-17ba00f6f9b8" data-media-type="file"></span><h3 id="BugFixandRegressionTestTutorial-3.Fixthebug.1">3. Fix the bug</h3><p>This can be fixed easily by applying the <strong>Player </strong>tag to the player object. Now, the player can jump once they hit the jump pad.</p><h3 id="BugFixandRegressionTestTutorial-4.Executetheregressiontest.1">4. Execute the regression test</h3><p>Execute the system test case that you created earlier. It should pass now. Be sure to re-execute all other tests to make sure they all still pass with the changes implemented. If not, update these tests or create new ones.</p><h3 id="BugFixandRegressionTestTutorial-5.MakeaPR">5. Make a PR</h3><p>When making a PR for this bug fix, link or write the updated test plan in the description. The person reviewing your PR should verify that:</p><ol start="1"><li><p>all tests pass,</p></li><li><p>the tests are appropriate and match the test plan, and</p></li><li><p>the bug is fixed correctly.</p></li></ol>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/774832196/775028767.png">image-20230801-181317.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/774832196/775028773.png">image-20230801-181803.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/774832196/775028779.png">image-20230801-182706.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/774832196/775028785.png">image-20230801-183342.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/774832196/775028791.png">image-20230801-183524.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/774832196/775028797.png">image-20230801-183843.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/774832196/775028803.png">image-20230801-184156.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/774832196/775716872.png">image-20230802-151319.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/774832196/776011849.png">image-20230802-182749.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Jul 04, 2025 14:52</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>
